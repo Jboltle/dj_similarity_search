@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>VirtualDJ Link Map</title>
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <div id="app">
+      <canvas id="canvas"></canvas>
+      <div id="labels" aria-hidden="true"></div>
+
+      <header id="topbar">
+        <div class="brand">
+          <span class="brand-mark">●</span>
+          <span class="brand-text">VirtualDJ Link Map</span>
+        </div>
+        <div class="tabs-wrap">
+          <nav id="tabs" class="tabs" role="tablist" aria-label="Edge filter">
+            <button class="tab active" role="tab" data-view="related" aria-selected="true">
+              <span class="tab-label">Related Tracks</span>
+              <span class="tab-count" data-count="related">0</span>
+            </button>
+            <button class="tab" role="tab" data-view="history" aria-selected="false">
+              <span class="tab-label">History</span>
+              <span class="tab-count" data-count="history">0</span>
+            </button>
+            <button class="tab" role="tab" data-view="all" aria-selected="false">
+              <span class="tab-label">All edges</span>
+              <span class="tab-count" data-count="all">0</span>
+            </button>
+          </nav>
+          <div id="overlay-controls" class="overlay-controls hidden" aria-label="Layer additional edges">
+            <span class="overlay-label">Also show</span>
+            <button class="overlay-chip" data-overlay="history" type="button" aria-pressed="false" hidden>
+              <span class="chip-dot chip-history"></span>History
+            </button>
+            <button class="overlay-chip" data-overlay="vdj_link" type="button" aria-pressed="false" hidden>
+              <span class="chip-dot chip-vdj"></span>Related Tracks
+            </button>
+          </div>
+        </div>
+        <div id="search-wrap">
+          <input id="search" type="search" placeholder="Search artist or title…" autocomplete="off" />
+          <ul id="search-results" hidden></ul>
+        </div>
+        <div id="meta-summary" class="meta-summary">Loading graph…</div>
+      </header>
+
+      <div id="view-notice" class="view-notice hidden"></div>
+
+      <aside id="controls">
+        <section class="panel">
+          <header class="panel-header">Filters</header>
+          <label>BPM range
+            <span class="range-row">
+              <input id="bpm-min" type="number" min="0" max="300" step="1" placeholder="min" />
+              <span>–</span>
+              <input id="bpm-max" type="number" min="0" max="300" step="1" placeholder="max" />
+            </span>
+          </label>
+          <label>Key
+            <select id="key-filter"><option value="">Any</option></select>
+          </label>
+          <label>Genre
+            <select id="genre-filter"><option value="">Any</option></select>
+          </label>
+          <label class="checkbox">
+            <input id="hide-isolated" type="checkbox" />
+            <span>Hide isolated songs</span>
+          </label>
+          <button id="reset-filters" type="button">Reset filters</button>
+        </section>
+
+        <section class="panel">
+          <header class="panel-header">Color by</header>
+          <div class="segmented">
+            <button class="seg active" data-color="bpm">BPM</button>
+            <button class="seg" data-color="genre">Genre</button>
+            <button class="seg" data-color="key">Key</button>
+          </div>
+        </section>
+
+        <section class="panel">
+          <header class="panel-header">Layout</header>
+          <button id="recenter" type="button">Recenter camera</button>
+          <button id="reheat" type="button">Re-run layout</button>
+        </section>
+      </aside>
+
+      <aside id="sidebar" class="hidden">
+        <header class="sidebar-header">
+          <h2 id="sidebar-title">Select a track</h2>
+          <button id="sidebar-close" type="button" aria-label="Close">×</button>
+        </header>
+        <div id="sidebar-body"></div>
+      </aside>
+
+      <div id="tooltip" class="tooltip hidden"></div>
+      <div id="error-banner" class="error-banner hidden"></div>
+
+      <div id="hint-banner">
+        <span class="kbd">Click</span>
+        <span>any song to see its links and find compatible matches</span>
+      </div>
+
+      <div id="legend">
+        <span class="legend-swatch"><span class="swatch vdj"></span> Linked tracks</span>
+        <span class="legend-swatch"><span class="swatch history"></span> Played together</span>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

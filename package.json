@@ -1,0 +1,24 @@
+{
+  "name": "vdj-link-map",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Read-only VirtualDJ database explorer that visualizes linked tracks as a Three.js force-directed graph.",
+  "scripts": {
+    "inspect": "node scripts/inspect-link-shape.js",
+    "parse": "node scripts/parse-vdj-db.js",
+    "validate": "node scripts/validate-graph.js",
+    "build:data": "node scripts/parse-vdj-db.js && node scripts/validate-graph.js",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "better-sqlite3": "^12.9.0",
+    "fast-xml-parser": "^4.5.0",
+    "three": "^0.169.0"
+  },
+  "devDependencies": {
+    "vite": "^5.4.0"
+  }
+}
