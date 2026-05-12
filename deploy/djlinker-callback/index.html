@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>djLinker — SoundCloud Auth Callback</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #0e1116;
+        --fg: #e6edf3;
+        --muted: #8b949e;
+        --accent: #ff7700;
+        --panel: #161b22;
+        --border: #30363d;
+        --ok: #2ea043;
+        --err: #f85149;
+        font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        background: var(--bg);
+        color: var(--fg);
+        padding: 24px;
+      }
+      main {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 32px;
+        max-width: 560px;
+        width: 100%;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+      }
+      h1 {
+        margin: 0 0 4px;
+        font-size: 18px;
+        font-weight: 600;
+        letter-spacing: 0.2px;
+      }
+      h1 .dot {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--accent);
+        margin-right: 8px;
+        vertical-align: 1px;
+      }
+      p.lead {
+        margin: 0 0 20px;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.5;
+      }
+      .field-label {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.6px;
+        color: var(--muted);
+        margin: 18px 0 6px;
+      }
+      .codebox {
+        display: flex;
+        gap: 8px;
+        align-items: stretch;
+      }
+      .codebox input {
+        flex: 1;
+        font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+        font-size: 13px;
+        padding: 10px 12px;
+        background: #0d1117;
+        color: var(--fg);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        outline: none;
+      }
+      .codebox input:focus {
+        border-color: var(--accent);
+      }
+      button {
+        font: inherit;
+        font-size: 13px;
+        padding: 0 16px;
+        background: var(--accent);
+        color: #0e1116;
+        border: 0;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+      }
+      button:hover { filter: brightness(1.08); }
+      button.copied { background: var(--ok); color: white; }
+      .error {
+        margin-top: 18px;
+        padding: 14px;
+        border: 1px solid var(--err);
+        border-radius: 8px;
+        color: var(--err);
+        font-size: 13px;
+      }
+      .footer {
+        margin-top: 24px;
+        font-size: 12px;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+      .hidden { display: none; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1><span class="dot"></span>SoundCloud auth — djLinker</h1>
+      <p class="lead">
+        Copy the authorization code below and paste it back into your terminal where
+        <code>npm run upload:soundcloud</code> is waiting.
+      </p>
+
+      <div id="success" class="hidden">
+        <div class="field-label">Authorization code</div>
+        <div class="codebox">
+          <input id="code" type="text" readonly aria-label="Authorization code" />
+          <button id="copy-code" type="button">Copy</button>
+        </div>
+
+        <div class="field-label">State (for the CLI to verify)</div>
+        <div class="codebox">
+          <input id="state" type="text" readonly aria-label="State token" />
+          <button id="copy-state" type="button">Copy</button>
+        </div>
+      </div>
+
+      <div id="error" class="error hidden"></div>
+
+      <div class="footer">
+        This page runs entirely in your browser. The code never leaves your machine —
+        it's only displayed here so you can paste it into your local CLI.
+      </div>
+    </main>
+
+    <script>
+      (function () {
+        const params = new URLSearchParams(window.location.search);
+        const code = params.get('code');
+        const state = params.get('state');
+        const error = params.get('error');
+        const errorDescription = params.get('error_description');
+
+        const successEl = document.getElementById('success');
+        const errorEl = document.getElementById('error');
+
+        if (error) {
+          errorEl.classList.remove('hidden');
+          errorEl.textContent = 'SoundCloud returned an error: ' + error +
+            (errorDescription ? ' — ' + errorDescription : '');
+          return;
+        }
+        if (!code) {
+          errorEl.classList.remove('hidden');
+          errorEl.textContent =
+            'No authorization code found in the URL. Did you arrive here from the SoundCloud authorize page?';
+          return;
+        }
+
+        successEl.classList.remove('hidden');
+        document.getElementById('code').value = code;
+        document.getElementById('state').value = state || '';
+
+        function wireCopyButton(buttonId, inputId) {
+          const button = document.getElementById(buttonId);
+          const input = document.getElementById(inputId);
+          button.addEventListener('click', async function () {
+            try {
+              await navigator.clipboard.writeText(input.value);
+              const originalText = button.textContent;
+              button.textContent = 'Copied';
+              button.classList.add('copied');
+              setTimeout(function () {
+                button.textContent = originalText;
+                button.classList.remove('copied');
+              }, 1400);
+            } catch (e) {
+              input.select();
+              document.execCommand('copy');
+            }
+          });
+        }
+
+        wireCopyButton('copy-code', 'code');
+        wireCopyButton('copy-state', 'state');
+      })();
+    </script>
+  </body>
+</html>

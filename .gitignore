@@ -1,10 +1,13 @@
+# Optional: nested git in deploy/djlinker-callback (standalone GitHub Pages clone)
+deploy/djlinker-callback/.git/
+
 node_modules
 dist
 .DS_Store
 *.log
 .env
 .env.local
-
+bun.
 # generated artifacts (do NOT delete by hand while VirtualDJ is running)
 public/graph.json
 public/songs.json
