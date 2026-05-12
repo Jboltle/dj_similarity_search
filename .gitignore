@@ -10,4 +10,19 @@ public/graph.json
 public/songs.json
 public/unresolved-links.json
 public/link-shape-report.json
+public/soundcloud-playlist.json
+public/merge-extra-db-report.json
 data/cache.sqlite
+
+# extra.db backups — never auto-deleted, never committed
+public/backups/
+
+# OAuth tokens (NEVER commit these)
+.soundcloud-tokens.json
+
+# NOTE: the three linked-tracks export files are intentionally NOT in this list.
+# They are the portable sync artifact for moving your linked-tracks set between
+# machines (e.g. Mac → Windows). Commit them to share, or transfer manually:
+#   public/linked-tracks-export.json   # primary, human-readable
+#   public/linked-tracks-export.sql    # for `sqlite3 extra.db < file.sql`
+#   public/linked-tracks.db            # standalone SQLite, openable in any tool

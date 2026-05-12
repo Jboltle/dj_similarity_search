@@ -1,0 +1,397 @@
+{
+  "meta": {
+    "generatedAt": "2026-05-12T19:07:00.582Z",
+    "sourceGraphJson": "/Users/jboltle/Library/Application Support/VirtualDJ/database.xml",
+    "pairCount": 26,
+    "trackCount": 40,
+    "note": "Apply to a target extra.db by running merge-links-to-extra-db.js, or manually via: sqlite3 extra.db < linked-tracks-export.sql"
+  },
+  "tracks": [
+    {
+      "sid": -1920323898029420800,
+      "file": "netsearch://sc254454132",
+      "artist": "Trill Family, Boosie Badazz & Webbie feat. Foxx",
+      "title": "Wipe Me Down",
+      "remix": null
+    },
+    {
+      "sid": -7070251851495169000,
+      "file": "netsearch://sc998923204",
+      "artist": "Only The Family",
+      "title": "Only The Family & Lil Durk - Hellcats & Trackhawks",
+      "remix": null
+    },
+    {
+      "sid": 6228976102159244000,
+      "file": "netsearch://sc317417947",
+      "artist": "Gucci Mane",
+      "title": "On Deck",
+      "remix": null
+    },
+    {
+      "sid": -8585936171158979000,
+      "file": "netsearch://sc2227612178",
+      "artist": "Pooh Shiesty",
+      "title": "FDO",
+      "remix": null
+    },
+    {
+      "sid": -7422560558239781000,
+      "file": "netsearch://sc306555098",
+      "artist": "Tee Grizzley",
+      "title": "First Day Out",
+      "remix": null
+    },
+    {
+      "sid": -533227311905017000,
+      "file": "netsearch://sc354430742",
+      "artist": "Offset & Metro Boomin",
+      "title": "Ric Flair Drip",
+      "remix": null
+    },
+    {
+      "sid": 8317205378257848000,
+      "file": "netsearch://sc316331104",
+      "artist": "Playboi Carti",
+      "title": "Location",
+      "remix": null
+    },
+    {
+      "sid": -4562734104610217000,
+      "file": "netsearch://sc355413347",
+      "artist": "Lil Uzi Vert",
+      "title": "20 Min",
+      "remix": null
+    },
+    {
+      "sid": -9004404619787429000,
+      "file": "netsearch://sc512883342",
+      "artist": "Kodak Black feat. Travis Scott & Offset",
+      "title": "ZEZE",
+      "remix": null
+    },
+    {
+      "sid": 6638864610742859000,
+      "file": "netsearch://sc321780110",
+      "artist": "Chief Keef",
+      "title": "Faneto",
+      "remix": null
+    },
+    {
+      "sid": 8788623672298786000,
+      "file": "netsearch://sc1640817366",
+      "artist": "Beyoncé",
+      "title": "Irreplaceable.mp3",
+      "remix": null
+    },
+    {
+      "sid": 4558639512410397000,
+      "file": "netsearch://sc1808012274",
+      "artist": "310babii",
+      "title": "Soak City  .m4a",
+      "remix": null
+    },
+    {
+      "sid": 6882119958085239000,
+      "file": "netsearch://sc255837979",
+      "artist": "Vanessa Carlton",
+      "title": "A Thousand Miles",
+      "remix": null
+    },
+    {
+      "sid": 961837747601064700,
+      "file": "netsearch://sc547891794",
+      "artist": "Blueface",
+      "title": "Thotiana",
+      "remix": null
+    },
+    {
+      "sid": 620870433259002800,
+      "file": "netsearch://sc243932946",
+      "artist": "Soulja Boy",
+      "title": "Crank That",
+      "remix": null
+    },
+    {
+      "sid": 456770227159360800,
+      "file": "netsearch://sc317617213",
+      "artist": "Kendrick Lamar",
+      "title": "DNA.",
+      "remix": null
+    },
+    {
+      "sid": -1921352611812270000,
+      "file": "netsearch://sc328456146",
+      "artist": "16yrold",
+      "title": "sheck wes - mo bamba",
+      "remix": null
+    },
+    {
+      "sid": 203881108954063460,
+      "file": "netsearch://sc5188846",
+      "artist": "Waka Flocka Flame feat. Wale & Roscoe Dash",
+      "title": "No Hands",
+      "remix": null
+    },
+    {
+      "sid": -5302833897043341000,
+      "file": "netsearch://sc138636484",
+      "artist": "Fetty Wap",
+      "title": "Trap Queen",
+      "remix": null
+    },
+    {
+      "sid": 1587587936617607700,
+      "file": "netsearch://sc1866544854",
+      "artist": "Babyfxce E",
+      "title": "PTP",
+      "remix": null
+    },
+    {
+      "sid": -4971990465655620000,
+      "file": "netsearch://sc64377498",
+      "artist": "Meek Mill",
+      "title": "Dreams and Nightmares",
+      "remix": null
+    },
+    {
+      "sid": 6725358217406890000,
+      "file": "netsearch://sc2266109717",
+      "artist": "Sexxy Red",
+      "title": "He Wanna Hang With a Bad B tch.mp3",
+      "remix": null
+    },
+    {
+      "sid": 8586357300183572000,
+      "file": "netsearch://sc252944841",
+      "artist": "Lil Wayne feat. Drake & Future",
+      "title": "Love Me",
+      "remix": null
+    },
+    {
+      "sid": 4525038365038495000,
+      "file": "netsearch://sc2264882876",
+      "artist": "f3miii",
+      "title": "JANGANOBLE Jangalova x Noble",
+      "remix": null
+    },
+    {
+      "sid": 6843341732778477000,
+      "file": "netsearch://sc255766466",
+      "artist": "Kanye West",
+      "title": "Flashing Lights",
+      "remix": null
+    },
+    {
+      "sid": -9025328623485736000,
+      "file": "netsearch://sc280186218",
+      "artist": "Migos feat. Lil Uzi Vert",
+      "title": "Bad and Boujee",
+      "remix": null
+    },
+    {
+      "sid": -5284756712905230000,
+      "file": "netsearch://sc47552433",
+      "artist": "Soulja Boy",
+      "title": "Pretty Boy Swag",
+      "remix": null
+    },
+    {
+      "sid": -8018870165211076000,
+      "file": "netsearch://sc1604106489",
+      "artist": "Mello Buckzz",
+      "title": "MOVE",
+      "remix": null
+    },
+    {
+      "sid": 4600238890924848000,
+      "file": "netsearch://sc133046439",
+      "artist": "SpeakerKnockerz",
+      "title": "Speaker Knockerz - Freak Hoe",
+      "remix": null
+    },
+    {
+      "sid": -4313703094279130000,
+      "file": "netsearch://sc2161719609",
+      "artist": "On Top Of Cars",
+      "title": "Lil MU",
+      "remix": null
+    },
+    {
+      "sid": -6990735367791196000,
+      "file": "netsearch://sc1898102283",
+      "artist": "Lil Yachty, Veeze",
+      "title": "Sorry Not Sorry",
+      "remix": null
+    },
+    {
+      "sid": -7601176885809792000,
+      "file": "netsearch://sc257461530",
+      "artist": "Drake feat. The Weeknd",
+      "title": "Crew Love",
+      "remix": null
+    },
+    {
+      "sid": -176749921897283870,
+      "file": "netsearch://sc262672472",
+      "artist": "Rae Sremmurd",
+      "title": "No Type",
+      "remix": null
+    },
+    {
+      "sid": -2727522906494755300,
+      "file": "netsearch://sc1458212863",
+      "artist": "Don Toliver",
+      "title": "No Pole",
+      "remix": null
+    },
+    {
+      "sid": -6810662173207849000,
+      "file": "netsearch://sc255769403",
+      "artist": "Rihanna",
+      "title": "Bitch Better Have My Money",
+      "remix": null
+    },
+    {
+      "sid": 2940297290062761000,
+      "file": "netsearch://sc1622266413",
+      "artist": "All Falls Down",
+      "title": "Kanye West",
+      "remix": null
+    },
+    {
+      "sid": -5418843724154783000,
+      "file": "netsearch://sc160889754",
+      "artist": "Young Thug",
+      "title": "Lifestyle",
+      "remix": null
+    },
+    {
+      "sid": 5474343521310434000,
+      "file": "netsearch://sc276855160",
+      "artist": "J. Cole",
+      "title": "No Role Modelz",
+      "remix": null
+    },
+    {
+      "sid": -2459570864908248000,
+      "file": "netsearch://sc1794191197",
+      "artist": "T-Pain",
+      "title": "Up & Down",
+      "remix": null
+    },
+    {
+      "sid": 3992465107813142500,
+      "file": "netsearch://sc1450978399",
+      "artist": "Drake & Usher",
+      "title": "You Make Me Wanna x Come Thru",
+      "remix": null
+    }
+  ],
+  "pairs": [
+    {
+      "sid1": -1920323898029420800,
+      "sid2": -7070251851495169000
+    },
+    {
+      "sid1": 6228976102159244000,
+      "sid2": -8585936171158979000
+    },
+    {
+      "sid1": -7422560558239781000,
+      "sid2": -533227311905017000
+    },
+    {
+      "sid1": 8317205378257848000,
+      "sid2": -4562734104610217000
+    },
+    {
+      "sid1": -533227311905017000,
+      "sid2": -9004404619787429000
+    },
+    {
+      "sid1": 6228976102159244000,
+      "sid2": 6638864610742859000
+    },
+    {
+      "sid1": 8788623672298786000,
+      "sid2": 4558639512410397000
+    },
+    {
+      "sid1": 6882119958085239000,
+      "sid2": 961837747601064700
+    },
+    {
+      "sid1": 620870433259002800,
+      "sid2": 456770227159360800
+    },
+    {
+      "sid1": -1921352611812270000,
+      "sid2": 6638864610742859000
+    },
+    {
+      "sid1": 203881108954063460,
+      "sid2": -5302833897043341000
+    },
+    {
+      "sid1": 1587587936617607700,
+      "sid2": -4971990465655620000
+    },
+    {
+      "sid1": 6725358217406890000,
+      "sid2": 8586357300183572000
+    },
+    {
+      "sid1": 4525038365038495000,
+      "sid2": 6843341732778477000
+    },
+    {
+      "sid1": -9025328623485736000,
+      "sid2": -5284756712905230000
+    },
+    {
+      "sid1": -1920323898029420800,
+      "sid2": -5302833897043341000
+    },
+    {
+      "sid1": -8018870165211076000,
+      "sid2": 1587587936617607700
+    },
+    {
+      "sid1": -4971990465655620000,
+      "sid2": 4600238890924848000
+    },
+    {
+      "sid1": -7422560558239781000,
+      "sid2": 4600238890924848000
+    },
+    {
+      "sid1": -4313703094279130000,
+      "sid2": -8018870165211076000
+    },
+    {
+      "sid1": -6990735367791196000,
+      "sid2": -7601176885809792000
+    },
+    {
+      "sid1": -176749921897283870,
+      "sid2": -2727522906494755300
+    },
+    {
+      "sid1": -6810662173207849000,
+      "sid2": 961837747601064700
+    },
+    {
+      "sid1": 2940297290062761000,
+      "sid2": -5418843724154783000
+    },
+    {
+      "sid1": 5474343521310434000,
+      "sid2": -2459570864908248000
+    },
+    {
+      "sid1": -7601176885809792000,
+      "sid2": 3992465107813142500
+    }
+  ]
+}

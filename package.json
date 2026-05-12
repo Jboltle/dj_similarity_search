@@ -9,6 +9,8 @@
     "parse": "node scripts/parse-vdj-db.js",
     "validate": "node scripts/validate-graph.js",
     "build:data": "node scripts/parse-vdj-db.js && node scripts/validate-graph.js",
+    "upload:soundcloud": "node scripts/upload-to-soundcloud.js",
+    "merge:links": "node scripts/merge-links-to-extra-db.js",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
