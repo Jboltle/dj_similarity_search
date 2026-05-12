@@ -7,7 +7,7 @@ dist
 *.log
 .env
 .env.local
-bun.
+bun.lock
 # generated artifacts (do NOT delete by hand while VirtualDJ is running)
 public/graph.json
 public/songs.json

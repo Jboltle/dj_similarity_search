@@ -2,19 +2,21 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import Database from 'better-sqlite3';
-
-const DEFAULT_EXTRA_DB_LOCATIONS = {
-  darwin: () => path.join(os.homedir(), 'Library', 'Application Support', 'VirtualDJ', 'extra.db'),
-  win32: () => path.join(os.homedir(), 'Documents', 'VirtualDJ', 'extra.db'),
-  linux: () => path.join(os.homedir(), 'Documents', 'VirtualDJ', 'extra.db'),
-};
+import { expandVdjPath, listDefaultVirtualDjDirs } from './paths.js';
 
 export function resolveExtraDbPath(explicit) {
   const candidates = [];
-  if (explicit) candidates.push(explicit);
-  if (process.env.VDJ_EXTRA_DB_PATH) candidates.push(process.env.VDJ_EXTRA_DB_PATH);
-  const platformResolver = DEFAULT_EXTRA_DB_LOCATIONS[process.platform];
-  if (platformResolver) candidates.push(platformResolver());
+  if (explicit) {
+    const expanded = expandVdjPath(explicit);
+    if (expanded) candidates.push(expanded);
+  }
+  if (process.env.VDJ_EXTRA_DB_PATH) {
+    const expanded = expandVdjPath(process.env.VDJ_EXTRA_DB_PATH);
+    if (expanded) candidates.push(expanded);
+  }
+  for (const dir of listDefaultVirtualDjDirs()) {
+    candidates.push(path.join(dir, 'extra.db'));
+  }
   for (const candidate of candidates) {
     if (candidate && fs.existsSync(candidate)) return candidate;
   }
