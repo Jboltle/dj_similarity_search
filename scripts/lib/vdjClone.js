@@ -205,3 +205,12 @@ export function copyDirectoryRecursive(srcDir, destDir) {
   fs.mkdirSync(destDir, { recursive: true });
   fs.cpSync(srcDir, destDir, { recursive: true, errorOnExist: false });
 }
+
+/**
+ * Generic aliases — the underlying functions are already directory-agnostic;
+ * exposing them under directory-neutral names lets us reuse the same backup
+ * and fingerprint primitives for History/ (and any future folder) without
+ * baking "Cache" into call sites where it doesn't belong.
+ */
+export const renameDirectoryForBackup = renameCacheForBackup;
+export const sha256DirectoryAggregate = sha256CacheDirectoryAggregate;

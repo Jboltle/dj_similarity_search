@@ -1,7 +1,16 @@
 #!/usr/bin/env node
 /**
- * Snapshot VirtualDJ's extra.db (+ sidecars) and database.xml into a folder
- * (USB, network drive, etc.). Optional: include Cache/ (~multi-GB).
+ * Snapshot VirtualDJ's extra.db (+ sidecars), database.xml, and History/
+ * into a folder (USB, network drive, etc.).
+ *
+ * What gets copied:
+ *   - extra.db (+ -wal / -shm if present)         always
+ *   - database.xml                                always
+ *   - History/                                    default-on, opt-out via --no-history
+ *   - Cache/                                      opt-in via --include-cache (multi-GB)
+ *
+ * The manifest records SHA-256 fingerprints for History/ and Cache/ so the
+ * apply side can detect a corrupt or modified snapshot.
  *
  * @see scripts/lib/vdjClone.js
  */
@@ -19,13 +28,20 @@ import {
   copyExtraDbWithSidecars,
   copyDirectoryRecursive,
   sha256CacheDirectoryAggregate,
+  sha256DirectoryAggregate,
 } from './lib/vdjClone.js';
+
+// History is small (text .m3u files, typically a few MB at most) and is
+// almost always wanted when cloning a VDJ install, so it's default-on. Cache/
+// stays opt-in because it can be many gigabytes.
+const DEFAULT_INCLUDE_HISTORY = true;
 
 function parseArgs(argv) {
   const args = {
     to: null,
     source: null,
     includeCache: false,
+    includeHistory: DEFAULT_INCLUDE_HISTORY,
     forceWal: false,
     overwrite: false,
   };
@@ -39,6 +55,8 @@ function parseArgs(argv) {
       i += 1;
     } else if (arg === '--include-cache') {
       args.includeCache = true;
+    } else if (arg === '--no-history') {
+      args.includeHistory = false;
     } else if (arg === '--force-wal') {
       args.forceWal = true;
     } else if (arg === '--overwrite') {
@@ -92,6 +110,7 @@ function main() {
   const destExtra = path.join(dest, 'extra.db');
   const destXml = path.join(dest, 'database.xml');
   const destCache = path.join(dest, 'Cache');
+  const destHistory = path.join(dest, 'History');
 
   console.log(`[clone:export] Source VDJ folder: ${vdjFolder}`);
   console.log(`[clone:export] Destination:        ${dest}`);
@@ -111,6 +130,18 @@ function main() {
     }
   }
 
+  let historyFingerprint = null;
+  if (args.includeHistory) {
+    if (!fs.existsSync(files.historyDir)) {
+      console.warn(`[clone:export] No History folder at ${files.historyDir} — skipping.`);
+    } else {
+      if (fs.existsSync(destHistory)) fs.rmSync(destHistory, { recursive: true, force: true });
+      copyDirectoryRecursive(files.historyDir, destHistory);
+      historyFingerprint = sha256DirectoryAggregate(destHistory);
+      console.log(`[clone:export] Copied History/ (fingerprint ${historyFingerprint.slice(0, 12)}…)`);
+    }
+  }
+
   const manifest = {
     schemaVersion: MANIFEST_SCHEMA_VERSION,
     generatedAt: new Date().toISOString(),
@@ -119,6 +150,8 @@ function main() {
     sourceVdjFolder: vdjFolder,
     includesCache: args.includeCache && fs.existsSync(destCache),
     cacheFingerprint,
+    includesHistory: args.includeHistory && fs.existsSync(destHistory),
+    historyFingerprint,
     files: {
       'extra.db': {
         bytes: fs.statSync(destExtra).size,

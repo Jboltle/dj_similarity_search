@@ -227,11 +227,6 @@ export function mergePairsIntoExtraDb({ targetPath, pairs, projectRoot, dryRun, 
  * in scripts/lib/relatedTracks.js but accepts a CLI override.
  */
 export function resolveTargetPath(explicit) {
-<<<<<<< HEAD
-  if (explicit) return explicit;
-  if (process.env.VDJ_EXTRA_DB_PATH) return process.env.VDJ_EXTRA_DB_PATH;
-  return vdjFiles(resolveVdjFolder(null)).extraDb;
-=======
   if (explicit) {
     const expanded = expandVdjPath(explicit);
     if (expanded) return expanded;
@@ -248,5 +243,4 @@ export function resolveTargetPath(explicit) {
     return path.join(os.homedir(), 'Library', 'Application Support', 'VirtualDJ', 'extra.db');
   }
   return path.join(os.homedir(), 'Documents', 'VirtualDJ', 'extra.db');
->>>>>>> refs/remotes/origin/main
 }

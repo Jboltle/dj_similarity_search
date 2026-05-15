@@ -13,6 +13,7 @@
     "merge:links": "node scripts/merge-links-to-extra-db.js",
     "clone:export": "node scripts/clone-vdj-export.js",
     "clone:apply": "node scripts/clone-vdj-apply.js",
+    "history:copy": "node scripts/copy-history.js",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"

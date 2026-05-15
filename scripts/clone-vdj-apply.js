@@ -1,7 +1,12 @@
 #!/usr/bin/env node
 /**
  * Apply a snapshot folder (from clone:export) onto the local VirtualDJ install.
- * Default: dry-run. Pass --write to replace extra.db + database.xml (+ Cache if present in snapshot).
+ * Default: dry-run. Pass --write to replace extra.db + database.xml, plus
+ * History/ and Cache/ if either was included in the snapshot.
+ *
+ * Every replaced file/directory is first backed up next to its original (and
+ * for files, mirrored into public/backups/clone-<stamp>/). If any step fails
+ * mid-apply, all replacements are rolled back from those backups.
  *
  * @see scripts/lib/vdjClone.js
  */
@@ -20,8 +25,10 @@ import {
   backupVdjCloneTargets,
   timestampForCloneBackup,
   renameCacheForBackup,
+  renameDirectoryForBackup,
   copyDirectoryRecursive,
   sha256CacheDirectoryAggregate,
+  sha256DirectoryAggregate,
 } from './lib/vdjClone.js';
 
 function parseArgs(argv) {
@@ -94,6 +101,20 @@ function verifySnapshotAgainstManifest(snapshotDir, manifest) {
       }
     }
   }
+  if (manifest.includesHistory) {
+    const historyDir = path.join(snapshotDir, 'History');
+    if (!fs.existsSync(historyDir)) {
+      throw new Error('Manifest declares includesHistory but History/ is missing from snapshot.');
+    }
+    if (manifest.historyFingerprint) {
+      const fp = sha256DirectoryAggregate(historyDir);
+      if (fp !== manifest.historyFingerprint) {
+        throw new Error(
+          'History/ fingerprint does not match manifest (corrupt or modified snapshot).'
+        );
+      }
+    }
+  }
 }
 
 function restoreFromBackups(backups) {
@@ -137,6 +158,7 @@ function main() {
   const snapExtra = path.join(snapshotDir, 'extra.db');
   const snapXml = path.join(snapshotDir, 'database.xml');
   const snapCache = path.join(snapshotDir, 'Cache');
+  const snapHistory = path.join(snapshotDir, 'History');
 
   console.log(`[clone:apply] Snapshot:  ${snapshotDir}`);
   console.log(`[clone:apply] Target VDJ: ${vdjFolder}`);
@@ -149,6 +171,7 @@ function main() {
     dryRun: !args.write,
     manifestSchemaVersion: manifest.schemaVersion,
     includesCache: Boolean(manifest.includesCache),
+    includesHistory: Boolean(manifest.includesHistory),
   };
 
   if (!args.write) {
@@ -165,6 +188,7 @@ function main() {
   report.backups = backups;
 
   let cacheRenamedTo = null;
+  let historyRenamedTo = null;
   try {
     atomicReplaceFile(targetFiles.extraDb, snapExtra);
     removeSqliteSidecars(targetFiles.extraDb);
@@ -177,6 +201,14 @@ function main() {
         report.cacheBackedUpTo = cacheRenamedTo;
       }
       copyDirectoryRecursive(snapCache, targetFiles.cacheDir);
+    }
+
+    if (manifest.includesHistory && fs.existsSync(snapHistory)) {
+      if (fs.existsSync(targetFiles.historyDir)) {
+        historyRenamedTo = renameDirectoryForBackup(targetFiles.historyDir, stamp);
+        report.historyBackedUpTo = historyRenamedTo;
+      }
+      copyDirectoryRecursive(snapHistory, targetFiles.historyDir);
     }
 
     const postIntegrity = verifySqliteIntegrity(targetFiles.extraDb);
@@ -194,26 +226,36 @@ function main() {
     console.error('[clone:apply] Restoring from backups…');
     restoreFromBackups(backups);
     removeSqliteSidecars(targetFiles.extraDb);
-    if (cacheRenamedTo && fs.existsSync(cacheRenamedTo)) {
-      if (fs.existsSync(targetFiles.cacheDir)) {
-        try {
-          fs.rmSync(targetFiles.cacheDir, { recursive: true, force: true });
-        } catch {
-          /* ignore */
-        }
-      }
-      try {
-        fs.renameSync(cacheRenamedTo, targetFiles.cacheDir);
-      } catch {
-        /* ignore */
-      }
-    }
+    restoreRenamedDirectory(targetFiles.cacheDir, cacheRenamedTo);
+    restoreRenamedDirectory(targetFiles.historyDir, historyRenamedTo);
     report.success = false;
     report.error = err.message;
     report.restoredFromBackup = true;
     fs.mkdirSync(publicDir, { recursive: true });
     fs.writeFileSync(reportPath, JSON.stringify(report, null, 2));
     process.exitCode = 1;
+  }
+}
+
+/**
+ * Roll back a directory that was renamed aside before applying. Removes any
+ * partially-copied replacement at `targetDir` and moves the backup back into
+ * place. Best-effort: any cleanup failures are swallowed so we always attempt
+ * every restore step.
+ */
+function restoreRenamedDirectory(targetDir, renamedTo) {
+  if (!renamedTo || !fs.existsSync(renamedTo)) return;
+  if (fs.existsSync(targetDir)) {
+    try {
+      fs.rmSync(targetDir, { recursive: true, force: true });
+    } catch {
+      /* ignore */
+    }
+  }
+  try {
+    fs.renameSync(renamedTo, targetDir);
+  } catch {
+    /* ignore */
   }
 }
 
