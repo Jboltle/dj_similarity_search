@@ -1,13 +1,21 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import Database from 'better-sqlite3';
-import { resolveVdjFolder, vdjFiles } from './vdjPaths.js';
+import { expandVdjPath, listDefaultVirtualDjDirs } from './paths.js';
 
 export function resolveExtraDbPath(explicit) {
   const candidates = [];
-  if (explicit) candidates.push(explicit);
-  if (process.env.VDJ_EXTRA_DB_PATH) candidates.push(process.env.VDJ_EXTRA_DB_PATH);
-  candidates.push(vdjFiles(resolveVdjFolder(null)).extraDb);
+  if (explicit) {
+    const expanded = expandVdjPath(explicit);
+    if (expanded) candidates.push(expanded);
+  }
+  if (process.env.VDJ_EXTRA_DB_PATH) {
+    const expanded = expandVdjPath(process.env.VDJ_EXTRA_DB_PATH);
+    if (expanded) candidates.push(expanded);
+  }
+  for (const dir of listDefaultVirtualDjDirs()) {
+    candidates.push(path.join(dir, 'extra.db'));
+  }
   for (const candidate of candidates) {
     if (candidate && fs.existsSync(candidate)) return candidate;
   }

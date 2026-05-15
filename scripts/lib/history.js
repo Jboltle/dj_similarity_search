@@ -1,18 +1,21 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { normalizePath } from './paths.js';
-import { resolveVdjFolder, vdjFiles } from './vdjPaths.js';
+import { expandVdjPath, listDefaultVirtualDjDirs, normalizePath } from './paths.js';
 
 const EXTVDJ_RE = /^#EXTVDJ:(.*)$/i;
 const ATTR_RE = /<([a-zA-Z]+)>([\s\S]*?)<\/\1>/g;
 
 export function resolveHistoryDir(explicit) {
-  if (explicit && fs.existsSync(explicit)) return explicit;
-  if (process.env.VDJ_HISTORY_PATH && fs.existsSync(process.env.VDJ_HISTORY_PATH)) {
-    return process.env.VDJ_HISTORY_PATH;
+  const explicitExpanded = explicit ? expandVdjPath(explicit) : null;
+  if (explicitExpanded && fs.existsSync(explicitExpanded)) return explicitExpanded;
+  const envHistory = process.env.VDJ_HISTORY_PATH ? expandVdjPath(process.env.VDJ_HISTORY_PATH) : null;
+  if (envHistory && fs.existsSync(envHistory)) {
+    return envHistory;
   }
-  const candidate = vdjFiles(resolveVdjFolder(null)).historyDir;
-  if (fs.existsSync(candidate)) return candidate;
+  for (const dir of listDefaultVirtualDjDirs()) {
+    const candidate = path.join(dir, 'History');
+    if (fs.existsSync(candidate)) return candidate;
+  }
   return null;
 }
 
