@@ -4,12 +4,13 @@ Read-only desktop tool that visualizes the **real linked tracks** you've defined
 
 The default workflow (`parse` + `dev`) **never writes** to VirtualDJ's data. Every read is either via copy-to-temp (SQLite) or `readFileSync` (XML / M3U).
 
-Two **opt-in** commands (`upload:soundcloud` and `merge:links`) can publish your linked-tracks set externally:
+Four **opt-in** commands (`upload:soundcloud`, `merge:links`, `clone:export`, `clone:apply`) can publish or mirror your data externally:
 
 - `upload:soundcloud` makes outbound API calls to SoundCloud and creates a playlist named `Linked_DJ_Playlist`.
-- `merge:links` is the only command that ever writes to a VirtualDJ `extra.db`, and only with all of: a timestamped backup, a WAL-sidecar guard, a single transaction, and `--write` explicitly passed (otherwise it dry-runs).
+- `merge:links` is the only command that **merges** rows into an existing `extra.db`, and only with a WAL-sidecar guard, timestamped backup, single transaction, and `--write` explicitly passed (otherwise it dry-runs).
+- `clone:export` / `clone:apply` **replace** `extra.db` and `database.xml` (and optionally `Cache/`) from a snapshot folder — use for a full mirror between machines.
 
-See [Sharing linked tracks](#sharing-linked-tracks-opt-in) below.
+See [Sharing linked tracks](#sharing-linked-tracks-opt-in) and [Mirror your VDJ data](#mirror-your-vdj-data-mac--windows) below.
 
 ## Where the data comes from
 
@@ -42,17 +43,18 @@ npm install
 
 ## Configure
 
-By default the parser looks for VirtualDJ files at the standard macOS location:
+By default the parser looks for VirtualDJ files at the standard location for your OS:
 
-| File | Path |
-|---|---|
-| Library | `~/Library/Application Support/VirtualDJ/database.xml` |
-| Linked tracks | `~/Library/Application Support/VirtualDJ/extra.db` |
-| History | `~/Library/Application Support/VirtualDJ/History/` |
+| File | macOS | Windows |
+|---|---|---|
+| Library | `~/Library/Application Support/VirtualDJ/database.xml` | `%USERPROFILE%\Documents\VirtualDJ\database.xml` |
+| Linked tracks | `~/Library/Application Support/VirtualDJ/extra.db` | `%USERPROFILE%\Documents\VirtualDJ\extra.db` |
+| History | `~/Library/Application Support/VirtualDJ/History/` | `%USERPROFILE%\Documents\VirtualDJ\History\` |
 
-Override with environment variables (`.env.example`) or CLI flags:
+Override with environment variables (`.env.example`) or CLI flags. You can set **`VDJ_FOLDER`** once to the VirtualDJ data directory; individual paths still override when set:
 
 ```bash
+VDJ_FOLDER=/custom/VirtualDJ
 VDJ_DB_PATH=/custom/database.xml
 VDJ_EXTRA_DB_PATH=/custom/extra.db
 VDJ_HISTORY_PATH=/custom/History
@@ -258,6 +260,50 @@ npm run merge:links -- --target "/path/to/other/extra.db" --from ./export.json -
 4. **Schema introspection** via `PRAGMA table_info` — tolerates future VDJ versions that add columns. Inserts use `INSERT OR IGNORE`.
 5. **Dry-run is the default.** You must pass `--write` to commit anything.
 
+### Mirror your VDJ data (Mac → Windows)
+
+Full mirror of **`extra.db`** + **`database.xml`** (and optionally the multi-gigabyte **`Cache/`** folder) into a snapshot directory, then apply that snapshot on another machine’s VirtualDJ install. This is different from `merge:links`, which only **adds** linked-track rows into an existing `extra.db` and leaves the rest of your library alone.
+
+| | `clone:export` / `clone:apply` | `merge:links` |
+|---|---|---|
+| Files | `extra.db` + `database.xml` (+ optional `Cache/`) | `track_data` + `related_tracks` only |
+| Effect | **Replaces** whole DB + library XML | **Additive** `INSERT OR IGNORE` |
+| Preserves other machine’s library | No — you get a copy of the source library catalog | Yes |
+| Reversible | Yes — timestamped backups beside the files + under `public/backups/` | Yes — backups + portable export files |
+| Best for | “Make my Windows install match my Mac” | “Only sync linked pairs onto an existing Windows library” |
+
+**USB workflow**
+
+1. On the Mac, close VirtualDJ (or use `--force-wal` only if you know the WAL is safe to copy).
+
+```bash
+npm run clone:export -- --to /Volumes/YOURUSB/vdj-snapshot
+```
+
+2. Eject the USB, plug into the Windows PC, close VirtualDJ there.
+
+```powershell
+cd path\to\djLinker
+npm run clone:apply -- --from D:\vdj-snapshot --write
+```
+
+`clone:apply` defaults to **dry-run**; it validates the snapshot checksums and checks for WAL sidecars before `--write` replaces anything.
+
+**Flags**
+
+| Command | Useful flags |
+|---|---|
+| `clone:export` | `--to <dir>` (required), `--source <vdj-folder>`, `--include-cache` (~multi-GB), `--overwrite`, `--force-wal` |
+| `clone:apply` | `--from <dir>` (required), `--target <vdj-folder>`, `--write`, `--force-wal` |
+
+**Environment:** set `VDJ_FOLDER` to override the default VirtualDJ data directory on either OS (see [.env.example](.env.example)).
+
+**Caveats**
+
+- `database.xml` stores **absolute file paths** from the source OS. Tracks that pointed at Mac paths will show as missing on Windows unless they use portable sources (e.g. `netsearch://sc…`). Streaming SoundCloud entries in your library remain valid on both sides.
+- By default **`Cache/` is not included** (paths differ cross-OS; the cache is huge). Use `--include-cache` only if you share a volume or intentionally want a cold-cache copy.
+- **`public/vdj-snapshot/`** is gitignored — snapshots contain your full library metadata; use USB or a private copy instead of committing to a public repo.
+
 ### Cross-platform notes
 
 | Concern | macOS | Windows |
@@ -267,7 +313,7 @@ npm run merge:links -- --target "/path/to/other/extra.db" --from ./export.json -
 | Backup filenames | `extra.db.backup-2026-05-12T...` | Colons replaced with dashes — Windows-safe |
 | `better-sqlite3` | Prebuilt for arm64 + x64 | Prebuilt for x64; if you hit a build error, install [VS Build Tools](https://visualstudio.microsoft.com/visual-cpp-build-tools/) |
 
-Tested commands work identically on both: `parse`, `validate`, `merge:links`, `upload:soundcloud`.
+Tested commands work identically on both: `parse`, `validate`, `merge:links`, `upload:soundcloud`, `clone:export`, `clone:apply`.
 
 ## Project layout
 
@@ -280,8 +326,12 @@ vdj-link-map/
 │   ├── validate-graph.js
 │   ├── upload-to-soundcloud.js     # OPT-IN: create SC playlist from linked pairs
 │   ├── merge-links-to-extra-db.js  # OPT-IN: merge linked pairs into a target extra.db
+│   ├── clone-vdj-export.js         # OPT-IN: snapshot extra.db + database.xml (+ optional Cache)
+│   ├── clone-vdj-apply.js          # OPT-IN: apply snapshot onto local VirtualDJ folder
 │   └── lib/
 │       ├── relatedTracks.js        # SQLite reader (read-only, copy-to-temp)
+│       ├── vdjPaths.js             # resolve VirtualDJ data folder + standard file paths
+│       ├── vdjClone.js             # WAL guard, integrity, sha256, atomic file replace for clone
 │       ├── history.js              # M3U session log parser
 │       ├── xml.js                  # database.xml parser
 │       ├── paths.js                # path normalization + resolution

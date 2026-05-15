@@ -1,0 +1,24 @@
+{
+  "generatedAt": "2026-05-12T19:31:57.775Z",
+  "sourceType": "graph",
+  "sourcePath": "/Users/jboltle/Library/Application Support/VirtualDJ/database.xml",
+  "targetPath": "/Users/jboltle/Library/Application Support/VirtualDJ/extra.db",
+  "dryRun": true,
+  "write": false,
+  "forceWal": false,
+  "directMergeFailed": true,
+  "failureReason": "Target appears to be in use by VirtualDJ (sidecar files present):\n  /Users/jboltle/Library/Application Support/VirtualDJ/extra.db-wal\nClose VirtualDJ first, or re-run with --force-wal (DANGEROUS).",
+  "mergeReport": {
+    "targetPath": "/Users/jboltle/Library/Application Support/VirtualDJ/extra.db",
+    "dryRun": true,
+    "failed": true,
+    "error": "Target appears to be in use by VirtualDJ (sidecar files present):\n  /Users/jboltle/Library/Application Support/VirtualDJ/extra.db-wal\nClose VirtualDJ first, or re-run with --force-wal (DANGEROUS)."
+  },
+  "exports": {
+    "jsonPath": "/Users/jboltle/Sandbox/djLinker/public/linked-tracks-export.json",
+    "sqlPath": "/Users/jboltle/Sandbox/djLinker/public/linked-tracks-export.sql",
+    "dbPath": "/Users/jboltle/Sandbox/djLinker/public/linked-tracks.db",
+    "trackCount": 40,
+    "pairCount": 26
+  }
+}

@@ -24,9 +24,9 @@
  *      touching the original file.
  */
 import fs from 'node:fs';
-import os from 'node:os';
 import path from 'node:path';
 import Database from 'better-sqlite3';
+import { resolveVdjFolder, vdjFiles } from './vdjPaths.js';
 
 const TRACK_DATA_TABLE = 'track_data';
 const RELATED_TRACKS_TABLE = 'related_tracks';
@@ -229,9 +229,5 @@ export function mergePairsIntoExtraDb({ targetPath, pairs, projectRoot, dryRun, 
 export function resolveTargetPath(explicit) {
   if (explicit) return explicit;
   if (process.env.VDJ_EXTRA_DB_PATH) return process.env.VDJ_EXTRA_DB_PATH;
-  const platform = process.platform;
-  if (platform === 'darwin') {
-    return path.join(os.homedir(), 'Library', 'Application Support', 'VirtualDJ', 'extra.db');
-  }
-  return path.join(os.homedir(), 'Documents', 'VirtualDJ', 'extra.db');
+  return vdjFiles(resolveVdjFolder(null)).extraDb;
 }

@@ -1,27 +1,18 @@
 import fs from 'node:fs';
-import os from 'node:os';
 import path from 'node:path';
 import { normalizePath } from './paths.js';
+import { resolveVdjFolder, vdjFiles } from './vdjPaths.js';
 
 const EXTVDJ_RE = /^#EXTVDJ:(.*)$/i;
 const ATTR_RE = /<([a-zA-Z]+)>([\s\S]*?)<\/\1>/g;
-
-const DEFAULT_HISTORY_DIRS = {
-  darwin: () => path.join(os.homedir(), 'Library', 'Application Support', 'VirtualDJ', 'History'),
-  win32: () => path.join(os.homedir(), 'Documents', 'VirtualDJ', 'History'),
-  linux: () => path.join(os.homedir(), 'Documents', 'VirtualDJ', 'History'),
-};
 
 export function resolveHistoryDir(explicit) {
   if (explicit && fs.existsSync(explicit)) return explicit;
   if (process.env.VDJ_HISTORY_PATH && fs.existsSync(process.env.VDJ_HISTORY_PATH)) {
     return process.env.VDJ_HISTORY_PATH;
   }
-  const platform = DEFAULT_HISTORY_DIRS[process.platform];
-  if (platform) {
-    const candidate = platform();
-    if (fs.existsSync(candidate)) return candidate;
-  }
+  const candidate = vdjFiles(resolveVdjFolder(null)).historyDir;
+  if (fs.existsSync(candidate)) return candidate;
   return null;
 }
 

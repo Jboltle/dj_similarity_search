@@ -1,26 +1,19 @@
-import os from 'node:os';
-import path from 'node:path';
 import fs from 'node:fs';
-
-const DEFAULT_DB_LOCATIONS = {
-  darwin: () => path.join(os.homedir(), 'Library', 'Application Support', 'VirtualDJ', 'database.xml'),
-  win32: () => path.join(os.homedir(), 'Documents', 'VirtualDJ', 'database.xml'),
-  linux: () => path.join(os.homedir(), 'Documents', 'VirtualDJ', 'database.xml'),
-};
+import path from 'node:path';
+import { resolveVdjFolder, vdjFiles } from './vdjPaths.js';
 
 export function resolveDatabasePath(explicit) {
   const candidates = [];
   if (explicit) candidates.push(explicit);
   if (process.env.VDJ_DB_PATH) candidates.push(process.env.VDJ_DB_PATH);
-  const platformResolver = DEFAULT_DB_LOCATIONS[process.platform];
-  if (platformResolver) candidates.push(platformResolver());
+  candidates.push(vdjFiles(resolveVdjFolder(null)).databaseXml);
 
   for (const candidate of candidates) {
     if (candidate && fs.existsSync(candidate)) return candidate;
   }
   throw new Error(
     `Could not locate VirtualDJ database.xml. Tried:\n  - ${candidates.join('\n  - ')}\n` +
-      'Set VDJ_DB_PATH or pass --db <path> on the CLI.'
+      'Set VDJ_DB_PATH or VDJ_FOLDER, or pass --db <path> on the CLI.'
   );
 }
 

@@ -11,7 +11,8 @@ public/songs.json
 public/unresolved-links.json
 public/link-shape-report.json
 public/soundcloud-playlist.json
-public/merge-extra-db-report.json
+public/vdj-snapshot/
+public/clone-apply-report.json
 data/cache.sqlite
 
 # extra.db backups — never auto-deleted, never committed
