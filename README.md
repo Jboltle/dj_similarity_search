@@ -304,6 +304,141 @@ npm run clone:apply -- --from D:\vdj-snapshot --write
 - By default **`Cache/` is not included** (paths differ cross-OS; the cache is huge). Use `--include-cache` only if you share a volume or intentionally want a cold-cache copy.
 - **`public/vdj-snapshot/`** is gitignored — snapshots contain your full library metadata; use USB or a private copy instead of committing to a public repo.
 
+## Linked-tracks playlist folder
+
+`npm run linked:folder` writes a static VirtualDJ folder (`.vdjfolder`) that
+lists every song participating in at least one linked-tracks pair from your
+local `extra.db`. It appears in VirtualDJ's sidebar under **Folders** as
+"Linked Tracks" (rename via `--name "Whatever"`).
+
+```bash
+npm run linked:folder                              # dry-run (default)
+npm run linked:folder -- --write                   # actually create / overwrite
+npm run linked:folder -- --write --force-wal       # write even if VDJ sidecars present
+npm run linked:folder -- --name "My Linked Set"    # custom folder name
+```
+
+The output file lands at
+`<VDJ_FOLDER>/Folders/<name>.vdjfolder`. Existing files are backed up next to
+the original and into `public/backups/linked-folder-<stamp>/` before overwrite.
+
+This command also runs automatically at the end of `sync:pull --write` so the
+folder stays in sync with the merged link set across machines. Disable with
+`--no-linked-folder` if you'd rather manage it yourself.
+
+## Bidirectional sync (Mac ↔ Windows via git)
+
+`merge:links` and `clone:*` were designed for one-shot transfers. The `sync:*`
+commands are a higher-level workflow that combines all three data sources
+(`database.xml`, `extra.db`, `History/`) into a true bidirectional union via a
+committed `sync/` folder in this repo. Two machines can push and pull
+independently without anyone losing data.
+
+### How it differs from the existing commands
+
+| | `sync:*` | `clone:*` | `merge:links` |
+|---|---|---|---|
+| `database.xml` | Union, newest `<Infos LastModified>` wins | **Replaces** | Untouched |
+| `extra.db` | Union (tracks + linked pairs) | **Replaces** | Adds only linked pairs |
+| `History/` | File-level union, content-hash deduped | **Replaces** | Untouched |
+| Repo state | Committed `sync/mac/`, `sync/windows/`, `sync/merged/` | Snapshot folder is gitignored | One JSON export file |
+| Backups | Always; restore via `sync:restore` | Side-by-side timestamped | Side-by-side timestamped |
+
+### Layout in the repo
+
+```
+sync/
+  mac/         # raw VirtualDJ snapshot from the Mac (whoever pushed last)
+  windows/     # raw VirtualDJ snapshot from the Windows machine
+  merged/      # deterministically regenerated union of mac/ + windows/
+```
+
+Each subfolder holds `database.xml`, `extra.db`, `History/`, and a
+`manifest.json`. The `merged/` folder additionally carries `merge-report.json`
+with per-Song conflict details.
+
+### Daily workflow
+
+```bash
+# On the machine where you just edited tracks / curated linked pairs:
+git pull                        # grab whatever the other side pushed
+npm run sync:pull -- --write    # merge sync/merged/ INTO your local VDJ folder
+                                # (additive, full pre-write backup)
+# ...VirtualDJ work, history accumulates, linked tracks change...
+npm run sync:push               # snapshots local VDJ -> sync/<machine>/,
+                                # regenerates sync/merged/, commits, pushes.
+```
+
+VirtualDJ must be **closed** before `sync:push` and `sync:pull --write` — the
+scripts check for `extra.db-wal`/`extra.db-shm` sidecars and refuse to proceed
+otherwise (override at your own risk with `--force-wal`).
+
+### Conflict rules
+
+- **database.xml** — union by `FilePath`. On collision, the Song element with
+  the larger `<Infos LastModified="…">` epoch wins. Tie-breaker: streaming
+  paths (`netsearch://…`) outrank OS-specific filesystem paths, then the
+  local side wins. Output is sorted by FilePath so `git diff` shows real
+  changes only.
+- **extra.db** — union by `sid` for `track_data` (richer metadata wins on
+  collision); union by unordered `(sid1, sid2)` pair for `related_tracks`.
+- **History/** — keep both files when dates collide, suffixed
+  `2026-05-12.mac.m3u` / `2026-05-12.windows.m3u`. Identical content
+  (`SHA-256`) collapses to a single file.
+
+### Commands
+
+```bash
+npm run sync:push                      # snapshot + merge + commit + push (default ON)
+npm run sync:push -- --no-git          # write sync/ only; commit manually
+npm run sync:push -- --as mac          # override the auto-detected machine id
+npm run sync:push -- --dry-run         # plan + backup, don't touch sync/
+
+npm run sync:pull                      # dry run: shows what would change
+npm run sync:pull -- --write           # actually apply sync/merged/ to local VDJ
+npm run sync:pull -- --no-git          # skip `git pull`
+npm run sync:pull -- --no-history      # leave local History/ alone
+npm run sync:pull -- --no-parse        # don't regenerate public/graph.json after
+npm run sync:pull -- --no-linked-folder # don't refresh "Linked Tracks" .vdjfolder
+npm run sync:pull -- --linked-folder-name "My Set"  # use a custom folder name
+
+npm run sync:merge                     # local-only re-merge of mac/ + windows/
+npm run sync:merge -- --out /tmp/peek  # peek at the merge result somewhere else
+npm run sync:merge -- --prefer-local   # bias tie-broken Songs toward this OS
+
+npm run sync:restore                                           # list backups
+npm run sync:restore -- --stamp 2026-05-21T...                 # dry-run validate
+npm run sync:restore -- --stamp latest --write                 # restore newest pull-time backup
+npm run sync:restore -- --stamp <id> --no-history --write      # restore DB + xml only
+```
+
+### Backups
+
+Every write goes through `scripts/lib/syncBackups.js`. There is no `--write`
+path that doesn't take a backup first unless you also pass `--force`.
+
+- `sync:pull --write` backs up the **entire local VirtualDJ folder**
+  (`database.xml`, `extra.db` + WAL sidecars, full `History/`) into
+  `public/backups/sync-pull-<stamp>/` with a SHA-256 manifest, AND drops
+  side-by-side `.backup-<stamp>` files next to the originals.
+- `sync:push` backs up the **previous** `sync/<machine>/` and `sync/merged/`
+  into `public/backups/sync-push-<label>-<stamp>/` before overwriting them.
+- `public/backups/` is `.gitignore`d and never auto-deleted unless you ask.
+
+Uniform CLI flags on every write command:
+
+| Flag | Effect |
+|---|---|
+| `--backup-dir <path>` | Override the default `public/backups/` location. |
+| `--no-backup` | Skip backup. Requires `--force` to confirm intent. |
+| `--backup-only` | Take the backup, then exit without writing. |
+| `--keep-backups <N>` | After the run, prune the oldest backups of this kind beyond N. |
+
+`sync:restore` reads the manifest, validates every file's SHA-256, then
+atomically restores `database.xml`, `extra.db` (+ sidecars), and (unless
+`--no-history`) the full `History/` tree. Default mode is dry-run; pass
+`--write` to actually restore.
+
 ### Cross-platform notes
 
 | Concern | macOS | Windows |
@@ -313,7 +448,7 @@ npm run clone:apply -- --from D:\vdj-snapshot --write
 | Backup filenames | `extra.db.backup-2026-05-12T...` | Colons replaced with dashes — Windows-safe |
 | `better-sqlite3` | Prebuilt for arm64 + x64 | Prebuilt for x64; if you hit a build error, install [VS Build Tools](https://visualstudio.microsoft.com/visual-cpp-build-tools/) |
 
-Tested commands work identically on both: `parse`, `validate`, `merge:links`, `upload:soundcloud`, `clone:export`, `clone:apply`.
+Tested commands work identically on both: `parse`, `validate`, `merge:links`, `upload:soundcloud`, `clone:export`, `clone:apply`, `sync:push`, `sync:pull`, `sync:merge`, `sync:restore`.
 
 ## Project layout
 
@@ -328,6 +463,10 @@ vdj-link-map/
 │   ├── merge-links-to-extra-db.js  # OPT-IN: merge linked pairs into a target extra.db
 │   ├── clone-vdj-export.js         # OPT-IN: snapshot extra.db + database.xml (+ optional Cache)
 │   ├── clone-vdj-apply.js          # OPT-IN: apply snapshot onto local VirtualDJ folder
+│   ├── sync-push.js                # OPT-IN: snapshot local VDJ -> sync/<machine>/ + commit/push
+│   ├── sync-pull.js                # OPT-IN: git pull + merge sync/merged/ -> local VDJ (additive)
+│   ├── sync-merge.js               # local-only union of sync/mac/ + sync/windows/ -> sync/merged/
+│   ├── sync-restore.js             # roll back local VDJ from a public/backups/ stamp
 │   └── lib/
 │       ├── relatedTracks.js        # SQLite reader (read-only, copy-to-temp)
 │       ├── vdjPaths.js             # resolve VirtualDJ data folder + standard file paths
@@ -341,6 +480,11 @@ vdj-link-map/
 │       ├── linkedSongs.js          # graph.json → vdj_link pairs + SC track IDs
 │       ├── linkedTracksExport.js   # portable JSON + SQL + .db export (fallback)
 │       ├── extraDbWriter.js        # WAL guard + backup + transactional writes
+│       ├── databaseXmlMerge.js     # newest-wins Song merge + stable sort + XML serialize
+│       ├── extraDbMerge.js         # union of two extra.db files (tracks + linked pairs)
+│       ├── historyMerge.js         # file-level History/ union with SHA-256 dedupe
+│       ├── syncBackups.js          # timestamped backups + restore + retention pruning
+│       ├── machineId.js            # mac/windows folder selection with --as override
 │       ├── openBrowser.js          # cross-platform default-browser launcher
 │       ├── soundcloudAuth.js       # OAuth 2.1 + PKCE + paste-back flow
 │       └── soundcloudClient.js     # POST/PUT /playlists wrapper
@@ -351,6 +495,10 @@ vdj-link-map/
 │   ├── graph/{layout, renderer, colors}.js
 │   ├── match/findMatches.js        # on-demand BPM/key/genre scoring
 │   └── ui/{search, filters, sidebar, tooltip}.js
+├── sync/                           # COMMITTED: bidirectional sync state
+│   ├── mac/                        # raw VDJ snapshot from the Mac
+│   ├── windows/                    # raw VDJ snapshot from the Windows machine
+│   └── merged/                     # deterministic union (regenerated on every push/pull)
 └── public/                         # generated artifacts (git-ignored)
     ├── oauth-callback.html         # COMMITTED: deploy to GitHub Pages
     ├── graph.json
@@ -358,5 +506,5 @@ vdj-link-map/
     ├── linked-tracks.db
     ├── soundcloud-playlist.json
     ├── merge-extra-db-report.json
-    └── backups/                    # extra.db backups, never auto-deleted
+    └── backups/                    # extra.db backups + sync-push/pull backups, never auto-deleted
 ```

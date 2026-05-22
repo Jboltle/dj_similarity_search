@@ -23,6 +23,12 @@ public/backups/
 # OAuth tokens (NEVER commit these)
 .soundcloud-tokens.json
 
+# sync/ IS tracked (per-machine snapshots + merged result), but the SQLite
+# WAL/SHM sidecars are transient and machine-specific — never commit them.
+sync/**/*.db-wal
+sync/**/*.db-shm
+sync/**/.DS_Store
+
 # NOTE: the three linked-tracks export files are intentionally NOT in this list.
 # They are the portable sync artifact for moving your linked-tracks set between
 # machines (e.g. Mac → Windows). Commit them to share, or transfer manually:
