@@ -41,7 +41,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { execFileSync, spawnSync } from 'node:child_process';
 import { resolveVdjFolder, vdjFiles } from './lib/vdjPaths.js';
-import { assertNoVdjRunning, verifySqliteIntegrity } from './lib/vdjClone.js';
+import { assertNoVdjRunning, verifySqliteIntegrity } from './lib/sqliteGuards.js';
 import {
   syncMergedDir,
   syncFolderFiles,

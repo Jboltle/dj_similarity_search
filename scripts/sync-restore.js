@@ -21,7 +21,7 @@
 import path from 'node:path';
 import fs from 'node:fs';
 import { resolveVdjFolder, vdjFiles } from './lib/vdjPaths.js';
-import { assertNoVdjRunning } from './lib/vdjClone.js';
+import { assertNoVdjRunning } from './lib/sqliteGuards.js';
 import { listBackups, restoreBackup, BACKUP_KIND } from './lib/syncBackups.js';
 
 function parseArgs(argv) {

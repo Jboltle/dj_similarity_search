@@ -27,6 +27,8 @@
  *   --keep-backups <N>     Prune oldest sync-push backups beyond N.
  *   --no-git               Don't touch git; just update sync/.
  *   --no-push              Stage + commit, but don't `git push`.
+ *   --no-linked-folder     Skip refreshing the local Linked Tracks .vdjfolder.
+ *   --linked-folder-name   Folder display name (default "Linked Tracks").
  *   --force                Required to pair with --no-backup.
  *   --dry-run              Plan + back up, but don't write sync/ or git.
  *   --message <msg>        Override commit message.
@@ -35,9 +37,9 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import crypto from 'node:crypto';
-import { execFileSync } from 'node:child_process';
+import { execFileSync, spawnSync } from 'node:child_process';
 import { resolveVdjFolder, vdjFiles } from './lib/vdjPaths.js';
-import { assertNoVdjRunning, verifySqliteIntegrity } from './lib/vdjClone.js';
+import { assertNoVdjRunning, verifySqliteIntegrity } from './lib/sqliteGuards.js';
 import {
   resolveMachineId,
   syncMachineDir,
@@ -65,6 +67,8 @@ function parseArgs(argv) {
     keepBackups: null,
     git: true,
     push: true,
+    runLinkedFolder: true,
+    linkedFolderName: 'Linked Tracks',
     force: false,
     dryRun: false,
     message: null,
@@ -82,11 +86,24 @@ function parseArgs(argv) {
     else if (arg === '--keep-backups' && next) { args.keepBackups = Number.parseInt(next, 10); i += 1; }
     else if (arg === '--no-git') args.git = false;
     else if (arg === '--no-push') args.push = false;
+    else if (arg === '--no-linked-folder') args.runLinkedFolder = false;
+    else if (arg === '--linked-folder-name' && next) { args.linkedFolderName = next; i += 1; }
     else if (arg === '--force') args.force = true;
     else if (arg === '--dry-run') args.dryRun = true;
     else if (arg === '--message' && next) { args.message = next; i += 1; }
   }
   return args;
+}
+
+function runBuildLinkedFolder({ cwd, source, name, forceWal }) {
+  const args = ['scripts/build-linked-folder.js', '--write'];
+  if (forceWal) args.push('--force-wal');
+  if (source) args.push('--target', source);
+  if (name) args.push('--name', name);
+  const result = spawnSync('node', args, { cwd, stdio: 'inherit' });
+  if (result.status !== 0) {
+    console.warn(`[sync:push] linked-folder step exited with code ${result.status}.`);
+  }
 }
 
 function sha256FileSync(p) {

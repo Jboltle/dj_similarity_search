@@ -33,7 +33,7 @@ import path from 'node:path';
 import Database from 'better-sqlite3';
 import { XMLBuilder } from 'fast-xml-parser';
 import { resolveVdjFolder, vdjFiles } from './lib/vdjPaths.js';
-import { assertNoVdjRunning } from './lib/vdjClone.js';
+import { assertNoVdjRunning } from './lib/sqliteGuards.js';
 import { timestampStamp } from './lib/syncBackups.js';
 import { projectRoot as getProjectRoot } from './lib/machineId.js';
 

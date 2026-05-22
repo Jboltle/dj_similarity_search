@@ -8,16 +8,13 @@ dist
 .env
 .env.local
 bun.lock
-# generated artifacts (do NOT delete by hand while VirtualDJ is running)
+# Generated artifacts — regenerable from sync/ + your VirtualDJ folder.
 public/graph.json
-public/songs.json
 public/unresolved-links.json
 public/link-shape-report.json
 public/soundcloud-playlist.json
-public/clone-apply-report.json
-data/cache.sqlite
 
-# extra.db backups — never auto-deleted, never committed
+# Backups for sync:pull / sync:push / linked:folder — never auto-deleted, never committed
 public/backups/
 
 # OAuth tokens (NEVER commit these)
@@ -29,9 +26,6 @@ sync/**/*.db-wal
 sync/**/*.db-shm
 sync/**/.DS_Store
 
-# NOTE: the three linked-tracks export files are intentionally NOT in this list.
-# They are the portable sync artifact for moving your linked-tracks set between
-# machines (e.g. Mac → Windows). Commit them to share, or transfer manually:
-#   public/linked-tracks-export.json   # primary, human-readable
-#   public/linked-tracks-export.sql    # for `sqlite3 extra.db < file.sql`
-#   public/linked-tracks.db            # standalone SQLite, openable in any tool
+# Stray test artifacts at repo root
+.tmp/
+.tmp-*
