@@ -21,7 +21,10 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import readline from 'node:readline/promises';
 import { fileURLToPath } from 'node:url';
+import { loadProjectEnv } from './env.js';
 import { openBrowser } from './openBrowser.js';
+
+loadProjectEnv();
 
 const AUTHORIZE_URL = 'https://secure.soundcloud.com/authorize';
 const TOKEN_URL = 'https://secure.soundcloud.com/oauth/token';
@@ -86,15 +89,29 @@ function isTokenFresh(tokens) {
   return Date.now() + TOKEN_REFRESH_SAFETY_MS < tokens.expires_at;
 }
 
+/**
+ * SoundCloud compares redirect_uri as an exact string on authorize and token.
+ * GitHub Pages URLs are often registered with a trailing slash; add it without
+ * using `new URL().href` — that lowercases the host and breaks apps registered
+ * with mixed-case hostnames (e.g. Jboltle.github.io).
+ */
+function normalizeSoundCloudRedirectUri(raw) {
+  const t = raw.trim();
+  if (!/^https:\/\/[^/]+\.github\.io\//i.test(t)) return t;
+  if (t.includes('?')) return t;
+  if (t.endsWith('/')) return t;
+  return `${t}/`;
+}
+
 function getConfig() {
-  const clientId = process.env.SOUNDCLOUD_CLIENT_ID;
-  const clientSecret = process.env.SOUNDCLOUD_CLIENT_SECRET;
-  const redirectUri = process.env.SOUNDCLOUD_REDIRECT_URI;
+  const clientId = process.env.SOUNDCLOUD_CLIENT_ID?.trim();
+  const clientSecret = process.env.SOUNDCLOUD_CLIENT_SECRET?.trim();
+  const rawRedirect = process.env.SOUNDCLOUD_REDIRECT_URI;
 
   const missing = [];
   if (!clientId) missing.push('SOUNDCLOUD_CLIENT_ID');
   if (!clientSecret) missing.push('SOUNDCLOUD_CLIENT_SECRET');
-  if (!redirectUri) missing.push('SOUNDCLOUD_REDIRECT_URI');
+  if (!rawRedirect?.trim()) missing.push('SOUNDCLOUD_REDIRECT_URI');
   if (missing.length) {
     throw new Error(
       `Missing required env vars: ${missing.join(', ')}.\n` +
@@ -102,6 +119,7 @@ function getConfig() {
         `See .env.example for the full list.`
     );
   }
+  const redirectUri = normalizeSoundCloudRedirectUri(rawRedirect);
   if (!/^https:\/\//i.test(redirectUri)) {
     throw new Error(
       `SOUNDCLOUD_REDIRECT_URI must be an https:// URL. SoundCloud has rejected ` +
@@ -133,6 +151,10 @@ async function postForm(url, body) {
     const err = new Error(`SoundCloud token endpoint ${response.status}: ${message}`);
     err.status = response.status;
     err.body = parsed ?? text;
+    if (parsed?.error === 'invalid_grant' && /redirect/i.test(String(parsed?.error_description ?? ''))) {
+      err.message +=
+        '\nHint: In soundcloud.com/you/apps, the redirect URI must match SOUNDCLOUD_REDIRECT_URI exactly (https, path, trailing slash, and letter case).';
+    }
     throw err;
   }
   return parsed;
@@ -200,6 +222,7 @@ async function promptForCode({ authorizeUrl, expectedState }) {
 
 async function runInteractiveFlow() {
   const { clientId, clientSecret, redirectUri } = getConfig();
+  console.log(`[soundcloud] redirect_uri sent to SoundCloud: ${redirectUri}`);
   const { verifier, challenge } = generatePkcePair();
   const state = base64UrlEncode(crypto.randomBytes(STATE_BYTES));
   const authorizeUrl = buildAuthorizeUrl({
