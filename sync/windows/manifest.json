@@ -1,0 +1,19 @@
+{
+  "machineId": "windows",
+  "hostname": "DESKTOP-02SQPLG",
+  "platform": "linux",
+  "sourceVdjFolder": "/mnt/c/Users/Jon/AppData/Local/VirtualDJ",
+  "generatedAt": "2026-05-22T23:42:02.515Z",
+  "includesHistory": true,
+  "historyFingerprint": "8b0160c7f2c7ca9fb7596b9d0c1124435aefeaf3279b3c5f384aecb50f5951a2",
+  "files": {
+    "database.xml": {
+      "bytes": 760246,
+      "sha256": "31e957e31a19a0cf38152481ae4a8d3561318003314b51ed3ae2c687e7e985de"
+    },
+    "extra.db": {
+      "bytes": 57344,
+      "sha256": "7a1b407f22df6f19e2996643ca393d6ade2c498151d43a2d0cba52379acbf493"
+    }
+  }
+}
