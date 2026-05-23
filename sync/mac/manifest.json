@@ -1,0 +1,19 @@
+{
+  "machineId": "mac",
+  "hostname": "Jonathans-MacBook-Pro-5.local",
+  "platform": "darwin",
+  "sourceVdjFolder": "/Users/jboltle/Library/Application Support/VirtualDJ",
+  "generatedAt": "2026-05-23T16:37:57.993Z",
+  "includesHistory": true,
+  "historyFingerprint": "cc3a357cb67d99ee872434b99e8bff8791d313558c658492fe19384e4fc05f37",
+  "files": {
+    "database.xml": {
+      "bytes": 77948,
+      "sha256": "85c538656c22b1626eeb6aa697e254765a58d96cd14e527ff9802e5122db497f"
+    },
+    "extra.db": {
+      "bytes": 53248,
+      "sha256": "677ac999f59b4d0572fdd0c4e80eaa1fc2a0247decbe929af6d0ff57320cd5b7"
+    }
+  }
+}
