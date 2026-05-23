@@ -1,6 +1,6 @@
 {
   "manifest": {
-    "generatedAt": "2026-05-22T23:42:02.638Z",
+    "generatedAt": "2026-05-23T16:32:19.135Z",
     "generatedOn": "DESKTOP-02SQPLG",
     "generatedFromPlatform": "linux",
     "preferLocal": false,
@@ -23,31 +23,31 @@
     },
     "summary": {
       "databaseXml": {
-        "local": 629,
+        "local": 632,
         "remote": 0,
-        "merged": 629,
+        "merged": 632,
         "addedFromRemote": 0,
-        "keptLocalOnTie": 629,
+        "keptLocalOnTie": 632,
         "conflicts": 0,
         "singleSource": "windows"
       },
       "extraDb": {
         "localPath": "/home/on/Sandbox/dj_similarity_search/sync/windows/extra.db",
         "remotePath": null,
-        "localTrackCount": 112,
+        "localTrackCount": 113,
         "remoteTrackCount": 0,
-        "mergedTrackCount": 112,
+        "mergedTrackCount": 113,
         "trackConflicts": 0,
-        "localPairCount": 67,
+        "localPairCount": 70,
         "remotePairCount": 0,
-        "mergedPairCount": 67,
+        "mergedPairCount": 70,
         "pairsAddedFromRemote": 0,
         "singleSource": "windows"
       },
       "history": {
         "localFileCount": 0,
-        "remoteFileCount": 45,
-        "mergedFileCount": 45,
+        "remoteFileCount": 46,
+        "mergedFileCount": 46,
         "identicalDedup": 0,
         "collisionsSuffixed": 0
       }
@@ -324,6 +324,12 @@
       "decision": "single",
       "keptFrom": "windows",
       "outFile": "2026-05-22.m3u"
+    },
+    {
+      "basename": "2026-05-23.m3u",
+      "decision": "single",
+      "keptFrom": "windows",
+      "outFile": "2026-05-23.m3u"
     }
   ]
 }
