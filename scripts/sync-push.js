@@ -280,6 +280,16 @@ function main() {
   const { dest } = runSyncMerge({ outDir: mergedDir });
   console.log(`[sync:push] Re-merged → ${dest}`);
 
+  if (args.runLinkedFolder) {
+    console.log(`[sync:push] Refreshing local Linked Tracks folder ("${args.linkedFolderName}")…`);
+    runBuildLinkedFolder({
+      cwd: projectDir,
+      source: args.source,
+      name: args.linkedFolderName,
+      forceWal: args.forceWal,
+    });
+  }
+
   if (args.keepBackups != null) {
     const { pruned } = pruneOldBackups({
       backupRoot: args.backupDir,
