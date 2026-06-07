@@ -1,53 +1,53 @@
 {
-  "generatedAt": "2026-05-23T16:37:58.315Z",
-  "generatedOn": "Jonathans-MacBook-Pro-5.local",
-  "generatedFromPlatform": "darwin",
+  "generatedAt": "2026-06-07T00:55:47.035Z",
+  "generatedOn": "DESKTOP-02SQPLG",
+  "generatedFromPlatform": "linux",
   "preferLocal": false,
   "inputs": {
     "mac": {
-      "databaseXml": "/Users/jboltle/Sandbox/djLinker/sync/mac/database.xml",
-      "extraDb": "/Users/jboltle/Sandbox/djLinker/sync/mac/extra.db",
-      "historyDir": "/Users/jboltle/Sandbox/djLinker/sync/mac/History"
+      "databaseXml": "/home/on/Sandbox/dj_similarity_search/sync/mac/database.xml",
+      "extraDb": "/home/on/Sandbox/dj_similarity_search/sync/mac/extra.db",
+      "historyDir": "/home/on/Sandbox/dj_similarity_search/sync/mac/History"
     },
     "windows": {
-      "databaseXml": "/Users/jboltle/Sandbox/djLinker/sync/windows/database.xml",
-      "extraDb": "/Users/jboltle/Sandbox/djLinker/sync/windows/extra.db",
-      "historyDir": "/Users/jboltle/Sandbox/djLinker/sync/windows/History"
+      "databaseXml": "/home/on/Sandbox/dj_similarity_search/sync/windows/database.xml",
+      "extraDb": "/home/on/Sandbox/dj_similarity_search/sync/windows/extra.db",
+      "historyDir": "/home/on/Sandbox/dj_similarity_search/sync/windows/History"
     }
   },
   "outputs": {
-    "databaseXml": "/Users/jboltle/Sandbox/djLinker/sync/merged/database.xml",
-    "extraDb": "/Users/jboltle/Sandbox/djLinker/sync/merged/extra.db",
-    "historyDir": "/Users/jboltle/Sandbox/djLinker/sync/merged/History"
+    "databaseXml": "/home/on/Sandbox/dj_similarity_search/sync/merged/database.xml",
+    "extraDb": "/home/on/Sandbox/dj_similarity_search/sync/merged/extra.db",
+    "historyDir": "/home/on/Sandbox/dj_similarity_search/sync/merged/History"
   },
   "summary": {
     "databaseXml": {
-      "local": 211,
-      "remote": 632,
-      "merged": 735,
-      "addedFromRemote": 524,
-      "keptLocalOnTie": 108,
+      "local": 671,
+      "remote": 211,
+      "merged": 774,
+      "addedFromRemote": 103,
+      "keptLocalOnTie": 1,
       "conflicts": 108,
       "singleSource": null
     },
     "extraDb": {
-      "localPath": "/Users/jboltle/Sandbox/djLinker/sync/mac/extra.db",
-      "remotePath": "/Users/jboltle/Sandbox/djLinker/sync/windows/extra.db",
-      "localTrackCount": 113,
+      "localPath": "/home/on/Sandbox/dj_similarity_search/sync/windows/extra.db",
+      "remotePath": "/home/on/Sandbox/dj_similarity_search/sync/mac/extra.db",
+      "localTrackCount": 127,
       "remoteTrackCount": 113,
-      "mergedTrackCount": 113,
+      "mergedTrackCount": 127,
       "trackConflicts": 113,
-      "localPairCount": 71,
-      "remotePairCount": 70,
-      "mergedPairCount": 71,
-      "pairsAddedFromRemote": 0
+      "localPairCount": 80,
+      "remotePairCount": 71,
+      "mergedPairCount": 82,
+      "pairsAddedFromRemote": 2
     },
     "history": {
       "localFileCount": 76,
-      "remoteFileCount": 46,
-      "mergedFileCount": 107,
-      "identicalDedup": 15,
-      "collisionsSuffixed": 2
+      "remoteFileCount": 50,
+      "mergedFileCount": 112,
+      "identicalDedup": 14,
+      "collisionsSuffixed": 4
     }
   }
 }

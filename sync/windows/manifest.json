@@ -3,17 +3,17 @@
   "hostname": "DESKTOP-02SQPLG",
   "platform": "linux",
   "sourceVdjFolder": "/mnt/c/Users/Jon/AppData/Local/VirtualDJ",
-  "generatedAt": "2026-05-23T16:32:19.008Z",
+  "generatedAt": "2026-06-07T00:55:46.867Z",
   "includesHistory": true,
-  "historyFingerprint": "61b3013e54712872b72d54c1d28d9ace1a89387435a3f4c817c926ff4dc81817",
+  "historyFingerprint": "1b6fa0204c75481493be89e4440ca25888c4570b89469bbcd242f3c1ff842b8e",
   "files": {
     "database.xml": {
-      "bytes": 796495,
-      "sha256": "27830df0e11a853c3696b9a3557a3a3f504c981510255e4ffd80649fd9322d67"
+      "bytes": 825933,
+      "sha256": "c220172e70f68d9229c276a1a404f69c552527b1c65cad97975674278727e5f4"
     },
     "extra.db": {
-      "bytes": 57344,
-      "sha256": "0b30e104daa8b6b1bdd4221b0d95ada50d9e305d34ba139d426556f8848880f2"
+      "bytes": 770048,
+      "sha256": "94a18f4202c4615b6d6b2ba3d6f50a4e1fbe5102b9d0ff3b77d79b6460ea932f"
     }
   }
 }
