@@ -1,6 +1,6 @@
 {
   "manifest": {
-    "generatedAt": "2026-06-07T00:55:47.035Z",
+    "generatedAt": "2026-08-14T20:40:26.727Z",
     "generatedOn": "DESKTOP-02SQPLG",
     "generatedFromPlatform": "linux",
     "preferLocal": false,
@@ -23,293 +23,286 @@
     },
     "summary": {
       "databaseXml": {
-        "local": 671,
+        "local": 798,
         "remote": 211,
-        "merged": 774,
-        "addedFromRemote": 103,
-        "keptLocalOnTie": 1,
-        "conflicts": 108,
+        "merged": 898,
+        "addedFromRemote": 100,
+        "keptLocalOnTie": 103,
+        "conflicts": 111,
         "singleSource": null
       },
       "extraDb": {
         "localPath": "/home/on/Sandbox/dj_similarity_search/sync/windows/extra.db",
         "remotePath": "/home/on/Sandbox/dj_similarity_search/sync/mac/extra.db",
-        "localTrackCount": 127,
+        "localTrackCount": 128,
         "remoteTrackCount": 113,
-        "mergedTrackCount": 127,
+        "mergedTrackCount": 128,
         "trackConflicts": 113,
-        "localPairCount": 80,
+        "localPairCount": 83,
         "remotePairCount": 71,
-        "mergedPairCount": 82,
-        "pairsAddedFromRemote": 2
+        "mergedPairCount": 86,
+        "pairsAddedFromRemote": 3
       },
       "history": {
         "localFileCount": 76,
-        "remoteFileCount": 50,
-        "mergedFileCount": 112,
-        "identicalDedup": 14,
-        "collisionsSuffixed": 4
+        "remoteFileCount": 60,
+        "mergedFileCount": 124,
+        "identicalDedup": 12,
+        "collisionsSuffixed": 8
       }
     }
   },
   "xmlConflicts": [
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Babyfxce E - PTP.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553097,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Babyfxce E - PTP.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493847,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Blueface - Thotiana.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553378,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Blueface - Thotiana.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493850,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/All Falls Down - Kanye West.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553472,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\All Falls Down - Kanye West.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493864,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Tee Grizzley - First Day Out.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553424,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Tee Grizzley - First Day Out.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493869,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Rihanna - Bitch Better Have My Money.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553384,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Rihanna - Bitch Better Have My Money.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493881,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/On Top Of Cars - Lil MU (JEFE SLAB OPEN VERSE).vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553137,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\On Top Of Cars - Lil MU (JEFE SLAB OPEN VERSE).vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493891,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Kodak Black feat. Travis Scott & Offset - ZEZE.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553419,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Kodak Black feat. Travis Scott & Offset - ZEZE.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493893,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Offset & Metro Boomin - Ric Flair Drip (Slowed).vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553526,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Offset & Metro Boomin - Ric Flair Drip (Slowed).vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493894,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/16yrold - sheck wes - mo bamba (prod. 16yrold & take a daytrip).vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553194,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\16yrold - sheck wes - mo bamba (prod. 16yrold & take a daytrip).vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493837,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Only The Family - Only The Family & Lil Durk - Hellcats & Trackhawks.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553163,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Only The Family - Only The Family & Lil Durk - Hellcats & Trackhawks.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493842,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Chief Keef - Faneto.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553214,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Chief Keef - Faneto.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1785082971,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Pooh Shiesty - FDO.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553194,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Pooh Shiesty - FDO.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493849,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Gucci Mane - On Deck.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553180,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Gucci Mane - On Deck.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1785082972,
       "remoteLastModified": 1779554087
     },
     {
       "filePath": "C:\\Users\\Jon\\Downloads\\Real Boston Richey - Help Me (Official Audio).mp3",
       "winner": "windows",
       "reason": "newer_local",
-      "localLastModified": 1780678242,
+      "localLastModified": 1783894831,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Fetty Wap - Trap Queen.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553180,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Fetty Wap - Trap Queen.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493855,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Kendrick Lamar - DNA.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553268,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Kendrick Lamar - DNA.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493851,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Playboi Carti - Vamp Anthem.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553526,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Playboi Carti - Vamp Anthem.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493866,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Drake feat. The Weeknd - Crew Love.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553126,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Drake feat. The Weeknd - Crew Love.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493876,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Drake & Usher - You Make Me Wanna x Come Thru (Slghtwrk Edit).vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553106,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Drake - Energy.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493845,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Drake - Energy.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553514,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\SpeakerKnockerz - Speaker Knockerz - Freak Hoe.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493895,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/SpeakerKnockerz - Speaker Knockerz - Freak Hoe.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553488,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Rae Sremmurd - No Type.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493855,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Rae Sremmurd - No Type.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553321,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Young Thug - Lifestyle.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493858,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Young Thug - Lifestyle.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553445,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Lil Uzi Vert - 20 Min.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786494405,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Lil Uzi Vert - 20 Min.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553325,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Trill Family, Boosie Badazz & Webbie feat. Foxx - Wipe Me Down.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493839,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Trill Family, Boosie Badazz & Webbie feat. Foxx - Wipe Me Down.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553102,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Soulja Boy - Crank That.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493858,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Soulja Boy - Crank That.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553236,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Don Toliver - After Party.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493863,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Don Toliver - After Party.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553110,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Lil Yachty, Veeze - Sorry Not Sorry.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493881,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Lil Yachty, Veeze - Sorry Not Sorry.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553137,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Waka Flocka Flame feat. Wale & Roscoe Dash - No Hands.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493898,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Waka Flocka Flame feat. Wale & Roscoe Dash - No Hands.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553272,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Robin S - Show Me Love.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493853,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Robin S - Show Me Love.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553339,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Rae Sremmurd feat. Gucci Mane - Black Beatles.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493891,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Rae Sremmurd feat. Gucci Mane - Black Beatles.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553207,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Lil Uzi Vert - Money Longer.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493867,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Lil Uzi Vert - Money Longer.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553254,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Lil Uzi Vert - XO Tour Llif3.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493867,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Lil Uzi Vert - XO Tour Llif3.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553163,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Lil Skies - Lust (prod. CashMoneyAp).vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493880,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Lil Skies - Lust (prod. CashMoneyAp).vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553137,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\DaBaby - PHAT.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493843,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/DaBaby - PHAT.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553254,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Mello Buckzz - MOVE.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493850,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Mello Buckzz - MOVE.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553114,
-      "remoteLastModified": 1779554087
-    },
-    {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/City Girls - Act Up.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553450,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\City Girls - Act Up.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493849,
       "remoteLastModified": 1779554087
     },
     {
@@ -320,192 +313,192 @@
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Meek Mill - Dreams and Nightmares.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553526,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Meek Mill - Dreams and Nightmares.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493875,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Gunna feat. Burna Boy - wgft.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553493,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Gunna feat. Burna Boy - wgft.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493867,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/CENTRAL CEE FT. LIL BABY - BAND4BAND.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553176,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\CENTRAL CEE FT. LIL BABY - BAND4BAND.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493877,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Migos feat. Lil Uzi Vert - Bad and Boujee (Prod. By Metro Boomin).vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553294,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Migos feat. Lil Uzi Vert - Bad and Boujee (Prod. By Metro Boomin).vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493840,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Icona Pop, Charli XCX - Icona Pop_ I Love It.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553307,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Icona Pop, Charli XCX - Icona Pop_ I Love It.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493890,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Jeremih feat. YG - Don't Tell 'Em.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553410,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Jeremih feat. YG - Don't Tell 'Em.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493872,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/a!mee - Juke Me From The Back.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553119,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\a!mee - Juke Me From The Back.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493865,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Pretty Liyah - It's A Throw.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553130,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Pretty Liyah - It's A Throw.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493866,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Drake - Shabang.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553361,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Drake - Shabang.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493913,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/PnB Rock - Selfish.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553391,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\PnB Rock - Selfish.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493848,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Drake, PARTYNEXTDOOR - Fortworth.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553391,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Drake, PARTYNEXTDOOR - Fortworth.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493878,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Don Toliver - No Idea.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553280,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Don Toliver - No Idea.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786494115,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Young Money feat. Drake - Trophies.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553231,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Young Money feat. Drake - Trophies.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493879,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Yung Miami - Spend Dat.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553479,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Yung Miami - Spend Dat.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493854,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Trey Songz - All We Do.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553361,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Trey Songz - All We Do.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493990,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/J. Cole - No Role Modelz.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553405,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\J. Cole - No Role Modelz.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493858,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Jack Ü, Skrillex, Diplo - Where Are Ü Now (with Justin Bieber).vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553239,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Jack Ü, Skrillex, Diplo - Where Are Ü Now (with Justin Bieber).vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1785510248,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Kanye West - Flashing Lights.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553472,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Kanye West - Flashing Lights.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493868,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/2hollis - jeans.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553223,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\2hollis - jeans.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493845,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/JAŸ-Z, Kanye West feat. Frank Ocean & The-Dream - No Church In The Wild.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553479,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\JAŸ-Z, Kanye West feat. Frank Ocean & The-Dream - No Church In The Wild.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493840,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Fatt Macc, Baby Mel - Control the Traffic (Slowed Down).vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553276,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Fatt Macc, Baby Mel - Control the Traffic (Slowed Down).vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493834,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/future - march madness (432hz).vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553348,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\future - march madness (432hz).vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493870,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/YG feat. Drake - Who Do You Love_.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553450,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\YG feat. Drake - Who Do You Love_.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493874,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Ty Dolla $ign feat. B.o.B - Paranoid.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553433,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Ty Dolla $ign feat. B.o.B - Paranoid.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493876,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Kiiara - Gold.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553518,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Kiiara - Gold.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493843,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/King Von - Crazy Story.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553154,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\King Von - Crazy Story.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493856,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Lloyd feat. Lil Wayne - You.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553414,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Lloyd feat. Lil Wayne - You.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493864,
       "remoteLastModified": 1779554087
     },
     {
@@ -516,164 +509,171 @@
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/YFN Lucci - Wet.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553294,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\YFN Lucci - Wet.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493845,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Don Toliver - E85.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553263,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Don Toliver - E85.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493848,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Drake - Started From the Bottom.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553501,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Drake - Started From the Bottom.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493872,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Rob49 - WTHELLY.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553521,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Rob49 - WTHELLY.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493846,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Lil Baby - Mrs. Trendsetter.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553142,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Lil Baby - Mrs. Trendsetter.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493866,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Sage The Gemini feat. Iamsu! - Gas Pedal.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553441,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Sage The Gemini feat. Iamsu! - Gas Pedal.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493884,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Young Dolph - Preach.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553168,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Young Dolph - Preach.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493852,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Fetty Wap feat. Remy Boyz - 679.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553463,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Fetty Wap feat. Remy Boyz - 679.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493871,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Big Sean feat. E-40 - I Don't Fuck With You.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553424,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Big Sean feat. E-40 - I Don't Fuck With You.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493886,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Soulja Boy - Pretty Boy Swag.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553334,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Soulja Boy - Pretty Boy Swag.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493869,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Don Toliver - No Pole.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553285,
+      "filePath": "netsearch://sc321780110",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1785082971,
+      "remoteLastModified": 1779554163
+    },
+    {
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Don Toliver - No Pole.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493852,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Lil Wayne feat. Drake & Future - Love Me.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553312,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Lil Wayne feat. Drake & Future - Love Me.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786494192,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Michael Jackson - Wanna Be Startin Somethin (Áudio Oficial).vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553294,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Michael Jackson - Wanna Be Startin Somethin (Áudio Oficial).vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493835,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Playboi Carti - Location.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553312,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Playboi Carti - Location.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786494329,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Chief Keef feat. Lil Reese - I Don't Like.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553268,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Chief Keef feat. Lil Reese - I Don't Like.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493884,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Drake - HYFR feat Lil Wayne (Slowed, Bass Boosted, & Reverb).vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553357,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Drake - HYFR feat Lil Wayne (Slowed, Bass Boosted, & Reverb).vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493837,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Trey Songz - Heart Attack.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553180,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Trey Songz - Heart Attack.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493862,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Trinidad James - All Gold Everything.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553400,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Trinidad James - All Gold Everything.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493881,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Jeezy feat. Bankroll Fresh - All There.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553211,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Jeezy feat. Bankroll Fresh - All There.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493883,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Nicki Minaj feat. 2 Chainz - Beez In The Trap.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553173,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Nicki Minaj feat. 2 Chainz - Beez In The Trap.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493889,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Sexxy Red - He Wanna Hang With a Bad B tch.mp3.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553458,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Sexxy Red - He Wanna Hang With a Bad B tch.mp3.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786494268,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Fred again.., Skepta, PlaqueBoyMax - Victory Lap.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553252,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Fred again.., Skepta, PlaqueBoyMax - Victory Lap.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493896,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/UGK ft. Andre 3000 - Int'l Players Anthem (Lightstar Remix).vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553497,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\UGK ft. Andre 3000 - Int'l Players Anthem (Lightstar Remix).vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493836,
       "remoteLastModified": 1779554087
     },
     {
@@ -684,6 +684,20 @@
       "remoteLastModified": 1779554158
     },
     {
+      "filePath": "netsearch://sc317417947",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1785082972,
+      "remoteLastModified": 1779554163
+    },
+    {
+      "filePath": "netsearch://sc998923204",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493841,
+      "remoteLastModified": 1779554166
+    },
+    {
       "filePath": "netsearch://sc1794191197",
       "winner": "mac",
       "reason": "newer_remote",
@@ -692,65 +706,65 @@
     },
     {
       "filePath": "netsearch://sc1663902996",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779550213,
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1785510461,
       "remoteLastModified": 1779554154
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Timeless - The Weekend x Playboi Carti (Alt Intro, OG Adlibs, Reverb).vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553344,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Timeless - The Weekend x Playboi Carti (Alt Intro, OG Adlibs, Reverb).vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493841,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Alicia Keys - Un - Thinkable (Swizz Delight Bootleg, I'm Ready Ft Drake).vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553370,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Alicia Keys - Un - Thinkable (Swizz Delight Bootleg, I'm Ready Ft Drake).vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493842,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/DaBaby - POP DAT THANG.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553258,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\DaBaby - POP DAT THANG.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493853,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Gunna - Who You Foolin.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553374,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Gunna - Who You Foolin.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493855,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/F.L.Y. Ft. Lil Wayne - Swag Surfin.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553214,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\F.L.Y. Ft. Lil Wayne - Swag Surfin.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493875,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Ke$ha - We R Who We R (Gladez Remix).vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553244,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Ke$ha - We R Who We R (Gladez Remix).vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493876,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Sexyy Red, Key Glock - Hang Wit a Bad Bitch.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553353,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Sexyy Red, Key Glock - Hang Wit a Bad Bitch.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493888,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/John Newman - Love Me Again.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553303,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\John Newman - Love Me Again.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493863,
       "remoteLastModified": 1779554087
     },
     {
@@ -782,32 +796,39 @@
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Playboi Carti - TOXIC.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553223,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Playboi Carti - TOXIC.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493853,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Vanessa Carlton - A Thousand Miles.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553488,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\Vanessa Carlton - A Thousand Miles.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493879,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/f3miii - JANGANOBLE Jangalova x Noble.vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553472,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\f3miii - JANGANOBLE Jangalova x Noble.vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493882,
       "remoteLastModified": 1779554087
     },
     {
-      "filePath": "C:/Users/Jon/AppData/Local/VirtualDJ/Cache/310babii - Soak City  .m4a (Official Video, Do It).vdjcache",
-      "winner": "mac",
-      "reason": "newer_remote",
-      "localLastModified": 1779553387,
+      "filePath": "C:\\Users\\Jon\\AppData\\Local\\VirtualDJ\\Cache\\310babii - Soak City  .m4a (Official Video, Do It).vdjcache",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1786493894,
       "remoteLastModified": 1779554087
+    },
+    {
+      "filePath": "netsearch://sc1450978399",
+      "winner": "windows",
+      "reason": "newer_local",
+      "localLastModified": 1785082965,
+      "remoteLastModified": 1779554154
     }
   ],
   "historyDecisions": [
@@ -1407,9 +1428,15 @@
     },
     {
       "basename": "2026-05-15.m3u",
-      "decision": "dedup",
+      "decision": "collision",
       "keptFrom": "mac",
-      "outFile": "2026-05-15.m3u"
+      "outFile": "2026-05-15.mac.m3u"
+    },
+    {
+      "basename": "2026-05-15.m3u",
+      "decision": "collision",
+      "keptFrom": "windows",
+      "outFile": "2026-05-15.windows.m3u"
     },
     {
       "basename": "2026-05-16.m3u",
@@ -1437,9 +1464,15 @@
     },
     {
       "basename": "2026-05-21.m3u",
-      "decision": "dedup",
+      "decision": "collision",
       "keptFrom": "mac",
-      "outFile": "2026-05-21.m3u"
+      "outFile": "2026-05-21.mac.m3u"
+    },
+    {
+      "basename": "2026-05-21.m3u",
+      "decision": "collision",
+      "keptFrom": "windows",
+      "outFile": "2026-05-21.windows.m3u"
     },
     {
       "basename": "2026-05-22.m3u",
@@ -1482,6 +1515,66 @@
       "decision": "single",
       "keptFrom": "windows",
       "outFile": "2026-06-06.m3u"
+    },
+    {
+      "basename": "2026-06-16.m3u",
+      "decision": "single",
+      "keptFrom": "windows",
+      "outFile": "2026-06-16.m3u"
+    },
+    {
+      "basename": "2026-06-20.m3u",
+      "decision": "single",
+      "keptFrom": "windows",
+      "outFile": "2026-06-20.m3u"
+    },
+    {
+      "basename": "2026-06-21.m3u",
+      "decision": "single",
+      "keptFrom": "windows",
+      "outFile": "2026-06-21.m3u"
+    },
+    {
+      "basename": "2026-06-22.m3u",
+      "decision": "single",
+      "keptFrom": "windows",
+      "outFile": "2026-06-22.m3u"
+    },
+    {
+      "basename": "2026-07-01.m3u",
+      "decision": "single",
+      "keptFrom": "windows",
+      "outFile": "2026-07-01.m3u"
+    },
+    {
+      "basename": "2026-07-12.m3u",
+      "decision": "single",
+      "keptFrom": "windows",
+      "outFile": "2026-07-12.m3u"
+    },
+    {
+      "basename": "2026-07-26.m3u",
+      "decision": "single",
+      "keptFrom": "windows",
+      "outFile": "2026-07-26.m3u"
+    },
+    {
+      "basename": "2026-07-31.m3u",
+      "decision": "single",
+      "keptFrom": "windows",
+      "outFile": "2026-07-31.m3u"
+    },
+    {
+      "basename": "2026-08-09.m3u",
+      "decision": "single",
+      "keptFrom": "windows",
+      "outFile": "2026-08-09.m3u"
+    },
+    {
+      "basename": "2026-08-11.m3u",
+      "decision": "single",
+      "keptFrom": "windows",
+      "outFile": "2026-08-11.m3u"
     }
   ]
 }

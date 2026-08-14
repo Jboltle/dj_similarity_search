@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-07T00:55:47.035Z",
+  "generatedAt": "2026-08-14T20:40:26.727Z",
   "generatedOn": "DESKTOP-02SQPLG",
   "generatedFromPlatform": "linux",
   "preferLocal": false,
@@ -22,32 +22,32 @@
   },
   "summary": {
     "databaseXml": {
-      "local": 671,
+      "local": 798,
       "remote": 211,
-      "merged": 774,
-      "addedFromRemote": 103,
-      "keptLocalOnTie": 1,
-      "conflicts": 108,
+      "merged": 898,
+      "addedFromRemote": 100,
+      "keptLocalOnTie": 103,
+      "conflicts": 111,
       "singleSource": null
     },
     "extraDb": {
       "localPath": "/home/on/Sandbox/dj_similarity_search/sync/windows/extra.db",
       "remotePath": "/home/on/Sandbox/dj_similarity_search/sync/mac/extra.db",
-      "localTrackCount": 127,
+      "localTrackCount": 128,
       "remoteTrackCount": 113,
-      "mergedTrackCount": 127,
+      "mergedTrackCount": 128,
       "trackConflicts": 113,
-      "localPairCount": 80,
+      "localPairCount": 83,
       "remotePairCount": 71,
-      "mergedPairCount": 82,
-      "pairsAddedFromRemote": 2
+      "mergedPairCount": 86,
+      "pairsAddedFromRemote": 3
     },
     "history": {
       "localFileCount": 76,
-      "remoteFileCount": 50,
-      "mergedFileCount": 112,
-      "identicalDedup": 14,
-      "collisionsSuffixed": 4
+      "remoteFileCount": 60,
+      "mergedFileCount": 124,
+      "identicalDedup": 12,
+      "collisionsSuffixed": 8
     }
   }
 }
