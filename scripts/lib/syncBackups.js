@@ -26,9 +26,14 @@ import crypto from 'node:crypto';
 import { vdjFiles } from './vdjPaths.js';
 import { projectRoot } from './machineId.js';
 
-const BACKUP_DEFAULT_ROOT = path.join(projectRoot(), 'public', 'backups');
 export const BACKUP_MANIFEST_FILENAME = 'manifest.json';
 const WAL_SIDECAR_EXTENSIONS = ['-wal', '-shm'];
+
+function backupDefaultRoot() {
+  const override = process.env.VDJ_BACKUP_ROOT;
+  if (override) return path.resolve(override);
+  return path.join(projectRoot(), 'public', 'backups');
+}
 
 export const BACKUP_KIND = Object.freeze({
   PULL: 'sync-pull',
@@ -50,7 +55,7 @@ function copyDirectoryRecursive(src, dest) {
 }
 
 function ensureBackupRoot(rootOverride) {
-  const root = rootOverride ? path.resolve(rootOverride) : BACKUP_DEFAULT_ROOT;
+  const root = rootOverride ? path.resolve(rootOverride) : backupDefaultRoot();
   fs.mkdirSync(root, { recursive: true });
   return root;
 }
@@ -208,7 +213,7 @@ function sha256DirectoryAggregate(rootDir) {
  */
 export function pruneOldBackups({ backupRoot, keep, kindPrefixes } = {}) {
   if (keep == null || !Number.isFinite(keep) || keep < 0) return { pruned: [] };
-  const root = backupRoot ? path.resolve(backupRoot) : BACKUP_DEFAULT_ROOT;
+  const root = backupRoot ? path.resolve(backupRoot) : backupDefaultRoot();
   if (!fs.existsSync(root)) return { pruned: [] };
   const prefixes = kindPrefixes ?? Object.values(BACKUP_KIND);
 
@@ -245,7 +250,7 @@ export function pruneOldBackups({ backupRoot, keep, kindPrefixes } = {}) {
  * validate the requested stamp.
  */
 export function listBackups({ backupRoot } = {}) {
-  const root = backupRoot ? path.resolve(backupRoot) : BACKUP_DEFAULT_ROOT;
+  const root = backupRoot ? path.resolve(backupRoot) : backupDefaultRoot();
   if (!fs.existsSync(root)) return [];
   const out = [];
   for (const ent of fs.readdirSync(root, { withFileTypes: true })) {

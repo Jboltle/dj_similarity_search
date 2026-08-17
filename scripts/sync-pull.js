@@ -39,6 +39,7 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { execFileSync, spawnSync } from 'node:child_process';
 import { resolveVdjFolder, vdjFiles } from './lib/vdjPaths.js';
 import { assertNoVdjRunning, verifySqliteIntegrity } from './lib/sqliteGuards.js';
@@ -57,6 +58,25 @@ import { runSyncMerge } from './sync-merge.js';
 import { mergeDatabaseXmlFiles } from './lib/databaseXmlMerge.js';
 import { mergeExtraDbFiles } from './lib/extraDbMerge.js';
 import { mergeHistoryDirs } from './lib/historyMerge.js';
+
+const LOG_SOURCE = 'sync:pull';
+
+function makeLogger(onLog) {
+  return {
+    info(msg) {
+      console.log(msg);
+      onLog?.({ level: 'info', msg, source: LOG_SOURCE });
+    },
+    warn(msg) {
+      console.warn(msg);
+      onLog?.({ level: 'warn', msg, source: LOG_SOURCE });
+    },
+    error(msg) {
+      console.error(msg);
+      onLog?.({ level: 'error', msg, source: LOG_SOURCE });
+    },
+  };
+}
 
 function parseArgs(argv) {
   const args = {
@@ -165,228 +185,269 @@ function ensureBlankDir(dir) {
   fs.mkdirSync(dir, { recursive: true });
 }
 
-function main() {
-  const args = parseArgs(process.argv);
+const CLI_DEFAULTS_PULL = {
+  write: false,
+  target: null,
+  git: true,
+  merge: true,
+  includeHistory: true,
+  runParse: true,
+  runLinkedFolder: true,
+  linkedFolderName: 'Linked Tracks',
+  forceWal: false,
+  backupDir: null,
+  backup: true,
+  backupOnly: false,
+  keepBackups: null,
+  force: false,
+};
 
-  if (!args.backup && !args.force) {
-    throw new Error(
-      'Refusing to skip backup without --force. Pass --no-backup --force together (DANGEROUS).'
-    );
-  }
+export async function runSyncPull(args = {}) {
+  const opts = { ...CLI_DEFAULTS_PULL, ...args };
+  const log = makeLogger(opts.onLog);
+  const result = { ok: false, backupFolder: null };
 
-  const projectDir = getProjectRoot();
-  const vdjFolder = resolveVdjFolder(args.target);
-  const localFiles = vdjFiles(vdjFolder);
-  const mergedDir = syncMergedDir();
-  const mergedFiles = syncFolderFiles(mergedDir);
-
-  console.log(`[sync:pull] Local VDJ:   ${vdjFolder}`);
-  console.log(`[sync:pull] Merged dir:  ${mergedDir}`);
-  console.log(`[sync:pull] Mode:        ${args.write ? 'WRITE' : 'DRY RUN'}`);
-
-  if (args.git) {
-    gitPull(projectDir);
-  } else {
-    console.log('[sync:pull] --no-git: skipped git pull.');
-  }
-
-  if (args.merge) {
-    runSyncMerge({ outDir: mergedDir });
-  } else {
-    console.log('[sync:pull] --no-merge: assuming sync/merged/ is already up to date.');
-  }
-
-  if (!fs.existsSync(mergedFiles.databaseXml) && !fs.existsSync(mergedFiles.extraDb)) {
-    throw new Error(
-      `sync/merged/ has no database.xml or extra.db. Run \`npm run sync:push\` on at least one machine first.`
-    );
-  }
-
-  if (args.write) {
-    assertNoVdjRunning(localFiles.extraDb, { forceWal: args.forceWal });
-  }
-
-  const stamp = timestampStamp();
-  let backupInfo = null;
-  if (args.backup && args.write) {
-    backupInfo = backupVdjFolder({
-      vdjFolder,
-      kind: BACKUP_KIND.PULL,
-      stamp,
-      backupRoot: args.backupDir,
-      includeHistory: args.includeHistory,
-      note: 'pre-pull snapshot of local VDJ folder',
-    });
-    console.log(`[sync:pull] Backup folder: ${backupInfo.folder}`);
-  }
-
-  if (args.backupOnly) {
-    console.log('[sync:pull] --backup-only: exiting without writing.');
-    return;
-  }
-
-  // ─── Plan / apply database.xml ────────────────────────────────────────
-  let xmlPlan = null;
-  if (fs.existsSync(mergedFiles.databaseXml)) {
-    const tmpDir = fs.mkdtempSync(path.join(projectDir, '.tmp-sync-pull-'));
-    try {
-      const stagedXml = path.join(tmpDir, 'database.xml');
-      if (fs.existsSync(localFiles.databaseXml)) {
-        const { report } = applyMergedXmlToLocal({
-          mergedXml: mergedFiles.databaseXml,
-          localXml: localFiles.databaseXml,
-          stampedOut: stagedXml,
-        });
-        xmlPlan = { stagedXml, report };
-      } else {
-        fs.copyFileSync(mergedFiles.databaseXml, stagedXml);
-        xmlPlan = {
-          stagedXml,
-          report: { mergedCount: -1, addedFromRemote: -1, conflicts: [], note: 'no local database.xml; copied merged through' },
-        };
-      }
-      if (args.write) {
-        copyFileAtomic(xmlPlan.stagedXml, localFiles.databaseXml);
-      }
-    } finally {
-      if (!args.write) {
-        try { fs.rmSync(tmpDir, { recursive: true, force: true }); } catch { /* ignore */ }
-      } else {
-        try { fs.rmSync(tmpDir, { recursive: true, force: true }); } catch { /* ignore */ }
-      }
-    }
-  }
-
-  // ─── Plan / apply extra.db ────────────────────────────────────────────
-  let dbPlan = null;
-  if (fs.existsSync(mergedFiles.extraDb)) {
-    const tmpDir = fs.mkdtempSync(path.join(projectDir, '.tmp-sync-pull-db-'));
-    try {
-      const stagedDb = path.join(tmpDir, 'extra.db');
-      if (fs.existsSync(localFiles.extraDb)) {
-        const integrity = verifySqliteIntegrity(localFiles.extraDb);
-        if (integrity !== 'ok') {
-          throw new Error(`Local extra.db failed integrity_check pre-apply: ${integrity}`);
-        }
-        const { report } = mergeExtraDbFiles({
-          localPath: localFiles.extraDb,
-          remotePath: mergedFiles.extraDb,
-          outPath: stagedDb,
-        });
-        dbPlan = { stagedDb, report };
-      } else {
-        fs.copyFileSync(mergedFiles.extraDb, stagedDb);
-        dbPlan = { stagedDb, report: { note: 'no local extra.db; copied merged through' } };
-      }
-      const postIntegrity = verifySqliteIntegrity(dbPlan.stagedDb);
-      if (postIntegrity !== 'ok') {
-        throw new Error(`Staged merged extra.db failed integrity_check: ${postIntegrity}`);
-      }
-      if (args.write) {
-        copyFileAtomic(dbPlan.stagedDb, localFiles.extraDb);
-        removeSqliteSidecars(localFiles.extraDb);
-      }
-    } finally {
-      try { fs.rmSync(tmpDir, { recursive: true, force: true }); } catch { /* ignore */ }
-    }
-  }
-
-  // ─── Plan / apply History ─────────────────────────────────────────────
-  let historyPlan = null;
-  if (args.includeHistory && fs.existsSync(mergedFiles.historyDir)) {
-    const tmpHistory = path.join(projectDir, `.tmp-sync-pull-history-${stamp}`);
-    ensureBlankDir(tmpHistory);
-    const report = mergeHistoryDirs({
-      localDir: fs.existsSync(localFiles.historyDir) ? localFiles.historyDir : null,
-      remoteDir: mergedFiles.historyDir,
-      outDir: tmpHistory,
-      localLabel: 'local',
-      remoteLabel: 'merged',
-    });
-    historyPlan = { stagedDir: tmpHistory, report };
-    if (args.write) {
-      if (fs.existsSync(localFiles.historyDir)) {
-        fs.rmSync(localFiles.historyDir, { recursive: true, force: true });
-      }
-      fs.renameSync(tmpHistory, localFiles.historyDir);
-    } else {
-      try { fs.rmSync(tmpHistory, { recursive: true, force: true }); } catch { /* ignore */ }
-    }
-  }
-
-  if (args.write) {
-    if (args.keepBackups != null) {
-      const { pruned } = pruneOldBackups({
-        backupRoot: args.backupDir,
-        keep: args.keepBackups,
-        kindPrefixes: [BACKUP_KIND.PULL],
-      });
-      if (pruned.length) console.log(`[sync:pull] Pruned ${pruned.length} old backup folder(s).`);
-    }
-
-    if (fs.existsSync(localFiles.extraDb)) {
-      const post = verifySqliteIntegrity(localFiles.extraDb);
-      console.log(`[sync:pull] Post-apply extra.db integrity: ${post}`);
-    }
-  }
-
-  console.log('[sync:pull] ─── Summary ───────────────────────────────');
-  if (xmlPlan) {
-    const r = xmlPlan.report;
-    if (r.note) {
-      console.log(`[sync:pull] database.xml: ${r.note}`);
-    } else {
-      console.log(
-        `[sync:pull] database.xml: merged=${r.mergedCount}, addedFromMerged=${r.addedFromRemote}, conflicts=${r.conflicts?.length ?? 0}`
+  try {
+    if (!opts.backup && !opts.force) {
+      throw new Error(
+        'Refusing to skip backup without --force. Pass --no-backup --force together (DANGEROUS).'
       );
     }
-  } else {
-    console.log('[sync:pull] database.xml: (no merged input)');
-  }
-  if (dbPlan) {
-    const r = dbPlan.report;
-    if (r.note) console.log(`[sync:pull] extra.db:    ${r.note}`);
-    else console.log(
-      `[sync:pull] extra.db:    tracks ${r.mergedTrackCount}, pairs ${r.mergedPairCount} (added ${r.pairsAddedFromRemote})`
-    );
-  } else {
-    console.log('[sync:pull] extra.db:    (no merged input)');
-  }
-  if (historyPlan) {
-    const r = historyPlan.report;
-    console.log(
-      `[sync:pull] History/:    merged=${r.mergedFileCount} (local=${r.localFileCount}, remote=${r.remoteFileCount}, deduped=${r.identicalDedup}, collisions=${r.collisionsSuffixed})`
-    );
-  } else {
-    console.log('[sync:pull] History/:    (skipped or no merged input)');
-  }
 
-  if (!args.write) {
-    console.log(
-      '\n[sync:pull] Dry run complete. Re-run with --write (and VirtualDJ closed) to apply.'
-    );
-    return;
-  }
+    const projectDir = getProjectRoot();
+    const vdjFolder = resolveVdjFolder(opts.target);
+    const localFiles = vdjFiles(vdjFolder);
+    const mergedDir = syncMergedDir();
+    const mergedFiles = syncFolderFiles(mergedDir);
 
-  if (args.runParse) {
-    console.log('[sync:pull] Refreshing public/graph.json...');
-    runParse(projectDir);
-  }
+    log.info(`[sync:pull] Local VDJ:   ${vdjFolder}`);
+    log.info(`[sync:pull] Merged dir:  ${mergedDir}`);
+    log.info(`[sync:pull] Mode:        ${opts.write ? 'WRITE' : 'DRY RUN'}`);
 
-  if (args.runLinkedFolder) {
-    console.log(`[sync:pull] Regenerating "${args.linkedFolderName}" .vdjfolder from merged extra.db...`);
-    runBuildLinkedFolder({
-      cwd: projectDir,
-      target: args.target,
-      name: args.linkedFolderName,
-      forceWal: args.forceWal,
+    if (opts.git) {
+      gitPull(projectDir);
+    } else {
+      log.info('[sync:pull] --no-git: skipped git pull.');
+    }
+
+    if (opts.merge) {
+      runSyncMerge({ outDir: mergedDir });
+    } else {
+      log.info('[sync:pull] --no-merge: assuming sync/merged/ is already up to date.');
+    }
+
+    if (!fs.existsSync(mergedFiles.databaseXml) && !fs.existsSync(mergedFiles.extraDb)) {
+      throw new Error(
+        `sync/merged/ has no database.xml or extra.db. Run \`npm run sync:push\` on at least one machine first.`
+      );
+    }
+
+    if (opts.write) {
+      assertNoVdjRunning(localFiles.extraDb, { forceWal: opts.forceWal });
+    }
+
+    const stamp = timestampStamp();
+    let backupInfo = null;
+    if (opts.backup && opts.write) {
+      backupInfo = backupVdjFolder({
+        vdjFolder,
+        kind: BACKUP_KIND.PULL,
+        stamp,
+        backupRoot: opts.backupDir,
+        includeHistory: opts.includeHistory,
+        note: 'pre-pull snapshot of local VDJ folder',
+      });
+      log.info(`[sync:pull] Backup folder: ${backupInfo.folder}`);
+      result.backupFolder = backupInfo.folder;
+    }
+
+    if (opts.backupOnly) {
+      log.info('[sync:pull] --backup-only: exiting without writing.');
+      result.ok = true;
+      return result;
+    }
+
+    let xmlPlan = null;
+    if (fs.existsSync(mergedFiles.databaseXml)) {
+      const tmpDir = fs.mkdtempSync(path.join(projectDir, '.tmp-sync-pull-'));
+      try {
+        const stagedXml = path.join(tmpDir, 'database.xml');
+        if (fs.existsSync(localFiles.databaseXml)) {
+          const { report } = applyMergedXmlToLocal({
+            mergedXml: mergedFiles.databaseXml,
+            localXml: localFiles.databaseXml,
+            stampedOut: stagedXml,
+          });
+          xmlPlan = { stagedXml, report };
+        } else {
+          fs.copyFileSync(mergedFiles.databaseXml, stagedXml);
+          xmlPlan = {
+            stagedXml,
+            report: { mergedCount: -1, addedFromRemote: -1, conflicts: [], note: 'no local database.xml; copied merged through' },
+          };
+        }
+        if (opts.write) {
+          copyFileAtomic(xmlPlan.stagedXml, localFiles.databaseXml);
+        }
+      } finally {
+        try { fs.rmSync(tmpDir, { recursive: true, force: true }); } catch { /* ignore */ }
+      }
+    }
+
+    let dbPlan = null;
+    if (fs.existsSync(mergedFiles.extraDb)) {
+      const tmpDir = fs.mkdtempSync(path.join(projectDir, '.tmp-sync-pull-db-'));
+      try {
+        const stagedDb = path.join(tmpDir, 'extra.db');
+        if (fs.existsSync(localFiles.extraDb)) {
+          const integrity = verifySqliteIntegrity(localFiles.extraDb);
+          if (integrity !== 'ok') {
+            throw new Error(`Local extra.db failed integrity_check pre-apply: ${integrity}`);
+          }
+          const { report } = mergeExtraDbFiles({
+            localPath: localFiles.extraDb,
+            remotePath: mergedFiles.extraDb,
+            outPath: stagedDb,
+          });
+          dbPlan = { stagedDb, report };
+        } else {
+          fs.copyFileSync(mergedFiles.extraDb, stagedDb);
+          dbPlan = { stagedDb, report: { note: 'no local extra.db; copied merged through' } };
+        }
+        const postIntegrity = verifySqliteIntegrity(dbPlan.stagedDb);
+        if (postIntegrity !== 'ok') {
+          throw new Error(`Staged merged extra.db failed integrity_check: ${postIntegrity}`);
+        }
+        if (opts.write) {
+          copyFileAtomic(dbPlan.stagedDb, localFiles.extraDb);
+          removeSqliteSidecars(localFiles.extraDb);
+        }
+      } finally {
+        try { fs.rmSync(tmpDir, { recursive: true, force: true }); } catch { /* ignore */ }
+      }
+    }
+
+    let historyPlan = null;
+    if (opts.includeHistory && fs.existsSync(mergedFiles.historyDir)) {
+      const tmpHistory = path.join(projectDir, `.tmp-sync-pull-history-${stamp}`);
+      ensureBlankDir(tmpHistory);
+      const report = mergeHistoryDirs({
+        localDir: fs.existsSync(localFiles.historyDir) ? localFiles.historyDir : null,
+        remoteDir: mergedFiles.historyDir,
+        outDir: tmpHistory,
+        localLabel: 'local',
+        remoteLabel: 'merged',
+      });
+      historyPlan = { stagedDir: tmpHistory, report };
+      if (opts.write) {
+        if (fs.existsSync(localFiles.historyDir)) {
+          fs.rmSync(localFiles.historyDir, { recursive: true, force: true });
+        }
+        fs.renameSync(tmpHistory, localFiles.historyDir);
+      } else {
+        try { fs.rmSync(tmpHistory, { recursive: true, force: true }); } catch { /* ignore */ }
+      }
+    }
+
+    if (opts.write) {
+      if (opts.keepBackups != null) {
+        const { pruned } = pruneOldBackups({
+          backupRoot: opts.backupDir,
+          keep: opts.keepBackups,
+          kindPrefixes: [BACKUP_KIND.PULL],
+        });
+        if (pruned.length) log.info(`[sync:pull] Pruned ${pruned.length} old backup folder(s).`);
+      }
+
+      if (fs.existsSync(localFiles.extraDb)) {
+        const post = verifySqliteIntegrity(localFiles.extraDb);
+        log.info(`[sync:pull] Post-apply extra.db integrity: ${post}`);
+      }
+    }
+
+    log.info('[sync:pull] ─── Summary ───────────────────────────────');
+    if (xmlPlan) {
+      const r = xmlPlan.report;
+      if (r.note) {
+        log.info(`[sync:pull] database.xml: ${r.note}`);
+      } else {
+        log.info(
+          `[sync:pull] database.xml: merged=${r.mergedCount}, addedFromMerged=${r.addedFromRemote}, conflicts=${r.conflicts?.length ?? 0}`
+        );
+      }
+    } else {
+      log.info('[sync:pull] database.xml: (no merged input)');
+    }
+    if (dbPlan) {
+      const r = dbPlan.report;
+      if (r.note) log.info(`[sync:pull] extra.db:    ${r.note}`);
+      else log.info(
+        `[sync:pull] extra.db:    tracks ${r.mergedTrackCount}, pairs ${r.mergedPairCount} (added ${r.pairsAddedFromRemote})`
+      );
+    } else {
+      log.info('[sync:pull] extra.db:    (no merged input)');
+    }
+    if (historyPlan) {
+      const r = historyPlan.report;
+      log.info(
+        `[sync:pull] History/:    merged=${r.mergedFileCount} (local=${r.localFileCount}, remote=${r.remoteFileCount}, deduped=${r.identicalDedup}, collisions=${r.collisionsSuffixed})`
+      );
+    } else {
+      log.info('[sync:pull] History/:    (skipped or no merged input)');
+    }
+
+    if (!opts.write) {
+      log.info(
+        '\n[sync:pull] Dry run complete. Re-run with --write (and VirtualDJ closed) to apply.'
+      );
+      result.ok = true;
+      return result;
+    }
+
+    if (opts.runParse) {
+      log.info('[sync:pull] Refreshing public/graph.json...');
+      runParse(projectDir);
+    }
+
+    if (opts.runLinkedFolder) {
+      log.info(`[sync:pull] Regenerating "${opts.linkedFolderName}" .vdjfolder from merged extra.db...`);
+      runBuildLinkedFolder({
+        cwd: projectDir,
+        target: opts.target,
+        name: opts.linkedFolderName,
+        forceWal: opts.forceWal,
+      });
+    }
+
+    result.ok = true;
+    return result;
+  } catch (err) {
+    log.error(`[sync:pull] ERROR: ${err.message}`);
+    result.ok = false;
+    result.error = err.message;
+    return result;
+  }
+}
+
+function main() {
+  runSyncPull(parseArgs(process.argv))
+    .then((res) => {
+      if (!res.ok && !process.exitCode) process.exitCode = 1;
+    })
+    .catch((err) => {
+      console.error(`[sync:pull] ERROR: ${err.message}`);
+      process.exitCode = 1;
     });
-  }
 }
 
-try {
-  main();
-} catch (err) {
-  console.error(`[sync:pull] ERROR: ${err.message}`);
-  process.exitCode = 1;
-}
+const invokedDirectly = (() => {
+  try {
+    const resolved = fs.realpathSync(process.argv[1] ?? '');
+    const self = fs.realpathSync(fileURLToPath(import.meta.url));
+    return resolved === self;
+  } catch {
+    return false;
+  }
+})();
+
+if (invokedDirectly) main();

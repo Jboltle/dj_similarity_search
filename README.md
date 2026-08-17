@@ -1,9 +1,108 @@
 # VirtualDJ Link Map
 
-Desktop tool that visualizes the **real linked tracks** you've defined in
-VirtualDJ as an interactive Three.js graph, layered with your play-history
-transitions, and lets you mine the rest of your library on demand for
-compatible matches.
+A standalone desktop app for macOS and Windows that visualizes the tracks you've
+manually **linked** inside VirtualDJ as a live 3D graph, layers your
+play-history transitions on top, and — when you enable it — keeps your entire
+library (including per-song markers, hot cues, saved loops, and beat grid) in
+sync between machines.
+
+## Install
+
+1. Download the latest installer from the [Releases](../../releases) page:
+   - **macOS** → `VirtualDJ Link Map-<version>.dmg`
+   - **Windows** → `VirtualDJ Link Map Setup <version>.exe`
+2. Open the installer.
+3. On first launch, point the app at your VirtualDJ data folder. It usually
+   auto-detects — you just click **Confirm**.
+4. Done. The graph appears within a few seconds.
+
+## What it does
+
+- **Visualize your linked tracks** as a Three.js force-directed graph, colored
+  by BPM, key, or genre.
+- **Layer your play history** on top so you can see which tracks you actually
+  mix in and out of together.
+- **Find compatible matches** for any song on demand — BPM proximity, Camelot
+  wheel, same genre, same folder — without ever precomputing them.
+- **Keep every machine in sync**. Push the songs, links, and markers you edited
+  on one machine to a shared library; pull down what everyone else added.
+  Newest edit wins, per song, per marker.
+
+## How to sync
+
+The in-app **Sync** panel (top-right corner) shows three sections every time
+you open it:
+
+- **New here → shared library** — songs, linked pairs, and history files that
+  exist on this machine but not in the shared library. Click **Push** to
+  upload them.
+- **New on shared library → this machine** — songs, links, and history files
+  that other machines have added. Click **Pull** to apply them locally.
+- **Conflicts** — songs edited on both sides since the last sync. The panel
+  shows both `LastModified` timestamps and which side will win if you accept
+  the merge (newest edit wins by default).
+
+Every push and pull takes a timestamped backup of the files it's about to
+touch. Use **Settings → Restore from backup…** to roll back to any previous
+state.
+
+**Song markers are preserved automatically.** Cue points, hot cues, saved
+loops, beat grid, key overrides, and every other per-song setting live inside
+`database.xml` (under each `<Song>` element's `<Infos>` / `<POIs>` /
+`<Scan>` blocks). The sync engine merges at the song level using each song's
+`LastModified` timestamp, so whichever machine last edited a given song wins
+that whole song — markers and all. You never have to think about it.
+
+Before you can push or pull, open **Settings** and pick a sync target:
+
+- **Git** — point it at any private repo (GitHub, self-hosted Gitea, etc.). All
+  push/pull happens over `git`, so history is fully auditable.
+- **Local folder** — point it at a Dropbox / iCloud / SMB folder shared
+  between machines.
+- **None** — disables sync entirely. You can still use the app for
+  visualization on a single machine.
+
+## Where the app stores data
+
+| OS      | Path                                                      |
+|---------|-----------------------------------------------------------|
+| macOS   | `~/Library/Application Support/VirtualDJ Link Map/`       |
+| Windows | `%APPDATA%\VirtualDJ Link Map\`                           |
+
+That folder contains:
+
+- `settings.json` — your VDJ folder path, sync mode, machine identity, etc.
+- `graph.json` — the current parsed graph the UI renders.
+- `sync-repo/` — clone / local mirror of the shared library (only if sync is
+  enabled).
+- `backups/` — timestamped backups from every write. Never auto-pruned.
+
+The app **never writes to your VirtualDJ folder** unless you explicitly click
+**Pull** with a diff that includes remote changes, or restore from a backup.
+
+## Building from source
+
+Requires Node.js 18+.
+
+```bash
+npm install                 # installs Vite + Electron + parser deps
+npm run dev:app             # launches Vite + Electron in dev mode
+npm run dist:mac            # builds signed .dmg into dist/
+npm run dist:win            # builds .exe installer into dist/
+```
+
+The Vite renderer alone (browser tab, no Electron shell) still runs with
+`npm run dev` and hits `public/graph.json` via `fetch`. Sync and Settings
+controls are hidden or disabled in browser mode because they require Node.
+
+---
+
+## Command-line tools
+
+Everything below documents the underlying CLI scripts. They still work
+standalone if you want to script parsing, syncing, or SoundCloud uploads
+outside of the desktop app. The app calls the same scripts under the hood via
+its Electron main process.
 
 The default workflow (`parse` + `dev`) **never writes** to VirtualDJ's data.
 Every read is either via copy-to-temp (SQLite) or `readFileSync` (XML / M3U).
@@ -26,7 +125,7 @@ See [Bidirectional sync](#bidirectional-sync-mac--windows-via-git),
 [Linked-tracks folder](#linked-tracks-playlist-folder), and
 [SoundCloud playlist](#soundcloud-playlist) below.
 
-## Where the data comes from
+### Where the data comes from
 
 | Source | What's in it | Used for |
 |---|---|---|
@@ -35,7 +134,7 @@ See [Bidirectional sync](#bidirectional-sync-mac--windows-via-git),
 | `database.xml` | Every song in your library with BPM, key, genre, etc. | Node metadata + library pool for compatible-match suggestions |
 | `History/*.m3u` | Session-by-session play sequences | Secondary edges (`type: "history"`, weighted by frequency) |
 
-## Pipeline
+### Pipeline
 
 ```
 extra.db (related_tracks + track_data)
@@ -48,7 +147,7 @@ History/*.m3u (consecutive plays per session)
 Compatible-match suggestions are **not** precomputed — they're scored in the
 browser when you click a node.
 
-## Install
+### Install
 
 ```bash
 npm install
@@ -56,7 +155,7 @@ npm install
 
 `better-sqlite3` is a native dep; it builds on first install (~10–30s).
 
-## Configure
+### Configure
 
 By default the parser auto-locates VirtualDJ at the standard location for your OS
 (including WSL → Windows `/mnt/c/Users/<you>/AppData/Local/VirtualDJ` translation).
@@ -78,7 +177,7 @@ VDJ_EXTRA_DB_PATH=/custom/extra.db
 VDJ_HISTORY_PATH=/custom/History
 ```
 
-## Run
+### Run
 
 ```bash
 npm run parse      # generate public/graph.json
@@ -88,7 +187,7 @@ npm run build      # build static site into dist/
 npm run inspect    # one-off debug report on extra.db schema → public/link-shape-report.json
 ```
 
-## What the parser produces
+### What the parser produces
 
 `public/graph.json`
 
@@ -109,9 +208,9 @@ npm run inspect    # one-off debug report on extra.db schema → public/link-sha
 }
 ```
 
-## UI
+### UI
 
-### Tabs (top bar)
+#### Tabs (top bar)
 
 - **Related Tracks** (default) — only your real `extra.db.related_tracks` edges (green). Auto-isolates so you only see the songs you've linked.
 - **History** — only play-sequence edges (orange). Auto-isolates to the songs you've ever played.
@@ -119,7 +218,7 @@ npm run inspect    # one-off debug report on extra.db schema → public/link-sha
 
 Each tab has a count badge that turns red when empty.
 
-### Node click → sidebar
+#### Node click → sidebar
 
 Three sections per selected song:
 
@@ -133,21 +232,21 @@ Three sections per selected song:
 
    Each candidate is scored: BPM proximity (40 pts) + key match (25) + genre (15) + same artist (10) + same folder (10).
 
-### Graph visuals
+#### Graph visuals
 
 - **Sphere size** = total linked degree (related + history).
 - **Sphere color** = BPM gradient (default), genre, or Camelot key — pick from the "Color by" panel.
 - **Edge color** = green for related-track, orange for history.
 - **Drag** to pan, **scroll** to zoom, **search** (top bar) recenters the camera.
 
-## File safety
+### File safety
 
 - `database.xml` is opened with `fs.readFileSync('utf8')` only.
 - `extra.db` (and any `-wal` / `-shm` sidecars) is **copied to a fresh temp directory** before being opened, then opened `readonly: true` via better-sqlite3, then the temp dir is deleted. The original is never even read-locked by the parser.
 - Generated artifacts go to `public/`; nothing is written back to VirtualDJ unless you explicitly invoke `sync:pull --write` or `linked:folder --write`.
 - Write commands take a SHA-256-fingerprinted backup into `public/backups/` and side-by-side `.backup-<stamp>` files before touching anything.
 
-## Linked-tracks playlist folder
+### Linked-tracks playlist folder
 
 `npm run linked:folder` writes a static VirtualDJ folder (`.vdjfolder`) that
 lists every song participating in at least one linked-tracks pair from your
@@ -169,13 +268,13 @@ This command also runs automatically at the end of `sync:pull --write` so the
 folder stays in sync with the merged link set across machines. Disable with
 `--no-linked-folder` if you'd rather manage it yourself.
 
-## Bidirectional sync (Mac ↔ Windows via git)
+### Bidirectional sync (Mac ↔ Windows via git)
 
 A true bidirectional union merge of `database.xml`, `extra.db`, and `History/`
 between machines via a committed `sync/` folder in this repo. Two machines can
 push and pull independently without anyone losing data.
 
-### Layout in the repo
+#### Layout in the repo
 
 ```
 sync/
@@ -188,7 +287,7 @@ Each subfolder holds `database.xml`, `extra.db`, `History/`, and a
 `manifest.json`. `merged/` additionally carries `merge-report.json` with
 per-Song conflict details.
 
-### Daily workflow
+#### Daily workflow
 
 ```bash
 # On either machine:
@@ -204,7 +303,7 @@ VirtualDJ must be **closed** before `sync:push` and `sync:pull --write` — the
 scripts check for `extra.db-wal`/`extra.db-shm` sidecars and refuse to proceed
 otherwise (override at your own risk with `--force-wal`).
 
-### Conflict rules
+#### Conflict rules
 
 - **database.xml** — union by `FilePath`. On collision, the Song element with
   the larger `<Infos LastModified="…">` epoch wins. Tie-breaker: streaming
@@ -217,7 +316,7 @@ otherwise (override at your own risk with `--force-wal`).
   `2026-05-12.mac.m3u` / `2026-05-12.windows.m3u`. Identical content
   (`SHA-256`) collapses to a single file.
 
-### Commands
+#### Commands
 
 ```bash
 npm run sync:push                      # snapshot + merge + commit + push (default ON)
@@ -243,7 +342,7 @@ npm run sync:restore -- --stamp latest --write                 # restore newest 
 npm run sync:restore -- --stamp <id> --no-history --write      # restore DB + xml only
 ```
 
-### Backups
+#### Backups
 
 Every write goes through [scripts/lib/syncBackups.js](scripts/lib/syncBackups.js).
 There is no `--write` path that doesn't take a backup first unless you also
@@ -273,7 +372,7 @@ atomically restores `database.xml`, `extra.db` (+ sidecars), and (unless
 `--no-history`) the full `History/` tree. Default mode is dry-run; pass
 `--write` to actually restore.
 
-## SoundCloud playlist
+### SoundCloud playlist
 
 `npm run upload:soundcloud` creates a SoundCloud playlist titled
 `Linked_DJ_Playlist` containing every song in your linked pairs that
@@ -298,7 +397,7 @@ First run opens your browser to SoundCloud; you click Allow, the callback page
 shows a code with a Copy button, you paste it back into the terminal.
 Subsequent runs reuse the saved refresh token silently for ~hour each.
 
-### Environment variables for SoundCloud
+#### Environment variables for SoundCloud
 
 | Var | Where to get it |
 |---|---|
@@ -320,7 +419,7 @@ $env:SOUNDCLOUD_CLIENT_SECRET="..."
 $env:SOUNDCLOUD_REDIRECT_URI="https://YOURUSER.github.io/djlinker-callback/"
 ```
 
-## Cross-platform notes
+### Cross-platform notes
 
 | Concern | macOS | Windows / WSL |
 |---|---|---|
@@ -333,19 +432,20 @@ All commands work identically on both: `parse`, `validate`, `inspect`,
 `sync:push`, `sync:pull`, `sync:merge`, `sync:restore`, `linked:folder`,
 `upload:soundcloud`.
 
-## Project layout
+### Project layout
 
 ```
 vdj-link-map/
 ├── index.html                          # Vite entry
 ├── vite.config.js
-├── src/                                # Web app
+├── src/                                # Web app (renderer)
 │   ├── main.js                         # entry: load graph, wire UI, manage selection
 │   ├── styles.css
-│   ├── data/loadGraph.js
+│   ├── data/loadGraph.js               # vdjApi.getGraph() with /graph.json fallback
 │   ├── graph/{layout,renderer,colors}.js
 │   ├── match/findMatches.js            # on-demand BPM/key/genre scoring
-│   └── ui/{search,filters,sidebar,tooltip}.js
+│   └── ui/{search,filters,sidebar,tooltip,drawer,sync,settings}.js
+├── electron/                           # Electron main-process + preload (desktop shell)
 ├── scripts/
 │   ├── parse-vdj-db.js                 # extra.db → vdj_link, History → history → public/graph.json
 │   ├── validate-graph.js               # integrity check on graph.json

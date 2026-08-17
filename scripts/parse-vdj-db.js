@@ -23,8 +23,10 @@ import { readDatabase } from './lib/xml.js';
 import { resolveHistoryDir, loadAllSessions, buildHistoryEdges } from './lib/history.js';
 import { resolveExtraDbPath, readRelatedTracks } from './lib/relatedTracks.js';
 
+const LOG_SOURCE = 'parse';
+
 function parseArgs(argv) {
-  const args = { db: null, extraDb: null, history: null, useHistory: true };
+  const args = { db: null, extraDb: null, history: null, useHistory: true, out: null };
   for (let i = 2; i < argv.length; i += 1) {
     const arg = argv[i];
     if (arg === '--db' && argv[i + 1]) {
@@ -38,9 +40,29 @@ function parseArgs(argv) {
       i += 1;
     } else if (arg === '--no-history') {
       args.useHistory = false;
+    } else if (arg === '--out' && argv[i + 1]) {
+      args.out = argv[i + 1];
+      i += 1;
     }
   }
   return args;
+}
+
+function makeLogger(onLog) {
+  return {
+    info(msg) {
+      console.log(msg);
+      onLog?.({ level: 'info', msg, source: LOG_SOURCE });
+    },
+    warn(msg) {
+      console.warn(msg);
+      onLog?.({ level: 'warn', msg, source: LOG_SOURCE });
+    },
+    error(msg) {
+      console.error(msg);
+      onLog?.({ level: 'error', msg, source: LOG_SOURCE });
+    },
+  };
 }
 
 function pickFirst(...values) {
@@ -222,40 +244,47 @@ function writeJson(filePath, data) {
   fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
 }
 
-function main() {
-  const args = parseArgs(process.argv);
-  const dbPath = resolveDatabasePath(args.db);
-  console.log(`[parse] Reading library:   ${dbPath}`);
+export async function runParse(args = {}) {
+  const opts = {
+    db: null,
+    extraDb: null,
+    history: null,
+    useHistory: true,
+    out: null,
+    ...args,
+  };
+  const log = makeLogger(opts.onLog);
+
+  const dbPath = resolveDatabasePath(opts.db);
+  log.info(`[parse] Reading library:   ${dbPath}`);
 
   const { version, songs: rawSongs } = readDatabase(dbPath);
-  console.log(`[parse] Songs in database: ${rawSongs.length}`);
+  log.info(`[parse] Songs in database: ${rawSongs.length}`);
 
   const songs = rawSongs.map(normalizeSong);
   const indices = buildIndices(songs);
 
-  // Primary edge source: extra.db related_tracks
-  const extraDbPath = resolveExtraDbPath(args.extraDb);
+  const extraDbPath = resolveExtraDbPath(opts.extraDb);
   let vdjEdges = [];
   let relatedStats = null;
   let relatedUnresolved = [];
   if (extraDbPath) {
-    console.log(`[parse] Reading extra.db:  ${extraDbPath}`);
+    log.info(`[parse] Reading extra.db:  ${extraDbPath}`);
     const { rows, stats } = readRelatedTracks(extraDbPath);
     relatedStats = stats;
     const result = buildRelatedTrackEdges(rows, indices);
     vdjEdges = result.edges;
     relatedUnresolved = result.unresolved;
   } else {
-    console.warn('[parse] extra.db not found; no related-track edges will be generated.');
+    log.warn('[parse] extra.db not found; no related-track edges will be generated.');
   }
   const existingEdgeIds = new Set(vdjEdges.map((e) => e.id));
 
-  // Secondary edge source: History play sequences.
   let historyEdges = [];
   let historyStats = null;
   let historyDir = null;
-  if (args.useHistory) {
-    historyDir = resolveHistoryDir(args.history);
+  if (opts.useHistory) {
+    historyDir = resolveHistoryDir(opts.history);
     if (historyDir) {
       const sessions = loadAllSessions(historyDir);
       const { edges: historyAccumulator, stats } = buildHistoryEdges(sessions, indices);
@@ -285,7 +314,7 @@ function main() {
         if (b) b.linkedCount += 1;
       }
     } else {
-      console.warn('[parse] No History/ folder found; skipping history edges.');
+      log.warn('[parse] No History/ folder found; skipping history edges.');
     }
   }
 
@@ -318,27 +347,50 @@ function main() {
 
   const here = path.dirname(fileURLToPath(import.meta.url));
   const projectRoot = path.resolve(here, '..');
-  const publicDir = path.join(projectRoot, 'public');
+  const graphPath = opts.out
+    ? path.resolve(opts.out)
+    : path.join(projectRoot, 'public', 'graph.json');
+  const outDir = path.dirname(graphPath);
+  const unresolvedPath = path.join(outDir, 'unresolved-links.json');
 
-  writeJson(path.join(publicDir, 'graph.json'), { meta, nodes, edges: allEdges });
-  writeJson(path.join(publicDir, 'unresolved-links.json'), { meta, relatedUnresolved });
+  writeJson(graphPath, { meta, nodes, edges: allEdges });
+  writeJson(unresolvedPath, { meta, relatedUnresolved });
 
-  console.log('[parse] ─── Summary ───────────────────────────────');
-  console.log(`[parse] Songs (library):       ${meta.totals.songs}`);
-  console.log(`[parse] In related pairs:      ${meta.totals.inRelatedTrackPairs}`);
-  console.log(`[parse] Related-track edges:   ${vdjEdges.length}`);
+  log.info('[parse] ─── Summary ───────────────────────────────');
+  log.info(`[parse] Songs (library):       ${meta.totals.songs}`);
+  log.info(`[parse] In related pairs:      ${meta.totals.inRelatedTrackPairs}`);
+  log.info(`[parse] Related-track edges:   ${vdjEdges.length}`);
   if (relatedStats) {
-    console.log(
+    log.info(
       `[parse]   total in extra.db: ${relatedStats.totalRelatedRows}, joined: ${relatedStats.joinedRows}, unresolved: ${relatedUnresolved.length}`
     );
   }
-  console.log(`[parse] History edges:         ${historyEdges.length}`);
+  log.info(`[parse] History edges:         ${historyEdges.length}`);
   if (historyStats) {
-    console.log(
+    log.info(
       `[parse]   sessions: ${historyStats.sessions}, transitions: ${historyStats.totalTransitions}, unmatched: ${historyStats.unmatchedEntries}`
     );
   }
-  console.log(`[parse] Wrote → public/graph.json, public/unresolved-links.json`);
+  log.info(`[parse] Wrote → ${graphPath}, ${unresolvedPath}`);
+
+  return { ok: true, meta, graphPath };
 }
 
-main();
+function main() {
+  runParse(parseArgs(process.argv)).catch((err) => {
+    console.error(`[parse] ERROR: ${err.message}`);
+    process.exitCode = 1;
+  });
+}
+
+const invokedDirectly = (() => {
+  try {
+    const resolved = fs.realpathSync(process.argv[1] ?? '');
+    const self = fs.realpathSync(fileURLToPath(import.meta.url));
+    return resolved === self;
+  } catch {
+    return false;
+  }
+})();
+
+if (invokedDirectly) main();

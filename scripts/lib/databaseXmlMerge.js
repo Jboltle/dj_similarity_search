@@ -53,7 +53,7 @@ const STREAMING_FILE_PATH_RE = /^(netsearch|http|https|spotify|tidal|deezer|yout
  * Lowercased, slash-normalized FilePath. Used only as the dedupe key — the
  * original FilePath is preserved verbatim in the surviving <Song> element.
  */
-function songKey(song) {
+export function songKey(song) {
   const raw = song?.[FILE_PATH_ATTR];
   if (!raw || typeof raw !== 'string') return null;
   if (STREAMING_FILE_PATH_RE.test(raw)) return raw.trim();

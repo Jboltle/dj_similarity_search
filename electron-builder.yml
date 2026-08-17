@@ -1,0 +1,28 @@
+appId: com.jboltle.vdjlinkmap
+productName: VirtualDJ Link Map
+directories:
+  output: release
+files:
+  - dist/**
+  - electron/**
+  - scripts/**
+  - package.json
+  - '!**/node_modules/*/{README.md,CHANGELOG.md,test,tests,__tests__}'
+asarUnpack:
+  - node_modules/better-sqlite3/**
+mac:
+  category: public.app-category.music
+  target:
+    - target: dmg
+      arch: [x64, arm64]
+    - target: zip
+      arch: [x64, arm64]
+win:
+  target:
+    - target: nsis
+      arch: [x64]
+    - target: portable
+      arch: [x64]
+linux:
+  target: [AppImage]
+publish: null

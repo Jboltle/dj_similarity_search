@@ -20,9 +20,29 @@
  */
 import path from 'node:path';
 import fs from 'node:fs';
+import { fileURLToPath } from 'node:url';
 import { resolveVdjFolder, vdjFiles } from './lib/vdjPaths.js';
 import { assertNoVdjRunning } from './lib/sqliteGuards.js';
 import { listBackups, restoreBackup, BACKUP_KIND } from './lib/syncBackups.js';
+
+const LOG_SOURCE = 'sync:restore';
+
+function makeLogger(onLog) {
+  return {
+    info(msg) {
+      console.log(msg);
+      onLog?.({ level: 'info', msg, source: LOG_SOURCE });
+    },
+    warn(msg) {
+      console.warn(msg);
+      onLog?.({ level: 'warn', msg, source: LOG_SOURCE });
+    },
+    error(msg) {
+      console.error(msg);
+      onLog?.({ level: 'error', msg, source: LOG_SOURCE });
+    },
+  };
+}
 
 function parseArgs(argv) {
   const args = {
@@ -48,21 +68,21 @@ function parseArgs(argv) {
   return args;
 }
 
-function printBackupTable(backups) {
+function printBackupTable(backups, log) {
   if (backups.length === 0) {
-    console.log('[sync:restore] No backups found.');
+    log.info('[sync:restore] No backups found.');
     return;
   }
-  console.log('[sync:restore] Available backups:');
-  console.log('  ' + ['STAMP', 'KIND', 'FILES'].join('  '.padEnd(4)));
+  log.info('[sync:restore] Available backups:');
+  log.info('  ' + ['STAMP', 'KIND', 'FILES'].join('  '.padEnd(4)));
   for (const b of backups) {
     const stamp = b.manifest.stamp ?? b.name;
     const kind = b.manifest.kind ?? '?';
     const files = Object.keys(b.manifest.files ?? {}).join(',') || '(no files)';
-    console.log(`  ${stamp}  ${kind}  ${files}`);
+    log.info(`  ${stamp}  ${kind}  ${files}`);
   }
-  console.log('');
-  console.log('Restore a backup with: npm run sync:restore -- --stamp <STAMP> --write');
+  log.info('');
+  log.info('Restore a backup with: npm run sync:restore -- --stamp <STAMP> --write');
 }
 
 function findBackupByStamp(backups, stamp) {
@@ -78,65 +98,105 @@ function findBackupByStamp(backups, stamp) {
   );
 }
 
+const CLI_DEFAULTS_RESTORE = {
+  stamp: null,
+  folder: null,
+  target: null,
+  backupDir: null,
+  includeHistory: true,
+  write: false,
+  forceWal: false,
+};
+
+export async function runSyncRestore(args = {}) {
+  const opts = { ...CLI_DEFAULTS_RESTORE, ...args };
+  const log = makeLogger(opts.onLog);
+  const result = { ok: false };
+
+  try {
+    const backups = listBackups({ backupRoot: opts.backupDir });
+
+    if (!opts.stamp && !opts.folder) {
+      printBackupTable(backups, log);
+      result.ok = true;
+      return result;
+    }
+
+    let chosenFolder = null;
+    let chosenManifest = null;
+    if (opts.folder) {
+      chosenFolder = path.resolve(opts.folder);
+      const manifestPath = path.join(chosenFolder, 'manifest.json');
+      if (!fs.existsSync(manifestPath)) {
+        throw new Error(`No manifest.json under ${chosenFolder}.`);
+      }
+      chosenManifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+    } else {
+      const match = findBackupByStamp(backups, opts.stamp);
+      if (!match) {
+        log.error(`[sync:restore] No backup matching stamp "${opts.stamp}". Available:`);
+        printBackupTable(backups, log);
+        throw new Error('No matching backup.');
+      }
+      chosenFolder = match.folder;
+      chosenManifest = match.manifest;
+    }
+
+    const vdjFolder = resolveVdjFolder(opts.target);
+    const localFiles = vdjFiles(vdjFolder);
+
+    log.info(`[sync:restore] Backup folder: ${chosenFolder}`);
+    log.info(`[sync:restore] Kind:          ${chosenManifest.kind ?? '?'}`);
+    log.info(`[sync:restore] Stamp:         ${chosenManifest.stamp ?? '?'}`);
+    log.info(`[sync:restore] Target VDJ:    ${vdjFolder}`);
+    log.info(`[sync:restore] Mode:          ${opts.write ? 'WRITE' : 'DRY RUN'}`);
+
+    if (opts.write) {
+      assertNoVdjRunning(localFiles.extraDb, { forceWal: opts.forceWal });
+    }
+
+    const restoreResult = restoreBackup({
+      backupFolder: chosenFolder,
+      vdjFolder,
+      write: opts.write,
+      includeHistory: opts.includeHistory,
+    });
+
+    if (restoreResult.dryRun) {
+      log.info('[sync:restore] Dry run OK — sha256s validated. Re-run with --write to apply.');
+      result.ok = true;
+      return result;
+    }
+    log.info('[sync:restore] Restore complete.');
+    result.ok = true;
+    return result;
+  } catch (err) {
+    log.error(`[sync:restore] ERROR: ${err.message}`);
+    result.ok = false;
+    result.error = err.message;
+    return result;
+  }
+}
+
 function main() {
-  const args = parseArgs(process.argv);
-  const backups = listBackups({ backupRoot: args.backupDir });
-
-  if (!args.stamp && !args.folder) {
-    printBackupTable(backups);
-    return;
-  }
-
-  let chosenFolder = null;
-  let chosenManifest = null;
-  if (args.folder) {
-    chosenFolder = path.resolve(args.folder);
-    const manifestPath = path.join(chosenFolder, 'manifest.json');
-    if (!fs.existsSync(manifestPath)) {
-      throw new Error(`No manifest.json under ${chosenFolder}.`);
-    }
-    chosenManifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
-  } else {
-    const match = findBackupByStamp(backups, args.stamp);
-    if (!match) {
-      console.error(`[sync:restore] No backup matching stamp "${args.stamp}". Available:`);
-      printBackupTable(backups);
-      throw new Error('No matching backup.');
-    }
-    chosenFolder = match.folder;
-    chosenManifest = match.manifest;
-  }
-
-  const vdjFolder = resolveVdjFolder(args.target);
-  const localFiles = vdjFiles(vdjFolder);
-
-  console.log(`[sync:restore] Backup folder: ${chosenFolder}`);
-  console.log(`[sync:restore] Kind:          ${chosenManifest.kind ?? '?'}`);
-  console.log(`[sync:restore] Stamp:         ${chosenManifest.stamp ?? '?'}`);
-  console.log(`[sync:restore] Target VDJ:    ${vdjFolder}`);
-  console.log(`[sync:restore] Mode:          ${args.write ? 'WRITE' : 'DRY RUN'}`);
-
-  if (args.write) {
-    assertNoVdjRunning(localFiles.extraDb, { forceWal: args.forceWal });
-  }
-
-  const result = restoreBackup({
-    backupFolder: chosenFolder,
-    vdjFolder,
-    write: args.write,
-    includeHistory: args.includeHistory,
-  });
-
-  if (result.dryRun) {
-    console.log('[sync:restore] Dry run OK — sha256s validated. Re-run with --write to apply.');
-    return;
-  }
-  console.log('[sync:restore] Restore complete.');
+  runSyncRestore(parseArgs(process.argv))
+    .then((res) => {
+      if (!res.ok && !process.exitCode) process.exitCode = 1;
+    })
+    .catch((err) => {
+      console.error(`[sync:restore] ERROR: ${err.message}`);
+      process.exitCode = 1;
+    });
 }
 
-try {
-  main();
-} catch (err) {
-  console.error(`[sync:restore] ERROR: ${err.message}`);
-  process.exitCode = 1;
-}
+const invokedDirectly = (() => {
+  try {
+    const resolved = fs.realpathSync(process.argv[1] ?? '');
+    const self = fs.realpathSync(fileURLToPath(import.meta.url));
+    return resolved === self;
+  } catch {
+    return false;
+  }
+})();
+
+if (invokedDirectly) main();

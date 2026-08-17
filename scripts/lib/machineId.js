@@ -8,8 +8,19 @@ import { fileURLToPath } from 'node:url';
 
 export const SYNC_MACHINE_IDS = Object.freeze(['mac', 'windows']);
 
-const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
-const SYNC_ROOT = path.join(PROJECT_ROOT, 'sync');
+const PROJECT_ROOT_DEFAULT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
+const SYNC_SUBDIR_NAME = 'sync';
+
+function currentProjectRoot() {
+  const override = process.env.VDJ_PROJECT_ROOT;
+  return override ? path.resolve(override) : PROJECT_ROOT_DEFAULT;
+}
+
+function currentSyncRoot() {
+  const override = process.env.VDJ_SYNC_ROOT;
+  if (override) return path.resolve(override);
+  return path.join(currentProjectRoot(), SYNC_SUBDIR_NAME);
+}
 
 /**
  * @param {string | null | undefined} explicit One of 'mac' | 'windows', or null/undefined to auto-detect.
@@ -35,19 +46,19 @@ export function resolveMachineId(explicit) {
  * @returns {string}
  */
 export function syncMachineDir(machineId) {
-  return path.join(SYNC_ROOT, machineId);
+  return path.join(currentSyncRoot(), machineId);
 }
 
 export function syncMergedDir() {
-  return path.join(SYNC_ROOT, 'merged');
+  return path.join(currentSyncRoot(), 'merged');
 }
 
 export function syncRoot() {
-  return SYNC_ROOT;
+  return currentSyncRoot();
 }
 
 export function projectRoot() {
-  return PROJECT_ROOT;
+  return currentProjectRoot();
 }
 
 /**

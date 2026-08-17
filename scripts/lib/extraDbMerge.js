@@ -34,7 +34,7 @@ const RELATED_TRACKS_DDL = `
   )
 `;
 
-function copyToTempReadonly(srcDbPath) {
+export function copyToTempReadonly(srcDbPath) {
   const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'vdj-extra-merge-'));
   const tmpDb = path.join(tmpDir, 'extra.db');
   fs.copyFileSync(srcDbPath, tmpDb);
@@ -45,7 +45,7 @@ function copyToTempReadonly(srcDbPath) {
   return { tmpDir, tmpDb };
 }
 
-function readExtraDb(srcDbPath) {
+export function readExtraDb(srcDbPath) {
   if (!fs.existsSync(srcDbPath)) return { tracks: [], pairs: [] };
   const { tmpDir, tmpDb } = copyToTempReadonly(srcDbPath);
   let db;
@@ -108,7 +108,7 @@ function unionTracks(localTracks, remoteTracks) {
  * Canonicalize (sid1, sid2) → smaller first so the dedupe key is
  * order-independent.
  */
-function pairKey(p) {
+export function pairKey(p) {
   if (p?.sid1 == null || p?.sid2 == null) return null;
   const a = BigInt(p.sid1);
   const b = BigInt(p.sid2);

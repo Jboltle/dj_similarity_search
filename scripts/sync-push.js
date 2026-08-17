@@ -37,6 +37,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import crypto from 'node:crypto';
+import { fileURLToPath } from 'node:url';
 import { execFileSync, spawnSync } from 'node:child_process';
 import { resolveVdjFolder, vdjFiles } from './lib/vdjPaths.js';
 import { assertNoVdjRunning, verifySqliteIntegrity } from './lib/sqliteGuards.js';
@@ -54,6 +55,25 @@ import {
   BACKUP_KIND,
 } from './lib/syncBackups.js';
 import { runSyncMerge } from './sync-merge.js';
+
+const LOG_SOURCE = 'sync:push';
+
+function makeLogger(onLog) {
+  return {
+    info(msg) {
+      console.log(msg);
+      onLog?.({ level: 'info', msg, source: LOG_SOURCE });
+    },
+    warn(msg) {
+      console.warn(msg);
+      onLog?.({ level: 'warn', msg, source: LOG_SOURCE });
+    },
+    error(msg) {
+      console.error(msg);
+      onLog?.({ level: 'error', msg, source: LOG_SOURCE });
+    },
+  };
+}
 
 function parseArgs(argv) {
   const args = {
@@ -208,133 +228,192 @@ function gitHasChanges(cwd) {
   return Boolean(out && out.length > 0);
 }
 
-function main() {
-  const args = parseArgs(process.argv);
+const CLI_DEFAULTS_PUSH = {
+  as: null,
+  source: null,
+  includeHistory: true,
+  forceWal: false,
+  backupDir: null,
+  backup: true,
+  backupOnly: false,
+  keepBackups: null,
+  git: true,
+  push: true,
+  runLinkedFolder: true,
+  linkedFolderName: 'Linked Tracks',
+  force: false,
+  dryRun: false,
+  message: null,
+};
 
-  if (!args.backup && !args.force) {
-    throw new Error(
-      'Refusing to skip backup without --force. Pass --no-backup --force together (DANGEROUS).'
-    );
-  }
+export async function runSyncPush(args = {}) {
+  const opts = { ...CLI_DEFAULTS_PUSH, ...args };
+  const log = makeLogger(opts.onLog);
+  const result = { ok: false, backupFolder: null, commitSha: null };
 
-  const machineId = resolveMachineId(args.as);
-  const projectDir = getProjectRoot();
-  const vdjFolder = resolveVdjFolder(args.source);
-  const syncDir = syncMachineDir(machineId);
-  const mergedDir = syncMergedDir();
-
-  console.log(`[sync:push] Machine id:   ${machineId}`);
-  console.log(`[sync:push] Local VDJ:    ${vdjFolder}`);
-  console.log(`[sync:push] Sync folder:  ${syncDir}`);
-  console.log(`[sync:push] Merged dir:   ${mergedDir}`);
-  console.log(`[sync:push] Mode:         ${args.dryRun ? 'DRY RUN' : 'WRITE'}`);
-
-  const files = vdjFiles(vdjFolder);
-  assertNoVdjRunning(files.extraDb, { forceWal: args.forceWal });
-  const integrity = verifySqliteIntegrity(files.extraDb);
-  if (integrity !== 'ok') {
-    throw new Error(`Local extra.db failed integrity_check: ${integrity}`);
-  }
-
-  const stamp = timestampStamp();
-  const backups = [];
-  if (args.backup && !args.dryRun) {
-    const b1 = backupSyncSubfolder({
-      syncSubfolder: syncDir,
-      label: machineId,
-      kind: BACKUP_KIND.PUSH,
-      stamp,
-      backupRoot: args.backupDir,
-      note: 'pre-push snapshot of sync/<machine>/',
-    });
-    if (b1) backups.push(b1.folder);
-    const b2 = backupSyncSubfolder({
-      syncSubfolder: mergedDir,
-      label: 'merged',
-      kind: BACKUP_KIND.PUSH,
-      stamp,
-      backupRoot: args.backupDir,
-      note: 'pre-push snapshot of sync/merged/',
-    });
-    if (b2) backups.push(b2.folder);
-  }
-
-  if (args.backupOnly) {
-    console.log(`[sync:push] --backup-only: ${backups.length} backup folder(s) written. Exiting.`);
-    return;
-  }
-
-  if (args.dryRun) {
-    console.log('[sync:push] Dry run — would snapshot local VDJ → sync/<machine>/ and regenerate sync/merged/.');
-    return;
-  }
-
-  const manifest = snapshotLocalToSyncFolder({
-    vdjFolder,
-    syncDir,
-    includeHistory: args.includeHistory,
-    machineId,
-  });
-  console.log(`[sync:push] Snapshot written: ${manifest.files['database.xml'].bytes}B xml, ${manifest.files['extra.db'].bytes}B db, history=${manifest.includesHistory}`);
-
-  const { dest } = runSyncMerge({ outDir: mergedDir });
-  console.log(`[sync:push] Re-merged → ${dest}`);
-
-  if (args.runLinkedFolder) {
-    console.log(`[sync:push] Refreshing local Linked Tracks folder ("${args.linkedFolderName}")…`);
-    runBuildLinkedFolder({
-      cwd: projectDir,
-      source: args.source,
-      name: args.linkedFolderName,
-      forceWal: args.forceWal,
-    });
-  }
-
-  if (args.keepBackups != null) {
-    const { pruned } = pruneOldBackups({
-      backupRoot: args.backupDir,
-      keep: args.keepBackups,
-      kindPrefixes: [BACKUP_KIND.PUSH],
-    });
-    if (pruned.length) console.log(`[sync:push] Pruned ${pruned.length} old backup folder(s).`);
-  }
-
-  if (!args.git) {
-    console.log('[sync:push] --no-git: skipped git operations.');
-    return;
-  }
-
-  if (!gitHasChanges(projectDir)) {
-    console.log('[sync:push] No changes under sync/ — nothing to commit.');
-    return;
-  }
-
-  gitExec(['add', 'sync/'], { cwd: projectDir });
-  const commitMsg =
-    args.message ??
-    `sync: push from ${machineId} (${os.hostname()}) ${new Date().toISOString().slice(0, 19)}`;
-  gitExec(['commit', '-m', commitMsg], { cwd: projectDir });
-  console.log(`[sync:push] Committed: ${commitMsg}`);
-
-  if (!args.push) {
-    console.log('[sync:push] --no-push: skipped `git push`.');
-    return;
-  }
   try {
-    gitExec(['push'], { cwd: projectDir });
-    console.log('[sync:push] Pushed to remote.');
-  } catch (err) {
-    console.error(
-      `[sync:push] git push failed: ${err.message}\n` +
-        '  Resolve manually (e.g. pull --rebase, then push) — the commit is local.'
+    if (!opts.backup && !opts.force) {
+      throw new Error(
+        'Refusing to skip backup without --force. Pass --no-backup --force together (DANGEROUS).'
+      );
+    }
+
+    const machineId = resolveMachineId(opts.as);
+    const projectDir = getProjectRoot();
+    const vdjFolder = resolveVdjFolder(opts.source);
+    const syncDir = syncMachineDir(machineId);
+    const mergedDir = syncMergedDir();
+
+    log.info(`[sync:push] Machine id:   ${machineId}`);
+    log.info(`[sync:push] Local VDJ:    ${vdjFolder}`);
+    log.info(`[sync:push] Sync folder:  ${syncDir}`);
+    log.info(`[sync:push] Merged dir:   ${mergedDir}`);
+    log.info(`[sync:push] Mode:         ${opts.dryRun ? 'DRY RUN' : 'WRITE'}`);
+
+    const files = vdjFiles(vdjFolder);
+    assertNoVdjRunning(files.extraDb, { forceWal: opts.forceWal });
+    const integrity = verifySqliteIntegrity(files.extraDb);
+    if (integrity !== 'ok') {
+      throw new Error(`Local extra.db failed integrity_check: ${integrity}`);
+    }
+
+    const stamp = timestampStamp();
+    const backups = [];
+    if (opts.backup && !opts.dryRun) {
+      const b1 = backupSyncSubfolder({
+        syncSubfolder: syncDir,
+        label: machineId,
+        kind: BACKUP_KIND.PUSH,
+        stamp,
+        backupRoot: opts.backupDir,
+        note: 'pre-push snapshot of sync/<machine>/',
+      });
+      if (b1) backups.push(b1.folder);
+      const b2 = backupSyncSubfolder({
+        syncSubfolder: mergedDir,
+        label: 'merged',
+        kind: BACKUP_KIND.PUSH,
+        stamp,
+        backupRoot: opts.backupDir,
+        note: 'pre-push snapshot of sync/merged/',
+      });
+      if (b2) backups.push(b2.folder);
+    }
+    result.backupFolder = backups[0] ?? null;
+
+    if (opts.backupOnly) {
+      log.info(`[sync:push] --backup-only: ${backups.length} backup folder(s) written. Exiting.`);
+      result.ok = true;
+      return result;
+    }
+
+    if (opts.dryRun) {
+      log.info('[sync:push] Dry run — would snapshot local VDJ → sync/<machine>/ and regenerate sync/merged/.');
+      result.ok = true;
+      return result;
+    }
+
+    const manifest = snapshotLocalToSyncFolder({
+      vdjFolder,
+      syncDir,
+      includeHistory: opts.includeHistory,
+      machineId,
+    });
+    log.info(
+      `[sync:push] Snapshot written: ${manifest.files['database.xml'].bytes}B xml, ${manifest.files['extra.db'].bytes}B db, history=${manifest.includesHistory}`
     );
-    process.exitCode = 2;
+
+    const { dest } = runSyncMerge({ outDir: mergedDir });
+    log.info(`[sync:push] Re-merged → ${dest}`);
+
+    if (opts.runLinkedFolder) {
+      log.info(`[sync:push] Refreshing local Linked Tracks folder ("${opts.linkedFolderName}")…`);
+      runBuildLinkedFolder({
+        cwd: projectDir,
+        source: opts.source,
+        name: opts.linkedFolderName,
+        forceWal: opts.forceWal,
+      });
+    }
+
+    if (opts.keepBackups != null) {
+      const { pruned } = pruneOldBackups({
+        backupRoot: opts.backupDir,
+        keep: opts.keepBackups,
+        kindPrefixes: [BACKUP_KIND.PUSH],
+      });
+      if (pruned.length) log.info(`[sync:push] Pruned ${pruned.length} old backup folder(s).`);
+    }
+
+    if (!opts.git) {
+      log.info('[sync:push] --no-git: skipped git operations.');
+      result.ok = true;
+      return result;
+    }
+
+    if (!gitHasChanges(projectDir)) {
+      log.info('[sync:push] No changes under sync/ — nothing to commit.');
+      result.ok = true;
+      return result;
+    }
+
+    gitExec(['add', 'sync/'], { cwd: projectDir });
+    const commitMsg =
+      opts.message ??
+      `sync: push from ${machineId} (${os.hostname()}) ${new Date().toISOString().slice(0, 19)}`;
+    gitExec(['commit', '-m', commitMsg], { cwd: projectDir });
+    log.info(`[sync:push] Committed: ${commitMsg}`);
+
+    const sha = gitExec(['rev-parse', 'HEAD'], { cwd: projectDir, allowFail: true });
+    if (sha) result.commitSha = sha;
+
+    if (!opts.push) {
+      log.info('[sync:push] --no-push: skipped `git push`.');
+      result.ok = true;
+      return result;
+    }
+    try {
+      gitExec(['push'], { cwd: projectDir });
+      log.info('[sync:push] Pushed to remote.');
+      result.ok = true;
+      return result;
+    } catch (err) {
+      log.error(
+        `[sync:push] git push failed: ${err.message}\n` +
+          '  Resolve manually (e.g. pull --rebase, then push) — the commit is local.'
+      );
+      process.exitCode = 2;
+      result.ok = false;
+      result.error = `git push failed: ${err.message}`;
+      return result;
+    }
+  } catch (err) {
+    log.error(`[sync:push] ERROR: ${err.message}`);
+    result.ok = false;
+    result.error = err.message;
+    return result;
   }
 }
 
-try {
-  main();
-} catch (err) {
-  console.error(`[sync:push] ERROR: ${err.message}`);
-  process.exitCode = 1;
+function main() {
+  runSyncPush(parseArgs(process.argv))
+    .then((res) => {
+      if (!res.ok && !process.exitCode) process.exitCode = 1;
+    })
+    .catch((err) => {
+      console.error(`[sync:push] ERROR: ${err.message}`);
+      process.exitCode = 1;
+    });
 }
+
+const invokedDirectly = (() => {
+  try {
+    const resolved = fs.realpathSync(process.argv[1] ?? '');
+    const self = fs.realpathSync(fileURLToPath(import.meta.url));
+    return resolved === self;
+  } catch {
+    return false;
+  }
+})();
+
+if (invokedDirectly) main();

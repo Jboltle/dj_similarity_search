@@ -45,6 +45,18 @@
           <input id="search" type="search" placeholder="Search artist or title…" autocomplete="off" />
           <ul id="search-results" hidden></ul>
         </div>
+        <div id="topbar-actions" class="topbar-actions">
+          <button id="btn-sync" class="topbar-btn" type="button" data-drawer="sync" title="Sync">
+            <span class="topbar-btn-label">Sync</span>
+            <span id="sync-badge" class="sync-badge" hidden></span>
+          </button>
+          <button id="btn-settings" class="topbar-btn topbar-btn-icon" type="button" data-drawer="settings" title="Settings" aria-label="Settings">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="3"></circle>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.0A1.65 1.65 0 0 0 10 3.09V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v0a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+            </svg>
+          </button>
+        </div>
         <div id="meta-summary" class="meta-summary">Loading graph…</div>
       </header>
 
@@ -86,6 +98,7 @@
           <header class="panel-header">Layout</header>
           <button id="recenter" type="button">Recenter camera</button>
           <button id="reheat" type="button">Re-run layout</button>
+          <button id="refresh-library" type="button" hidden>Refresh library</button>
         </section>
       </aside>
 
@@ -95,6 +108,14 @@
           <button id="sidebar-close" type="button" aria-label="Close">×</button>
         </header>
         <div id="sidebar-body"></div>
+      </aside>
+
+      <aside id="drawer" class="drawer right hidden" data-drawer="host" aria-hidden="true">
+        <header class="drawer-header">
+          <h2 id="drawer-title">Sync</h2>
+          <button id="drawer-close" type="button" aria-label="Close">×</button>
+        </header>
+        <div id="drawer-body" class="drawer-body"></div>
       </aside>
 
       <div id="tooltip" class="tooltip hidden"></div>
