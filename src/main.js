@@ -20,10 +20,30 @@ function el(id) {
   return node;
 }
 
+function detectPlatform() {
+  const ua = (typeof navigator !== 'undefined' && navigator.userAgent) || '';
+  if (/Mac/i.test(ua)) return 'mac';
+  if (/Windows/i.test(ua)) return 'win';
+  return 'linux';
+}
+
+function hideLoader() {
+  const loader = document.getElementById('loader');
+  if (loader) loader.classList.add('hidden');
+}
+
 function showError(message) {
   const banner = document.getElementById('error-banner');
-  banner.textContent = message;
+  if (!banner) return;
+  const body = banner.querySelector('.error-banner-body') || banner;
+  body.textContent = message;
   banner.classList.remove('hidden');
+  const closeBtn = banner.querySelector('.error-banner-close');
+  if (closeBtn && !closeBtn.dataset.wired) {
+    closeBtn.dataset.wired = '1';
+    closeBtn.addEventListener('click', () => banner.classList.add('hidden'));
+  }
+  hideLoader();
 }
 
 function buildAdjacency(edges) {
@@ -120,12 +140,17 @@ function configureDesktopOnlyButton(button) {
 }
 
 async function main() {
+  if (typeof document !== 'undefined') {
+    document.body.dataset.platform = detectPlatform();
+  }
+
   const api = (typeof window !== 'undefined' && window.vdjApi) || null;
 
   const canvas = el('canvas');
   const tooltipEl = el('tooltip');
   const sidebarRoot = el('sidebar');
   const sidebarTitle = el('sidebar-title');
+  const sidebarSubtitle = document.getElementById('sidebar-subtitle');
   const sidebarBody = el('sidebar-body');
   const sidebarClose = el('sidebar-close');
   const metaSummary = el('meta-summary');
@@ -162,6 +187,7 @@ async function main() {
   const sidebar = new Sidebar({
     root: sidebarRoot,
     title: sidebarTitle,
+    subtitle: sidebarSubtitle,
     body: sidebarBody,
     closeButton: sidebarClose,
     onSelectNeighbor: (id) => selectNode(id, { recenter: false }),
@@ -193,6 +219,8 @@ async function main() {
   });
   renderer.setData(state.nodes, state.edges);
   renderer.start();
+
+  hideLoader();
 
   const tabButtons = [...document.querySelectorAll('#tabs .tab')];
   const viewNotice = el('view-notice');
@@ -410,10 +438,11 @@ function wireDrawerAndPanels({ api, rebuildFromGraph, applyColorMode }) {
   });
 
   refreshBtn.hidden = false;
+  const refreshLabelEl = refreshBtn.querySelector('span') || refreshBtn;
   refreshBtn.addEventListener('click', async () => {
     refreshBtn.disabled = true;
-    const prevLabel = refreshBtn.textContent;
-    refreshBtn.textContent = 'Refreshing…';
+    const prevLabel = refreshLabelEl.textContent;
+    refreshLabelEl.textContent = 'Refreshing…';
     try {
       const result = await api.refreshLibrary();
       if (!result?.ok) {
@@ -426,7 +455,7 @@ function wireDrawerAndPanels({ api, rebuildFromGraph, applyColorMode }) {
       showError(error?.message || String(error));
     } finally {
       refreshBtn.disabled = false;
-      refreshBtn.textContent = prevLabel;
+      refreshLabelEl.textContent = prevLabel;
     }
   });
 

@@ -138,7 +138,44 @@ export class SettingsPanel {
         <section class="form-row">
           <label>Machine identity</label>
           ${segmentedMarkup('settings-machine', MACHINE_MODES, machineValue)}
-          <p class="form-hint">Overrides the auto-detected OS label used inside the shared library.</p>
+          <p class="form-hint">Legacy override; new installs identify by a stable UUID (see below).</p>
+        </section>
+
+        <section class="form-row">
+          <label for="settings-machine-name">Machine display name</label>
+          <input type="text" id="settings-machine-name"
+                 value="${escape(s.machineDisplayName || '')}"
+                 placeholder="Studio iMac, Living Room PC, …" spellcheck="false" />
+          <p class="form-hint">
+            Shown to other machines in the sync panel. UUID:
+            <code>${escape(s.machineUuid || '(pending)')}</code>
+          </p>
+        </section>
+
+        <section class="form-row">
+          <label>Cloud backends</label>
+          <div id="settings-cloud-backends" class="cloud-backends">
+            <button type="button" id="settings-detect-clouds" class="ghost-btn">Detect cloud folders…</button>
+          </div>
+          <p class="form-hint">One-click sync via Dropbox, OneDrive, iCloud Drive, or Google Drive.</p>
+        </section>
+
+        <section class="form-row selection-section">
+          <label>Selective sync (push)</label>
+          <div class="selection-block">
+            <input type="text" id="settings-push-include" class="selection-input"
+                   value="${escape((s.syncSelection?.push?.includeFolders ?? []).join(', '))}"
+                   placeholder="Include folder prefixes (comma-separated)" spellcheck="false" />
+            <input type="text" id="settings-push-exclude" class="selection-input"
+                   value="${escape((s.syncSelection?.push?.excludeFolders ?? []).join(', '))}"
+                   placeholder="Exclude folder prefixes (comma-separated)" spellcheck="false" />
+            <label class="checkbox">
+              <input type="checkbox" id="settings-push-nostream" ${s.syncSelection?.push?.excludeStreaming ? 'checked' : ''} />
+              <span>Exclude streaming tracks (Spotify, netsearch, …)</span>
+            </label>
+            <div class="selection-preview" id="settings-selection-preview">—</div>
+          </div>
+          <p class="form-hint">Filters which songs from your library get pushed to the shared sync target.</p>
         </section>
 
         <section class="form-row">
@@ -241,6 +278,24 @@ export class SettingsPanel {
       await this.persist({ machineId });
     });
 
+    const machineName = body.querySelector('#settings-machine-name');
+    if (machineName) {
+      machineName.addEventListener('change', async () => {
+        const value = machineName.value.trim();
+        await this.persist({ machineDisplayName: value });
+        await this.api.sync?.renameThisMachine?.(value);
+      });
+    }
+
+    const detectClouds = body.querySelector('#settings-detect-clouds');
+    if (detectClouds) {
+      detectClouds.addEventListener('click', async () => {
+        await this.renderCloudBackends();
+      });
+    }
+
+    this.wireSelectionInputs();
+
     const linkedName = body.querySelector('#settings-linked-name');
     linkedName.addEventListener('change', () => {
       const value = linkedName.value.trim() || DEFAULT_LINKED_FOLDER_NAME;
@@ -251,6 +306,103 @@ export class SettingsPanel {
     autoRefresh.addEventListener('change', () => this.persist({ autoRefreshOnStartup: autoRefresh.checked }));
 
     body.querySelector('#settings-open-backups').addEventListener('click', () => this.openBackups());
+  }
+
+  wireSelectionInputs() {
+    const body = this.drawer.getBody();
+    const include = body.querySelector('#settings-push-include');
+    const exclude = body.querySelector('#settings-push-exclude');
+    const noStream = body.querySelector('#settings-push-nostream');
+    if (!include || !exclude || !noStream) return;
+
+    const parseList = (raw) => String(raw ?? '')
+      .split(',')
+      .map((s) => s.trim())
+      .filter(Boolean);
+
+    const persistRules = async () => {
+      const nextPush = {
+        includeFolders: parseList(include.value),
+        excludeFolders: parseList(exclude.value),
+        excludeStreaming: !!noStream.checked,
+      };
+      const current = this.settings?.syncSelection ?? { push: {}, pull: {} };
+      const next = { push: nextPush, pull: current.pull ?? {} };
+      await this.persist({ syncSelection: next });
+      if (this.api.sync?.saveSelectionRules) {
+        await this.api.sync.saveSelectionRules(next);
+      }
+      this.refreshSelectionPreview();
+    };
+
+    include.addEventListener('change', persistRules);
+    exclude.addEventListener('change', persistRules);
+    noStream.addEventListener('change', persistRules);
+
+    this.refreshSelectionPreview();
+  }
+
+  async refreshSelectionPreview() {
+    const body = this.drawer.getBody();
+    const el = body.querySelector('#settings-selection-preview');
+    if (!el) return;
+    const rules = this.settings?.syncSelection ?? { push: {}, pull: {} };
+    if (!this.api.sync?.previewSelection) {
+      el.textContent = '';
+      return;
+    }
+    el.textContent = 'Recalculating…';
+    try {
+      const preview = await this.api.sync.previewSelection(rules);
+      el.textContent =
+        `Push would include ${preview.push} songs; pull would include ${preview.pull} songs of ${preview.total} candidates.`;
+    } catch (error) {
+      el.textContent = `Preview unavailable (${error?.message || 'error'})`;
+    }
+  }
+
+  async renderCloudBackends() {
+    const body = this.drawer.getBody();
+    const wrap = body.querySelector('#settings-cloud-backends');
+    if (!wrap) return;
+    wrap.innerHTML = `<p class="form-hint">Scanning…</p>`;
+    let providers = [];
+    try {
+      providers = await this.api.sync?.detectCloudFolders?.() ?? [];
+    } catch (error) {
+      wrap.innerHTML = `<p class="form-hint">${escape(error?.message || 'Detection failed')}</p>`;
+      return;
+    }
+    if (!providers.length) {
+      wrap.innerHTML = `<p class="form-hint">No cloud sync folders detected.</p>`;
+      return;
+    }
+    wrap.innerHTML = providers
+      .map(
+        (p) => `
+        <button type="button" class="ghost-btn cloud-backend-btn" data-provider="${escape(p.provider)}" data-path="${escape(p.path)}">
+          Use ${escape(p.provider)}
+          <span class="cloud-backend-path">${escape(p.path)}</span>
+        </button>
+      `
+      )
+      .join('');
+    wrap.querySelectorAll('.cloud-backend-btn').forEach((btn) => {
+      btn.addEventListener('click', async () => {
+        btn.disabled = true;
+        const provider = btn.dataset.provider;
+        const target = btn.dataset.path;
+        const res = await this.api.sync?.useCloudBackend?.({ provider, path: target });
+        if (res?.ok) {
+          this.drawer.showToast(`Sync configured via ${provider}`);
+          await this.load();
+          this.render();
+        } else {
+          this.drawer.showToast(res?.error || 'Setup failed', { kind: 'err' });
+          btn.disabled = false;
+        }
+      });
+    });
   }
 
   wireSegmented(selector, onChange) {

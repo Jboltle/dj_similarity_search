@@ -1,12 +1,18 @@
 const TOAST_DURATION_MS = 2200;
 const TOAST_FADE_MS = 300;
 
+const PANEL_ICONS = {
+  sync: '#icon-sync',
+  settings: '#icon-settings',
+};
+
 export class Drawer {
   constructor({ root, titleEl, bodyEl, closeButton }) {
     this.root = root;
     this.titleEl = titleEl;
     this.bodyEl = bodyEl;
     this.closeButton = closeButton;
+    this.iconUseEl = root.querySelector('.drawer-icon use');
     this.activePanel = null;
     this.onCloseHandlers = new Set();
 
@@ -32,13 +38,16 @@ export class Drawer {
   open({ name, title }) {
     this.activePanel = name;
     this.titleEl.textContent = title;
+    this.setIconForPanel(name);
     this.root.classList.remove('hidden');
+    this.root.setAttribute('aria-hidden', 'false');
     this.root.dataset.panel = name;
   }
 
   close() {
     if (!this.isOpen()) return;
     this.root.classList.add('hidden');
+    this.root.setAttribute('aria-hidden', 'true');
     const previous = this.activePanel;
     this.activePanel = null;
     delete this.root.dataset.panel;
@@ -47,6 +56,12 @@ export class Drawer {
 
   setTitle(title) {
     this.titleEl.textContent = title;
+  }
+
+  setIconForPanel(name) {
+    if (!this.iconUseEl) return;
+    const href = PANEL_ICONS[name];
+    if (href) this.iconUseEl.setAttribute('href', href);
   }
 
   getBody() {

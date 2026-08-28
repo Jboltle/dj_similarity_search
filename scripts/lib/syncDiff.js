@@ -8,6 +8,12 @@
  *   - Related-track pairs from extra.db (by canonical (sid1, sid2) key).
  *   - History .m3u files (by filename).
  *
+ * For song conflicts we also compute per-side "provenance": which specific
+ * fields differ (POIs, BPM, tags), plus a `reason` bucket the UI uses to
+ * render a compact chip. Conflicts without any semantic change (only the
+ * LastModified attribute drifted) are surfaced as `lastmodified_only` so
+ * the UI can suppress them or show them dimmed.
+ *
  * When the sync repo isn't reachable or `sync/merged/` is empty we return a
  * structurally-valid, `ready: false` result so the UI can render an empty
  * state instead of crashing.
@@ -24,6 +30,11 @@ const LAST_MODIFIED_ATTR = `${ATTR_PREFIX}LastModified`;
 const AUTHOR_ATTR = `${ATTR_PREFIX}Author`;
 const ARTIST_ATTR = `${ATTR_PREFIX}Artist`;
 const TITLE_ATTR = `${ATTR_PREFIX}Title`;
+const BPM_ATTR = `${ATTR_PREFIX}Bpm`;
+const KEY_ATTR = `${ATTR_PREFIX}Key`;
+const GENRE_ATTR = `${ATTR_PREFIX}Genre`;
+const ALBUM_ATTR = `${ATTR_PREFIX}Album`;
+const YEAR_ATTR = `${ATTR_PREFIX}Year`;
 
 const ARRAY_TAGS = new Set(['Song', 'Link', 'Poi']);
 
@@ -45,6 +56,7 @@ function makeEmptyDiff(reason) {
     songs: { localOnly: [], remoteOnly: [], conflicts: [] },
     linkedPairs: { localOnly: [], remoteOnly: [] },
     history: { localOnly: [], remoteOnly: [] },
+    machines: [],
   };
 }
 
@@ -72,17 +84,58 @@ function pickAttr(obj, ...attrs) {
   return '';
 }
 
+function songLastModified(song) {
+  const infos = song?.Infos;
+  if (!infos) return 0;
+  const raw = infos[LAST_MODIFIED_ATTR];
+  if (!raw) return 0;
+  const n = Number.parseInt(String(raw), 10);
+  return Number.isFinite(n) ? n : 0;
+}
+
+function songBpm(song) {
+  const scan = song?.Scan;
+  const raw = scan?.[BPM_ATTR];
+  if (!raw) return null;
+  const n = Number.parseFloat(String(raw));
+  return Number.isFinite(n) ? n : null;
+}
+
+function songPoiCount(song) {
+  const poi = song?.Poi;
+  if (Array.isArray(poi)) return poi.length;
+  if (poi) return 1;
+  return 0;
+}
+
+function songFolder(song) {
+  const raw = String(song?.[FILE_PATH_ATTR] ?? '');
+  if (!raw) return '';
+  const normalized = raw.replaceAll('\\', '/');
+  const idx = normalized.lastIndexOf('/');
+  return idx >= 0 ? normalized.slice(0, idx) : '';
+}
+
+function isStreaming(song) {
+  const raw = String(song?.[FILE_PATH_ATTR] ?? '');
+  return /^(netsearch|http|https|spotify|tidal|deezer|youtube|soundcloud):/i.test(raw);
+}
+
 function songToSummary(song) {
   const filePath = pickAttr(song, FILE_PATH_ATTR);
   const tags = song?.Tags ?? {};
   const artist = pickAttr(tags, AUTHOR_ATTR, ARTIST_ATTR);
   const title = pickAttr(tags, TITLE_ATTR);
-  const infos = song?.Infos ?? {};
-  const rawLm = infos[LAST_MODIFIED_ATTR];
-  const lastModified = rawLm ? Number.parseInt(String(rawLm), 10) || 0 : 0;
-  const poi = song?.Poi;
-  const poiCount = Array.isArray(poi) ? poi.length : poi ? 1 : 0;
-  return { filePath, artist, title, lastModified, poiCount };
+  return {
+    filePath,
+    artist,
+    title,
+    lastModified: songLastModified(song),
+    poiCount: songPoiCount(song),
+    bpm: songBpm(song),
+    folder: songFolder(song),
+    streaming: isStreaming(song),
+  };
 }
 
 function indexBy(records, keyFn) {
@@ -93,6 +146,50 @@ function indexBy(records, keyFn) {
     map.set(key, record);
   }
   return map;
+}
+
+/**
+ * Compute the set of tag/scan/poi fields that differ between the two <Song>
+ * elements. Used to power reason-chips in the UI.
+ */
+function computeChangedFields(local, remote) {
+  const changed = [];
+
+  const localBpm = songBpm(local);
+  const remoteBpm = songBpm(remote);
+  if ((localBpm ?? null) !== (remoteBpm ?? null)) changed.push('bpm');
+
+  const localPoi = songPoiCount(local);
+  const remotePoi = songPoiCount(remote);
+  if (localPoi !== remotePoi) changed.push('pois');
+
+  for (const [tag, label] of [
+    [KEY_ATTR, 'key'],
+    [GENRE_ATTR, 'genre'],
+    [ALBUM_ATTR, 'album'],
+    [YEAR_ATTR, 'year'],
+  ]) {
+    const l = String(local?.Tags?.[tag] ?? '').trim();
+    const r = String(remote?.Tags?.[tag] ?? '').trim();
+    if (l !== r) changed.push(label);
+  }
+
+  const localArtist = pickAttr(local?.Tags, AUTHOR_ATTR, ARTIST_ATTR);
+  const remoteArtist = pickAttr(remote?.Tags, AUTHOR_ATTR, ARTIST_ATTR);
+  if (localArtist !== remoteArtist) changed.push('artist');
+
+  const localTitle = pickAttr(local?.Tags, TITLE_ATTR);
+  const remoteTitle = pickAttr(remote?.Tags, TITLE_ATTR);
+  if (localTitle !== remoteTitle) changed.push('title');
+
+  return changed;
+}
+
+function reasonForConflict(changedFields) {
+  if (changedFields.length === 0) return 'lastmodified_only';
+  if (changedFields.includes('pois')) return 'poi_diff';
+  if (changedFields.includes('bpm')) return 'bpm_diff';
+  return 'meta_diff';
 }
 
 function diffSongs(localSongs, remoteSongs) {
@@ -106,22 +203,44 @@ function diffSongs(localSongs, remoteSongs) {
   for (const [key, localSong] of localByKey) {
     const remoteSong = remoteByKey.get(key);
     if (!remoteSong) {
-      localOnly.push(songToSummary(localSong));
+      const summary = songToSummary(localSong);
+      localOnly.push({ ...summary, reason: 'new_locally' });
       continue;
     }
     const local = songToSummary(localSong);
     const remote = songToSummary(remoteSong);
-    if (local.lastModified !== remote.lastModified) {
+    const changedFields = computeChangedFields(localSong, remoteSong);
+    if (local.lastModified !== remote.lastModified || changedFields.length > 0) {
+      const winnerIfMerged = local.lastModified >= remote.lastModified ? 'local' : 'remote';
       conflicts.push({
-        ...local,
+        filePath: local.filePath,
+        artist: local.artist,
+        title: local.title,
+        folder: local.folder,
+        streaming: local.streaming,
         localLastModified: local.lastModified,
         remoteLastModified: remote.lastModified,
-        winnerIfMerged: local.lastModified >= remote.lastModified ? 'local' : 'remote',
+        winnerIfMerged,
+        reason: reasonForConflict(changedFields),
+        local: {
+          lastModified: local.lastModified,
+          poiCount: local.poiCount,
+          bpm: local.bpm,
+        },
+        remote: {
+          lastModified: remote.lastModified,
+          poiCount: remote.poiCount,
+          bpm: remote.bpm,
+        },
+        changedFields,
       });
     }
   }
   for (const [key, remoteSong] of remoteByKey) {
-    if (!localByKey.has(key)) remoteOnly.push(songToSummary(remoteSong));
+    if (!localByKey.has(key)) {
+      const summary = songToSummary(remoteSong);
+      remoteOnly.push({ ...summary, reason: 'from_remote' });
+    }
   }
 
   return { localOnly, remoteOnly, conflicts };
@@ -193,6 +312,17 @@ function diffHistory(localDir, remoteDir) {
   return { localOnly, remoteOnly };
 }
 
+function readMergedMachines(mergedDir) {
+  const manifestPath = path.join(mergedDir, 'manifest.json');
+  if (!fs.existsSync(manifestPath)) return [];
+  try {
+    const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+    return Array.isArray(manifest.machines) ? manifest.machines : [];
+  } catch {
+    return [];
+  }
+}
+
 /**
  * @param {{ localVdjFolder: string, syncRepoRoot: string | null, machineId?: string }} args
  * @returns {Promise<object>}
@@ -233,5 +363,6 @@ export async function computeSyncDiff({ localVdjFolder, syncRepoRoot, machineId 
     songs,
     linkedPairs,
     history,
+    machines: readMergedMachines(mergedDir),
   };
 }

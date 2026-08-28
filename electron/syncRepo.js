@@ -6,10 +6,12 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
-import { app } from 'electron';
+import { createRequire } from 'node:module';
+const require = createRequire(import.meta.url);
+const { app } = require('electron');
 
 const SYNC_REPO_DIR = 'sync-repo';
-const SYNC_SUBDIRS = ['sync/mac', 'sync/windows', 'sync/merged'];
+const SYNC_SUBDIRS = ['sync/machines', 'sync/merged'];
 
 /**
  * @param {{ syncMode: string, syncLocalFolder: string | null } | null} settings

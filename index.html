@@ -6,129 +6,258 @@
     <title>VirtualDJ Link Map</title>
     <link rel="stylesheet" href="/src/styles.css" />
   </head>
-  <body>
+  <body data-platform="unknown">
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+      <defs>
+        <symbol id="icon-search" viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></circle>
+          <path d="m21 21-4.3-4.3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+        </symbol>
+        <symbol id="icon-sync" viewBox="0 0 24 24">
+          <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12a9 9 0 0 1-15 6.7L3 16"></path>
+            <path d="M3 12a9 9 0 0 1 15-6.7L21 8"></path>
+            <polyline points="21 3 21 8 16 8"></polyline>
+            <polyline points="3 21 3 16 8 16"></polyline>
+          </g>
+        </symbol>
+        <symbol id="icon-settings" viewBox="0 0 24 24">
+          <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.6 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1A1.7 1.7 0 0 0 4.7 9a1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"></path>
+          </g>
+        </symbol>
+        <symbol id="icon-close" viewBox="0 0 24 24">
+          <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+            <line x1="6" y1="18" x2="18" y2="6"></line>
+          </g>
+        </symbol>
+        <symbol id="icon-refresh" viewBox="0 0 24 24">
+          <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12a9 9 0 1 1-3-6.7"></path>
+            <polyline points="21 3 21 8 16 8"></polyline>
+          </g>
+        </symbol>
+        <symbol id="icon-recenter" viewBox="0 0 24 24">
+          <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"></circle>
+            <line x1="12" y1="2" x2="12" y2="6"></line>
+            <line x1="12" y1="18" x2="12" y2="22"></line>
+            <line x1="2" y1="12" x2="6" y2="12"></line>
+            <line x1="18" y1="12" x2="22" y2="12"></line>
+          </g>
+        </symbol>
+        <symbol id="icon-layout" viewBox="0 0 24 24">
+          <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="5" cy="6" r="2"></circle>
+            <circle cx="19" cy="6" r="2"></circle>
+            <circle cx="12" cy="18" r="2"></circle>
+            <line x1="6.7" y1="7.2" x2="10.3" y2="16.7"></line>
+            <line x1="17.3" y1="7.2" x2="13.7" y2="16.7"></line>
+            <line x1="7" y1="6" x2="17" y2="6"></line>
+          </g>
+        </symbol>
+        <symbol id="icon-empty" viewBox="0 0 64 64">
+          <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="10" y="14" width="44" height="34" rx="4"></rect>
+            <path d="M10 22h44"></path>
+            <circle cx="16" cy="18" r="1.2"></circle>
+            <circle cx="20" cy="18" r="1.2"></circle>
+            <path d="M22 34h20"></path>
+            <path d="M22 40h14"></path>
+          </g>
+        </symbol>
+        <symbol id="icon-alert" viewBox="0 0 24 24">
+          <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10.3 3.8 2 18a2 2 0 0 0 1.7 3h16.6A2 2 0 0 0 22 18L13.7 3.8a2 2 0 0 0-3.4 0z"></path>
+            <line x1="12" y1="9" x2="12" y2="13"></line>
+            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+          </g>
+        </symbol>
+      </defs>
+    </svg>
+
     <div id="app">
       <canvas id="canvas"></canvas>
       <div id="labels" aria-hidden="true"></div>
 
+      <div id="titlebar" class="titlebar" aria-hidden="true">
+        <div class="titlebar-drag"></div>
+        <div class="titlebar-title">VirtualDJ Link Map</div>
+      </div>
+
       <header id="topbar">
-        <div class="brand">
-          <span class="brand-mark">●</span>
-          <span class="brand-text">VirtualDJ Link Map</span>
-        </div>
-        <div class="tabs-wrap">
-          <nav id="tabs" class="tabs" role="tablist" aria-label="Edge filter">
-            <button class="tab active" role="tab" data-view="related" aria-selected="true">
-              <span class="tab-label">Related Tracks</span>
-              <span class="tab-count" data-count="related">0</span>
+        <div class="topbar-drag"></div>
+        <div class="topbar-inner">
+          <div class="brand">
+            <span class="brand-mark" aria-hidden="true"></span>
+            <span class="brand-text">VirtualDJ Link Map</span>
+          </div>
+          <div class="tabs-wrap">
+            <nav id="tabs" class="tabs" role="tablist" aria-label="Edge filter">
+              <button class="tab active" role="tab" data-view="related" aria-selected="true">
+                <span class="tab-dot" data-dot="vdj"></span>
+                <span class="tab-label">Related</span>
+                <span class="tab-count" data-count="related">0</span>
+              </button>
+              <button class="tab" role="tab" data-view="history" aria-selected="false">
+                <span class="tab-dot" data-dot="history"></span>
+                <span class="tab-label">History</span>
+                <span class="tab-count" data-count="history">0</span>
+              </button>
+              <button class="tab" role="tab" data-view="all" aria-selected="false">
+                <span class="tab-dot" data-dot="all"></span>
+                <span class="tab-label">All edges</span>
+                <span class="tab-count" data-count="all">0</span>
+              </button>
+            </nav>
+            <div id="overlay-controls" class="overlay-controls hidden" aria-label="Layer additional edges">
+              <span class="overlay-label">Also show</span>
+              <button class="overlay-chip" data-overlay="history" type="button" aria-pressed="false" hidden>
+                <span class="chip-dot chip-history"></span>History
+              </button>
+              <button class="overlay-chip" data-overlay="vdj_link" type="button" aria-pressed="false" hidden>
+                <span class="chip-dot chip-vdj"></span>Related
+              </button>
+            </div>
+          </div>
+          <div id="search-wrap">
+            <svg class="search-icon" aria-hidden="true"><use href="#icon-search"></use></svg>
+            <input id="search" type="search" placeholder="Search artist or title…" autocomplete="off" spellcheck="false" />
+            <ul id="search-results" hidden></ul>
+          </div>
+          <div id="topbar-actions" class="topbar-actions">
+            <button id="btn-sync" class="topbar-btn" type="button" data-drawer="sync" title="Sync">
+              <svg class="topbar-btn-icon" aria-hidden="true"><use href="#icon-sync"></use></svg>
+              <span class="topbar-btn-label">Sync</span>
+              <span id="sync-badge" class="sync-badge" hidden></span>
             </button>
-            <button class="tab" role="tab" data-view="history" aria-selected="false">
-              <span class="tab-label">History</span>
-              <span class="tab-count" data-count="history">0</span>
-            </button>
-            <button class="tab" role="tab" data-view="all" aria-selected="false">
-              <span class="tab-label">All edges</span>
-              <span class="tab-count" data-count="all">0</span>
-            </button>
-          </nav>
-          <div id="overlay-controls" class="overlay-controls hidden" aria-label="Layer additional edges">
-            <span class="overlay-label">Also show</span>
-            <button class="overlay-chip" data-overlay="history" type="button" aria-pressed="false" hidden>
-              <span class="chip-dot chip-history"></span>History
-            </button>
-            <button class="overlay-chip" data-overlay="vdj_link" type="button" aria-pressed="false" hidden>
-              <span class="chip-dot chip-vdj"></span>Related Tracks
+            <button id="btn-settings" class="topbar-btn topbar-btn-icon-only" type="button" data-drawer="settings" title="Settings" aria-label="Settings">
+              <svg class="topbar-btn-icon" aria-hidden="true"><use href="#icon-settings"></use></svg>
             </button>
           </div>
+          <div id="meta-summary" class="meta-summary">Loading graph…</div>
         </div>
-        <div id="search-wrap">
-          <input id="search" type="search" placeholder="Search artist or title…" autocomplete="off" />
-          <ul id="search-results" hidden></ul>
-        </div>
-        <div id="topbar-actions" class="topbar-actions">
-          <button id="btn-sync" class="topbar-btn" type="button" data-drawer="sync" title="Sync">
-            <span class="topbar-btn-label">Sync</span>
-            <span id="sync-badge" class="sync-badge" hidden></span>
-          </button>
-          <button id="btn-settings" class="topbar-btn topbar-btn-icon" type="button" data-drawer="settings" title="Settings" aria-label="Settings">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <circle cx="12" cy="12" r="3"></circle>
-              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.0A1.65 1.65 0 0 0 10 3.09V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v0a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-            </svg>
-          </button>
-        </div>
-        <div id="meta-summary" class="meta-summary">Loading graph…</div>
       </header>
 
       <div id="view-notice" class="view-notice hidden"></div>
 
       <aside id="controls">
         <section class="panel">
-          <header class="panel-header">Filters</header>
-          <label>BPM range
-            <span class="range-row">
-              <input id="bpm-min" type="number" min="0" max="300" step="1" placeholder="min" />
-              <span>–</span>
-              <input id="bpm-max" type="number" min="0" max="300" step="1" placeholder="max" />
-            </span>
-          </label>
-          <label>Key
-            <select id="key-filter"><option value="">Any</option></select>
-          </label>
-          <label>Genre
-            <select id="genre-filter"><option value="">Any</option></select>
-          </label>
-          <label class="checkbox">
-            <input id="hide-isolated" type="checkbox" />
-            <span>Hide isolated songs</span>
-          </label>
-          <button id="reset-filters" type="button">Reset filters</button>
-        </section>
-
-        <section class="panel">
-          <header class="panel-header">Color by</header>
-          <div class="segmented">
-            <button class="seg active" data-color="bpm">BPM</button>
-            <button class="seg" data-color="genre">Genre</button>
-            <button class="seg" data-color="key">Key</button>
+          <header class="panel-header">
+            <span class="panel-eyebrow">Filters</span>
+          </header>
+          <div class="panel-body">
+            <label class="field">
+              <span class="field-label">BPM range</span>
+              <span class="range-row">
+                <input id="bpm-min" type="number" min="0" max="300" step="1" placeholder="min" />
+                <span class="range-sep">–</span>
+                <input id="bpm-max" type="number" min="0" max="300" step="1" placeholder="max" />
+              </span>
+            </label>
+            <label class="field">
+              <span class="field-label">Key</span>
+              <select id="key-filter"><option value="">Any</option></select>
+            </label>
+            <label class="field">
+              <span class="field-label">Genre</span>
+              <select id="genre-filter"><option value="">Any</option></select>
+            </label>
+            <label class="field checkbox">
+              <input id="hide-isolated" type="checkbox" />
+              <span>Hide isolated songs</span>
+            </label>
+            <button id="reset-filters" type="button" class="ghost-btn">Reset filters</button>
           </div>
         </section>
 
         <section class="panel">
-          <header class="panel-header">Layout</header>
-          <button id="recenter" type="button">Recenter camera</button>
-          <button id="reheat" type="button">Re-run layout</button>
-          <button id="refresh-library" type="button" hidden>Refresh library</button>
+          <header class="panel-header">
+            <span class="panel-eyebrow">Color by</span>
+          </header>
+          <div class="panel-body">
+            <div class="segmented">
+              <button class="seg active" data-color="bpm" type="button">BPM</button>
+              <button class="seg" data-color="genre" type="button">Genre</button>
+              <button class="seg" data-color="key" type="button">Key</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <header class="panel-header">
+            <span class="panel-eyebrow">Layout</span>
+          </header>
+          <div class="panel-body">
+            <button id="recenter" type="button" class="ghost-btn icon-btn">
+              <svg aria-hidden="true"><use href="#icon-recenter"></use></svg>
+              <span>Recenter camera</span>
+            </button>
+            <button id="reheat" type="button" class="ghost-btn icon-btn">
+              <svg aria-hidden="true"><use href="#icon-layout"></use></svg>
+              <span>Re-run layout</span>
+            </button>
+            <button id="refresh-library" type="button" class="accent-btn icon-btn" hidden>
+              <svg aria-hidden="true"><use href="#icon-refresh"></use></svg>
+              <span>Refresh library</span>
+            </button>
+          </div>
         </section>
       </aside>
 
-      <aside id="sidebar" class="hidden">
+      <aside id="sidebar" class="hidden" aria-hidden="true">
         <header class="sidebar-header">
-          <h2 id="sidebar-title">Select a track</h2>
-          <button id="sidebar-close" type="button" aria-label="Close">×</button>
+          <div class="sidebar-title-wrap">
+            <h2 id="sidebar-title">Select a track</h2>
+            <div id="sidebar-subtitle" class="sidebar-subtitle"></div>
+          </div>
+          <button id="sidebar-close" type="button" class="icon-close-btn" aria-label="Close">
+            <svg aria-hidden="true"><use href="#icon-close"></use></svg>
+          </button>
         </header>
         <div id="sidebar-body"></div>
       </aside>
 
       <aside id="drawer" class="drawer right hidden" data-drawer="host" aria-hidden="true">
         <header class="drawer-header">
+          <span class="drawer-icon" aria-hidden="true">
+            <svg><use href="#icon-sync"></use></svg>
+          </span>
           <h2 id="drawer-title">Sync</h2>
-          <button id="drawer-close" type="button" aria-label="Close">×</button>
+          <button id="drawer-close" type="button" class="icon-close-btn" aria-label="Close">
+            <svg aria-hidden="true"><use href="#icon-close"></use></svg>
+          </button>
         </header>
         <div id="drawer-body" class="drawer-body"></div>
       </aside>
 
       <div id="tooltip" class="tooltip hidden"></div>
-      <div id="error-banner" class="error-banner hidden"></div>
+
+      <div id="error-banner" class="error-banner hidden" role="alert">
+        <svg class="error-banner-icon" aria-hidden="true"><use href="#icon-alert"></use></svg>
+        <div class="error-banner-body"></div>
+        <button type="button" class="error-banner-close icon-close-btn" aria-label="Dismiss">
+          <svg aria-hidden="true"><use href="#icon-close"></use></svg>
+        </button>
+      </div>
 
       <div id="hint-banner">
         <span class="kbd">Click</span>
-        <span>any song to see its links and find compatible matches</span>
+        <span>any track to see its links and compatible matches</span>
       </div>
 
-      <div id="legend">
-        <span class="legend-swatch"><span class="swatch vdj"></span> Linked tracks</span>
-        <span class="legend-swatch"><span class="swatch history"></span> Played together</span>
+      <div id="legend" aria-hidden="true">
+        <div class="legend-title">Edges</div>
+        <div class="legend-row"><span class="swatch vdj"></span><span>Related tracks</span></div>
+        <div class="legend-row"><span class="swatch history"></span><span>Played together</span></div>
+      </div>
+
+      <div id="loader" class="loader" role="status" aria-live="polite">
+        <div class="loader-ring" aria-hidden="true"></div>
+        <div class="loader-title">Loading library</div>
+        <div class="loader-sub">Parsing graph and running force layout…</div>
       </div>
     </div>
 

@@ -2,10 +2,38 @@
  * Bridges the renderer <-> main process. Exposes a single `window.vdjApi`
  * object whose methods are thin `ipcRenderer.invoke` wrappers, plus one
  * event stream (`onLog`) for live script output.
+ *
+ * The `sync.*` namespace holds the v2 methods (conflict resolutions,
+ * selection rules, known machines, cloud backends). The top-level
+ * `syncPush` / `syncPull` are preserved as aliases so nothing already
+ * calling them breaks mid-flight.
  */
-import { contextBridge, ipcRenderer } from 'electron';
+import { createRequire } from 'node:module';
+const require = createRequire(import.meta.url);
+const { contextBridge, ipcRenderer } = require('electron');
 
 const invoke = (channel, ...args) => ipcRenderer.invoke(channel, ...args);
+
+const sync = {
+  push: (opts) => invoke('vdj:syncPush', opts),
+  pull: (opts) => invoke('vdj:syncPull', opts),
+  computeDiff: () => invoke('vdj:computeSyncDiff'),
+
+  listKnownMachines: () => invoke('vdj:sync:listKnownMachines'),
+  renameThisMachine: (displayName) => invoke('vdj:sync:renameThisMachine', displayName),
+  forgetMachine: (id) => invoke('vdj:sync:forgetMachine', id),
+
+  getSelectionRules: () => invoke('vdj:sync:getSelectionRules'),
+  saveSelectionRules: (rules) => invoke('vdj:sync:saveSelectionRules', rules),
+  previewSelection: (rules) => invoke('vdj:sync:previewSelection', rules),
+
+  setConflictResolution: (filePath, choice) =>
+    invoke('vdj:sync:setConflictResolution', filePath, choice),
+  listConflictResolutions: () => invoke('vdj:sync:listConflictResolutions'),
+
+  detectCloudFolders: () => invoke('vdj:sync:detectCloudFolders'),
+  useCloudBackend: (opts) => invoke('vdj:sync:useCloudBackend', opts),
+};
 
 contextBridge.exposeInMainWorld('vdjApi', {
   getSettings: () => invoke('vdj:getSettings'),
@@ -22,6 +50,7 @@ contextBridge.exposeInMainWorld('vdjApi', {
   listBackups: () => invoke('vdj:listBackups'),
   restoreBackup: (stamp, opts) => invoke('vdj:restoreBackup', stamp, opts),
   refreshLinkedFolder: () => invoke('vdj:refreshLinkedFolder'),
+  sync,
   onLog: (cb) => {
     const listener = (_event, line) => {
       try {

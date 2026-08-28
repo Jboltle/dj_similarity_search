@@ -47,6 +47,7 @@ import {
   syncMergedDir,
   syncFolderFiles,
   projectRoot as getProjectRoot,
+  resolveMachineId,
 } from './lib/machineId.js';
 import {
   backupVdjFolder,
@@ -54,10 +55,13 @@ import {
   timestampStamp,
   BACKUP_KIND,
 } from './lib/syncBackups.js';
+import { acquireLock, releaseLock } from './lib/syncLock.js';
 import { runSyncMerge } from './sync-merge.js';
 import { mergeDatabaseXmlFiles } from './lib/databaseXmlMerge.js';
 import { mergeExtraDbFiles } from './lib/extraDbMerge.js';
 import { mergeHistoryDirs } from './lib/historyMerge.js';
+import { applySelection, hasActiveRules } from './lib/selectionRules.js';
+import { XMLParser, XMLBuilder } from 'fast-xml-parser';
 
 const LOG_SOURCE = 'sync:pull';
 
@@ -152,7 +156,7 @@ function runBuildLinkedFolder({ cwd, target, name, forceWal }) {
   }
 }
 
-function applyMergedXmlToLocal({ mergedXml, localXml, stampedOut }) {
+function applyMergedXmlToLocal({ mergedXml, localXml, stampedOut, resolutions }) {
   return mergeDatabaseXmlFiles({
     localPath: localXml,
     remotePath: mergedXml,
@@ -160,6 +164,7 @@ function applyMergedXmlToLocal({ mergedXml, localXml, stampedOut }) {
     localLabel: 'local',
     remoteLabel: 'merged',
     preferLocal: true,
+    resolutions,
   });
 }
 
@@ -185,6 +190,50 @@ function ensureBlankDir(dir) {
   fs.mkdirSync(dir, { recursive: true });
 }
 
+const PULL_XML_ATTR_PREFIX = '@_';
+const PULL_XML_ARRAY_TAGS = new Set(['Song', 'Link', 'Poi']);
+
+function writeFilteredMergedXml({ inputPath, outputPath, selectionRules, filePaths }) {
+  const parser = new XMLParser({
+    ignoreAttributes: false,
+    attributeNamePrefix: PULL_XML_ATTR_PREFIX,
+    allowBooleanAttributes: true,
+    parseAttributeValue: false,
+    parseTagValue: false,
+    trimValues: true,
+    preserveOrder: false,
+    isArray: (name) => PULL_XML_ARRAY_TAGS.has(name),
+  });
+  const builder = new XMLBuilder({
+    ignoreAttributes: false,
+    attributeNamePrefix: PULL_XML_ATTR_PREFIX,
+    format: true,
+    indentBy: ' ',
+    suppressEmptyNode: true,
+  });
+  const raw = fs.readFileSync(inputPath, 'utf8');
+  const parsed = parser.parse(raw);
+  const root = parsed?.VirtualDJ_Database ?? parsed?.virtualDJ_Database;
+  if (!root) {
+    fs.copyFileSync(inputPath, outputPath);
+    return { kept: 0, total: 0 };
+  }
+  const songs = Array.isArray(root.Song) ? root.Song : root.Song ? [root.Song] : [];
+  const summaries = songs.map((s) => ({
+    filePath: String(s?.[`${PULL_XML_ATTR_PREFIX}FilePath`] ?? ''),
+    lastModified: Number(s?.Infos?.[`${PULL_XML_ATTR_PREFIX}LastModified`] ?? 0) || 0,
+    _song: s,
+  }));
+  const rules = { ...(selectionRules ?? {}) };
+  if (Array.isArray(filePaths) && filePaths.length > 0) rules.filePaths = filePaths;
+  const kept = applySelection(summaries, rules).map((k) => k._song);
+  const nextRoot = { ...root, Song: kept };
+  const body = builder.build({ VirtualDJ_Database: nextRoot });
+  const final = body.startsWith('<?xml') ? body : `<?xml version="1.0" encoding="UTF-8"?>\n${body}`;
+  fs.writeFileSync(outputPath, final.endsWith('\n') ? final : `${final}\n`);
+  return { kept: kept.length, total: songs.length };
+}
+
 const CLI_DEFAULTS_PULL = {
   write: false,
   target: null,
@@ -200,12 +249,18 @@ const CLI_DEFAULTS_PULL = {
   backupOnly: false,
   keepBackups: null,
   force: false,
+  resolutions: null,
+  filePaths: null,
+  selectionRules: null,
 };
 
 export async function runSyncPull(args = {}) {
   const opts = { ...CLI_DEFAULTS_PULL, ...args };
   const log = makeLogger(opts.onLog);
   const result = { ok: false, backupFolder: null };
+  let lockHeld = false;
+  let lockMachineId = null;
+  let lockSyncRoot = null;
 
   try {
     if (!opts.backup && !opts.force) {
@@ -220,6 +275,23 @@ export async function runSyncPull(args = {}) {
     const mergedDir = syncMergedDir();
     const mergedFiles = syncFolderFiles(mergedDir);
 
+    const machineId = resolveMachineId(null);
+    lockSyncRoot = path.dirname(mergedDir);
+    lockMachineId = machineId;
+    const lockRes = acquireLock({
+      syncRoot: lockSyncRoot,
+      machineUuid: machineId,
+      displayName: machineId,
+    });
+    if (!lockRes.ok) {
+      const other = lockRes.existing;
+      const who = other?.displayName || other?.machineUuid || 'another machine';
+      throw new Error(
+        `Sync lock is held by ${who} (acquired ${new Date(other?.acquiredAt ?? 0).toISOString()}). Retry in a few minutes.`
+      );
+    }
+    lockHeld = true;
+
     log.info(`[sync:pull] Local VDJ:   ${vdjFolder}`);
     log.info(`[sync:pull] Merged dir:  ${mergedDir}`);
     log.info(`[sync:pull] Mode:        ${opts.write ? 'WRITE' : 'DRY RUN'}`);
@@ -231,7 +303,7 @@ export async function runSyncPull(args = {}) {
     }
 
     if (opts.merge) {
-      runSyncMerge({ outDir: mergedDir });
+      runSyncMerge({ outDir: mergedDir, resolutions: opts.resolutions });
     } else {
       log.info('[sync:pull] --no-merge: assuming sync/merged/ is already up to date.');
     }
@@ -272,15 +344,30 @@ export async function runSyncPull(args = {}) {
       const tmpDir = fs.mkdtempSync(path.join(projectDir, '.tmp-sync-pull-'));
       try {
         const stagedXml = path.join(tmpDir, 'database.xml');
+        let mergedXmlSource = mergedFiles.databaseXml;
+        const activeSelection = hasActiveRules(opts.selectionRules)
+          || (Array.isArray(opts.filePaths) && opts.filePaths.length > 0);
+        if (activeSelection) {
+          const filteredXml = path.join(tmpDir, 'merged-filtered.xml');
+          const stats = writeFilteredMergedXml({
+            inputPath: mergedFiles.databaseXml,
+            outputPath: filteredXml,
+            selectionRules: opts.selectionRules,
+            filePaths: opts.filePaths,
+          });
+          log.info(`[sync:pull] Selection filter narrowed merged input to ${stats.kept}/${stats.total} songs.`);
+          mergedXmlSource = filteredXml;
+        }
         if (fs.existsSync(localFiles.databaseXml)) {
           const { report } = applyMergedXmlToLocal({
-            mergedXml: mergedFiles.databaseXml,
+            mergedXml: mergedXmlSource,
             localXml: localFiles.databaseXml,
             stampedOut: stagedXml,
+            resolutions: opts.resolutions,
           });
           xmlPlan = { stagedXml, report };
         } else {
-          fs.copyFileSync(mergedFiles.databaseXml, stagedXml);
+          fs.copyFileSync(mergedXmlSource, stagedXml);
           xmlPlan = {
             stagedXml,
             report: { mergedCount: -1, addedFromRemote: -1, conflicts: [], note: 'no local database.xml; copied merged through' },
@@ -426,6 +513,10 @@ export async function runSyncPull(args = {}) {
     result.ok = false;
     result.error = err.message;
     return result;
+  } finally {
+    if (lockHeld && lockSyncRoot && lockMachineId) {
+      releaseLock({ syncRoot: lockSyncRoot, machineUuid: lockMachineId });
+    }
   }
 }
 

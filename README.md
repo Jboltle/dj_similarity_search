@@ -30,17 +30,24 @@ sync between machines.
 
 ## How to sync
 
-The in-app **Sync** panel (top-right corner) shows three sections every time
+The in-app **Sync** panel (top-right corner) shows four sections every time
 you open it:
 
+- **Known machines** — every machine that's ever pushed to your shared
+  library, with a freshness dot (green ≤ 7 days, yellow ≤ 30, red beyond).
+  Click **Forget** on any row to remove its snapshot from the shared library
+  on the next push.
 - **New here → shared library** — songs, linked pairs, and history files that
-  exist on this machine but not in the shared library. Click **Push** to
-  upload them.
+  exist on this machine but not in the shared library. Filter with the
+  per-section search box; select rows with the checkbox to push only those,
+  or click **Push** to send everything.
 - **New on shared library → this machine** — songs, links, and history files
-  that other machines have added. Click **Pull** to apply them locally.
-- **Conflicts** — songs edited on both sides since the last sync. The panel
-  shows both `LastModified` timestamps and which side will win if you accept
-  the merge (newest edit wins by default).
+  that other machines have added. Same per-row selection applies.
+- **Conflicts** — songs edited on both sides since the last sync. Each row
+  shows a reason chip (**POIs**, **BPM**, **metadata**, or **timestamp
+  only**), both sides' timestamps, and per-machine attribution. Click **Keep
+  local** or **Keep from `<machine>`** to override the newest-wins default;
+  choices are persisted per file path and applied on the next push/pull.
 
 Every push and pull takes a timestamped backup of the files it's about to
 touch. Use **Settings → Restore from backup…** to roll back to any previous
@@ -53,14 +60,42 @@ loops, beat grid, key overrides, and every other per-song setting live inside
 `LastModified` timestamp, so whichever machine last edited a given song wins
 that whole song — markers and all. You never have to think about it.
 
+### Picking a sync target
+
 Before you can push or pull, open **Settings** and pick a sync target:
 
-- **Git** — point it at any private repo (GitHub, self-hosted Gitea, etc.). All
-  push/pull happens over `git`, so history is fully auditable.
-- **Local folder** — point it at a Dropbox / iCloud / SMB folder shared
-  between machines.
+- **Cloud folder (one click)** — the Settings panel has a **Detect cloud
+  folders…** button that scans standard install locations for Dropbox,
+  OneDrive, iCloud Drive, and Google Drive and offers a **Use `<provider>`**
+  button for each one it finds. Clicking it creates
+  `<detectedPath>/VirtualDJ Link Map/` and configures the app to sync there.
+- **Git** — point it at any private repo (GitHub, self-hosted Gitea, etc.).
+  All push/pull happens over `git`, so history is fully auditable.
+- **Local folder** — point it at any shared folder (SMB share, mounted NAS,
+  bespoke cloud client, etc.).
 - **None** — disables sync entirely. You can still use the app for
   visualization on a single machine.
+
+### Selective sync
+
+Under **Settings → Selective sync (push)** you can restrict what leaves this
+machine:
+
+- **Include folder prefixes** — comma-separated list; only songs whose
+  filesystem path starts with one of these gets pushed.
+- **Exclude folder prefixes** — same shape, but excluded.
+- **Exclude streaming tracks** — drops `spotify://…`, `netsearch://…`, etc.
+  from the snapshot.
+
+Rules are stored per-machine, so your laptop can sync only "Live Sets" while
+your studio machine syncs everything. A live count under the section shows
+how many songs the current rules would let through.
+
+### Machine identity
+
+Every install gets a stable UUID on first launch. In **Settings →
+Machine display name** you can label it ("Studio iMac", "Living Room PC")
+so other people (and future-you) can tell machines apart in the Sync panel.
 
 ## Where the app stores data
 
@@ -268,24 +303,41 @@ This command also runs automatically at the end of `sync:pull --write` so the
 folder stays in sync with the merged link set across machines. Disable with
 `--no-linked-folder` if you'd rather manage it yourself.
 
-### Bidirectional sync (Mac ↔ Windows via git)
+### Bidirectional sync (N machines via git or cloud folder)
 
 A true bidirectional union merge of `database.xml`, `extra.db`, and `History/`
-between machines via a committed `sync/` folder in this repo. Two machines can
-push and pull independently without anyone losing data.
+between an arbitrary number of machines. Every machine pushes and pulls
+independently without anyone losing data.
 
-#### Layout in the repo
+#### Layout in the sync target
 
 ```
 sync/
-  mac/         # raw VirtualDJ snapshot from the Mac (whoever pushed last)
-  windows/     # raw VirtualDJ snapshot from the Windows machine
-  merged/      # deterministically regenerated union of mac/ + windows/
+  machines/
+    <machine-uuid>/    # raw VirtualDJ snapshot from one machine
+      database.xml
+      extra.db
+      History/
+      manifest.json    # {machineUuid, displayName, platform, hostname, lastPushAt, appVersion}
+  merged/              # deterministic N-way union (regenerated on every push/pull)
+    database.xml
+    extra.db
+    History/
+    manifest.json
+    merge-report.json
+  .lock                # short-lived collision-avoidance lock ({machineUuid, pid, expiresAt})
 ```
 
-Each subfolder holds `database.xml`, `extra.db`, `History/`, and a
-`manifest.json`. `merged/` additionally carries `merge-report.json` with
-per-Song conflict details.
+`machineUuid` is generated once per install and stored in the app's
+`settings.json`. The CLI accepts a legacy `--as <label>` flag ("mac",
+"windows", or any string) which slugifies to a folder name — useful for
+scripting or manual test setups.
+
+**Migration.** On first launch of v2 the Electron app renames any legacy
+`sync/mac/` or `sync/windows/` folders under the configured sync root into
+`sync/machines/mac/` and `sync/machines/windows/`, dropping a manifest with
+the correct platform hint so the new N-way merge treats them as first-class
+machines. No user action required.
 
 #### Daily workflow
 
@@ -305,23 +357,33 @@ otherwise (override at your own risk with `--force-wal`).
 
 #### Conflict rules
 
-- **database.xml** — union by `FilePath`. On collision, the Song element with
-  the larger `<Infos LastModified="…">` epoch wins. Tie-breaker: streaming
-  paths (`netsearch://…`) outrank OS-specific filesystem paths, then the
-  local side wins. Output is sorted by FilePath so `git diff` shows real
-  changes only.
+- **database.xml** — union by `FilePath`. On collision, if the user has
+  recorded an explicit resolution (via the Sync panel's **Keep local** /
+  **Keep from `<machine>`** buttons) that side wins. Otherwise the Song
+  element with the larger `<Infos LastModified="…">` epoch wins. Tie-breaker:
+  streaming paths (`netsearch://…`) outrank OS-specific filesystem paths,
+  then the local side wins. Output is sorted by FilePath so `git diff` shows
+  real changes only.
 - **extra.db** — union by `sid` for `track_data` (richer metadata wins on
   collision); union by unordered `(sid1, sid2)` pair for `related_tracks`.
 - **History/** — keep both files when dates collide, suffixed
-  `2026-05-12.mac.m3u` / `2026-05-12.windows.m3u`. Identical content
-  (`SHA-256`) collapses to a single file.
+  `2026-05-12.<machine-a>.m3u` / `2026-05-12.<machine-b>.m3u`. Identical
+  content (`SHA-256`) collapses to a single file.
+
+#### N-way merge
+
+`sync-merge.js` scans every folder under `sync/machines/`, sorts them by
+`lastPushAt` ascending, then folds pairwise via the existing 2-way merger.
+Because the last machine folded in wins ties, the freshest push is favored
+on LastModified ties. For a 2-machine setup this reduces to the pre-v2
+behavior exactly.
 
 #### Commands
 
 ```bash
 npm run sync:push                      # snapshot + merge + commit + push (default ON)
 npm run sync:push -- --no-git          # write sync/ only; commit manually
-npm run sync:push -- --as mac          # override the auto-detected machine id
+npm run sync:push -- --as studio-imac  # override the machine id (slugified into sync/machines/<id>/)
 npm run sync:push -- --dry-run         # plan + backup, don't touch sync/
 
 npm run sync:pull                      # dry run: shows what would change
@@ -332,9 +394,9 @@ npm run sync:pull -- --no-parse        # don't regenerate public/graph.json afte
 npm run sync:pull -- --no-linked-folder # don't refresh "Linked Tracks" .vdjfolder
 npm run sync:pull -- --linked-folder-name "My Set"  # use a custom folder name
 
-npm run sync:merge                     # local-only re-merge of mac/ + windows/
+npm run sync:merge                     # local-only N-way merge of sync/machines/*/
 npm run sync:merge -- --out /tmp/peek  # peek at the merge result somewhere else
-npm run sync:merge -- --prefer-local   # bias tie-broken Songs toward this OS
+npm run sync:merge -- --prefer-local   # bias tie-broken Songs toward this machine
 
 npm run sync:restore                                           # list backups
 npm run sync:restore -- --stamp 2026-05-21T...                 # dry-run validate
@@ -446,14 +508,22 @@ vdj-link-map/
 │   ├── match/findMatches.js            # on-demand BPM/key/genre scoring
 │   └── ui/{search,filters,sidebar,tooltip,drawer,sync,settings}.js
 ├── electron/                           # Electron main-process + preload (desktop shell)
+│   ├── main.js                         # BrowserWindow + startup migration + IPC registration
+│   ├── preload.js                      # window.vdjApi bridge (thin invoke wrappers)
+│   ├── ipcHandlers.js                  # every vdj:* channel handler
+│   ├── settings.js                     # persistent settings + first-run machineUuid/displayName
+│   ├── syncRepo.js                     # git clone / local-folder init for sync target
+│   ├── syncMigration.js                # one-shot v1 (sync/{mac,windows}/) → v2 (sync/machines/*/)
+│   └── cloudBackends.js                # Dropbox / OneDrive / iCloud / Google Drive autodetect
 ├── scripts/
 │   ├── parse-vdj-db.js                 # extra.db → vdj_link, History → history → public/graph.json
 │   ├── validate-graph.js               # integrity check on graph.json
 │   ├── inspect-link-shape.js           # one-off debug: database.xml + extra.db structure report
-│   ├── sync-push.js                    # local VDJ → sync/<machine>/ → commit/push
-│   ├── sync-pull.js                    # git pull → merge → apply to local VDJ (additive)
-│   ├── sync-merge.js                   # local-only union of sync/mac/ + sync/windows/ → sync/merged/
+│   ├── sync-push.js                    # local VDJ → sync/machines/<uuid>/ → commit/push
+│   ├── sync-pull.js                    # git pull → N-way merge → apply to local VDJ (additive)
+│   ├── sync-merge.js                   # local-only N-way union of sync/machines/*/ → sync/merged/
 │   ├── sync-restore.js                 # roll back local VDJ from a public/backups/ stamp
+│   ├── verify-sync-revamp.js           # regression harness (migration + N-way + selection + lock)
 │   ├── build-linked-folder.js          # write <VDJ_FOLDER>/Folders/Linked Tracks.vdjfolder
 │   ├── upload-to-soundcloud.js         # OPT-IN: SC playlist from linked pairs
 │   └── lib/
@@ -469,15 +539,19 @@ vdj-link-map/
 │       ├── extraDbMerge.js             # union of two extra.db files
 │       ├── historyMerge.js             # file-level History/ union with SHA-256 dedupe
 │       ├── syncBackups.js              # timestamped backups + restore + retention pruning
-│       ├── machineId.js                # mac/windows folder selection + --as override
+│       ├── machineId.js                # UUID / friendly-name folder resolution + N-machine listing
+│       ├── conflictResolutions.js      # user's per-song Keep-Local / Keep-Remote overrides
+│       ├── selectionRules.js           # pure selective-sync filter (folders / playlists / streaming / date)
+│       ├── syncLock.js                 # TTL lockfile to prevent cloud-folder race conditions
+│       ├── syncDiff.js                 # per-conflict provenance for the diff panel
 │       ├── linkedSongs.js              # graph.json → vdj_link pairs + SC track IDs
 │       ├── openBrowser.js              # cross-platform default-browser launcher
 │       ├── soundcloudAuth.js           # OAuth 2.1 + PKCE + paste-back flow
 │       └── soundcloudClient.js         # POST/PUT /playlists wrapper
 ├── sync/                               # COMMITTED: bidirectional sync state
-│   ├── mac/                            # raw VDJ snapshot from the Mac
-│   ├── windows/                        # raw VDJ snapshot from the Windows machine
-│   └── merged/                         # deterministic union (regenerated on every push/pull)
+│   ├── machines/                       # one folder per machine, keyed by machine UUID
+│   │   └── <machine-uuid>/             # raw VDJ snapshot + manifest.json per machine
+│   └── merged/                         # deterministic N-way union (regenerated on every push/pull)
 └── public/                             # generated artifacts (git-ignored except oauth-callback.html)
     ├── oauth-callback.html             # COMMITTED: deploy to GitHub Pages
     ├── graph.json                      # generated by `parse`

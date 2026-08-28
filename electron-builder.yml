@@ -2,6 +2,8 @@ appId: com.jboltle.vdjlinkmap
 productName: VirtualDJ Link Map
 directories:
   output: release
+npmRebuild: false
+nodeGypRebuild: false
 files:
   - dist/**
   - electron/**

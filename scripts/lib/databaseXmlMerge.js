@@ -131,16 +131,29 @@ function higherVersion(a, b) {
   return a ?? b ?? null;
 }
 
+function resolutionKey(song) {
+  const raw = song?.[FILE_PATH_ATTR];
+  if (!raw || typeof raw !== 'string') return null;
+  return raw.trim();
+}
+
 /**
  * Pure merge driver. Pass two parsed XMLs (each is the parsed.VirtualDJ_Database
  * root). Returns the merged root plus a structured report.
  *
+ * When `resolutions` is a map of FilePath -> 'local' | 'remote' (or a machine
+ * label matching local.label / remote.label), the specified side wins on that
+ * song regardless of LastModified. Unlisted songs fall through to the
+ * newest-wins default.
+ *
  * @param {{ root: object, label: string }} local
  * @param {{ root: object, label: string }} remote
+ * @param {{ preferLocal?: boolean, resolutions?: Record<string, 'local'|'remote'|string> }} [opts]
  */
-export function mergeDatabaseRoots(local, remote, { preferLocal = true } = {}) {
+export function mergeDatabaseRoots(local, remote, { preferLocal = true, resolutions = null } = {}) {
   const localSongs = extractSongs(local.root);
   const remoteSongs = extractSongs(remote.root);
+  const resolutionMap = resolutions && typeof resolutions === 'object' ? resolutions : null;
 
   const merged = new Map();
   const report = {
@@ -148,6 +161,7 @@ export function mergeDatabaseRoots(local, remote, { preferLocal = true } = {}) {
     remoteCount: remoteSongs.length,
     addedFromRemote: 0,
     keptLocal: 0,
+    resolvedByUser: 0,
     conflicts: [],
   };
 
@@ -166,11 +180,28 @@ export function mergeDatabaseRoots(local, remote, { preferLocal = true } = {}) {
       report.addedFromRemote += 1;
       continue;
     }
-    const { winner, reason } = chooseWinner(existing.song, song, { preferLocal });
-    const winnerOrigin =
-      winner === existing.song ? existing.origin : remote.label;
+    const resolutionChoice = resolutionMap
+      ? resolutionMap[resolutionKey(song)] ?? resolutionMap[resolutionKey(existing.song)] ?? null
+      : null;
+    let winner, reason, winnerOrigin;
+    if (resolutionChoice === 'local' || resolutionChoice === local.label) {
+      winner = existing.song;
+      reason = 'user_resolved_local';
+      winnerOrigin = existing.origin;
+      report.resolvedByUser += 1;
+    } else if (resolutionChoice === 'remote' || resolutionChoice === remote.label) {
+      winner = song;
+      reason = 'user_resolved_remote';
+      winnerOrigin = remote.label;
+      report.resolvedByUser += 1;
+    } else {
+      const chosen = chooseWinner(existing.song, song, { preferLocal });
+      winner = chosen.winner;
+      reason = chosen.reason;
+      winnerOrigin = winner === existing.song ? existing.origin : remote.label;
+    }
     if (winner !== existing.song) {
-      merged.set(key, { song: winner, origin: remote.label });
+      merged.set(key, { song: winner, origin: winnerOrigin });
     } else {
       report.keptLocal += 1;
     }
@@ -214,6 +245,7 @@ export function mergeDatabaseXmlFiles({
   localLabel = 'local',
   remoteLabel = 'remote',
   preferLocal = true,
+  resolutions = null,
 }) {
   const localParsed = parseXmlFile(localPath);
   const remoteParsed = parseXmlFile(remotePath);
@@ -221,7 +253,7 @@ export function mergeDatabaseXmlFiles({
   const { mergedRoot, report } = mergeDatabaseRoots(
     { root: extractRoot(localParsed), label: localLabel },
     { root: extractRoot(remoteParsed), label: remoteLabel },
-    { preferLocal }
+    { preferLocal, resolutions }
   );
 
   const xml = serializeWithXmlDeclaration({ VirtualDJ_Database: mergedRoot });

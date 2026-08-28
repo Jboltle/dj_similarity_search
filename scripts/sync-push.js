@@ -39,6 +39,7 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { execFileSync, spawnSync } from 'node:child_process';
+import { XMLParser, XMLBuilder } from 'fast-xml-parser';
 import { resolveVdjFolder, vdjFiles } from './lib/vdjPaths.js';
 import { assertNoVdjRunning, verifySqliteIntegrity } from './lib/sqliteGuards.js';
 import {
@@ -54,6 +55,8 @@ import {
   timestampStamp,
   BACKUP_KIND,
 } from './lib/syncBackups.js';
+import { acquireLock, releaseLock } from './lib/syncLock.js';
+import { applySelection, hasActiveRules } from './lib/selectionRules.js';
 import { runSyncMerge } from './sync-merge.js';
 
 const LOG_SOURCE = 'sync:push';
@@ -169,7 +172,70 @@ function writeJson(p, obj) {
   fs.writeFileSync(p, JSON.stringify(obj, null, 2));
 }
 
-function snapshotLocalToSyncFolder({ vdjFolder, syncDir, includeHistory, machineId }) {
+const XML_ATTR_PREFIX = '@_';
+const XML_ARRAY_TAGS = new Set(['Song', 'Link', 'Poi']);
+
+function filterSnapshotDatabaseXml({ databaseXmlPath, selectionRules, filePaths }) {
+  if (!databaseXmlPath || !fs.existsSync(databaseXmlPath)) {
+    return { kept: 0, total: 0 };
+  }
+  const parser = new XMLParser({
+    ignoreAttributes: false,
+    attributeNamePrefix: XML_ATTR_PREFIX,
+    allowBooleanAttributes: true,
+    parseAttributeValue: false,
+    parseTagValue: false,
+    trimValues: true,
+    preserveOrder: false,
+    isArray: (name) => XML_ARRAY_TAGS.has(name),
+  });
+  const builder = new XMLBuilder({
+    ignoreAttributes: false,
+    attributeNamePrefix: XML_ATTR_PREFIX,
+    format: true,
+    indentBy: ' ',
+    suppressEmptyNode: true,
+  });
+
+  const raw = fs.readFileSync(databaseXmlPath, 'utf8');
+  const parsed = parser.parse(raw);
+  const root = parsed?.VirtualDJ_Database ?? parsed?.virtualDJ_Database;
+  if (!root) return { kept: 0, total: 0 };
+
+  const songs = Array.isArray(root.Song) ? root.Song : root.Song ? [root.Song] : [];
+  const total = songs.length;
+
+  const summaries = songs.map((s) => ({
+    filePath: String(s?.[`${XML_ATTR_PREFIX}FilePath`] ?? ''),
+    lastModified: Number(s?.Infos?.[`${XML_ATTR_PREFIX}LastModified`] ?? 0) || 0,
+    isStreaming: /^(netsearch|http|https|spotify|tidal|deezer|youtube|soundcloud):/i.test(
+      String(s?.[`${XML_ATTR_PREFIX}FilePath`] ?? '')
+    ),
+    _song: s,
+  }));
+
+  const rulesForFilter = { ...(selectionRules ?? {}) };
+  if (Array.isArray(filePaths) && filePaths.length > 0) rulesForFilter.filePaths = filePaths;
+
+  const kept = applySelection(summaries, rulesForFilter);
+  const keptSongs = kept.map((k) => k._song);
+
+  const nextRoot = { ...root, Song: keptSongs };
+  const body = builder.build({ VirtualDJ_Database: nextRoot });
+  const finalXml = body.startsWith('<?xml') ? body : `<?xml version="1.0" encoding="UTF-8"?>\n${body}`;
+  fs.writeFileSync(databaseXmlPath, finalXml.endsWith('\n') ? finalXml : `${finalXml}\n`);
+
+  return { kept: keptSongs.length, total };
+}
+
+function snapshotLocalToSyncFolder({
+  vdjFolder,
+  syncDir,
+  includeHistory,
+  machineId,
+  machineDisplayName,
+  appVersion,
+}) {
   const files = vdjFiles(vdjFolder);
   emptyDirectory(syncDir);
   const dest = syncFolderFiles(syncDir);
@@ -200,12 +266,17 @@ function snapshotLocalToSyncFolder({ vdjFolder, syncDir, includeHistory, machine
     historyFingerprint = sha256DirectoryAggregate(dest.historyDir);
   }
 
+  const now = Date.now();
   const manifest = {
     machineId,
+    machineUuid: machineId,
+    displayName: machineDisplayName || machineId,
     hostname: os.hostname(),
     platform: process.platform,
+    appVersion: appVersion || null,
     sourceVdjFolder: vdjFolder,
-    generatedAt: new Date().toISOString(),
+    generatedAt: new Date(now).toISOString(),
+    lastPushAt: now,
     includesHistory: Boolean(historyFingerprint),
     historyFingerprint,
     files: manifestFiles,
@@ -244,12 +315,19 @@ const CLI_DEFAULTS_PUSH = {
   force: false,
   dryRun: false,
   message: null,
+  machineUuid: null,
+  machineDisplayName: null,
+  appVersion: null,
+  selectionRules: null,
 };
 
 export async function runSyncPush(args = {}) {
   const opts = { ...CLI_DEFAULTS_PUSH, ...args };
   const log = makeLogger(opts.onLog);
   const result = { ok: false, backupFolder: null, commitSha: null };
+  let lockHeld = false;
+  let lockMachineId = null;
+  let lockSyncRoot = null;
 
   try {
     if (!opts.backup && !opts.force) {
@@ -258,13 +336,32 @@ export async function runSyncPush(args = {}) {
       );
     }
 
-    const machineId = resolveMachineId(opts.as);
+    const machineId = resolveMachineId(opts.machineUuid ?? opts.as);
+    const machineDisplayName =
+      opts.machineDisplayName || (opts.as ? String(opts.as) : machineId);
     const projectDir = getProjectRoot();
     const vdjFolder = resolveVdjFolder(opts.source);
     const syncDir = syncMachineDir(machineId);
     const mergedDir = syncMergedDir();
 
+    lockSyncRoot = path.dirname(path.dirname(syncDir));
+    lockMachineId = machineId;
+    const lockRes = acquireLock({
+      syncRoot: lockSyncRoot,
+      machineUuid: machineId,
+      displayName: machineDisplayName,
+    });
+    if (!lockRes.ok) {
+      const other = lockRes.existing;
+      const who = other?.displayName || other?.machineUuid || 'another machine';
+      throw new Error(
+        `Sync lock is held by ${who} (acquired ${new Date(other?.acquiredAt ?? 0).toISOString()}). Retry in a few minutes.`
+      );
+    }
+    lockHeld = true;
+
     log.info(`[sync:push] Machine id:   ${machineId}`);
+    log.info(`[sync:push] Display name: ${machineDisplayName}`);
     log.info(`[sync:push] Local VDJ:    ${vdjFolder}`);
     log.info(`[sync:push] Sync folder:  ${syncDir}`);
     log.info(`[sync:push] Merged dir:   ${mergedDir}`);
@@ -318,10 +415,23 @@ export async function runSyncPush(args = {}) {
       syncDir,
       includeHistory: opts.includeHistory,
       machineId,
+      machineDisplayName,
+      appVersion: opts.appVersion,
     });
     log.info(
       `[sync:push] Snapshot written: ${manifest.files['database.xml'].bytes}B xml, ${manifest.files['extra.db'].bytes}B db, history=${manifest.includesHistory}`
     );
+
+    if (hasActiveRules(opts.selectionRules) || (Array.isArray(opts.filePaths) && opts.filePaths.length > 0)) {
+      const filtered = filterSnapshotDatabaseXml({
+        databaseXmlPath: syncFolderFiles(syncDir).databaseXml,
+        selectionRules: opts.selectionRules,
+        filePaths: opts.filePaths,
+      });
+      log.info(
+        `[sync:push] Selection filter kept ${filtered.kept}/${filtered.total} songs in snapshot.`
+      );
+    }
 
     const { dest } = runSyncMerge({ outDir: mergedDir });
     log.info(`[sync:push] Re-merged → ${dest}`);
@@ -392,6 +502,10 @@ export async function runSyncPush(args = {}) {
     result.ok = false;
     result.error = err.message;
     return result;
+  } finally {
+    if (lockHeld && lockSyncRoot && lockMachineId) {
+      releaseLock({ syncRoot: lockSyncRoot, machineUuid: lockMachineId });
+    }
   }
 }
 

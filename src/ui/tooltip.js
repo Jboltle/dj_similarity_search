@@ -16,13 +16,15 @@ export class Tooltip {
     }
     const lines = [
       `<strong>${escape(node.displayName)}</strong>`,
-      node.bpm != null ? `BPM: ${escape(node.bpm)}` : 'BPM: —',
-      node.key ? `Key: ${escape(node.key)}${node.camelotKey ? ` (${escape(node.camelotKey)})` : ''}` : 'Key: —',
-      node.genre ? `Genre: ${escape(node.genre)}` : null,
-      `Linked tracks: ${escape(node.linkedCount ?? 0)}`,
-      node.filePath ? `<span style="color:var(--muted);font-size:0.85em">${escape(node.filePath)}</span>` : null,
+      node.bpm != null ? `BPM · ${escape(node.bpm)}` : 'BPM · —',
+      node.key ? `Key · ${escape(node.key)}${node.camelotKey ? ` (${escape(node.camelotKey)})` : ''}` : 'Key · —',
+      node.genre ? `Genre · ${escape(node.genre)}` : null,
+      `Linked tracks · ${escape(node.linkedCount ?? 0)}`,
     ].filter(Boolean);
-    this.el.innerHTML = lines.join('<br />');
+    const path = node.filePath
+      ? `<div class="tooltip-path">${escape(node.filePath)}</div>`
+      : '';
+    this.el.innerHTML = lines.join('<br />') + path;
     this.el.classList.remove('hidden');
     this.el.style.left = `${position.x}px`;
     this.el.style.top = `${position.y}px`;
