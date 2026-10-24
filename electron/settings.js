@@ -23,6 +23,15 @@ const SETTINGS_FILENAME = 'settings.json';
  */
 
 /**
+ * @typedef {Object} AudioLibrarySettings
+ * @property {string | null} root                 Absolute path to the shared audio library folder (ideally inside a cloud mount like Google Drive).
+ * @property {boolean} includeLinkedPairs         If true, scope includes every file that participates in a related_tracks pair.
+ * @property {boolean} includeRecentSessions      If true, scope also includes files played in the last N sessions.
+ * @property {number} recentSessionsCount         N value when includeRecentSessions is enabled.
+ * @property {boolean} autoAddDiscovered          If true, newly-discovered files in root are added to database.xml automatically on scan.
+ */
+
+/**
  * @typedef {Object} AppSettings
  * @property {string | null} vdjFolder
  * @property {'git' | 'local-folder' | 'none'} syncMode
@@ -36,7 +45,21 @@ const SETTINGS_FILENAME = 'settings.json';
  * @property {boolean} autoRefreshOnStartup
  * @property {string | null} lastRefreshedAt
  * @property {{push: SelectionRules, pull: SelectionRules}} syncSelection
+ * @property {AudioLibrarySettings} audioLibrary
  */
+
+const DEFAULT_RECENT_SESSIONS_COUNT = 5;
+
+/** @returns {AudioLibrarySettings} */
+export function getDefaultAudioLibrary() {
+  return {
+    root: null,
+    includeLinkedPairs: true,
+    includeRecentSessions: true,
+    recentSessionsCount: DEFAULT_RECENT_SESSIONS_COUNT,
+    autoAddDiscovered: false,
+  };
+}
 
 /** @returns {AppSettings} */
 export function getDefaults() {
@@ -56,6 +79,7 @@ export function getDefaults() {
       push: {},
       pull: {},
     },
+    audioLibrary: getDefaultAudioLibrary(),
   };
 }
 
@@ -112,6 +136,19 @@ function ensureMachineIdentity(current) {
     if (!merged.syncSelection.pull || typeof merged.syncSelection.pull !== 'object') {
       merged.syncSelection.pull = {};
       mutated = true;
+    }
+  }
+
+  if (!merged.audioLibrary || typeof merged.audioLibrary !== 'object') {
+    merged.audioLibrary = getDefaultAudioLibrary();
+    mutated = true;
+  } else {
+    const audioDefaults = getDefaultAudioLibrary();
+    for (const key of Object.keys(audioDefaults)) {
+      if (merged.audioLibrary[key] === undefined) {
+        merged.audioLibrary[key] = audioDefaults[key];
+        mutated = true;
+      }
     }
   }
 

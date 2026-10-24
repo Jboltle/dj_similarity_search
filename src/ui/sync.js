@@ -538,6 +538,9 @@ export class SyncPanel {
         this.drawer.showToast(result?.error || 'Push failed', { kind: 'err' });
       } else {
         this.drawer.showToast('Pushed to shared library');
+        // Keep the local "Linked Tracks" folder in sync with the just-pushed
+        // state (Drive files + SoundCloud + linked pairs all in one view).
+        try { await this.api.refreshLinkedFolder?.(); } catch { /* best effort */ }
       }
       await this.refreshSettings?.();
       setTimeout(() => this.refresh(), REFRESH_HINT_DELAY_MS);
@@ -560,6 +563,9 @@ export class SyncPanel {
         this.drawer.showToast(result?.error || 'Pull failed', { kind: 'err' });
       } else {
         this.drawer.showToast('Pulled from shared library');
+        // Rebuild the local "Linked Tracks" folder so freshly-arrived Drive
+        // files and SoundCloud entries show up in VirtualDJ immediately.
+        try { await this.api.refreshLinkedFolder?.(); } catch { /* best effort */ }
       }
       await this.refreshSettings?.();
       setTimeout(() => this.refresh(), REFRESH_HINT_DELAY_MS);

@@ -37,6 +37,7 @@ import { resolveVdjFolder, vdjFiles } from './lib/vdjPaths.js';
 import { assertNoVdjRunning } from './lib/sqliteGuards.js';
 import { timestampStamp } from './lib/syncBackups.js';
 import { projectRoot as getProjectRoot } from './lib/machineId.js';
+import { scanAudioLibrary, resolveLocalPath } from './lib/audioLibrary.js';
 
 const LOG_SOURCE = 'linked:folder';
 const DEFAULT_FOLDER_NAME = 'Linked Tracks';
@@ -78,6 +79,9 @@ function parseArgs(argv) {
     backupDir: null,
     backup: true,
     force: false,
+    audioLibraryRoot: null,
+    includeAudioLibrary: null, // null = auto (include iff root provided)
+    mergedLibraryIndex: null,
   };
   for (let i = 2; i < argv.length; i += 1) {
     const arg = argv[i];
@@ -91,6 +95,9 @@ function parseArgs(argv) {
     else if (arg === '--backup-dir' && next) { args.backupDir = next; i += 1; }
     else if (arg === '--no-backup') args.backup = false;
     else if (arg === '--force') args.force = true;
+    else if (arg === '--audio-library-root' && next) { args.audioLibraryRoot = next; i += 1; }
+    else if (arg === '--merged-library-index' && next) { args.mergedLibraryIndex = next; i += 1; }
+    else if (arg === '--no-audio-library') args.includeAudioLibrary = false;
   }
   return args;
 }
@@ -201,7 +208,68 @@ const CLI_DEFAULTS_LINKED = {
   backupDir: null,
   backup: true,
   force: false,
+  audioLibraryRoot: null,
+  includeAudioLibrary: null,
+  mergedLibraryIndex: null,
 };
+
+function readMergedLibraryIndex(indexPath) {
+  if (!indexPath || !fs.existsSync(indexPath)) return null;
+  try {
+    const raw = fs.readFileSync(indexPath, 'utf8');
+    const parsed = JSON.parse(raw);
+    if (!parsed || !Array.isArray(parsed.entries)) return null;
+    return parsed;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Collect additional absolute paths from the shared audio library — either
+ * from the merged N-way index (preferred, so both machines agree) or by
+ * scanning the local root as a fallback.
+ */
+function collectAudioLibraryPaths({ audioLibraryRoot, mergedIndexPath, log }) {
+  if (!audioLibraryRoot) return [];
+
+  const fromMerged = readMergedLibraryIndex(mergedIndexPath);
+  if (fromMerged) {
+    const abs = [];
+    for (const entry of fromMerged.entries) {
+      if (!entry?.relativePath) continue;
+      const p = resolveLocalPath(audioLibraryRoot, entry.relativePath);
+      if (p) abs.push(p);
+    }
+    log.info(`[linked:folder] Merged library index: ${abs.length} entries from ${mergedIndexPath}`);
+    return abs;
+  }
+
+  const scan = scanAudioLibrary(audioLibraryRoot);
+  if (!scan.rootExists) {
+    log.warn(`[linked:folder] Audio library root does not exist: ${audioLibraryRoot}`);
+    return [];
+  }
+  const abs = scan.entries
+    .map((e) => resolveLocalPath(audioLibraryRoot, e.relativePath))
+    .filter(Boolean);
+  log.info(`[linked:folder] Scanned audio library: ${abs.length} files under ${audioLibraryRoot}`);
+  return abs;
+}
+
+function unionPaths(a, b) {
+  const seen = new Set();
+  const out = [];
+  for (const list of [a, b]) {
+    for (const p of list) {
+      const key = typeof p === 'string' ? p.replaceAll('\\', '/').toLowerCase() : '';
+      if (!key || seen.has(key)) continue;
+      seen.add(key);
+      out.push(p);
+    }
+  }
+  return out;
+}
 
 export async function runBuildLinkedFolder(args = {}) {
   const opts = { ...CLI_DEFAULTS_LINKED, ...args };
@@ -237,14 +305,34 @@ export async function runBuildLinkedFolder(args = {}) {
       assertNoVdjRunning(extraDbPath, { forceWal: opts.forceWal });
     }
 
-    const { filePaths, totalRelatedPairs } = readLinkedFilePaths(extraDbPath);
+    const { filePaths: linkedPaths, totalRelatedPairs } = readLinkedFilePaths(extraDbPath);
     log.info(
-      `[linked:folder] Found ${filePaths.length} unique linked songs across ${totalRelatedPairs} pairs.`
+      `[linked:folder] Found ${linkedPaths.length} unique linked songs across ${totalRelatedPairs} pairs.`
     );
+
+    const includeLibrary =
+      opts.includeAudioLibrary === false
+        ? false
+        : Boolean(opts.audioLibraryRoot);
+    const libraryPaths = includeLibrary
+      ? collectAudioLibraryPaths({
+          audioLibraryRoot: opts.audioLibraryRoot,
+          mergedIndexPath: opts.mergedLibraryIndex,
+          log,
+        })
+      : [];
+
+    const filePaths = unionPaths(linkedPaths, libraryPaths);
+    if (libraryPaths.length > 0) {
+      const addedBeyondLinked = filePaths.length - linkedPaths.length;
+      log.info(
+        `[linked:folder] Audio library contributes ${addedBeyondLinked} additional path(s) beyond linked pairs.`
+      );
+    }
 
     if (filePaths.length === 0) {
       log.info(
-        '[linked:folder] No linked tracks found in extra.db. Link some songs in VirtualDJ first.'
+        '[linked:folder] No linked tracks or audio-library files found. Link some songs in VirtualDJ or configure a shared audio library.'
       );
       result.ok = true;
       return result;

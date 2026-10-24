@@ -253,6 +253,74 @@ function reduceHistories({ machineEntries, destDir }) {
   }
 }
 
+/**
+ * Union-merge audio library indexes across every machine. Each machine's
+ * index is a JSON file of { relativePath, bytes, mtime } entries. On
+ * conflict (same relativePath, different metadata) the entry with the
+ * newest mtime wins — "whichever machine most recently touched the file".
+ */
+function reduceAudioLibraryIndexes({ machineEntries, destFile }) {
+  const indexes = [];
+  for (const entry of machineEntries) {
+    const indexPath = syncFolderFiles(entry.dir).audioLibraryIndex;
+    if (!fs.existsSync(indexPath)) continue;
+    try {
+      const parsed = JSON.parse(fs.readFileSync(indexPath, 'utf8'));
+      if (parsed && Array.isArray(parsed.entries)) {
+        indexes.push({ entry, data: parsed });
+      }
+    } catch {
+      // skip malformed index
+    }
+  }
+  if (indexes.length === 0) return null;
+
+  const mergedByRelative = new Map();
+  const contributors = {};
+  for (const { entry, data } of indexes) {
+    for (const row of data.entries) {
+      if (!row || typeof row.relativePath !== 'string') continue;
+      const key = row.relativePath.replace(/\\/g, '/');
+      const existing = mergedByRelative.get(key);
+      const normalized = {
+        relativePath: key,
+        bytes: Number(row.bytes) || 0,
+        mtime: Number(row.mtime) || 0,
+      };
+      if (!existing || normalized.mtime > existing.mtime) {
+        mergedByRelative.set(key, normalized);
+      }
+      const bag = contributors[key] ?? (contributors[key] = []);
+      if (!bag.includes(entry.id)) bag.push(entry.id);
+    }
+  }
+
+  const mergedEntries = [...mergedByRelative.values()].sort((a, b) =>
+    a.relativePath.localeCompare(b.relativePath, undefined, { sensitivity: 'base' })
+  );
+
+  const envelope = {
+    version: 1,
+    generatedAt: new Date().toISOString(),
+    machineCount: indexes.length,
+    sourceMachines: indexes.map((i) => ({
+      id: i.entry.id,
+      displayName: machineDisplayNameFor(i.entry),
+      root: i.data.root ?? null,
+      count: Array.isArray(i.data.entries) ? i.data.entries.length : 0,
+    })),
+    count: mergedEntries.length,
+    totalBytes: mergedEntries.reduce((acc, e) => acc + e.bytes, 0),
+    entries: mergedEntries,
+    contributors,
+  };
+  writeJson(destFile, envelope);
+  return {
+    envelope,
+    contributingMachines: indexes.map((i) => i.entry.id),
+  };
+}
+
 export function runSyncMerge({ outDir = null, preferLocal = false, resolutions = null } = {}) {
   const machines = listSyncMachines();
   const dest = outDir ? path.resolve(outDir) : syncMergedDir();
@@ -280,6 +348,10 @@ export function runSyncMerge({ outDir = null, preferLocal = false, resolutions =
     machineEntries: machines,
     destDir: destFiles.historyDir,
   });
+  const audioLibrary = reduceAudioLibraryIndexes({
+    machineEntries: machines,
+    destFile: destFiles.audioLibraryIndex,
+  });
 
   const currentMachineId = resolveMachineId(null);
   const manifest = {
@@ -299,6 +371,7 @@ export function runSyncMerge({ outDir = null, preferLocal = false, resolutions =
       databaseXml: xml ? destFiles.databaseXml : null,
       extraDb: db ? destFiles.extraDb : null,
       historyDir: history ? destFiles.historyDir : null,
+      audioLibraryIndex: audioLibrary ? destFiles.audioLibraryIndex : null,
     },
     summary: {
       databaseXml: xml
@@ -328,6 +401,14 @@ export function runSyncMerge({ outDir = null, preferLocal = false, resolutions =
             identicalDedup: history.report.identicalDedup,
             collisionsSuffixed: history.report.collisionsSuffixed,
             contributing: history.contributingMachines,
+          }
+        : null,
+      audioLibrary: audioLibrary
+        ? {
+            fileCount: audioLibrary.envelope.count,
+            totalBytes: audioLibrary.envelope.totalBytes,
+            machineCount: audioLibrary.envelope.machineCount,
+            contributing: audioLibrary.contributingMachines,
           }
         : null,
     },

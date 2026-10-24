@@ -185,6 +185,35 @@ export class SettingsPanel {
         </section>
 
         <section class="form-row">
+          <label for="settings-audio-root">
+            Shared audio library folder
+            ${statusDotMarkup(Boolean(s.audioLibrary?.root))}
+          </label>
+          <div class="input-with-button">
+            <input type="text" id="settings-audio-root"
+                   value="${escape(s.audioLibrary?.root || '')}"
+                   placeholder="/path/to/Google Drive/DJ Library" spellcheck="false" />
+            <button type="button" id="settings-audio-browse" class="ghost-btn">Browse…</button>
+          </div>
+          <p class="form-hint">
+            Each machine mounts this at its own path (e.g. <code>G:\\My Drive\\DJ Library</code> on Windows,
+            <code>~/Library/CloudStorage/GoogleDrive-you</code> on Mac). Only the index is synced; files
+            stay in your cloud folder.
+          </p>
+          <label class="checkbox">
+            <input type="checkbox" id="settings-audio-autoadd"
+                   ${s.audioLibrary?.autoAddDiscovered ? 'checked' : ''} />
+            <span>Auto-add new library files to <code>database.xml</code> after each pull</span>
+          </label>
+          <div class="input-with-button" style="margin-top: 8px;">
+            <button type="button" id="settings-audio-scan" class="ghost-btn">Scan library</button>
+            <button type="button" id="settings-audio-preview" class="ghost-btn">Preview</button>
+            <button type="button" id="settings-audio-ingest" class="ghost-btn">Ingest new…</button>
+          </div>
+          <div class="selection-preview" id="settings-audio-preview-output">—</div>
+        </section>
+
+        <section class="form-row">
           <label class="checkbox">
             <input type="checkbox" id="settings-auto-refresh" ${s.autoRefreshOnStartup ? 'checked' : ''} />
             <span>Auto-refresh library on startup</span>
@@ -305,7 +334,96 @@ export class SettingsPanel {
     const autoRefresh = body.querySelector('#settings-auto-refresh');
     autoRefresh.addEventListener('change', () => this.persist({ autoRefreshOnStartup: autoRefresh.checked }));
 
+    this.wireAudioLibrary();
+
     body.querySelector('#settings-open-backups').addEventListener('click', () => this.openBackups());
+  }
+
+  wireAudioLibrary() {
+    const body = this.drawer.getBody();
+    const rootInput = body.querySelector('#settings-audio-root');
+    const browse = body.querySelector('#settings-audio-browse');
+    const autoAdd = body.querySelector('#settings-audio-autoadd');
+    const scanBtn = body.querySelector('#settings-audio-scan');
+    const previewBtn = body.querySelector('#settings-audio-preview');
+    const ingestBtn = body.querySelector('#settings-audio-ingest');
+    const output = body.querySelector('#settings-audio-preview-output');
+    if (!rootInput || !this.api.audio) return;
+
+    const persistAudio = async (patch) => {
+      const current = this.settings?.audioLibrary ?? {};
+      await this.persist({ audioLibrary: { ...current, ...patch } });
+    };
+
+    rootInput.addEventListener('change', () =>
+      persistAudio({ root: rootInput.value.trim() || null })
+    );
+    browse.addEventListener('click', async () => {
+      const picked = await this.api.pickFolder('audioLibrary');
+      if (!picked) return;
+      rootInput.value = picked;
+      await persistAudio({ root: picked });
+    });
+    autoAdd.addEventListener('change', () =>
+      persistAudio({ autoAddDiscovered: autoAdd.checked })
+    );
+
+    const withBusy = async (btn, label, fn) => {
+      btn.disabled = true;
+      const originalLabel = btn.textContent;
+      btn.textContent = label;
+      try {
+        await fn();
+      } finally {
+        btn.disabled = false;
+        btn.textContent = originalLabel;
+      }
+    };
+
+    scanBtn.addEventListener('click', () =>
+      withBusy(scanBtn, 'Scanning…', async () => {
+        output.textContent = 'Scanning…';
+        const res = await this.api.audio.scan();
+        if (!res?.ok) {
+          output.textContent = `Scan failed: ${res?.error ?? 'unknown error'}`;
+          return;
+        }
+        output.textContent = `${res.count} audio file(s) under ${res.root}.`;
+      })
+    );
+
+    previewBtn.addEventListener('click', () =>
+      withBusy(previewBtn, 'Comparing…', async () => {
+        output.textContent = 'Comparing…';
+        const res = await this.api.audio.preview();
+        if (!res?.ok) {
+          output.textContent = `Preview failed: ${res?.error ?? 'unknown error'}`;
+          return;
+        }
+        output.textContent =
+          `Library: ${res.totalLibraryFiles} files · ` +
+          `VDJ: ${res.totalVdjSongs} songs · ` +
+          `New: ${res.newFiles.length} · ` +
+          `Matched: ${res.matched} · ` +
+          `Missing on disk: ${res.missingFromLibrary}`;
+      })
+    );
+
+    ingestBtn.addEventListener('click', () =>
+      withBusy(ingestBtn, 'Ingesting…', async () => {
+        const confirmed = window.confirm(
+          'Add newly-discovered audio library files to database.xml?\n\nA backup will be taken first.'
+        );
+        if (!confirmed) return;
+        const res = await this.api.audio.ingest({ backup: true });
+        if (!res?.ok && res?.error) {
+          output.textContent = `Ingest failed: ${res.error}`;
+          return;
+        }
+        output.textContent = `Inserted ${res.inserted ?? 0}, skipped ${res.skipped ?? 0}.`;
+        this.drawer.showToast(`Ingested ${res.inserted ?? 0} new file(s)`);
+      })
+    );
   }
 
   wireSelectionInputs() {

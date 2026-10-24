@@ -61,6 +61,12 @@ import { mergeDatabaseXmlFiles } from './lib/databaseXmlMerge.js';
 import { mergeExtraDbFiles } from './lib/extraDbMerge.js';
 import { mergeHistoryDirs } from './lib/historyMerge.js';
 import { applySelection, hasActiveRules } from './lib/selectionRules.js';
+import {
+  rewriteDatabaseXmlToLocalLibrary,
+  readMergedLibraryIndex,
+} from './lib/audioLibraryRewrite.js';
+import { entriesNotYetIngested } from './lib/audioLibraryDiff.js';
+import { ingestNewFiles } from './lib/audioIngest.js';
 import { XMLParser, XMLBuilder } from 'fast-xml-parser';
 
 const LOG_SOURCE = 'sync:pull';
@@ -142,7 +148,7 @@ function runParse(cwd) {
   }
 }
 
-function runBuildLinkedFolder({ cwd, target, name, forceWal }) {
+function runBuildLinkedFolder({ cwd, target, name, forceWal, audioLibraryRoot, mergedLibraryIndex }) {
   const args = ['scripts/build-linked-folder.js', '--write'];
   // sync:pull has already established VDJ should be closed (or --force-wal is OK);
   // pass --force-wal through so the linked-folder regeneration doesn't bail out
@@ -150,6 +156,8 @@ function runBuildLinkedFolder({ cwd, target, name, forceWal }) {
   if (forceWal) args.push('--force-wal');
   if (target) args.push('--target', target);
   if (name) args.push('--name', name);
+  if (audioLibraryRoot) args.push('--audio-library-root', audioLibraryRoot);
+  if (mergedLibraryIndex) args.push('--merged-library-index', mergedLibraryIndex);
   const result = spawnSync('node', args, { cwd, stdio: 'inherit' });
   if (result.status !== 0) {
     console.warn(`[sync:pull] linked-folder step exited with code ${result.status}.`);
@@ -252,6 +260,8 @@ const CLI_DEFAULTS_PULL = {
   resolutions: null,
   filePaths: null,
   selectionRules: null,
+  audioLibraryRoot: null,
+  autoAddDiscovered: false,
 };
 
 export async function runSyncPull(args = {}) {
@@ -340,6 +350,7 @@ export async function runSyncPull(args = {}) {
     }
 
     let xmlPlan = null;
+    let pathRewriteStats = null;
     if (fs.existsSync(mergedFiles.databaseXml)) {
       const tmpDir = fs.mkdtempSync(path.join(projectDir, '.tmp-sync-pull-'));
       try {
@@ -357,6 +368,23 @@ export async function runSyncPull(args = {}) {
           });
           log.info(`[sync:pull] Selection filter narrowed merged input to ${stats.kept}/${stats.total} songs.`);
           mergedXmlSource = filteredXml;
+        }
+        if (opts.audioLibraryRoot) {
+          const mergedIndex = readMergedLibraryIndex(mergedFiles.audioLibraryIndex);
+          if (mergedIndex && mergedIndex.entries.length > 0) {
+            const rewrittenXml = path.join(tmpDir, 'merged-rewritten.xml');
+            const stats = rewriteDatabaseXmlToLocalLibrary({
+              inputPath: mergedXmlSource,
+              outputPath: rewrittenXml,
+              audioLibraryRoot: opts.audioLibraryRoot,
+              libraryEntries: mergedIndex.entries,
+            });
+            pathRewriteStats = stats;
+            log.info(
+              `[sync:pull] Rewrote ${stats.rewritten}/${stats.total} library paths to this machine's root.`
+            );
+            mergedXmlSource = rewrittenXml;
+          }
         }
         if (fs.existsSync(localFiles.databaseXml)) {
           const { report } = applyMergedXmlToLocal({
@@ -496,6 +524,29 @@ export async function runSyncPull(args = {}) {
       runParse(projectDir);
     }
 
+    let ingestReport = null;
+    if (opts.audioLibraryRoot && opts.autoAddDiscovered && opts.write) {
+      const mergedIndex = readMergedLibraryIndex(mergedFiles.audioLibraryIndex);
+      if (mergedIndex && mergedIndex.entries.length > 0) {
+        const toAdd = entriesNotYetIngested({
+          audioLibraryRoot: opts.audioLibraryRoot,
+          mergedIndex: mergedIndex.entries,
+          databaseXmlPath: localFiles.databaseXml,
+        });
+        if (toAdd.length > 0) {
+          log.info(`[sync:pull] Auto-adding ${toAdd.length} new audio-library file(s) to database.xml.`);
+          ingestReport = ingestNewFiles({
+            databaseXmlPath: localFiles.databaseXml,
+            newFiles: toAdd,
+            backup: false, // we already took a full pre-pull backup
+          });
+          log.info(`[sync:pull] Ingested ${ingestReport.inserted}, skipped ${ingestReport.skipped}.`);
+        } else {
+          log.info('[sync:pull] Audio library: no new files to add.');
+        }
+      }
+    }
+
     if (opts.runLinkedFolder) {
       log.info(`[sync:pull] Regenerating "${opts.linkedFolderName}" .vdjfolder from merged extra.db...`);
       runBuildLinkedFolder({
@@ -503,10 +554,16 @@ export async function runSyncPull(args = {}) {
         target: opts.target,
         name: opts.linkedFolderName,
         forceWal: opts.forceWal,
+        audioLibraryRoot: opts.audioLibraryRoot,
+        mergedLibraryIndex: mergedFiles.audioLibraryIndex,
       });
     }
 
     result.ok = true;
+    result.audioLibrary = {
+      rewritten: pathRewriteStats?.rewritten ?? 0,
+      ingested: ingestReport?.inserted ?? 0,
+    };
     return result;
   } catch (err) {
     log.error(`[sync:pull] ERROR: ${err.message}`);

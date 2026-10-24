@@ -104,6 +104,7 @@ export function syncFolderFiles(dir) {
     databaseXml: path.join(dir, 'database.xml'),
     historyDir: path.join(dir, 'History'),
     manifest: path.join(dir, MANIFEST_FILENAME),
+    audioLibraryIndex: path.join(dir, 'audio-library-index.json'),
   };
 }
 

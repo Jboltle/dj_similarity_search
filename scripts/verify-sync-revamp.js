@@ -29,6 +29,9 @@ const { runSyncMerge } = await import('./sync-merge.js');
 const { listSyncMachines, syncMachineDir, syncFolderFiles } = await import('./lib/machineId.js');
 const { applySelection } = await import('./lib/selectionRules.js');
 const { acquireLock, releaseLock, readLock } = await import('./lib/syncLock.js');
+const { scanAudioLibrary } = await import('./lib/audioLibrary.js');
+const { classifyLibrary } = await import('./lib/audioLibraryDiff.js');
+const { rewriteDatabaseXmlToLocalLibrary } = await import('./lib/audioLibraryRewrite.js');
 
 function log(msg) { console.log(`[verify] ${msg}`); }
 
@@ -156,6 +159,76 @@ async function testSelectionRules() {
   log('selection: PASS');
 }
 
+async function testAudioLibrary() {
+  log('audio library: scan + classify + cross-machine path rewrite');
+  const libRoot = path.join(workRoot, 'drive-mac', 'DJ Library');
+  fs.mkdirSync(path.join(libRoot, 'house'), { recursive: true });
+  fs.mkdirSync(path.join(libRoot, 'techno'), { recursive: true });
+  fs.writeFileSync(path.join(libRoot, 'house', 'a.mp3'), 'x');
+  fs.writeFileSync(path.join(libRoot, 'techno', 'b.flac'), 'x');
+  fs.writeFileSync(path.join(libRoot, 'readme.txt'), 'ignored'); // non-audio
+
+  const scan = scanAudioLibrary(libRoot);
+  assert.equal(scan.rootExists, true, 'root detected');
+  assert.equal(scan.entries.length, 2, 'two audio files discovered');
+  const rels = scan.entries.map((e) => e.relativePath).sort();
+  assert.deepEqual(rels, ['house/a.mp3', 'techno/b.flac'], 'POSIX relative paths');
+
+  // A VDJ database that only knows about one of the two files (as it would
+  // on a fresh install) — the other should surface as "new".
+  const dbPath = path.join(workRoot, 'database.xml');
+  const macAbsHouse = path.join(libRoot, 'house', 'a.mp3');
+  fs.writeFileSync(dbPath, xmlForSongs([
+    { filePath: macAbsHouse, lastModified: 100 },
+  ]));
+
+  const diff = classifyLibrary({
+    audioLibraryRoot: libRoot,
+    libraryEntries: scan.entries,
+    databaseXmlPath: dbPath,
+  });
+  assert.equal(diff.totalLibraryFiles, 2);
+  assert.equal(diff.totalVdjSongs, 1);
+  assert.equal(diff.newFiles.length, 1, 'the flac is new');
+  assert.equal(diff.newFiles[0].relativePath, 'techno/b.flac');
+  assert.equal(diff.matched.length, 1, 'house/a.mp3 matched');
+
+  // Simulate pulling: the merged XML holds a Mac path, but this machine's
+  // library root is on Windows. We expect FilePath to be rewritten to the
+  // Windows root while unrelated streaming entries pass through unchanged.
+  const windowsRoot = path.join(workRoot, 'drive-windows', 'DJ Library');
+  const mergedXml = path.join(workRoot, 'merged.xml');
+  fs.writeFileSync(mergedXml, xmlForSongs([
+    { filePath: macAbsHouse, lastModified: 100 },
+    { filePath: 'netsearch://soundcloud/track/42', lastModified: 200 },
+    { filePath: '/Users/other/local-only.mp3', lastModified: 300 },
+  ]));
+  const outXml = path.join(workRoot, 'merged-rewritten.xml');
+  const stats = rewriteDatabaseXmlToLocalLibrary({
+    inputPath: mergedXml,
+    outputPath: outXml,
+    audioLibraryRoot: windowsRoot,
+    libraryEntries: scan.entries,
+  });
+  assert.equal(stats.rewritten, 1, 'only the library song gets rewritten');
+  assert.equal(stats.total, 3);
+  const rewritten = fs.readFileSync(outXml, 'utf8');
+  const expectedWindowsPath = path.join(windowsRoot, 'house', 'a.mp3');
+  assert.ok(
+    rewritten.includes(expectedWindowsPath),
+    `rewritten XML should reference ${expectedWindowsPath}`
+  );
+  assert.ok(
+    rewritten.includes('netsearch://soundcloud/track/42'),
+    'streaming URL preserved'
+  );
+  assert.ok(
+    rewritten.includes('/Users/other/local-only.mp3'),
+    'unrelated local path preserved'
+  );
+  log('audio library: PASS');
+}
+
 async function testLockfile() {
   log('lockfile: single-machine acquire/release + contention');
   const lockRoot = path.join(workRoot, 'lockroot');
@@ -178,6 +251,7 @@ async function main() {
     await testNwayMerge();
     await testTwoWayEquivalence();
     await testSelectionRules();
+    await testAudioLibrary();
     await testLockfile();
     log('ALL PASS');
     process.exit(0);

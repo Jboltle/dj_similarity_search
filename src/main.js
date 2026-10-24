@@ -199,6 +199,8 @@ async function main() {
 
   const renderer = new GraphRenderer(canvas, {
     onHover: (node, position) => {
+      // graceful no-op if WebGL fell through (see below)
+      if (renderer?.webglUnavailable) return;
       if (!node) {
         tooltip.hide();
         labelOverlay.setHovered(null);
@@ -219,6 +221,20 @@ async function main() {
   });
   renderer.setData(state.nodes, state.edges);
   renderer.start();
+
+  // Surface a visible banner when WebGL is unavailable so the user knows the
+  // library, sync panel, and settings all still work — only the graph is blank.
+  if (renderer.webglUnavailable) {
+    const banner = document.createElement('div');
+    banner.textContent =
+      'Graph view disabled: WebGL not available on this system. ' +
+      'Everything else (library browser, sync, settings, Linked Tracks) still works.';
+    banner.style.cssText =
+      'position: fixed; top: 0; left: 0; right: 0; z-index: 9999; ' +
+      'background: #f5a623; color: #1a1a1a; padding: 10px 16px; ' +
+      'text-align: center; font-size: 13px; font-weight: 500;';
+    document.body.appendChild(banner);
+  }
 
   hideLoader();
 

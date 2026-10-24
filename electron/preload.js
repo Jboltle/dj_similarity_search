@@ -35,6 +35,14 @@ const sync = {
   useCloudBackend: (opts) => invoke('vdj:sync:useCloudBackend', opts),
 };
 
+const audio = {
+  getConfig: () => invoke('vdj:audio:getConfig'),
+  setConfig: (patch) => invoke('vdj:audio:setConfig', patch),
+  scan: () => invoke('vdj:audio:scan'),
+  preview: () => invoke('vdj:audio:preview'),
+  ingest: (opts) => invoke('vdj:audio:ingest', opts),
+};
+
 contextBridge.exposeInMainWorld('vdjApi', {
   getSettings: () => invoke('vdj:getSettings'),
   saveSettings: (patch) => invoke('vdj:saveSettings', patch),
@@ -51,6 +59,7 @@ contextBridge.exposeInMainWorld('vdjApi', {
   restoreBackup: (stamp, opts) => invoke('vdj:restoreBackup', stamp, opts),
   refreshLinkedFolder: () => invoke('vdj:refreshLinkedFolder'),
   sync,
+  audio,
   onLog: (cb) => {
     const listener = (_event, line) => {
       try {

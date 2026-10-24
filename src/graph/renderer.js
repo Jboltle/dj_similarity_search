@@ -33,12 +33,28 @@ export class GraphRenderer {
     this.camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.1, 5000);
     this.camera.position.set(0, 0, 1000);
 
-    this.renderer = new THREE.WebGLRenderer({
-      canvas,
-      antialias: true,
-      alpha: true,
-      premultipliedAlpha: true,
-    });
+    try {
+      this.renderer = new THREE.WebGLRenderer({
+        canvas,
+        antialias: true,
+        alpha: true,
+        premultipliedAlpha: true,
+        // Accept Chromium's software fallback (SwiftShader) rather than
+        // failing hard. "Slow" rendering is strictly better than a blank
+        // canvas on WSL / headless Linux where WebGL may be blocklisted.
+        failIfMajorPerformanceCaveat: false,
+        powerPreference: 'default',
+      });
+    } catch (err) {
+      console.error(
+        '[graph] WebGL unavailable; the graph view will stay blank. ' +
+          'The rest of the app (library, sync, settings) still works. ' +
+          `Underlying error: ${err?.message ?? err}`
+      );
+      this.renderer = null;
+      this.webglUnavailable = true;
+      return;
+    }
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     this.renderer.setClearColor(0x000000, 0);
 
@@ -139,6 +155,7 @@ export class GraphRenderer {
   }
 
   handleResize() {
+    if (!this.renderer) return;
     const width = window.innerWidth;
     const height = window.innerHeight;
     this.renderer.setSize(width, height, false);
@@ -172,6 +189,7 @@ export class GraphRenderer {
   }
 
   buildNodeMesh() {
+    if (!this.renderer) return;
     const positions = new Float32Array(this.nodes.length * 3);
     const colors = new Float32Array(this.nodes.length * 3);
     const sizes = new Float32Array(this.nodes.length);
@@ -581,7 +599,7 @@ export class GraphRenderer {
         this.needsRender = true;
       }
 
-      if (this.needsRender) {
+      if (this.needsRender && this.renderer) {
         this.renderer.render(this.scene, this.camera);
         if (this.onCameraChange) this.onCameraChange();
         this.needsRender = false;

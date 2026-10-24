@@ -57,6 +57,7 @@ import {
 } from './lib/syncBackups.js';
 import { acquireLock, releaseLock } from './lib/syncLock.js';
 import { applySelection, hasActiveRules } from './lib/selectionRules.js';
+import { scanAudioLibrary, buildIndexEnvelope } from './lib/audioLibrary.js';
 import { runSyncMerge } from './sync-merge.js';
 
 const LOG_SOURCE = 'sync:push';
@@ -118,11 +119,13 @@ function parseArgs(argv) {
   return args;
 }
 
-function runBuildLinkedFolder({ cwd, source, name, forceWal }) {
+function runBuildLinkedFolder({ cwd, source, name, forceWal, audioLibraryRoot, mergedLibraryIndex }) {
   const args = ['scripts/build-linked-folder.js', '--write'];
   if (forceWal) args.push('--force-wal');
   if (source) args.push('--target', source);
   if (name) args.push('--name', name);
+  if (audioLibraryRoot) args.push('--audio-library-root', audioLibraryRoot);
+  if (mergedLibraryIndex) args.push('--merged-library-index', mergedLibraryIndex);
   const result = spawnSync('node', args, { cwd, stdio: 'inherit' });
   if (result.status !== 0) {
     console.warn(`[sync:push] linked-folder step exited with code ${result.status}.`);
@@ -235,6 +238,8 @@ function snapshotLocalToSyncFolder({
   machineId,
   machineDisplayName,
   appVersion,
+  audioLibraryRoot,
+  log,
 }) {
   const files = vdjFiles(vdjFolder);
   emptyDirectory(syncDir);
@@ -266,6 +271,32 @@ function snapshotLocalToSyncFolder({
     historyFingerprint = sha256DirectoryAggregate(dest.historyDir);
   }
 
+  let audioLibrarySummary = null;
+  if (audioLibraryRoot && typeof audioLibraryRoot === 'string') {
+    const scan = scanAudioLibrary(audioLibraryRoot);
+    if (!scan.rootExists) {
+      log?.warn(`[sync:push] Audio library root does not exist: ${audioLibraryRoot}. Skipping index.`);
+    } else {
+      const envelope = buildIndexEnvelope({
+        machineUuid: machineId,
+        machineDisplayName,
+        root: scan.root,
+        entries: scan.entries,
+      });
+      writeJson(dest.audioLibraryIndex, envelope);
+      manifestFiles['audio-library-index.json'] = {
+        bytes: fs.statSync(dest.audioLibraryIndex).size,
+        sha256: sha256FileSync(dest.audioLibraryIndex),
+      };
+      audioLibrarySummary = {
+        root: scan.root,
+        count: envelope.count,
+        totalBytes: envelope.totalBytes,
+        errors: scan.errors.length,
+      };
+    }
+  }
+
   const now = Date.now();
   const manifest = {
     machineId,
@@ -279,6 +310,7 @@ function snapshotLocalToSyncFolder({
     lastPushAt: now,
     includesHistory: Boolean(historyFingerprint),
     historyFingerprint,
+    audioLibrary: audioLibrarySummary,
     files: manifestFiles,
   };
   writeJson(dest.manifest, manifest);
@@ -319,6 +351,7 @@ const CLI_DEFAULTS_PUSH = {
   machineDisplayName: null,
   appVersion: null,
   selectionRules: null,
+  audioLibraryRoot: null,
 };
 
 export async function runSyncPush(args = {}) {
@@ -417,10 +450,17 @@ export async function runSyncPush(args = {}) {
       machineId,
       machineDisplayName,
       appVersion: opts.appVersion,
+      audioLibraryRoot: opts.audioLibraryRoot,
+      log,
     });
     log.info(
       `[sync:push] Snapshot written: ${manifest.files['database.xml'].bytes}B xml, ${manifest.files['extra.db'].bytes}B db, history=${manifest.includesHistory}`
     );
+    if (manifest.audioLibrary) {
+      log.info(
+        `[sync:push] Audio library indexed: ${manifest.audioLibrary.count} files (${manifest.audioLibrary.totalBytes} bytes) under ${manifest.audioLibrary.root}`
+      );
+    }
 
     if (hasActiveRules(opts.selectionRules) || (Array.isArray(opts.filePaths) && opts.filePaths.length > 0)) {
       const filtered = filterSnapshotDatabaseXml({
@@ -443,6 +483,8 @@ export async function runSyncPush(args = {}) {
         source: opts.source,
         name: opts.linkedFolderName,
         forceWal: opts.forceWal,
+        audioLibraryRoot: opts.audioLibraryRoot,
+        mergedLibraryIndex: path.join(mergedDir, 'audio-library-index.json'),
       });
     }
 

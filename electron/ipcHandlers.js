@@ -29,6 +29,9 @@ import {
 } from '../scripts/lib/conflictResolutions.js';
 import { listSyncMachines } from '../scripts/lib/machineId.js';
 import { detectCloudFolders } from './cloudBackends.js';
+import { scanAudioLibrary } from '../scripts/lib/audioLibrary.js';
+import { classifyLibrary } from '../scripts/lib/audioLibraryDiff.js';
+import { ingestNewFiles } from '../scripts/lib/audioIngest.js';
 
 const GRAPH_FILENAME = 'graph.json';
 const BACKUP_SUBDIR = 'backups';
@@ -40,19 +43,19 @@ export function setMainWindow(win) {
   mainWindow = win;
 }
 
-function graphJsonPath() {
+export function graphJsonPath() {
   return path.join(app.getPath('userData'), GRAPH_FILENAME);
 }
 
-function backupRootPath() {
+export function backupRootPath() {
   return path.join(app.getPath('userData'), BACKUP_SUBDIR);
 }
 
-function resolutionsPath() {
+export function resolutionsPath() {
   return resolutionsFilePath(app.getPath('userData'));
 }
 
-function makeLogSink() {
+export function makeLogSink() {
   return (line) => {
     if (mainWindow && !mainWindow.isDestroyed()) {
       mainWindow.webContents.send('vdj:log', {
@@ -81,7 +84,7 @@ function currentVdjFolder(settings) {
  * backup dir for the duration of one sync call. Returns a restore function
  * so we always reset the process env once we're done, even on error.
  */
-function applyScriptEnvOverrides({ syncRepoRoot, machineUuid }) {
+export function applyScriptEnvOverrides({ syncRepoRoot, machineUuid }) {
   const prev = {
     VDJ_SYNC_ROOT: process.env.VDJ_SYNC_ROOT,
     VDJ_PROJECT_ROOT: process.env.VDJ_PROJECT_ROOT,
@@ -166,6 +169,8 @@ export function registerIpcHandlers() {
         ? 'Choose your VirtualDJ folder'
         : purpose === 'sync'
         ? 'Choose a sync folder'
+        : purpose === 'audioLibrary'
+        ? 'Choose your shared audio library folder (e.g. Google Drive)'
         : 'Choose a folder';
     const result = await dialog.showOpenDialog({
       title,
@@ -228,6 +233,7 @@ export function registerIpcHandlers() {
         git: settings.syncMode === 'git',
         push: settings.syncMode === 'git',
         runLinkedFolder: false,
+        audioLibraryRoot: settings.audioLibrary?.root ?? null,
         onLog: makeLogSink(),
       });
       return res;
@@ -257,6 +263,8 @@ export function registerIpcHandlers() {
         git: settings.syncMode === 'git',
         runParse: false,
         runLinkedFolder: false,
+        audioLibraryRoot: settings.audioLibrary?.root ?? null,
+        autoAddDiscovered: Boolean(settings.audioLibrary?.autoAddDiscovered),
         onLog: makeLogSink(),
       });
       if (res.ok) {
@@ -425,8 +433,104 @@ export function registerIpcHandlers() {
       write: true,
       forceWal: true,
       backupDir: backupRootPath(),
+      audioLibraryRoot: settings.audioLibrary?.root ?? null,
       onLog: makeLogSink(),
     });
     return res;
+  });
+
+  // ---- Shared audio library (Google Drive, Dropbox, etc.) ----------------
+  // The physical files live wherever each machine mounts the shared folder;
+  // we only sync the *index* (relative paths) so each machine can resolve the
+  // same track to its own absolute path.
+
+  ipcMain.handle('vdj:audio:getConfig', async () => {
+    const settings = getSettings();
+    return settings.audioLibrary ?? null;
+  });
+
+  ipcMain.handle('vdj:audio:setConfig', async (_e, patch = {}) => {
+    const current = getSettings().audioLibrary ?? {};
+    const next = { ...current, ...patch };
+    const merged = saveSettings({ audioLibrary: next });
+    return { ok: true, audioLibrary: merged.audioLibrary };
+  });
+
+  ipcMain.handle('vdj:audio:scan', async () => {
+    const settings = getSettings();
+    const root = settings.audioLibrary?.root;
+    if (!root) return { ok: false, error: 'audio library root not configured' };
+    try {
+      const scan = scanAudioLibrary(root);
+      return {
+        ok: true,
+        root: scan.root,
+        rootExists: scan.rootExists,
+        count: scan.entries.length,
+        skippedDirs: scan.skippedDirs,
+        skippedFiles: scan.skippedFiles,
+        errors: scan.errors,
+      };
+    } catch (err) {
+      return { ok: false, error: err?.message ?? String(err) };
+    }
+  });
+
+  ipcMain.handle('vdj:audio:preview', async () => {
+    const settings = getSettings();
+    const root = settings.audioLibrary?.root;
+    const vdjFolder = currentVdjFolder(settings);
+    if (!root) return { ok: false, error: 'audio library root not configured' };
+    if (!vdjFolder) return { ok: false, error: 'VirtualDJ folder not configured' };
+    try {
+      const scan = scanAudioLibrary(root);
+      const databaseXmlPath = vdjFiles(vdjFolder).databaseXml;
+      const diff = classifyLibrary({
+        audioLibraryRoot: scan.root,
+        libraryEntries: scan.entries,
+        databaseXmlPath,
+      });
+      return {
+        ok: true,
+        root: scan.root,
+        totalLibraryFiles: diff.totalLibraryFiles,
+        totalVdjSongs: diff.totalVdjSongs,
+        newFiles: diff.newFiles,
+        matched: diff.matched.length,
+        missingFromLibrary: diff.missingFromLibrary.length,
+      };
+    } catch (err) {
+      return { ok: false, error: err?.message ?? String(err) };
+    }
+  });
+
+  ipcMain.handle('vdj:audio:ingest', async (_e, opts = {}) => {
+    const settings = getSettings();
+    const root = settings.audioLibrary?.root;
+    const vdjFolder = currentVdjFolder(settings);
+    if (!root) return { ok: false, error: 'audio library root not configured' };
+    if (!vdjFolder) return { ok: false, error: 'VirtualDJ folder not configured' };
+    try {
+      const scan = scanAudioLibrary(root);
+      const databaseXmlPath = vdjFiles(vdjFolder).databaseXml;
+      const diff = classifyLibrary({
+        audioLibraryRoot: scan.root,
+        libraryEntries: scan.entries,
+        databaseXmlPath,
+      });
+      if (diff.newFiles.length === 0) {
+        return { ok: true, inserted: 0, skipped: 0, dryRun: Boolean(opts.dryRun) };
+      }
+      const res = ingestNewFiles({
+        databaseXmlPath,
+        newFiles: diff.newFiles,
+        backup: opts.backup !== false,
+        backupDir: backupRootPath(),
+        dryRun: Boolean(opts.dryRun),
+      });
+      return res;
+    } catch (err) {
+      return { ok: false, error: err?.message ?? String(err) };
+    }
   });
 }

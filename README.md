@@ -97,6 +97,29 @@ Every install gets a stable UUID on first launch. In **Settings →
 Machine display name** you can label it ("Studio iMac", "Living Room PC")
 so other people (and future-you) can tell machines apart in the Sync panel.
 
+### Shared audio library (Google Drive, Dropbox, …)
+
+The sync primitives above move VirtualDJ *metadata* (database.xml, extra.db,
+History). To also share the *audio files themselves* without copying them
+through git, point each machine at the same cloud-mounted folder.
+
+- **Settings → Shared audio library folder** — pick where this machine mounts
+  the shared drive, e.g. `G:\My Drive\DJ Library` on Windows and
+  `~/Library/CloudStorage/GoogleDrive-you/My Drive/DJ Library` on macOS.
+- Only an index of **POSIX-relative paths** (plus bytes + mtime) rides along
+  in the sync repo at `sync/machines/<uuid>/audio-library-index.json`. The
+  physical files stay in your cloud folder.
+- On pull, FilePath attributes for shared-library songs are rewritten to this
+  machine's root so VirtualDJ can open them. SoundCloud/`netsearch://` and
+  other streaming URLs pass through untouched.
+- Toggle **Auto-add new library files** to have `sync-pull` append freshly-
+  discovered tracks to `database.xml` on arrival. You can also run **Scan /
+  Preview / Ingest** manually from Settings.
+- The "Linked Tracks" virtual folder (`scripts/build-linked-folder.js`) is
+  the union of your extra.db-linked pairs ∪ the merged audio library index,
+  so every machine sees the same playlist of local + shared + streaming
+  tracks.
+
 ## Where the app stores data
 
 | OS      | Path                                                      |
