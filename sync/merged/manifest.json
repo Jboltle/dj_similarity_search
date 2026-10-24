@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-24T00:19:00.067Z",
+  "generatedAt": "2026-10-24T01:05:46.381Z",
   "generatedOn": "DESKTOP-02SQPLG",
   "generatedFromPlatform": "linux",
   "generatedByMachine": "windows",
@@ -10,19 +10,20 @@
       "displayName": "windows",
       "platform": "linux",
       "hostname": "DESKTOP-02SQPLG",
-      "lastPushAt": 1792801139923
+      "lastPushAt": 1792803946239
     }
   ],
   "outputs": {
     "databaseXml": "/home/on/Sandbox/dj_similarity_search/sync/merged/database.xml",
     "extraDb": "/home/on/Sandbox/dj_similarity_search/sync/merged/extra.db",
-    "historyDir": "/home/on/Sandbox/dj_similarity_search/sync/merged/History"
+    "historyDir": "/home/on/Sandbox/dj_similarity_search/sync/merged/History",
+    "audioLibraryIndex": null
   },
   "summary": {
     "databaseXml": {
-      "merged": 814,
+      "merged": 893,
       "addedFromRemote": 0,
-      "keptLocal": 814,
+      "keptLocal": 893,
       "conflicts": 0,
       "contributing": [
         "windows"
@@ -39,14 +40,15 @@
       ]
     },
     "history": {
-      "localFileCount": 62,
+      "localFileCount": 63,
       "remoteFileCount": 0,
-      "mergedFileCount": 62,
+      "mergedFileCount": 63,
       "identicalDedup": 0,
       "collisionsSuffixed": 0,
       "contributing": [
         "windows"
       ]
-    }
+    },
+    "audioLibrary": null
   }
 }
