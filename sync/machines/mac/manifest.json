@@ -1,0 +1,24 @@
+{
+  "machineId": "mac",
+  "machineUuid": "mac",
+  "displayName": "mac",
+  "hostname": "Jonathans-MacBook-Pro-8.local",
+  "platform": "darwin",
+  "appVersion": null,
+  "sourceVdjFolder": "/Users/jboltle/Library/Application Support/VirtualDJ",
+  "generatedAt": "2026-10-29T04:00:25.088Z",
+  "lastPushAt": 1793246425088,
+  "includesHistory": true,
+  "historyFingerprint": "f2e106b14bbd4f981fcac5baa0e3e0c12adb715fc7004e2368f86ca92702e469",
+  "audioLibrary": null,
+  "files": {
+    "database.xml": {
+      "bytes": 1029530,
+      "sha256": "75232ba33bbd9d4bdcbfdd42aae123d5bd2f440887c3866e2174bfbdf422f63e"
+    },
+    "extra.db": {
+      "bytes": 1187840,
+      "sha256": "614677b92e940246bf7ec347b1248f9f1032f5df28b3a2658de5729731a8c83c"
+    }
+  }
+}

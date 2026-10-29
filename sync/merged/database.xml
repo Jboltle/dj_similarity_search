@@ -1,132 +1,683 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<VirtualDJ_Database Version="2025">
- <Song FilePath="/Users/jboltle/Desktop/Screen Recording 2025-01-17 at 12.37.40 AM.mov" FileSize="199818594" Flag="64">
-  <Tags Flag="1"/>
-  <Infos SongLength="78.966667" LastModified="1761791354" FirstSeen="1761791285" Bitrate="20243" Cover="34"/>
+<VirtualDJ_Database Version="2026">
+ <Song FilePath="/Users/jboltle/Desktop/Screen Recording 2025-01-17 at 12.37.40 AM.mov" FileSize="199818594">
+  <Infos LastModified="1787960263" FirstSeen="1787953522" Cover="32"/>
  </Song>
  <Song FilePath="/Users/jboltle/Desktop/Screen Recording 2025-01-18 at 1.19.21 AM.mov" FileSize="100458301" Flag="64">
   <Tags Flag="1"/>
-  <Infos SongLength="39.733333" LastModified="1761791571" FirstSeen="1761791285" Bitrate="20227" Cover="34"/>
+  <Infos SongLength="39.733333" LastModified="1787960263" FirstSeen="1787953522" Bitrate="20227" Cover="34"/>
  </Song>
  <Song FilePath="/Users/jboltle/Desktop/Screen Recording 2025-01-18 at 1.22.27 AM.mov" FileSize="101440383" Flag="64">
   <Tags Flag="1"/>
-  <Infos SongLength="41.416667" LastModified="1765834108" FirstSeen="1761791285" Bitrate="19594" Cover="34"/>
+  <Infos SongLength="41.416667" LastModified="1787960263" FirstSeen="1787953522" Bitrate="19594" Cover="34"/>
  </Song>
  <Song FilePath="/Users/jboltle/Desktop/Screen Recording 2025-01-18 at 1.24.00 AM.mov" FileSize="114254013" Flag="64">
   <Tags Flag="1"/>
-  <Infos SongLength="48.10" LastModified="1762027465" FirstSeen="1761791285" Bitrate="19003" Cover="34"/>
+  <Infos SongLength="48.10" LastModified="1787960263" FirstSeen="1787953522" Bitrate="19003" Cover="34"/>
  </Song>
- <Song FilePath="/Users/jboltle/Desktop/Screen Recording 2025-01-21 at 9.40.27 PM.mov" FileSize="103953875" Flag="64">
-  <Tags Flag="1"/>
-  <Infos SongLength="56.283333" LastModified="1777773137" FirstSeen="1761791285" Bitrate="14776" Cover="34"/>
+ <Song FilePath="/Users/jboltle/Desktop/Screen Recording 2025-01-21 at 9.40.27 PM.mov" FileSize="103953875">
+  <Infos LastModified="1787960263" FirstSeen="1787953522" Cover="32"/>
  </Song>
  <Song FilePath="/Users/jboltle/Desktop/Screen Recording 2025-01-24 at 1.29.47 AM.mov" FileSize="114557439" Flag="64">
   <Tags Flag="1"/>
-  <Infos SongLength="48.450" LastModified="1765834104" FirstSeen="1761791285" Bitrate="18916" Cover="34"/>
+  <Infos SongLength="48.450" LastModified="1787953558" FirstSeen="1787953522" Bitrate="18916" Cover="2"/>
  </Song>
  <Song FilePath="/Users/jboltle/Desktop/Screen Recording 2025-01-27 at 12.28.58 AM.mov" FileSize="103009343" Flag="64">
   <Tags Flag="1"/>
-  <Infos SongLength="40.933333" LastModified="1777926403" FirstSeen="1761791285" Bitrate="20132" Cover="34"/>
+  <Infos SongLength="40.933333" LastModified="1787953533" FirstSeen="1787953522" Bitrate="20132" Cover="2"/>
  </Song>
- <Song FilePath="/Users/jboltle/Desktop/Screen Recording 2025-01-27 at 12.32.52 AM.mov" FileSize="112263368" Flag="64">
-  <Tags Flag="1"/>
-  <Infos SongLength="51.933333" LastModified="1777926475" FirstSeen="1761791285" Bitrate="17293" Cover="34"/>
+ <Song FilePath="/Users/jboltle/Desktop/Screen Recording 2025-01-27 at 12.32.52 AM.mov" FileSize="112263368">
+  <Infos LastModified="1787953522" FirstSeen="1787953522"/>
  </Song>
  <Song FilePath="/Users/jboltle/Desktop/Screen Recording 2025-01-28 at 11.32.02 PM.mov" FileSize="115741571" Flag="64">
   <Tags Flag="1"/>
-  <Infos SongLength="47.616667" LastModified="1761791453" FirstSeen="1761791285" Bitrate="19446" Cover="2"/>
+  <Infos SongLength="47.616667" LastModified="1787953550" FirstSeen="1787953522" Bitrate="19446" Cover="2"/>
  </Song>
- <Song FilePath="/Users/jboltle/Desktop/Screen Recording 2025-01-29 at 6.29.05 PM.mov" FileSize="136264673" Flag="64">
-  <Tags Flag="1"/>
-  <Infos SongLength="26.766667" LastModified="1770175923" FirstSeen="1761791285" Bitrate="40727" Cover="34"/>
+ <Song FilePath="/Users/jboltle/Desktop/Screen Recording 2025-01-29 at 6.29.05 PM.mov" FileSize="136264673">
+  <Infos LastModified="1787953522" FirstSeen="1787953522"/>
  </Song>
  <Song FilePath="/Users/jboltle/Desktop/Screen Recording 2025-01-30 at 11.54.01 PM.mov" FileSize="120591587" Flag="64">
   <Tags Flag="1"/>
-  <Infos SongLength="49.650" LastModified="1761791469" FirstSeen="1761791285" Bitrate="19431" Cover="2"/>
+  <Infos SongLength="49.650" LastModified="1787953558" FirstSeen="1787953522" Bitrate="19431" Cover="2"/>
  </Song>
  <Song FilePath="/Users/jboltle/Desktop/Screen Recording 2025-01-31 at 11.57.03 PM.mov" FileSize="116328170" Flag="64">
   <Tags Flag="1"/>
-  <Infos SongLength="45.533333" LastModified="1761791332" FirstSeen="1761791285" Bitrate="20438" Cover="2"/>
+  <Infos SongLength="45.533333" LastModified="1787953542" FirstSeen="1787953522" Bitrate="20438" Cover="2"/>
  </Song>
- <Song FilePath="/Users/jboltle/Desktop/Screen Recording 2025-01-31 at 11.59.50 PM.mov" FileSize="110351041" Flag="64">
-  <Tags Flag="1"/>
-  <Infos SongLength="46.283333" LastModified="1773877555" FirstSeen="1761791285" Bitrate="19074" Cover="34"/>
+ <Song FilePath="/Users/jboltle/Desktop/Screen Recording 2025-01-31 at 11.59.50 PM.mov" FileSize="110351041">
+  <Infos LastModified="1787953522" FirstSeen="1787953522"/>
  </Song>
- <Song FilePath="/Users/jboltle/Desktop/Screen Recording 2025-02-01 at 12.03.30 AM.mov" FileSize="120566859" Flag="64">
-  <Tags Flag="1"/>
-  <Infos SongLength="47.683333" LastModified="1761791396" FirstSeen="1761791285" Bitrate="20228" Cover="2"/>
+ <Song FilePath="/Users/jboltle/Desktop/Screen Recording 2025-02-01 at 12.03.30 AM.mov" FileSize="120566859">
+  <Infos LastModified="1787953522" FirstSeen="1787953522"/>
  </Song>
- <Song FilePath="/Users/jboltle/Desktop/Screen Recording 2025-02-02 at 11.32.06 AM.mov" FileSize="146950705" Flag="64">
-  <Tags Flag="1"/>
-  <Infos SongLength="136.566667" LastModified="1762380103" FirstSeen="1761791285" Bitrate="8608" Cover="34"/>
+ <Song FilePath="/Users/jboltle/Desktop/Screen Recording 2025-02-02 at 11.32.06 AM.mov" FileSize="146950705">
+  <Infos LastModified="1787953522" FirstSeen="1787953522"/>
  </Song>
  <Song FilePath="/Users/jboltle/Desktop/Screen Recording 2025-02-02 at 11.36.59 AM.mov" FileSize="101506235" Flag="64">
   <Tags Flag="1"/>
-  <Infos SongLength="88.333333" LastModified="1762380112" FirstSeen="1761791285" Bitrate="9193" Cover="34"/>
+  <Infos SongLength="88.333333" LastModified="1787953565" FirstSeen="1787953522" Bitrate="9193" Cover="2"/>
  </Song>
- <Song FilePath="/Users/jboltle/Desktop/Screen Recording 2025-02-02 at 9.57.20 PM.mov" FileSize="144534382" Flag="64">
-  <Tags Flag="1"/>
-  <Infos SongLength="58.166667" LastModified="1761791354" FirstSeen="1761791285" Bitrate="19879" Cover="2"/>
+ <Song FilePath="/Users/jboltle/Desktop/Screen Recording 2025-02-02 at 9.57.20 PM.mov" FileSize="144534382">
+  <Infos LastModified="1787953522" FirstSeen="1787953522"/>
  </Song>
- <Song FilePath="/Users/jboltle/Desktop/Screen Recording 2025-02-05 at 11.31.58 PM.mov" FileSize="127665741" Flag="64">
-  <Tags Flag="1"/>
-  <Infos SongLength="54.250" LastModified="1764367067" FirstSeen="1761791285" Bitrate="18826" Cover="34"/>
+ <Song FilePath="/Users/jboltle/Desktop/Screen Recording 2025-02-05 at 11.31.58 PM.mov" FileSize="127665741">
+  <Infos LastModified="1787953522" FirstSeen="1787953522"/>
  </Song>
  <Song FilePath="/Users/jboltle/Desktop/Screen Recording 2025-02-05 at 11.41.43 PM.mov" FileSize="142483768" Flag="64">
   <Tags Flag="1"/>
-  <Infos SongLength="62.250" LastModified="1761791571" FirstSeen="1761791285" Bitrate="18311" Cover="2"/>
+  <Infos SongLength="62.250" LastModified="1787953573" FirstSeen="1787953522" Bitrate="18311" Cover="2"/>
  </Song>
  <Song FilePath="/Users/jboltle/Desktop/Screen Recording 2025-02-06 at 10.19.36 PM.mov" FileSize="163717796" Flag="64">
   <Tags Flag="1"/>
-  <Infos SongLength="52.016667" LastModified="1761791571" FirstSeen="1761791285" Bitrate="25179" Cover="34"/>
+  <Infos SongLength="52.016667" LastModified="1787953522" FirstSeen="1787953522" Bitrate="25179" Cover="2"/>
  </Song>
  <Song FilePath="/Users/jboltle/Desktop/Screen Recording 2025-02-06 at 10.45.31 PM.mov" FileSize="124837882" Flag="64">
   <Tags Flag="1"/>
-  <Infos SongLength="53.116667" LastModified="1761791601" FirstSeen="1761791285" Bitrate="18802" Cover="2"/>
+  <Infos SongLength="53.116667" LastModified="1787953579" FirstSeen="1787953522" Bitrate="18802" Cover="2"/>
  </Song>
  <Song FilePath="/Users/jboltle/Desktop/Screen Recording 2025-02-06 at 10.48.01 PM.mov" FileSize="125060779" Flag="64">
   <Tags Flag="1"/>
-  <Infos SongLength="50.483333" LastModified="1761791505" FirstSeen="1761791285" Bitrate="19818" Cover="2"/>
+  <Infos SongLength="50.483333" LastModified="1787953565" FirstSeen="1787953522" Bitrate="19818" Cover="2"/>
  </Song>
  <Song FilePath="/Users/jboltle/Desktop/Screen Recording 2025-02-06 at 10.51.06 PM.mov" FileSize="147559693" Flag="64">
   <Tags Flag="1"/>
-  <Infos SongLength="59.583333" LastModified="1761791520" FirstSeen="1761791285" Bitrate="19812" Cover="2"/>
+  <Infos SongLength="59.583333" LastModified="1787953533" FirstSeen="1787953522" Bitrate="19812" Cover="2"/>
  </Song>
- <Song FilePath="/Users/jboltle/Desktop/Screen Recording 2025-02-08 at 8.37.33 PM.mov" FileSize="130835352" Flag="64">
-  <Tags Flag="1"/>
-  <Infos SongLength="55.583333" LastModified="1761791333" FirstSeen="1761791285" Bitrate="18831" Cover="2"/>
+ <Song FilePath="/Users/jboltle/Desktop/Screen Recording 2025-02-08 at 8.37.33 PM.mov" FileSize="130835352">
+  <Infos LastModified="1787953522" FirstSeen="1787953522"/>
  </Song>
  <Song FilePath="/Users/jboltle/Desktop/Screen Recording 2025-02-12 at 1.18.02 AM.mov" FileSize="149985726" Flag="64">
   <Tags Flag="1"/>
-  <Infos SongLength="61.533333" LastModified="1765834104" FirstSeen="1761791285" Bitrate="19500" Cover="34"/>
+  <Infos SongLength="61.533333" LastModified="1787953565" FirstSeen="1787953522" Bitrate="19500" Cover="2"/>
  </Song>
- <Song FilePath="/Users/jboltle/Desktop/Screen Recording 2025-02-13 at 2.31.58 AM.mov" FileSize="154506176" Flag="64">
-  <Tags Flag="1"/>
-  <Infos SongLength="64.80" LastModified="1761791373" FirstSeen="1761791285" Bitrate="19075" Cover="2"/>
+ <Song FilePath="/Users/jboltle/Desktop/Screen Recording 2025-02-13 at 2.31.58 AM.mov" FileSize="154506176">
+  <Infos LastModified="1787953522" FirstSeen="1787953522"/>
  </Song>
- <Song FilePath="/Users/jboltle/Desktop/Screen Recording 2025-02-13 at 9.10.08 PM.mov" FileSize="124975931" Flag="64">
-  <Tags Flag="1"/>
-  <Infos SongLength="49.80" LastModified="1761791415" FirstSeen="1761791285" Bitrate="20076" Cover="2"/>
+ <Song FilePath="/Users/jboltle/Desktop/Screen Recording 2025-02-13 at 9.10.08 PM.mov" FileSize="124975931">
+  <Infos LastModified="1787953539" FirstSeen="1787953522" Cover="32"/>
  </Song>
  <Song FilePath="/Users/jboltle/Desktop/Screen Recording 2025-02-13 at 9.37.58 PM.mov" FileSize="151831402" Flag="64">
   <Tags Flag="1"/>
-  <Infos SongLength="59.666667" LastModified="1777924056" FirstSeen="1761791285" Bitrate="20357" Cover="34"/>
+  <Infos SongLength="59.666667" LastModified="1787953579" FirstSeen="1787953522" Bitrate="20357" Cover="34"/>
  </Song>
  <Song FilePath="/Users/jboltle/Desktop/Screen Recording 2025-02-19 at 11.20.53 PM.mov" FileSize="177282451" Flag="64">
   <Tags Flag="1"/>
-  <Infos SongLength="79.616667" LastModified="1777924052" FirstSeen="1761791285" Bitrate="17814" Cover="34"/>
+  <Infos SongLength="79.616667" LastModified="1787953550" FirstSeen="1787953522" Bitrate="17814" Cover="34"/>
  </Song>
- <Song FilePath="/Users/jboltle/Desktop/Screen Recording 2025-03-13 at 12.02.51 AM.mov" FileSize="128603678" Flag="64">
-  <Tags Flag="1"/>
-  <Infos SongLength="57.233333" LastModified="1773875872" FirstSeen="1761791285" Bitrate="17976" Cover="34"/>
+ <Song FilePath="/Users/jboltle/Desktop/Screen Recording 2025-03-13 at 12.02.51 AM.mov" FileSize="128603678">
+  <Infos LastModified="1787953523" FirstSeen="1787953522" Cover="32"/>
  </Song>
  <Song FilePath="/Users/jboltle/Desktop/Screen Recording 2025-04-08 at 4.52.08 PM.mov" FileSize="621934587" Flag="64">
   <Tags Flag="1"/>
-  <Infos SongLength="722.983333" LastModified="1770175923" FirstSeen="1761791285" Bitrate="6882" Cover="34"/>
+  <Infos SongLength="722.983333" LastModified="1787953579" FirstSeen="1787953522" Bitrate="6882" Cover="34"/>
  </Song>
  <Song FilePath="/Users/jboltle/Desktop/Screen Recording 2026-01-22 at 2.48.36 PM.mov" FileSize="19827738" Flag="64">
   <Tags Flag="1"/>
-  <Infos SongLength="6.550" LastModified="1777773346" FirstSeen="1773875853" Bitrate="24217" Cover="34"/>
+  <Infos SongLength="6.550" LastModified="1787953533" FirstSeen="1787953522" Bitrate="24217" Cover="2"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Downloads/Real Boston Richey - Help Me (Official Audio).mp3" FileSize="4386827">
+  <Tags Remix="Official Audio" Flag="1"/>
+  <Infos SongLength="182.7180" LastModified="1787951080" FirstSeen="1787951072" Bitrate="192" Cover="2"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/16yrold - sheck wes - mo bamba (prod. 16yrold &amp; take a daytrip).vdjcache" FileSize="5826240">
+  <Tags Author="16yrold" Title="sheck wes - mo bamba" Remix="prod. 16yrold &amp; take a daytrip" Flag="2"/>
+  <Infos SongLength="181.0" LastModified="1787953446" FirstSeen="1787951072" Bitrate="258" Cover="32"/>
+  <Link NetSearch="sc328456146"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/2hollis - jeans.vdjcache" FileSize="5838256">
+  <Tags Author="2hollis" Title="jeans" Flag="2"/>
+  <Infos SongLength="181.30" LastModified="1787951072" FirstSeen="1787951072" Bitrate="258"/>
+  <Link NetSearch="sc1650888186"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/310babii - Soak City  .m4a (Official Video, Do It).vdjcache" FileSize="2469864">
+  <Tags Author="310babii" Title="Soak City  .m4a" Remix="Official Video, Do It" Flag="2"/>
+  <Infos SongLength="154.30" LastModified="1787951080" FirstSeen="1787951072" Bitrate="128"/>
+  <Link NetSearch="sc1808012274"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/a!mee - Juke Me From The Back.vdjcache" FileSize="2953776">
+  <Tags Author="a!mee" Title="Juke Me From The Back" Flag="2"/>
+  <Infos SongLength="146.20" LastModified="1787951080" FirstSeen="1787951072" Bitrate="162"/>
+  <Link NetSearch="sc2234810591"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Alicia Keys - Un - Thinkable (Swizz Delight Bootleg, I&apos;m Ready Ft Drake).vdjcache" FileSize="11414224">
+  <Tags Author="Alicia Keys" Title="Un - Thinkable" Remix="Swizz Delight Bootleg, I&apos;m Ready Ft Drake" Flag="2"/>
+  <Infos SongLength="354.50" LastModified="1787953184" FirstSeen="1787951072" Bitrate="258" Cover="16384"/>
+  <Link NetSearch="sc1600402905"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/All Falls Down - Kanye West.vdjcache" FileSize="7199744">
+  <Tags Author="All Falls Down" Title="Kanye West" Flag="2"/>
+  <Infos SongLength="223.60" LastModified="1787951072" FirstSeen="1787951072" Bitrate="258"/>
+  <Link NetSearch="sc1622266413"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Babyfxce E - PTP.vdjcache" FileSize="4147120">
+  <Tags Author="Babyfxce E" Title="PTP" Flag="2"/>
+  <Infos SongLength="129.70" LastModified="1787951080" FirstSeen="1787951072" Bitrate="256"/>
+  <Link NetSearch="sc1866544854"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Beyoncé - Irreplaceable.mp3.vdjcache" FileSize="4035128" Flag="268435456">
+  <Tags Author="Beyoncé" Title="Irreplaceable.mp3" Flag="2"/>
+  <Infos SongLength="252.122268" LastModified="1787954018" FirstSeen="1787951072" Bitrate="128"/>
+  <Scan Version="801" Bpm="0.681814" Phase="19.253561" AltBpm="0.511361" Volume="0.854560" Key="A#" AudioSig="aZxXZ1dWV2hI14p3R2O2Qp0H" Flag="8421376"/>
+  <Poi Pos="0.089977" Type="automix" Point="realStart"/>
+  <Poi Pos="244.179592" Type="automix" Point="realEnd"/>
+  <Poi Pos="19.250" Type="automix" Point="fadeStart"/>
+  <Poi Pos="239.650" Type="automix" Point="fadeEnd"/>
+  <Link NetSearch="sc1640817366" DRM="20693"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Big Sean feat. E-40 - I Don&apos;t Fuck With You.vdjcache" FileSize="9256104">
+  <Tags Author="Big Sean feat. E-40" Title="I Don&apos;t Fuck With You" Flag="2"/>
+  <Infos SongLength="284.40" LastModified="1787953186" FirstSeen="1787951072" Bitrate="260" Cover="16384"/>
+  <Link NetSearch="sc167444670"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Blueface - Thotiana.vdjcache" FileSize="4209440">
+  <Tags Author="Blueface" Title="Thotiana" Flag="2"/>
+  <Infos SongLength="129.30" LastModified="1787951072" FirstSeen="1787951072" Bitrate="260"/>
+  <Link NetSearch="sc547891794"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Boston Richey - Real Boston Richey - Help Me (Official Instrumental).vdjcache" FileSize="3662600">
+  <Tags Author="Boston Richey" Title="Real Boston Richey - Help Me" Remix="Official Instrumental" Flag="2"/>
+  <Infos SongLength="181.30" LastModified="1787951072" FirstSeen="1787951072" Bitrate="162"/>
+  <Link NetSearch="sc1965687367"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/CENTRAL CEE FT. LIL BABY - BAND4BAND.vdjcache" FileSize="2286384">
+  <Tags Author="CENTRAL CEE FT. LIL BABY" Title="BAND4BAND" Flag="2"/>
+  <Infos SongLength="142.80" LastModified="1787951107" FirstSeen="1787951072" Bitrate="128" Cover="16384"/>
+  <Link NetSearch="sc1829458173"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Chief Keef - Faneto.vdjcache" FileSize="3539424" Flag="16">
+  <Tags Author="Chief Keef" Title="Faneto" Flag="2"/>
+  <Infos SongLength="221.20" LastModified="1788062013" FirstSeen="1788062013" Bitrate="128"/>
+  <Link NetSearch="sc321780110"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Chief Keef feat. Lil Reese - I Don&apos;t Like.vdjcache" FileSize="9554984">
+  <Tags Author="Chief Keef feat. Lil Reese" Title="I Don&apos;t Like" Flag="2"/>
+  <Infos SongLength="293.90" LastModified="1787953445" FirstSeen="1787951072" Bitrate="260" Cover="16384"/>
+  <Link NetSearch="sc271224922"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/City Girls - Act Up.vdjcache" FileSize="5143376" Flag="268435456">
+  <Tags Author="City Girls" Title="Act Up" Flag="2"/>
+  <Infos SongLength="158.357333" LastModified="1788062473" FirstSeen="1787951072" FirstPlay="1788062473" LastPlay="1788062473" PlayCount="1" Bitrate="257" Cover="16384"/>
+  <Scan Version="801" Bpm="0.618571" Phase="14.867824" AltBpm="0.463923" Volume="1.316646" Key="Cm" AudioSig="OIxJp2dkWFhHcodmOLmTx-gE" Flag="8421376"/>
+  <Poi Pos="0.020" Type="automix" Point="realStart"/>
+  <Poi Pos="158.169333" Type="automix" Point="realEnd"/>
+  <Poi Pos="9.950" Type="automix" Point="fadeStart"/>
+  <Poi Pos="155.250" Type="automix" Point="fadeEnd"/>
+  <Poi Pos="17.343129" Type="automix" Point="cutStart"/>
+  <Poi Pos="152.497778" Type="automix" Point="cutEnd"/>
+  <Poi Name="Break 1" Pos="39.301224" Type="remix"/>
+  <Poi Name="End Break 1" Pos="60.334875" Type="remix"/>
+  <Poi Name="Break 2" Pos="88.168345" Type="remix"/>
+  <Poi Name="End Break 2" Pos="118.941315" Type="remix"/>
+  <Link NetSearch="sc528996258" DRM="20695"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/DaBaby - PHAT.vdjcache" FileSize="4183264">
+  <Tags Author="DaBaby" Title="PHAT" Flag="2"/>
+  <Infos SongLength="129.10" LastModified="1787951072" FirstSeen="1787951072" Bitrate="259"/>
+  <Link NetSearch="sc1922947226"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/DaBaby - POP DAT THANG.vdjcache" FileSize="4504408">
+  <Tags Author="DaBaby" Title="POP DAT THANG" Flag="2"/>
+  <Infos SongLength="138.30" LastModified="1787953226" FirstSeen="1787951072" Bitrate="261" Cover="16384"/>
+  <Link NetSearch="sc2251812980"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Don Toliver - After Party.vdjcache" FileSize="5409488">
+  <Tags Author="Don Toliver" Title="After Party" Flag="2"/>
+  <Infos SongLength="168.0" LastModified="1787951072" FirstSeen="1787951072" Bitrate="258"/>
+  <Link NetSearch="sc774714985"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Don Toliver - E85.vdjcache" FileSize="4983256">
+  <Tags Author="Don Toliver" Title="E85" Flag="2"/>
+  <Infos SongLength="153.20" LastModified="1787953227" FirstSeen="1787951072" Bitrate="260" Cover="16384"/>
+  <Link NetSearch="sc2256834431"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Don Toliver - No Idea.vdjcache" FileSize="4952928">
+  <Tags Author="Don Toliver" Title="No Idea" Flag="2"/>
+  <Infos SongLength="153.80" LastModified="1787954014" FirstSeen="1787951072" Bitrate="258" Cover="16384"/>
+  <Link NetSearch="sc628515405"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Don Toliver - No Pole.vdjcache" FileSize="6090288">
+  <Tags Author="Don Toliver" Title="No Pole" Flag="2"/>
+  <Infos SongLength="187.60" LastModified="1787951080" FirstSeen="1787951072" Bitrate="260"/>
+  <Link NetSearch="sc1458212863"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Drake &amp; Usher - You Make Me Wanna x Come Thru (Slghtwrk Edit).vdjcache" FileSize="6650056" Flag="16">
+  <Tags Author="Drake &amp; Usher" Title="You Make Me Wanna x Come Thru" Remix="Slghtwrk Edit" Flag="2"/>
+  <Infos SongLength="206.50" LastModified="1788062013" FirstSeen="1788062013" Bitrate="258"/>
+  <Link NetSearch="sc1450978399"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Drake - Energy.vdjcache" FileSize="5840944">
+  <Tags Author="Drake" Title="Energy" Flag="2"/>
+  <Infos SongLength="182.0" LastModified="1787951099" FirstSeen="1787951072" Bitrate="257" Cover="16384"/>
+  <Link NetSearch="sc257461410"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Drake - HYFR feat Lil Wayne (Slowed, Bass Boosted, &amp; Reverb).vdjcache" FileSize="7832824">
+  <Tags Author="Drake" Title="HYFR feat Lil Wayne" Remix="Slowed, Bass Boosted, &amp; Reverb" Flag="2"/>
+  <Infos SongLength="243.30" LastModified="1787951101" FirstSeen="1787951072" Bitrate="258" Cover="16384"/>
+  <Link NetSearch="sc1109355829"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Drake - Shabang.vdjcache" FileSize="3020784">
+  <Tags Author="Drake" Title="Shabang" Flag="2"/>
+  <Infos SongLength="188.70" LastModified="1787953439" FirstSeen="1787951072" Bitrate="128" Cover="16384"/>
+  <Link NetSearch="sc2321027741"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Drake - Started From the Bottom.vdjcache" FileSize="5596752">
+  <Tags Author="Drake" Title="Started From the Bottom" Flag="2"/>
+  <Infos SongLength="173.20" LastModified="1787953444" FirstSeen="1787951072" Bitrate="259" Cover="16384"/>
+  <Link NetSearch="sc257461649"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Drake feat. The Weeknd - Crew Love.vdjcache" FileSize="6789904">
+  <Tags Author="Drake feat. The Weeknd" Title="Crew Love" Flag="2"/>
+  <Infos SongLength="208.80" LastModified="1787951080" FirstSeen="1787951072" Bitrate="260"/>
+  <Link NetSearch="sc257461530"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Drake, PARTYNEXTDOOR - Fortworth.vdjcache" FileSize="3711248">
+  <Tags Author="Drake, PARTYNEXTDOOR" Title="Fortworth" Flag="2"/>
+  <Infos SongLength="231.90" LastModified="1787953440" FirstSeen="1787951072" Bitrate="128" Cover="16384"/>
+  <Link NetSearch="sc2321029517"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/F.L.Y. Ft. Lil Wayne - Swag Surfin.vdjcache" FileSize="6196048">
+  <Tags Author="F.L.Y. Ft. Lil Wayne" Title="Swag Surfin" Flag="2"/>
+  <Infos SongLength="306.80" LastModified="1787953445" FirstSeen="1787951072" Bitrate="162" Cover="16384"/>
+  <Link NetSearch="sc25974017"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/f3miii - JANGANOBLE Jangalova x Noble.vdjcache" FileSize="5703928">
+  <Tags Author="f3miii" Title="JANGANOBLE Jangalova x Noble" Flag="2"/>
+  <Infos SongLength="175.50" LastModified="1787953227" FirstSeen="1787951072" Bitrate="260" Cover="32"/>
+  <Link NetSearch="sc2264882876"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Fatt Macc, Baby Mel - Control the Traffic (Slowed Down).vdjcache" FileSize="5663696">
+  <Tags Author="Fatt Macc, Baby Mel" Title="Control the Traffic" Remix="Slowed Down" Flag="2"/>
+  <Infos SongLength="174.60" LastModified="1787953220" FirstSeen="1787951072" Bitrate="260" Cover="16384"/>
+  <Link NetSearch="sc2069075220"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Fetty Wap - Trap Queen.vdjcache" FileSize="3554936">
+  <Tags Author="Fetty Wap" Title="Trap Queen" Flag="2"/>
+  <Infos SongLength="222.10" LastModified="1787951072" FirstSeen="1787951072" Bitrate="128"/>
+  <Link NetSearch="sc138636484"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Fetty Wap feat. Remy Boyz - 679.vdjcache" FileSize="6407576" Flag="268435456">
+  <Tags Author="Fetty Wap feat. Remy Boyz" Title="679" Flag="2"/>
+  <Infos SongLength="196.714667" LastModified="1788062552" FirstSeen="1787951072" FirstPlay="1788062552" LastPlay="1788062552" PlayCount="1" Bitrate="258" Cover="16384"/>
+  <Scan Version="801" Bpm="0.631587" Phase="10.126598" AltBpm="0.473685" Volume="1.327733" Key="Bm" AudioSig="qMSIh8WEiKh3sbWXV-ejywYG" Flag="8421376"/>
+  <Poi Pos="0.0240" Type="automix" Point="realStart"/>
+  <Poi Pos="194.225333" Type="automix" Point="realEnd"/>
+  <Poi Pos="2.10" Type="automix" Point="fadeStart"/>
+  <Poi Pos="192.050" Type="automix" Point="fadeEnd"/>
+  <Poi Pos="10.126803" Type="automix" Point="cutStart"/>
+  <Poi Pos="191.547211" Type="automix" Point="cutEnd"/>
+  <Link NetSearch="sc382729490" DRM="20695"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Fred again.., Skepta, PlaqueBoyMax - Victory Lap.vdjcache" FileSize="5404528">
+  <Tags Author="Fred again.., Skepta, PlaqueBoyMax" Title="Victory Lap" Flag="2"/>
+  <Infos SongLength="165.90" LastModified="1787951098" FirstSeen="1787951072" Bitrate="261" Cover="16384"/>
+  <Link NetSearch="sc2114899839"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/future - march madness (432hz).vdjcache" FileSize="7768960">
+  <Tags Author="future" Title="march madness" Remix="432hz" Flag="2"/>
+  <Infos SongLength="241.30" LastModified="1787953471" FirstSeen="1787951072" Bitrate="258" Cover="16384"/>
+  <Link NetSearch="sc781199587"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Gucci Mane - On Deck.vdjcache" FileSize="3777524" Flag="16">
+  <Tags Author="Gucci Mane" Title="On Deck" Flag="2"/>
+  <Infos SongLength="187.0" LastModified="1788062013" FirstSeen="1788062013" Bitrate="162"/>
+  <Link NetSearch="sc317417947"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Gunna - Who You Foolin.vdjcache" FileSize="3062416">
+  <Tags Author="Gunna" Title="Who You Foolin" Flag="2"/>
+  <Infos SongLength="151.60" LastModified="1787953471" FirstSeen="1787951072" Bitrate="162" Cover="16384"/>
+  <Link NetSearch="sc579244692"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Gunna feat. Burna Boy - wgft.vdjcache" FileSize="6010440">
+  <Tags Author="Gunna feat. Burna Boy" Title="wgft" Flag="2"/>
+  <Infos SongLength="184.50" LastModified="1787953227" FirstSeen="1787951072" Bitrate="261" Cover="16384"/>
+  <Link NetSearch="sc2140506552"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Icona Pop, Charli XCX - Icona Pop_ I Love It.vdjcache" FileSize="5045576">
+  <Tags Author="Icona Pop, Charli XCX" Title="Icona Pop: I Love It" Flag="2"/>
+  <Infos SongLength="156.70" LastModified="1787951072" FirstSeen="1787951072" Bitrate="258"/>
+  <Link NetSearch="sc118311514"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/J. Cole - No Role Modelz.vdjcache" FileSize="9529392" Flag="268435456">
+  <Tags Author="J. Cole" Title="No Role Modelz" Flag="2"/>
+  <Infos SongLength="292.821333" LastModified="1788062532" FirstSeen="1787951072" Bitrate="258"/>
+  <Scan Version="801" Bpm="0.60" Phase="0.021859" AltBpm="0.900023" Volume="0.985666" Key="A#m" AudioSig="eItYV0eHeVhHp5qWaIi7mAYJ" Flag="32768"/>
+  <Poi Pos="0.018667" Type="automix" Point="realStart"/>
+  <Poi Pos="288.718667" Type="automix" Point="realEnd"/>
+  <Poi Pos="0.050" Type="automix" Point="fadeStart"/>
+  <Poi Pos="264.0" Type="automix" Point="fadeEnd"/>
+  <Poi Pos="1.817687" Type="automix" Point="cutStart"/>
+  <Poi Pos="261.021315" Type="automix" Point="cutEnd"/>
+  <Link NetSearch="sc276855160" DRM="20695"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Jack Ü, Skrillex, Diplo - Where Are Ü Now (with Justin Bieber).vdjcache" FileSize="8134752">
+  <Tags Author="Jack Ü, Skrillex, Diplo" Title="Where Are Ü Now" Remix="with Justin Bieber" Flag="2"/>
+  <Infos SongLength="250.30" LastModified="1787951107" FirstSeen="1787951072" Bitrate="260" Cover="16384"/>
+  <Link NetSearch="sc193270658"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/JAŸ-Z, Kanye West feat. Frank Ocean &amp; The-Dream - No Church In The Wild.vdjcache" FileSize="8851080">
+  <Tags Author="JAŸ-Z, Kanye West feat. Frank Ocean &amp; The-Dream" Title="No Church In The Wild" Flag="2"/>
+  <Infos SongLength="272.50" LastModified="1787953445" FirstSeen="1787951072" Bitrate="260" Cover="16384"/>
+  <Link NetSearch="sc257701417"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Jeezy feat. Bankroll Fresh - All There.vdjcache" FileSize="6416448">
+  <Tags Author="Jeezy feat. Bankroll Fresh" Title="All There" Flag="2"/>
+  <Infos SongLength="198.40" LastModified="1787951072" FirstSeen="1787951072" Bitrate="259"/>
+  <Link NetSearch="sc285267223"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Jeremih feat. YG - Don&apos;t Tell &apos;Em.vdjcache" FileSize="8666376">
+  <Tags Author="Jeremih feat. YG" Title="Don&apos;t Tell &apos;Em" Flag="2"/>
+  <Infos SongLength="266.90" LastModified="1787953445" FirstSeen="1787951072" Bitrate="260" Cover="16384"/>
+  <Link NetSearch="sc256233695"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Kanye West - Flashing Lights.vdjcache" FileSize="7723680">
+  <Tags Author="Kanye West" Title="Flashing Lights" Flag="2"/>
+  <Infos SongLength="237.50" LastModified="1787951072" FirstSeen="1787951072" Bitrate="260"/>
+  <Link NetSearch="sc255766466"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Ke$ha - We R Who We R (Gladez Remix).vdjcache" FileSize="4307824">
+  <Tags Author="Ke$ha" Title="We R Who We R" Remix="Gladez Remix" Flag="2"/>
+  <Infos SongLength="133.80" LastModified="1787953184" FirstSeen="1787951072" Bitrate="258" Cover="16384"/>
+  <Link NetSearch="sc1486365388"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Kendrick Lamar - DNA.vdjcache" FileSize="6038624">
+  <Tags Author="Kendrick Lamar" Title="DNA." Flag="2"/>
+  <Infos SongLength="186.0" LastModified="1787951072" FirstSeen="1787951072" Bitrate="260"/>
+  <Link NetSearch="sc317617213"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Kiiara - Gold.vdjcache" FileSize="7338016">
+  <Tags Author="Kiiara" Title="Gold" Flag="2"/>
+  <Infos SongLength="225.90" LastModified="1787953226" FirstSeen="1787951072" Bitrate="260" Cover="16384"/>
+  <Link NetSearch="sc210633688"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/King Von - Crazy Story.vdjcache" FileSize="4727192">
+  <Tags Author="King Von" Title="Crazy Story" Flag="2"/>
+  <Infos SongLength="146.80" LastModified="1787951072" FirstSeen="1787951072" Bitrate="258"/>
+  <Link NetSearch="sc683076084"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Kodak Black feat. Travis Scott &amp; Offset - ZEZE.vdjcache" FileSize="7254032">
+  <Tags Author="Kodak Black feat. Travis Scott &amp; Offset" Title="ZEZE" Flag="2"/>
+  <Infos SongLength="225.30" LastModified="1787951072" FirstSeen="1787951072" Bitrate="258"/>
+  <Link NetSearch="sc512883342"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Lil Baby - Mrs. Trendsetter.vdjcache" FileSize="4833256">
+  <Tags Author="Lil Baby" Title="Mrs. Trendsetter" Flag="2"/>
+  <Infos SongLength="148.885333" LastModified="1788062608" FirstSeen="1787951072" Bitrate="257" Cover="16384"/>
+  <Scan Version="801" Bpm="0.379751" Phase="6.096326" AltBpm="0.569615" Volume="1.130944" Key="C#" AudioSig="SHOIaGZamVdXRm2WeJWpZ4QE" Flag="32768"/>
+  <Poi Pos="0.010667" Type="automix" Point="realStart"/>
+  <Poi Pos="146.421333" Type="automix" Point="realEnd"/>
+  <Poi Pos="0.010667" Type="automix" Point="fadeStart"/>
+  <Poi Pos="145.70" Type="automix" Point="fadeEnd"/>
+  <Poi Pos="0.400544" Type="automix" Point="cutStart"/>
+  <Poi Pos="142.804172" Type="automix" Point="cutEnd"/>
+  <Link NetSearch="sc2223116507" DRM="20695"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Lil Skies - Lust (prod. CashMoneyAp).vdjcache" FileSize="5027312">
+  <Tags Author="Lil Skies" Title="Lust" Remix="prod. CashMoneyAp" Flag="2"/>
+  <Infos SongLength="156.10" LastModified="1787951072" FirstSeen="1787951072" Bitrate="258"/>
+  <Link NetSearch="sc368537594"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Lil Uzi Vert - 20 Min.vdjcache" FileSize="7190736" Flag="268435456">
+  <Tags Author="Lil Uzi Vert" Title="20 Min" Flag="2"/>
+  <Infos SongLength="220.6080" LastModified="1788062591" FirstSeen="1787951072" Bitrate="258"/>
+  <Scan Version="801" Bpm="0.486225" Phase="0.863220" AltBpm="0.729342" Volume="1.29470" Key="Ebm" AudioSig="KFt4V2ZlWEdH5V_Wp1DNbM8G" Flag="32768"/>
+  <Poi Pos="0.1480" Type="automix" Point="realStart"/>
+  <Poi Pos="219.734667" Type="automix" Point="realEnd"/>
+  <Poi Pos="0.40" Type="automix" Point="fadeStart"/>
+  <Poi Pos="218.450" Type="automix" Point="fadeEnd"/>
+  <Poi Pos="2.808163" Type="automix" Point="cutStart"/>
+  <Poi Pos="217.962086" Type="automix" Point="cutEnd"/>
+  <Link NetSearch="sc355413347" DRM="20695"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Lil Uzi Vert - Money Longer.vdjcache" FileSize="3184208">
+  <Tags Author="Lil Uzi Vert" Title="Money Longer" Flag="2"/>
+  <Infos SongLength="198.90" LastModified="1787951080" FirstSeen="1787951072" Bitrate="128"/>
+  <Link NetSearch="sc245673410"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Lil Uzi Vert - XO Tour Llif3.vdjcache" FileSize="5949256">
+  <Tags Author="Lil Uzi Vert" Title="XO Tour Llif3" Flag="2"/>
+  <Infos SongLength="182.80" LastModified="1787951072" FirstSeen="1787951072" Bitrate="260"/>
+  <Link NetSearch="sc313998915"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Lil Wayne - She Will Ft. Drake.vdjcache" FileSize="5185768">
+  <Tags Author="Lil Wayne" Title="She Will Ft. Drake" Flag="2"/>
+  <Infos SongLength="324.0" LastModified="1787953440" FirstSeen="1787951072" Bitrate="128" Cover="16384"/>
+  <Link NetSearch="sc236392364"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Lil Wayne feat. Drake &amp; Future - Love Me.vdjcache" FileSize="8213936">
+  <Tags Author="Lil Wayne feat. Drake &amp; Future" Title="Love Me" Flag="2"/>
+  <Infos SongLength="253.50" LastModified="1787951072" FirstSeen="1787951072" Bitrate="259"/>
+  <Link NetSearch="sc252944841"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Lil Yachty, Veeze - Sorry Not Sorry.vdjcache" FileSize="4429760">
+  <Tags Author="Lil Yachty, Veeze" Title="Sorry Not Sorry" Flag="2"/>
+  <Infos SongLength="136.70" LastModified="1787951072" FirstSeen="1787951072" Bitrate="259"/>
+  <Link NetSearch="sc1898102283"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Lloyd feat. Lil Wayne - You.vdjcache" FileSize="8886872">
+  <Tags Author="Lloyd feat. Lil Wayne" Title="You" Flag="2"/>
+  <Infos SongLength="273.70" LastModified="1787951072" FirstSeen="1787951072" Bitrate="260"/>
+  <Link NetSearch="sc253096844"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Meek Mill - Dreams and Nightmares.vdjcache" FileSize="7469280">
+  <Tags Author="Meek Mill" Title="Dreams and Nightmares" Flag="2"/>
+  <Infos SongLength="230.70" LastModified="1787951072" FirstSeen="1787951072" Bitrate="259"/>
+  <Link NetSearch="sc64377498"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Mello Buckzz - MOVE.vdjcache" FileSize="5367424">
+  <Tags Author="Mello Buckzz" Title="MOVE" Flag="2"/>
+  <Infos SongLength="166.70" LastModified="1787951072" FirstSeen="1787951072" Bitrate="258"/>
+  <Link NetSearch="sc1604106489"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Michael Jackson - Wanna Be Startin Somethin (Áudio Oficial).vdjcache" FileSize="4109936">
+  <Tags Author="Michael Jackson" Title="Wanna Be Startin Somethin" Remix="Áudio Oficial" Flag="2"/>
+  <Infos SongLength="256.80" LastModified="1787951097" FirstSeen="1787951072" Bitrate="128" Cover="16384"/>
+  <Link NetSearch="sc370195859"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Migos feat. Lil Uzi Vert - Bad and Boujee (Prod. By Metro Boomin).vdjcache" FileSize="10770688">
+  <Tags Author="Migos feat. Lil Uzi Vert" Title="Bad and Boujee" Remix="Prod. By Metro Boomin" Flag="2"/>
+  <Infos SongLength="334.50" LastModified="1787951072" FirstSeen="1787951072" Bitrate="258"/>
+  <Link NetSearch="sc280186218"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Nicki Minaj feat. 2 Chainz - Beez In The Trap.vdjcache" FileSize="8754496">
+  <Tags Author="Nicki Minaj feat. 2 Chainz" Title="Beez In The Trap" Flag="2"/>
+  <Infos SongLength="268.50" LastModified="1787953441" FirstSeen="1787951072" Bitrate="261" Cover="16384"/>
+  <Link NetSearch="sc255821714"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Offset &amp; Metro Boomin - Ric Flair Drip (Slowed).vdjcache" FileSize="6551760">
+  <Tags Author="Offset &amp; Metro Boomin" Title="Ric Flair Drip" Remix="Slowed" Flag="2"/>
+  <Infos SongLength="203.50" LastModified="1787951072" FirstSeen="1787951072" Bitrate="258"/>
+  <Link NetSearch="sc354430742"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/On Top Of Cars - Lil MU (JEFE SLAB OPEN VERSE).vdjcache" FileSize="2740704">
+  <Tags Author="On Top Of Cars" Title="Lil MU" Remix="JEFE SLAB OPEN VERSE" Flag="2"/>
+  <Infos SongLength="171.20" LastModified="1787951080" FirstSeen="1787951072" Bitrate="128"/>
+  <Link NetSearch="sc2161719609"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Only The Family - Only The Family &amp; Lil Durk - Hellcats &amp; Trackhawks.vdjcache" FileSize="4731400" Flag="16">
+  <Tags Author="Only The Family" Title="Only The Family &amp; Lil Durk - Hellcats &amp; Trackhawks" Flag="2"/>
+  <Infos SongLength="146.90" LastModified="1788063152" FirstSeen="1788062013" Bitrate="258"/>
+  <Link NetSearch="sc998923204"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Playboi Carti - Location.vdjcache" FileSize="5490104">
+  <Tags Author="Playboi Carti" Title="Location" Flag="2"/>
+  <Infos SongLength="168.80" LastModified="1787951072" FirstSeen="1787951072" Bitrate="260"/>
+  <Link NetSearch="sc316331104"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Playboi Carti - TOXIC.vdjcache" FileSize="4670224">
+  <Tags Author="Playboi Carti" Title="TOXIC" Flag="2"/>
+  <Infos SongLength="135.30" LastModified="1787951072" FirstSeen="1787951072" Bitrate="276"/>
+  <Link NetSearch="sc2054341804"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Playboi Carti - Vamp Anthem.vdjcache" FileSize="3998432">
+  <Tags Author="Playboi Carti" Title="Vamp Anthem" Flag="2"/>
+  <Infos SongLength="124.20" LastModified="1787951072" FirstSeen="1787951072" Bitrate="258"/>
+  <Link NetSearch="sc953775880"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/PnB Rock - Selfish.vdjcache" FileSize="7910904">
+  <Tags Author="PnB Rock" Title="Selfish" Flag="2"/>
+  <Infos SongLength="245.70" LastModified="1787953446" FirstSeen="1787951072" Bitrate="258" Cover="16384"/>
+  <Link NetSearch="sc302395193"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Pooh Shiesty - FDO.vdjcache" FileSize="10384040">
+  <Tags Author="Pooh Shiesty" Title="FDO" Flag="2"/>
+  <Infos SongLength="319.30" LastModified="1787951072" FirstSeen="1787951072" Bitrate="260"/>
+  <Link NetSearch="sc2227612178"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Pretty Liyah - It&apos;s A Throw.vdjcache" FileSize="3793232">
+  <Tags Author="Pretty Liyah" Title="It&apos;s A Throw" Flag="2"/>
+  <Infos SongLength="119.70" LastModified="1787951080" FirstSeen="1787951072" Bitrate="254"/>
+  <Link NetSearch="sc1840102590"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Rae Sremmurd - No Type.vdjcache" FileSize="6463752">
+  <Tags Author="Rae Sremmurd" Title="No Type" Flag="2"/>
+  <Infos SongLength="200.10" LastModified="1787951072" FirstSeen="1787951072" Bitrate="258"/>
+  <Link NetSearch="sc262672472"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Rae Sremmurd feat. Gucci Mane - Black Beatles.vdjcache" FileSize="9516432">
+  <Tags Author="Rae Sremmurd feat. Gucci Mane" Title="Black Beatles" Flag="2"/>
+  <Infos SongLength="291.90" LastModified="1787953445" FirstSeen="1787951072" Bitrate="261" Cover="16384"/>
+  <Link NetSearch="sc275980933"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Rihanna - Bitch Better Have My Money.vdjcache" FileSize="7087712">
+  <Tags Author="Rihanna" Title="Bitch Better Have My Money" Flag="2"/>
+  <Infos SongLength="219.30" LastModified="1787951080" FirstSeen="1787951072" Bitrate="259"/>
+  <Link NetSearch="sc255769403"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Rob49 - WTHELLY.vdjcache" FileSize="4483168">
+  <Tags Author="Rob49" Title="WTHELLY" Flag="2"/>
+  <Infos SongLength="137.70" LastModified="1787953219" FirstSeen="1787951072" Bitrate="260" Cover="16384"/>
+  <Link NetSearch="sc2041455832"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Robin S - Show Me Love.vdjcache" FileSize="8704000">
+  <Tags Author="Robin S" Title="Show Me Love" Flag="2"/>
+  <Infos SongLength="269.50" LastModified="1787953440" FirstSeen="1787951072" Bitrate="258" Cover="16384"/>
+  <Link NetSearch="sc232282747"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Sage The Gemini feat. Iamsu! - Gas Pedal.vdjcache" FileSize="6766040">
+  <Tags Author="Sage The Gemini feat. Iamsu!" Title="Gas Pedal" Flag="2"/>
+  <Infos SongLength="207.30" LastModified="1787953445" FirstSeen="1787951072" Bitrate="261" Cover="16384"/>
+  <Link NetSearch="sc255981286"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Sexxy Red - He Wanna Hang With a Bad B tch.mp3.vdjcache" FileSize="4365400">
+  <Tags Author="Sexxy Red" Title="He Wanna Hang With a Bad B tch.mp3" Flag="2"/>
+  <Infos SongLength="216.10" LastModified="1787953439" FirstSeen="1787951072" Bitrate="162" Cover="16384"/>
+  <Link NetSearch="sc2266109717"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Sexyy Red, Key Glock - Hang Wit a Bad Bitch.vdjcache" FileSize="5040144">
+  <Tags Author="Sexyy Red, Key Glock" Title="Hang Wit a Bad Bitch" Flag="2"/>
+  <Infos SongLength="155.0" LastModified="1787951098" FirstSeen="1787951072" Bitrate="260" Cover="16384"/>
+  <Link NetSearch="sc2261604614"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Soulja Boy - Crank That.vdjcache" FileSize="7163696">
+  <Tags Author="Soulja Boy" Title="Crank That" Flag="2"/>
+  <Infos SongLength="222.50" LastModified="1787951072" FirstSeen="1787951072" Bitrate="258"/>
+  <Link NetSearch="sc243932946"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Soulja Boy - Pretty Boy Swag.vdjcache" FileSize="7234232">
+  <Tags Author="Soulja Boy" Title="Pretty Boy Swag" Flag="2"/>
+  <Infos SongLength="224.70" LastModified="1787951080" FirstSeen="1787951072" Bitrate="258"/>
+  <Link NetSearch="sc47552433"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/SpeakerKnockerz - Speaker Knockerz - Freak Hoe.vdjcache" FileSize="5328568">
+  <Tags Author="SpeakerKnockerz" Title="Speaker Knockerz - Freak Hoe" Flag="2"/>
+  <Infos SongLength="165.50" LastModified="1787951072" FirstSeen="1787951072" Bitrate="258"/>
+  <Link NetSearch="sc133046439"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Tee Grizzley - First Day Out.vdjcache" FileSize="8202304">
+  <Tags Author="Tee Grizzley" Title="First Day Out" Flag="2"/>
+  <Infos SongLength="254.70" LastModified="1787951072" FirstSeen="1787951072" Bitrate="258"/>
+  <Link NetSearch="sc306555098"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Timeless - The Weekend x Playboi Carti (Alt Intro, OG Adlibs, Reverb).vdjcache" FileSize="10388312">
+  <Tags Author="Timeless" Title="The Weekend x Playboi Carti" Remix="Alt Intro, OG Adlibs, Reverb" Flag="2"/>
+  <Infos SongLength="322.70" LastModified="1787953219" FirstSeen="1787951072" Bitrate="258" Cover="16384"/>
+  <Link NetSearch="sc1939797632"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Trey Songz - All We Do.vdjcache" FileSize="8711168">
+  <Tags Author="Trey Songz" Title="All We Do" Flag="2"/>
+  <Infos SongLength="267.90" LastModified="1787953441" FirstSeen="1787951072" Bitrate="260" Cover="16384"/>
+  <Link NetSearch="sc255774775"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Trey Songz - Heart Attack.vdjcache" FileSize="7603160">
+  <Tags Author="Trey Songz" Title="Heart Attack" Flag="2"/>
+  <Infos SongLength="236.10" LastModified="1787953471" FirstSeen="1787951072" Bitrate="258" Cover="16384"/>
+  <Link NetSearch="sc40998052"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Trill Family, Boosie Badazz &amp; Webbie feat. Foxx - Wipe Me Down.vdjcache" FileSize="9450080">
+  <Tags Author="Trill Family, Boosie Badazz &amp; Webbie feat. Foxx" Title="Wipe Me Down" Flag="2"/>
+  <Infos SongLength="290.90" LastModified="1787951072" FirstSeen="1787951072" Bitrate="260"/>
+  <Link NetSearch="sc254454132"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Trinidad James - All Gold Everything.vdjcache" FileSize="6109760">
+  <Tags Author="Trinidad James" Title="All Gold Everything" Flag="2"/>
+  <Infos SongLength="187.90" LastModified="1787953180" FirstSeen="1787951072" Bitrate="260" Cover="16384"/>
+  <Link NetSearch="sc1052528638"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Ty Dolla $ign feat. B.o.B - Paranoid.vdjcache" FileSize="7051520">
+  <Tags Author="Ty Dolla $ign feat. B.o.B" Title="Paranoid" Flag="2"/>
+  <Infos SongLength="216.60" LastModified="1787953603" FirstSeen="1787951072" Bitrate="260" Cover="16384"/>
+  <Link NetSearch="sc99242911"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/UGK ft. Andre 3000 - Int&apos;l Players Anthem (Lightstar Remix).vdjcache" FileSize="10078168">
+  <Tags Author="UGK ft. Andre 3000" Title="Int&apos;l Players Anthem" Remix="Lightstar Remix" Flag="2"/>
+  <Infos SongLength="313.0" LastModified="1787951100" FirstSeen="1787951072" Bitrate="258" Cover="16384"/>
+  <Link NetSearch="sc1811252652"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Vanessa Carlton - A Thousand Miles.vdjcache" FileSize="7695720">
+  <Tags Author="Vanessa Carlton" Title="A Thousand Miles" Flag="2"/>
+  <Infos SongLength="237.50" LastModified="1787951080" FirstSeen="1787951072" Bitrate="259"/>
+  <Link NetSearch="sc255837979"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Waka Flocka Flame feat. Wale &amp; Roscoe Dash - No Hands.vdjcache" FileSize="8607224">
+  <Tags Author="Waka Flocka Flame feat. Wale &amp; Roscoe Dash" Title="No Hands" Flag="2"/>
+  <Infos SongLength="267.30" LastModified="1787951080" FirstSeen="1787951072" Bitrate="258"/>
+  <Link NetSearch="sc5188846"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/YFN Lucci - Wet.vdjcache" FileSize="6839448">
+  <Tags Author="YFN Lucci" Title="Wet" Flag="2"/>
+  <Infos SongLength="210.10" LastModified="1787953181" FirstSeen="1787951072" Bitrate="260" Cover="16384"/>
+  <Link NetSearch="sc1052530612"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/YG feat. Drake - Who Do You Love_.vdjcache" FileSize="7617984" Flag="268435456">
+  <Tags Author="YG feat. Drake" Title="Who Do You Love?" Flag="2"/>
+  <Infos SongLength="234.410667" LastModified="1787958045" FirstSeen="1787951072" Bitrate="257" Cover="16384"/>
+  <Scan Version="801" Bpm="0.621769" Phase="20.118185" AltBpm="0.466315" Volume="0.875491" Key="Em" AudioSig="mch5pkZ6mXlW2YqGN3MuZ0YH" Flag="32768"/>
+  <Poi Pos="0.225333" Type="automix" Point="realStart"/>
+  <Poi Pos="233.489333" Type="automix" Point="realEnd"/>
+  <Poi Pos="10.50" Type="automix" Point="fadeStart"/>
+  <Poi Pos="232.950" Type="automix" Point="fadeEnd"/>
+  <Poi Pos="21.051791" Type="automix" Point="cutStart"/>
+  <Poi Pos="178.975782" Type="automix" Point="cutEnd"/>
+  <Poi Name="Break 1" Pos="99.390839" Type="remix"/>
+  <Poi Name="End Break 1" Pos="119.604535" Type="remix"/>
+  <Poi Name="Break 2" Pos="139.183311" Type="remix"/>
+  <Poi Name="End Break 2" Pos="159.395556" Type="remix"/>
+  <Link NetSearch="sc252642974" DRM="20693"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/YG feat. Jeezy &amp; Rich Homie Quan - My Nigga.vdjcache" FileSize="7660152">
+  <Tags Author="YG feat. Jeezy &amp; Rich Homie Quan" Title="My Nigga" Flag="2"/>
+  <Infos SongLength="235.60" LastModified="1787951072" FirstSeen="1787951072" Bitrate="260"/>
+  <Link NetSearch="sc252642992"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Young Dolph - Preach.vdjcache" FileSize="6586856">
+  <Tags Author="Young Dolph" Title="Preach" Flag="2"/>
+  <Infos SongLength="202.70" LastModified="1787953184" FirstSeen="1787951072" Bitrate="260" Cover="16384"/>
+  <Link NetSearch="sc1587842779"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Young Money feat. Drake - Trophies.vdjcache" FileSize="2390040">
+  <Tags Author="Young Money feat. Drake" Title="Trophies" Flag="2"/>
+  <Infos SongLength="149.30" LastModified="1787953181" FirstSeen="1787951072" Bitrate="128" Cover="16384"/>
+  <Link NetSearch="sc138278479"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Young Thug - Lifestyle.vdjcache" FileSize="4116624">
+  <Tags Author="Young Thug" Title="Lifestyle" Flag="2"/>
+  <Infos SongLength="257.20" LastModified="1787951080" FirstSeen="1787951072" Bitrate="128"/>
+  <Link NetSearch="sc160889754"/>
+ </Song>
+ <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Cache/Yung Miami - Spend Dat.vdjcache" FileSize="2903336">
+  <Tags Author="Yung Miami" Title="Spend Dat" Flag="2"/>
+  <Infos SongLength="181.40" LastModified="1787953439" FirstSeen="1787951072" Bitrate="128" Cover="16384"/>
+  <Link NetSearch="sc2304224711"/>
  </Song>
  <Song FilePath="/Users/jboltle/Library/Application Support/VirtualDJ/Sampler/MY BANK.bank/Soak City.vdjsample" Flag="131072">
   <Tags Author="" Title="Soak City" Remix="Vocal" Flag="1"/>
@@ -411,15 +962,9 @@
   <Tags Year="2023" Bpm="0.40" Flag="1"/>
   <Infos LastModified="1762317598" FirstSeen="1761791479" Cover="16386"/>
  </Song>
- <Song FilePath="/Users/jboltle/Music/Music stuff/luckiflip.mp3" FileSize="3168666" Flag="33554432">
+ <Song FilePath="/Users/jboltle/Music/Music stuff/luckiflip.mp3" FileSize="3168666">
   <Tags Flag="1"/>
-  <Infos SongLength="132.022857" LastModified="1762318298" FirstSeen="1761791479" FirstPlay="1762318298" LastPlay="1762318298" PlayCount="1" Bitrate="192" Cover="34"/>
-  <Scan Version="801" Bpm="0.548639" Phase="10.311429" AltBpm="0.371667" Volume="0.854165" Key="A" Flag="32768"/>
-  <Poi Pos="10.311429" Type="beatgrid"/>
-  <Poi Pos="0.642902" Type="automix" Point="realStart"/>
-  <Poi Pos="132.017052" Type="automix" Point="realEnd"/>
-  <Poi Pos="9.90" Type="automix" Point="fadeStart"/>
-  <Poi Pos="131.950" Type="automix" Point="fadeEnd"/>
+  <Infos SongLength="132.0230" LastModified="1787951080" FirstSeen="1787951072" Bitrate="192" Cover="2"/>
  </Song>
  <Song FilePath="/Users/jboltle/Music/Music stuff/mimofrl .mp3" FileSize="1499755">
   <Tags Flag="1"/>
@@ -436,15 +981,7 @@
  </Song>
  <Song FilePath="/Users/jboltle/Music/Music stuff/Synth beat 140 bpm.mp3" FileSize="3507792">
   <Tags Year="2023" Bpm="0.428571" Flag="1"/>
-  <Infos SongLength="146.155102" LastModified="1762318014" FirstSeen="1762317598" FirstPlay="1762318009" LastPlay="1762318009" PlayCount="1" Bitrate="192" Cover="16386"/>
-  <Scan Version="801" Bpm="0.428571" Phase="13.757959" AltBpm="0.642857" Volume="1.12390" Key="C#m" Flag="32768"/>
-  <Poi Pos="13.757959" Type="beatgrid"/>
-  <Poi Pos="0.023220" Type="automix" Point="realStart"/>
-  <Poi Pos="139.737687" Type="automix" Point="realEnd"/>
-  <Poi Pos="0.750" Type="automix" Point="fadeStart"/>
-  <Poi Pos="138.650" Type="automix" Point="fadeEnd"/>
-  <Poi Pos="15.046531" Type="automix" Point="cutStart"/>
-  <Poi Pos="136.328707" Type="automix" Point="cutEnd"/>
+  <Infos SongLength="146.1550" LastModified="1787951080" FirstSeen="1787951072" Bitrate="192" Cover="2"/>
  </Song>
  <Song FilePath="/Users/jboltle/Music/Music/Media.localized/Music/Unknown Artist/Unknown Album/(FREE SAMPLE) Dre6o x Lil Rae Type Beat - Belt 2 ass.mp3" FileSize="3003173">
   <Tags Flag="1"/>
@@ -460,13 +997,7 @@
  </Song>
  <Song FilePath="/Users/jboltle/Music/Music/Media.localized/Music/Unknown Artist/Unknown Album/elemental beat with prod tag.mp3" FileSize="321062">
   <Tags Year="2023" Bpm="0.416667" Flag="1"/>
-  <Infos SongLength="13.374694" LastModified="1761793615" FirstSeen="1761791479" FirstPlay="1761793615" LastPlay="1761793615" PlayCount="1" Bitrate="192" Cover="34"/>
-  <Scan Version="801" Bpm="0.625283" Phase="-0.111565" AltBpm="0.728526" Volume="0.278762" Key="C" Flag="32768"/>
-  <Poi Pos="-0.111565" Type="beatgrid"/>
-  <Poi Pos="0.026122" Type="automix" Point="realStart"/>
-  <Poi Pos="11.557732" Type="automix" Point="realEnd"/>
-  <Poi Pos="0.026122" Type="automix" Point="fadeStart"/>
-  <Poi Pos="11.557732" Type="automix" Point="fadeEnd"/>
+  <Infos SongLength="13.3750" LastModified="1787951080" FirstSeen="1787951072" Bitrate="192" Cover="2"/>
  </Song>
  <Song FilePath="/Users/jboltle/Music/Music/Media.localized/Music/Unknown Artist/Unknown Album/elemental beat.mp3" FileSize="2877092">
   <Tags Year="2023" Bpm="0.416667" Flag="1"/>
@@ -488,16 +1019,7 @@
   <Poi Pos="118.20" Type="automix" Point="fadeEnd"/>
  </Song>
  <Song FilePath="/Users/jboltle/Music/Music/Media.localized/Music/Unknown Artist/Unknown Album/high sky.wav" FileSize="8596254">
-  <Tags Flag="1"/>
-  <Infos SongLength="48.730771" LastModified="1762028021" FirstSeen="1761791479" Bitrate="1411" Cover="16384"/>
-  <Scan Version="801" Bpm="0.461519" Phase="-0.000136" AltBpm="0.693107" Volume="0.983543" Key="Em" Flag="32768"/>
-  <Poi Pos="-0.000136" Type="beatgrid"/>
-  <Poi Type="automix" Point="realStart"/>
-  <Poi Pos="45.675102" Type="automix" Point="realEnd"/>
-  <Poi Type="automix" Point="fadeStart"/>
-  <Poi Pos="44.30" Type="automix" Point="fadeEnd"/>
-  <Poi Pos="0.052971" Type="automix" Point="cutStart"/>
-  <Poi Pos="43.845805" Type="automix" Point="cutEnd"/>
+  <Infos LastModified="1787953523" FirstSeen="1787953523"/>
  </Song>
  <Song FilePath="/Users/jboltle/Music/Music/Media.localized/Music/Unknown Artist/Unknown Album/Interstellar.mp3" FileSize="6225636">
   <Tags Flag="1"/>
@@ -1233,10 +1755,9 @@
   <Poi Name="End Break 1" Pos="135.618322" Type="remix"/>
   <Link NetSearch="sc2092780665" DRM="20750" Cover="https://i1.sndcdn.com/artworks-oyCunaGNKQqQ7Gcs-E9Rz5Q-original.png"/>
  </Song>
- <Song FilePath="C:\Users\Jon\AppData\Local\VirtualDJ\Cache\Gucci Mane - On Deck.vdjcache" FileSize="3777672" Flag="16">
+ <Song FilePath="C:/Users/Jon/AppData/Local/VirtualDJ/Cache/Gucci Mane - On Deck.vdjcache" FileSize="3777672" Flag="16">
   <Tags Author="Gucci Mane" Title="On Deck" Flag="2"/>
-  <Infos SongLength="187.0" LastModified="1785082972" FirstSeen="1785082972" Bitrate="162"/>
-  <Link NetSearch="sc317417947"/>
+  <Infos SongLength="186.990" LastModified="1788062014" FirstSeen="1788062014" Bitrate="162"/>
  </Song>
  <Song FilePath="C:\Users\Jon\AppData\Local\VirtualDJ\Cache\Gunna - Who You Foolin.vdjcache" FileSize="3062416" Flag="16">
   <Tags Author="Gunna" Title="Who You Foolin" Flag="2"/>
@@ -2620,21 +3141,9 @@
   <Poi Name="Break 2" Pos="117.355102" Type="remix"/>
   <Poi Name="End Break 2" Pos="135.525442" Type="remix"/>
  </Song>
- <Song FilePath="C:\Users\Jon\Downloads\Chris Brown - Party ft. Usher, Gucci Mane.mp3" FileSize="5312816" Flag="301989904">
-  <Tags Flag="1"/>
-  <Infos SongLength="221.309388" LastModified="1787953633" FirstSeen="1780346444" FirstPlay="1780677522" LastPlay="1783894392" PlayCount="2" Bitrate="192" Cover="16386"/>
-  <Scan Version="801" Bpm="0.422540" Phase="27.354761" AltBpm="0.633810" Volume="1.251274" Key="Eb" AudioSig="V9NYZ1aaSHc3xHqXl7MvXMEG" Flag="32768"/>
-  <Poi Pos="0.313469" Type="automix" Point="realStart"/>
-  <Poi Pos="217.978776" Type="automix" Point="realEnd"/>
-  <Poi Pos="3.350" Type="automix" Point="fadeStart"/>
-  <Poi Pos="216.60" Type="automix" Point="fadeEnd"/>
-  <Poi Pos="27.356009" Type="automix" Point="cutStart"/>
-  <Poi Pos="216.219138" Type="automix" Point="cutEnd"/>
-  <Poi Name="Break 1" Pos="67.498231" Type="remix"/>
-  <Poi Name="End Break 1" Pos="81.440363" Type="remix"/>
-  <Poi Name="Break 2" Pos="117.355102" Type="remix"/>
-  <Poi Name="End Break 2" Pos="135.525442" Type="remix"/>
-  <Link clouddriveId="clouddrive://googledrive/1MYjDzzSnDIhGI67ZZeErv7xtSth549yD\Chris Brown - Party ft. Usher, Gucci Mane.mp3"/>
+ <Song FilePath="C:\Users\Jon\Downloads\Chris Brown - Party ft. Usher, Gucci Mane.mp3" Flag="16">
+  <Tags Flag="2"/>
+  <Infos SongLength="221.3090" LastModified="1787960170" FirstSeen="1787960170"/>
  </Song>
  <Song FilePath="C:\Users\Jon\Downloads\Drunk in Love.mp3" FileSize="7765101" Flag="301989904">
   <Tags Flag="1"/>
@@ -2666,35 +3175,13 @@
   <Poi Pos="0.582676" Type="automix" Point="cutStart"/>
   <Poi Pos="137.592744" Type="automix" Point="cutEnd"/>
  </Song>
- <Song FilePath="C:\Users\Jon\Downloads\HYFR (Hell Ya Fing Right) - Drake.mp3" FileSize="8265788" Flag="268435472">
-  <Tags Author="Drake" Title="HYFR (Hell Ya F***ing Right)" Album="Take Care" Year="2012" Flag="1"/>
-  <Infos SongLength="206.640" LastModified="1787953633" FirstSeen="1780776377" FirstPlay="1780776486" LastPlay="1780776486" PlayCount="1" Bitrate="320" Cover="16386"/>
-  <Scan Version="801" Bpm="0.428571" Phase="42.961884" AltBpm="0.642857" Volume="0.899784" Key="Gm" AudioSig="acZHd4Z1eHhXuHeXRzKDmlEG" Flag="32768"/>
-  <Poi Pos="0.133333" Type="automix" Point="realStart"/>
-  <Poi Pos="202.982667" Type="automix" Point="realEnd"/>
-  <Poi Pos="13.50" Type="automix" Point="fadeStart"/>
-  <Poi Pos="194.250" Type="automix" Point="fadeEnd"/>
-  <Poi Pos="41.233560" Type="automix" Point="cutStart"/>
-  <Poi Pos="194.034649" Type="automix" Point="cutEnd"/>
-  <Poi Name="Break 1" Pos="68.458957" Type="remix"/>
-  <Poi Name="End Break 1" Pos="82.386576" Type="remix"/>
-  <Poi Name="Break 2" Pos="95.888980" Type="remix"/>
-  <Poi Name="End Break 2" Pos="123.522902" Type="remix"/>
-  <Poi Name="Break 3" Pos="150.740317" Type="remix"/>
-  <Poi Name="End Break 3" Pos="164.669388" Type="remix"/>
-  <Link clouddriveId="clouddrive://googledrive/17Dg8GET5GywU8E3Af0BQBuNBPTVWsY4F\HYFR (Hell Ya Fing Right) - Drake.mp3"/>
+ <Song FilePath="C:\Users\Jon\Downloads\HYFR (Hell Ya Fing Right) - Drake.mp3" Flag="16">
+  <Tags Author="Drake" Title="HYFR (Hell Ya F***ing Right)" Flag="2"/>
+  <Infos SongLength="206.640" LastModified="1787960170" FirstSeen="1787960170"/>
  </Song>
- <Song FilePath="C:\Users\Jon\Downloads\Justin Timberlake - My Love.mp3" FileSize="4419846" Flag="301989904">
-  <Tags Flag="1"/>
-  <Infos SongLength="276.178141" LastModified="1787953633" FirstSeen="1780347089" FirstPlay="1780347223" LastPlay="1780782441" PlayCount="2" Bitrate="128" Cover="16386"/>
-  <Scan Version="801" Bpm="0.50" Phase="0.352721" AltBpm="0.750" Volume="1.301587" Key="A" AudioSig="mcNYV6aFd2hnt4SWh8rHu5II" Flag="32768"/>
-  <Poi Pos="0.031927" Type="automix" Point="realStart"/>
-  <Poi Pos="276.172336" Type="automix" Point="realEnd"/>
-  <Poi Pos="0.150" Type="automix" Point="fadeStart"/>
-  <Poi Pos="273.850" Type="automix" Point="fadeEnd"/>
-  <Poi Pos="2.854603" Type="automix" Point="cutStart"/>
-  <Poi Pos="265.853243" Type="automix" Point="cutEnd"/>
-  <Link clouddriveId="clouddrive://googledrive/1YaQ49Kcu1BZcJDnBcx1VLTUeRze21B5x\Justin Timberlake - My Love.mp3"/>
+ <Song FilePath="C:\Users\Jon\Downloads\Justin Timberlake - My Love.mp3" Flag="16">
+  <Tags Flag="2"/>
+  <Infos SongLength="276.1780" LastModified="1787960170" FirstSeen="1787960170"/>
  </Song>
  <Song FilePath="C:\Users\Jon\Downloads\My Love - Justin Timberlake .mp3" FileSize="4419846" Flag="16">
   <Tags Flag="2"/>
@@ -2723,38 +3210,13 @@
   <Poi Pos="168.761179" Type="automix" Point="cutEnd"/>
   <Link clouddriveId="clouddrive://googledrive/1T7KNAiyTT7JFsJFeW-gX0UmcS7wPyNJs\Real Boston Richey - Help Me (Official Audio).mp3,clouddrive://googledrive/1E-q_nfMVxTWRzecktvYChZ7wg9_pA05b\Real Boston Richey - Help Me (Official Audio).mp3"/>
  </Song>
- <Song FilePath="C:\Users\Jon\Downloads\Rihanna - Where Have You Been (Audio).mp3" FileSize="5877688" Flag="301989904">
-  <Tags Remix="Audio" Flag="1"/>
-  <Infos SongLength="244.831202" LastModified="1787953633" FirstSeen="1780346704" FirstPlay="1780346760" LastPlay="1782163467" PlayCount="4" Bitrate="192" Cover="16386"/>
-  <Scan Version="801" Bpm="0.468753" Phase="0.523810" AltBpm="0.703129" Volume="1.069458" Key="F#" AudioSig="unW5lsWiiLm31LrGtsYwQ34H" Flag="32768"/>
-  <Poi Pos="0.297506" Type="automix" Point="realStart"/>
-  <Poi Pos="240.87220" Type="automix" Point="realEnd"/>
-  <Poi Pos="0.80" Type="automix" Point="fadeStart"/>
-  <Poi Pos="234.850" Type="automix" Point="fadeEnd"/>
-  <Poi Pos="8.965079" Type="automix" Point="cutStart"/>
-  <Poi Pos="223.652426" Type="automix" Point="cutEnd"/>
-  <Poi Pos="8.961882" Type="automix" Point="tempoStart"/>
-  <Poi Pos="207.244263" Type="automix" Point="tempoEnd"/>
-  <Poi Name="Break 1" Pos="135.523991" Type="remix"/>
-  <Poi Name="End Break 1" Pos="150.877460" Type="remix"/>
-  <Link clouddriveId="clouddrive://googledrive/1tm347nR7-rhQ4RANYrZXvldr8A6qbnr1\Rihanna - Where Have You Been (Audio).mp3"/>
+ <Song FilePath="C:\Users\Jon\Downloads\Rihanna - Where Have You Been (Audio).mp3" Flag="16">
+  <Tags Remix="Audio" Flag="2"/>
+  <Infos SongLength="244.8310" LastModified="1787960170" FirstSeen="1787960170"/>
  </Song>
- <Song FilePath="C:\Users\Jon\Downloads\Travis Scott - SICKO MODE (Audio).mp3" FileSize="5180479" Flag="301989904">
-  <Tags Remix="Audio" Flag="1"/>
-  <Infos SongLength="314.444626" LastModified="1787953633" FirstSeen="1780345529" FirstPlay="1780345590" LastPlay="1783894675" PlayCount="2" Bitrate="132" Cover="16386"/>
-  <Scan Version="801" Bpm="0.387109" Phase="0.867982" AltBpm="0.580658" Volume="1.380933" Key="Dm" AudioSig="iatohqaGeJlnpoqml4KXTMkJ" Flag="32768"/>
-  <Poi Pos="0.841723" Type="automix" Point="realStart"/>
-  <Poi Pos="313.663855" Type="automix" Point="realEnd"/>
-  <Poi Pos="18.150" Type="automix" Point="fadeStart"/>
-  <Poi Pos="313.250" Type="automix" Point="fadeEnd"/>
-  <Poi Pos="96.443356" Type="automix" Point="cutStart"/>
-  <Poi Pos="299.522902" Type="automix" Point="cutEnd"/>
-  <Poi Name="Break 1" Pos="154.134785" Type="remix"/>
-  <Poi Name="Break 2" Pos="189.197642" Type="remix"/>
-  <Poi Name="End Break 2" Pos="202.163084" Type="remix"/>
-  <Poi Name="Break 3" Pos="251.133243" Type="remix"/>
-  <Poi Name="End Break 3" Pos="264.103764" Type="remix"/>
-  <Link clouddriveId="clouddrive://googledrive/1BgYEozbkhm4BReVGU5ozgzhQiwPNYGu5\Travis Scott - SICKO MODE (Audio).mp3"/>
+ <Song FilePath="C:\Users\Jon\Downloads\Travis Scott - SICKO MODE (Audio).mp3" Flag="16">
+  <Tags Remix="Audio" Flag="2"/>
+  <Infos SongLength="314.4450" LastModified="1787960170" FirstSeen="1787960170"/>
  </Song>
  <Song FilePath="netsearch://dz2758569841" Flag="257">
   <Tags Author="VonOff1700" Title="Opps On Deck" Flag="1"/>
@@ -2780,18 +3242,10 @@
   <Poi Pos="234.598095" Type="automix" Point="tempoEnd"/>
   <Link NetSearch="sc1015055341" Cover="https://i1.sndcdn.com/artworks-TrXx5zURiuCchGg6-e6JDEw-original.jpg"/>
  </Song>
- <Song FilePath="netsearch://sc1017721768" FileSize="206614" Flag="256">
-  <Tags Author="feat. Pooh Shiesty &amp; Lil Durk" Title="OFFICIAL KING VON Back In Blood Remix" Genre="Hip-hop &amp; Rap" Internal="https://soundcloud.com/user-106583414/back-in-blood-remix-feat-1?utm_medium=api&amp;utm_campaign=social_sharing&amp;utm_source=id_313874, DMVSauce, https://soundcloud.com/user-106583414?utm_medium=api&amp;utm_campaign=social_sharing&amp;utm_source=id_313874" Bpm="0.405405" Key="G#m" Flag="1"/>
-  <Infos SongLength="186.386576" LastModified="1771816244" FirstSeen="1768797514" FirstPlay="1768797606" LastPlay="1771816244" PlayCount="2" Bitrate="256" Cover="16384"/>
-  <Scan Version="801" Bpm="0.408163" Phase="13.161406" AltBpm="0.612245" Volume="1.333166" Key="G#m" AudioSig="mV2Yp8RzWJlX0q7Gp5C3VrAF" Flag="32768"/>
-  <Poi Pos="13.161406" Type="beatgrid"/>
-  <Poi Pos="0.098685" Type="automix" Point="realStart"/>
-  <Poi Pos="183.688707" Type="automix" Point="realEnd"/>
-  <Poi Pos="0.650" Type="automix" Point="fadeStart"/>
-  <Poi Pos="182.350" Type="automix" Point="fadeEnd"/>
-  <Poi Pos="13.155556" Type="automix" Point="cutStart"/>
-  <Poi Pos="182.345578" Type="automix" Point="cutEnd"/>
-  <Link NetSearch="sc1017721768" Cover="https://i1.sndcdn.com/artworks-RLpG8r5MkW5v4Xci-wRVifQ-original.jpg"/>
+ <Song FilePath="netsearch://sc1017721768" Flag="256">
+  <Tags Author="feat. Pooh Shiesty &amp; Lil Durk" Title="OFFICIAL KING VON Back In Blood Remix" Flag="1"/>
+  <Infos SongLength="186.3870" LastModified="1787961918" FirstSeen="1787960170" Bitrate="256" Cover="16384"/>
+  <Link NetSearch="sc1017721768"/>
  </Song>
  <Song FilePath="netsearch://sc1023161845" FileSize="145720" Flag="256">
   <Tags Author="Benji Of Sweden" Title="Beyonce" Genre="House" Remix="To The Left" Internal="https://soundcloud.com/benjiofsweden/bos-beyonce-to-the-left-clean?utm_medium=api&amp;utm_campaign=social_sharing&amp;utm_source=id_313874, benjiofsweden, https://soundcloud.com/benjiofsweden?utm_medium=api&amp;utm_campaign=social_sharing&amp;utm_source=id_313874" Bpm="0.50" Key="B" Flag="1"/>
@@ -2807,6 +3261,22 @@
   <Poi Pos="25.649161" Type="automix" Point="tempoStart"/>
   <Poi Pos="280.149433" Type="automix" Point="tempoEnd"/>
   <Link NetSearch="sc1023161845" Cover="https://i1.sndcdn.com/artworks-pUypltvZKpHEaGmp-1kVhJQ-original.jpg"/>
+ </Song>
+ <Song FilePath="netsearch://sc1027972999" FileSize="2351019" Flag="256">
+  <Tags Author="Lil Durk" Title="Hellcats &amp; Trackhawks" Genre="Hip-hop &amp; Rap" Remix="Bass Bossted" Internal="https://soundcloud.com/dat-niga-ugly/lil-durk-hellcats-trackhawks-bass-bossted?utm_medium=api&amp;utm_campaign=social_sharing&amp;utm_source=id_313874, vxlid.trxy, https://soundcloud.com/dat-niga-ugly?utm_medium=api&amp;utm_campaign=social_sharing&amp;utm_source=id_313874" Bpm="0.379747" Key="Em" Flag="1"/>
+  <Infos SongLength="146.881315" LastModified="1788063145" FirstSeen="1788063122" Bitrate="128" Cover="16384"/>
+  <Scan Version="801" Bpm="0.382211" Phase="3.207370" AltBpm="0.573288" Volume="1.363160" Key="E" AudioSig="mNeZl6ZcqMtXgq61V0w-7IwE" Flag="32768"/>
+  <Poi Pos="0.150930" Type="automix" Point="realStart"/>
+  <Poi Pos="146.863311" Type="automix" Point="realEnd"/>
+  <Poi Pos="0.150930" Type="automix" Point="fadeStart"/>
+  <Poi Pos="143.850" Type="automix" Point="fadeEnd"/>
+  <Poi Name="Break 1" Pos="61.127982" Type="remix"/>
+  <Poi Name="End Break 1" Pos="73.533243" Type="remix"/>
+  <Poi Name="Break 2" Pos="85.589478" Type="remix"/>
+  <Poi Name="End Break 2" Pos="97.993288" Type="remix"/>
+  <Poi Name="Break 3" Pos="122.087619" Type="remix"/>
+  <Poi Name="End Break 3" Pos="134.683719" Type="remix"/>
+  <Link NetSearch="sc1027972999" Cover="https://i1.sndcdn.com/artworks-3JWNrxzR1vAQs7HK-ypWybg-original.jpg"/>
  </Song>
  <Song FilePath="netsearch://sc1039117885" FileSize="2560417" Flag="256">
   <Tags Author="ssgkobe" Title="sound design" Genre="Hip-hop &amp; Rap" Bpm="0.540541" Key="Am" Flag="1"/>
@@ -2946,6 +3416,18 @@
   <Poi Pos="82.378594" Type="automix" Point="cutStart"/>
   <Poi Pos="227.520726" Type="automix" Point="cutEnd"/>
   <Link NetSearch="sc1064435608" Cover="https://i1.sndcdn.com/avatars-5J9xYu5QEY7qxymk-dyJv7w-large.jpg"/>
+ </Song>
+ <Song FilePath="netsearch://sc1092004495" FileSize="181944" Flag="256">
+  <Tags Author="Lil Durk" Title="Hellcats &amp; Trackhawks" Remix="FAST" Internal="https://soundcloud.com/user-737221695/lil-durk-hellcats-trackhawks-fast?utm_medium=api&amp;utm_campaign=social_sharing&amp;utm_source=id_313874, Fetti Fee Jams 16, https://soundcloud.com/user-737221695?utm_medium=api&amp;utm_campaign=social_sharing&amp;utm_source=id_313874" Bpm="0.594059" Key="G#m" Flag="1"/>
+  <Infos SongLength="128.940408" LastModified="1788063197" FirstSeen="1788063122" Bitrate="161"/>
+  <Scan Version="801" Bpm="0.599320" Phase="-1.412721" AltBpm="0.449501" Volume="1.162323" Key="A#" AudioSig="qT54Z6WTeHh33LumpiF-M_sD" Flag="8421376"/>
+  <Poi Pos="0.081270" Type="automix" Point="realStart"/>
+  <Poi Pos="128.925896" Type="automix" Point="realEnd"/>
+  <Poi Pos="0.40" Type="automix" Point="fadeStart"/>
+  <Poi Pos="122.650" Type="automix" Point="fadeEnd"/>
+  <Poi Pos="3.432925" Type="automix" Point="cutStart"/>
+  <Poi Pos="123.697778" Type="automix" Point="cutEnd"/>
+  <Link NetSearch="sc1092004495" Cover="https://i1.sndcdn.com/avatars-K79B5hUNoWzCpn3N-JiCgiA-large.jpg"/>
  </Song>
  <Song FilePath="netsearch://sc1093818229" FileSize="180585" Flag="256">
   <Tags Author="lil durk" Title="hellcats and trackhawks" Genre="Hip-hop &amp; Rap" Internal="https://soundcloud.com/4nefrain/lil-durk-hellcats-and?utm_medium=api&amp;utm_campaign=social_sharing&amp;utm_source=id_313874, 4nefrain, https://soundcloud.com/4nefrain?utm_medium=api&amp;utm_campaign=social_sharing&amp;utm_source=id_313874" Bpm="0.379747" Key="Em" Flag="1"/>
@@ -3133,6 +3615,18 @@
   <Poi Pos="11.70" Type="automix" Point="fadeStart"/>
   <Poi Pos="125.950" Type="automix" Point="fadeEnd"/>
   <Link NetSearch="sc1185019987" Cover="https://i1.sndcdn.com/artworks-KLW5ohogWba6Obiq-qcoyUg-original.jpg"/>
+ </Song>
+ <Song FilePath="netsearch://sc1188232408" FileSize="40736" Flag="256">
+  <Tags Author="Official Guap3x" Title="Hellcats and trackhawks" Internal="https://soundcloud.com/ant-furlow-davis/hellcats-and-trackhawks?utm_medium=api&amp;utm_campaign=social_sharing&amp;utm_source=id_313874, Official Guap3x, https://soundcloud.com/ant-furlow-davis?utm_medium=api&amp;utm_campaign=social_sharing&amp;utm_source=id_313874" Bpm="0.382166" Key="Em" Flag="1"/>
+  <Infos SongLength="132.309333" LastModified="1788063134" FirstSeen="1788063122" Bitrate="286" Cover="16384"/>
+  <Scan Version="801" Bpm="0.382166" Phase="3.198843" AltBpm="0.573265" Volume="1.161641" Key="E" AudioSig="ifOId8aMeNpnxk_Wd8we7v4D" Flag="32768"/>
+  <Poi Pos="0.1280" Type="automix" Point="realStart"/>
+  <Poi Pos="130.1480" Type="automix" Point="realEnd"/>
+  <Poi Pos="0.90" Type="automix" Point="fadeStart"/>
+  <Poi Pos="126.750" Type="automix" Point="fadeEnd"/>
+  <Poi Pos="0.140771" Type="automix" Point="cutStart"/>
+  <Poi Pos="115.176054" Type="automix" Point="cutEnd"/>
+  <Link NetSearch="sc1188232408" Cover="https://i1.sndcdn.com/avatars-GYmlwvEixNSw9qBk-8O8hPg-large.jpg"/>
  </Song>
  <Song FilePath="netsearch://sc1191748330" FileSize="204182" Flag="256">
   <Tags Author="Gunna feat. Young Thug" Title="pushin P" Genre="Hip-hop &amp; Rap" Bpm="0.384615" Key="C#m" Flag="1"/>
@@ -3778,6 +4272,16 @@
   <Infos LastModified="1792801158" FirstSeen="1792801158"/>
   <Link NetSearch="sc138636484"/>
  </Song>
+ <Song FilePath="netsearch://sc1388941066" FileSize="222560" Flag="256">
+  <Tags Author="Gucci Mane" Title="On Deck" Genre="Hip Hop" Year="2015" Internal="https://soundcloud.com/flameemojimusic/on-deck-1?utm_medium=api&amp;utm_campaign=social_sharing&amp;utm_source=id_313874, Gucci Mane, https://soundcloud.com/flameemojimusic?utm_medium=api&amp;utm_campaign=social_sharing&amp;utm_source=id_313874" Bpm="0.387097" Key="Gm" Flag="1"/>
+  <Infos SongLength="186.901333" LastModified="1788064084" FirstSeen="1788063997" FirstPlay="1788064084" LastPlay="1788064084" PlayCount="1" Bitrate="249"/>
+  <Scan Version="801" Bpm="0.389082" Phase="1.617143" AltBpm="0.583628" Volume="0.632158" Key="Gm" AudioSig="mbG5l6WXiJl37H7WhmIoGM8F" Flag="8421376"/>
+  <Poi Pos="0.041333" Type="automix" Point="realStart"/>
+  <Poi Pos="186.862667" Type="automix" Point="realEnd"/>
+  <Poi Pos="0.050" Type="automix" Point="fadeStart"/>
+  <Poi Pos="186.850" Type="automix" Point="fadeEnd"/>
+  <Link NetSearch="sc1388941066" Cover="https://i1.sndcdn.com/artworks-CuiMMFW1j7wP-0-original.jpg"/>
+ </Song>
  <Song FilePath="netsearch://sc1389914383" FileSize="2858003" Flag="256">
   <Tags Author="chris brown" Title="party" Genre="Hip-hop &amp; Rap" Remix="sped up" Internal="https://soundcloud.com/f-i-r-e-917820825/chris-brown-party-sped-up?utm_medium=api&amp;utm_campaign=social_sharing&amp;utm_source=id_313874, ItzKani_, https://soundcloud.com/f-i-r-e-917820825?utm_medium=api&amp;utm_campaign=social_sharing&amp;utm_source=id_313874" Bpm="0.681818" Key="Cm" Flag="1"/>
   <Infos SongLength="178.561451" LastModified="1780346294" FirstSeen="1780346279" Bitrate="128"/>
@@ -3971,9 +4475,9 @@
   <Poi Pos="120.0" Type="automix" Point="fadeEnd"/>
   <Link NetSearch="sc1448297704" Cover="https://i1.sndcdn.com/artworks-l68ZuITpUMXKBAHd-FJzZLw-original.jpg"/>
  </Song>
- <Song FilePath="netsearch://sc1450978399" FileSize="6650056" Flag="256">
+ <Song FilePath="netsearch://sc1450978399" FileSize="6650056" Flag="268435728">
   <Tags Author="Drake &amp; Usher" Title="You Make Me Wanna x Come Thru" Genre="Hip-hop &amp; Rap" Remix="Slghtwrk Edit" Internal="https://soundcloud.com/wrkmode/you-make-me-wanna-x-come-thru-slghtwrk-edit-drake-usher?utm_medium=api&amp;utm_campaign=social_sharing&amp;utm_source=id_313874, WrkMode, https://soundcloud.com/wrkmode?utm_medium=api&amp;utm_campaign=social_sharing&amp;utm_source=id_313874" Bpm="0.365854" Key="Cm" Flag="1"/>
-  <Infos SongLength="206.518277" LastModified="1785082965" FirstSeen="1766094674" FirstPlay="1766094805" LastPlay="1782944203" PlayCount="6" Bitrate="256" Cover="16386"/>
+  <Infos SongLength="206.518277" LastModified="1788062016" FirstSeen="1766094674" FirstPlay="1766094805" LastPlay="1782076082" PlayCount="7" Bitrate="256" Cover="16384"/>
   <Scan Version="801" Bpm="0.365590" Phase="0.320522" AltBpm="0.548390" Volume="1.189148" Key="Cm" AudioSig="abxoZ3ZkaHhHlKWmZ7bkUWwG" Flag="32768"/>
   <Poi Pos="0.320522" Type="beatgrid"/>
   <Poi Pos="0.304762" Type="automix" Point="realStart"/>
@@ -3982,7 +4486,7 @@
   <Poi Pos="206.10" Type="automix" Point="fadeEnd"/>
   <Poi Pos="0.314921" Type="automix" Point="cutStart"/>
   <Poi Pos="190.058231" Type="automix" Point="cutEnd"/>
-  <Link NetSearch="sc1450978399" Cover="https://i1.sndcdn.com/artworks-dUxbHh2tutah5fQb-l040Qw-original.jpg"/>
+  <Link NetSearch="sc1450978399" DRM="20635" Cover="https://i1.sndcdn.com/artworks-dUxbHh2tutah5fQb-l040Qw-original.jpg"/>
  </Song>
  <Song FilePath="netsearch://sc1458212863" FileSize="6090288" Flag="268435712">
   <Tags Author="Don Toliver" Title="No Pole" Genre="Rap/Hip Hop" Year="2023" Internal="https://soundcloud.com/dontoliver/don-toliver-no-pole?utm_medium=api&amp;utm_campaign=social_sharing&amp;utm_source=id_313874, Don Toliver, https://soundcloud.com/dontoliver?utm_medium=api&amp;utm_campaign=social_sharing&amp;utm_source=id_313874" Bpm="0.468750" Key="Cm" Flag="1"/>
@@ -4941,6 +5445,22 @@
   <Poi Pos="255.989365" Type="automix" Point="tempoEnd"/>
   <Link NetSearch="sc1699294068" Cover="https://i1.sndcdn.com/artworks-lsWIkx6PKDMxa7zj-85i1iQ-original.jpg"/>
  </Song>
+ <Song FilePath="netsearch://sc170626319" FileSize="3308146" Flag="256">
+  <Tags Author="Faneto" Title="Chief Keef" Genre="Hip Hop/Rap" Year="2014" Internal="https://soundcloud.com/chiefkeef/faneto-chief-keef?utm_medium=api&amp;utm_campaign=social_sharing&amp;utm_source=id_313874, ChiefKeef, https://soundcloud.com/chiefkeef?utm_medium=api&amp;utm_campaign=social_sharing&amp;utm_source=id_313874" Bpm="0.413793" Key="Em" Flag="1"/>
+  <Infos SongLength="206.706009" LastModified="1788064271" FirstSeen="1788064161" FirstPlay="1788064271" LastPlay="1788064271" PlayCount="1" Bitrate="128"/>
+  <Scan Version="801" Bpm="0.416667" Phase="26.919661" AltBpm="0.624989" Volume="1.037407" Key="Em" AudioSig="eed4d7aHeKh3hpiXp71uT0UG" Flag="32768"/>
+  <Poi Pos="0.252517" Type="automix" Point="realStart"/>
+  <Poi Pos="201.589841" Type="automix" Point="realEnd"/>
+  <Poi Pos="1.10" Type="automix" Point="fadeStart"/>
+  <Poi Pos="199.850" Type="automix" Point="fadeEnd"/>
+  <Poi Pos="28.170159" Type="automix" Point="cutStart"/>
+  <Poi Pos="199.223583" Type="automix" Point="cutEnd"/>
+  <Poi Name="Break 1" Pos="53.174422" Type="remix"/>
+  <Poi Name="End Break 1" Pos="83.588934" Type="remix"/>
+  <Poi Name="Break 2" Pos="126.492154" Type="remix"/>
+  <Poi Name="End Break 2" Pos="156.919728" Type="remix"/>
+  <Link NetSearch="sc170626319" Cover="https://i1.sndcdn.com/artworks-000092937510-4o8rje-original.jpg"/>
+ </Song>
  <Song FilePath="netsearch://sc1709852400" FileSize="76651" Flag="256">
   <Tags Author="YFG Fatso" Title="No Privacy" Bpm="0.365854" Key="Cm" Flag="1"/>
   <Infos SongLength="103.816417" LastModified="1763996340" FirstSeen="1763995519" FirstPlay="1763996340" LastPlay="1763996340" PlayCount="1" Bitrate="160"/>
@@ -5032,17 +5552,16 @@
   <Link NetSearch="sc173200959" Cover="https://i1.sndcdn.com/artworks-000094686332-8ph0tq-original.jpg"/>
  </Song>
  <Song FilePath="netsearch://sc1739024973" FileSize="120275" Flag="256">
-  <Tags Author="YoungBoy Never Broke Again" Title="Fuck Niggaz" Genre="Hip Hop" Year="2024" Bpm="0.379747" Key="Cm" Flag="1"/>
-  <Infos SongLength="133.738667" LastModified="1768798020" FirstSeen="1768797227" FirstPlay="1768798020" LastPlay="1768798020" PlayCount="1" Bitrate="254" Cover="16384"/>
+  <Tags Author="YoungBoy Never Broke Again" Title="Fuck Niggaz" Flag="1"/>
+  <Infos SongLength="133.738667" LastModified="1787961927" FirstSeen="1787960170" Bitrate="254" Cover="16384"/>
   <Scan Version="801" Bpm="0.379751" Phase="0.029025" AltBpm="0.569615" Volume="1.188004" Key="F" AudioSig="adpIJyc2eCdmjV5HFra6UR8E" Flag="32768"/>
-  <Poi Pos="0.029025" Type="beatgrid"/>
   <Poi Pos="0.025333" Type="automix" Point="realStart"/>
   <Poi Pos="133.270667" Type="automix" Point="realEnd"/>
   <Poi Pos="0.025333" Type="automix" Point="fadeStart"/>
   <Poi Pos="123.850" Type="automix" Point="fadeEnd"/>
   <Poi Pos="2.304580" Type="automix" Point="cutStart"/>
   <Poi Pos="121.548481" Type="automix" Point="cutEnd"/>
-  <Link NetSearch="sc1739024973" Cover="https://i1.sndcdn.com/artworks-p2PsuSgNo3av-0-original.jpg"/>
+  <Link NetSearch="sc1739024973"/>
  </Song>
  <Song FilePath="netsearch://sc1745495166" FileSize="88006" Flag="256">
   <Tags Author="GloRilla" Title="Yeah Glo!" Genre="Hip Hop" Year="2024" Internal="https://soundcloud.com/glorillapimp/yeah-glo-1?utm_medium=api&amp;utm_campaign=social_sharing&amp;utm_source=id_313874, GloRilla, https://soundcloud.com/glorillapimp?utm_medium=api&amp;utm_campaign=social_sharing&amp;utm_source=id_313874" Bpm="0.405405" Key="Em" Flag="1"/>
@@ -5242,17 +5761,10 @@
   <Poi Pos="128.069660" Type="automix" Point="cutEnd"/>
   <Link NetSearch="sc1787863360" Cover="https://i1.sndcdn.com/artworks-GYAPSwKFsBakYuVr-Qste3A-original.jpg"/>
  </Song>
- <Song FilePath="netsearch://sc1794191197" FileSize="137257" Flag="256">
-  <Tags Author="T-Pain" Title="Up &amp; Down" Genre="Hip-hop &amp; Rap" Internal="https://soundcloud.com/mandoswagmoney01/t-pain-up-down?utm_medium=api&amp;utm_campaign=social_sharing&amp;utm_source=id_313874, Mando&apos;s Swag Money Music Station, https://soundcloud.com/mandoswagmoney01?utm_medium=api&amp;utm_campaign=social_sharing&amp;utm_source=id_313874" Bpm="0.472441" Key="Ebm" Flag="1"/>
-  <Infos SongLength="156.757914" LastModified="1779467613" FirstSeen="1777772485" FirstPlay="1777772572" LastPlay="1779467613" PlayCount="2" Bitrate="160" Cover="16384"/>
-  <Scan Version="801" Bpm="0.476247" Phase="17.719229" AltBpm="0.714376" Volume="1.503609" Key="Ebm" AudioSig="SKVYV1eGWIhXlpmXh7LordwE" Flag="32768"/>
-  <Poi Pos="0.060952" Type="automix" Point="realStart"/>
-  <Poi Pos="156.720181" Type="automix" Point="realEnd"/>
-  <Poi Pos="0.10" Type="automix" Point="fadeStart"/>
-  <Poi Pos="156.250" Type="automix" Point="fadeEnd"/>
-  <Poi Pos="19.150658" Type="automix" Point="cutStart"/>
-  <Poi Pos="154.405442" Type="automix" Point="cutEnd"/>
-  <Link NetSearch="sc1794191197" Cover="https://i1.sndcdn.com/artworks-kIyy5PA7ZKVWock7-mmogNQ-original.jpg"/>
+ <Song FilePath="netsearch://sc1794191197" Flag="256">
+  <Tags Author="T-Pain" Title="Up &amp; Down" Flag="1"/>
+  <Infos SongLength="156.7580" LastModified="1787951359" FirstSeen="1787951359"/>
+  <Link NetSearch="sc1794191197"/>
  </Song>
  <Song FilePath="netsearch://sc1796108041" FileSize="4796217" Flag="256">
   <Tags Author="MAF Teeski &amp; VonOff1700" Title="3AM IN THE RAQ" Genre="Hip Hop/Rap" Year="2024" Bpm="0.370370" Key="G" Flag="1"/>
@@ -5860,6 +6372,11 @@
   <Poi Name="Break 1" Pos="24.696599" Type="remix"/>
   <Poi Name="End Break 1" Pos="37.397188" Type="remix"/>
   <Link NetSearch="sc1897040079" Cover="https://i1.sndcdn.com/artworks-pNpf1DTGeogAg0ZU-AqF9Jw-original.jpg"/>
+ </Song>
+ <Song FilePath="netsearch://sc189734440" Flag="256">
+  <Tags Flag="1"/>
+  <Infos LastModified="1787953216" FirstSeen="1787951359" Cover="32"/>
+  <Link NetSearch="sc189734440"/>
  </Song>
  <Song FilePath="netsearch://sc1898102283" FileSize="4429760" Flag="268435712">
   <Tags Author="Lil Yachty, Veeze" Title="Sorry Not Sorry" Genre="Hip Hop" Year="2024" Internal="https://soundcloud.com/770rd/sorry-not-sorry?utm_medium=api&amp;utm_campaign=social_sharing&amp;utm_source=id_313874, &quot;Lil Yachty, RD, Lil Boat&quot;, https://soundcloud.com/770rd?utm_medium=api&amp;utm_campaign=social_sharing&amp;utm_source=id_313874" Bpm="0.377358" Key="C#m" Flag="1"/>
@@ -8056,23 +8573,10 @@
   <Poi Name="End Break 1" Pos="99.690522" Type="remix"/>
   <Link NetSearch="sc2298995126" Cover="https://i1.sndcdn.com/artworks-CUXSURvGsZyT-0-original.jpg"/>
  </Song>
- <Song FilePath="netsearch://sc2300812547" FileSize="5404106" Flag="256">
-  <Tags Author="sameh rashwan" Title="🔥 Habibi - Extended  By HouseNatic _ Deep House Track 2026 _ DJ _ Club Music" Remix="Club Mix" Internal="https://soundcloud.com/user-761716908/habibi-extended-club-mix-by?utm_medium=api&amp;utm_campaign=social_sharing&amp;utm_source=id_313874, sameh rashwan, https://soundcloud.com/user-761716908?utm_medium=api&amp;utm_campaign=social_sharing&amp;utm_source=id_313874" Bpm="0.472441" Key="Bm" Flag="1"/>
-  <Infos SongLength="267.540317" LastModified="1785083588" FirstSeen="1785083261" FirstPlay="1785083588" LastPlay="1785083588" PlayCount="1" Bitrate="160" Cover="16384"/>
-  <Scan Version="801" Bpm="0.472059" Phase="53.095444" AltBpm="0.354161" Rigid="0.471610" Volume="1.350628" Key="Bm" AudioSig="eJOIl8WViJiHQbmmp8hShDsI" Flag="10518528" BeatGrid="9482[4.04:2,0.34923][4.74:1][5.12:1][5.46:1][5.84:2][6.54:5][8.36:2][9.06:1][9.3636:9][12.473:1][12.78:2][13.491:1,0.33358][13.816:1,0.35106][14.141:3][15.18:1][15.5:3][16.56:2][17.3:6][19.447:3][20.518:1][20.84:3][21.88:1][22.2:3][23.26:1][23.62:2][24.311:7][26.86:8,0.365][29.808:1,0.41966,1/4][30.283:22,0.47498][40.738:1][41.213:1][41.72:10][46.458:112][99.642:4][101.51:8][105.3:3][106.72:1,0.47927][107.22:1,0.47648][107.7:1,0.46949][108.16:70,0.47246][141.27:44][162.04:1][162.54:2][163.48:1,0.47152][163.92:1][164.4:1][164.9:1][165.34:5][167.7:3][169.1:1][169.6:2][170.56:1][171:1][171.5:1][171.94:1][172.41:1][172.92:1][173.37:44][194.12:58][221.45:60,0.47041][249.62:1,0.43697][250.04:1,0.42987][250.44:1,0.42838][250.87:1,0.43777][251.34:26,0.46638][263.48:0,0.458603]"/>
-  <Poi Pos="1.040544" Type="automix" Point="realStart"/>
-  <Poi Pos="265.498413" Type="automix" Point="realEnd"/>
-  <Poi Pos="1.90" Type="automix" Point="fadeStart"/>
-  <Poi Pos="263.90" Type="automix" Point="fadeEnd"/>
-  <Poi Pos="52.624399" Type="automix" Point="cutStart"/>
-  <Poi Pos="248.722721" Type="automix" Point="cutEnd"/>
-  <Poi Pos="52.686961" Type="automix" Point="tempoStart"/>
-  <Poi Pos="231.771451" Type="automix" Point="tempoEnd"/>
-  <Poi Name="Break 1" Pos="97.739320" Type="remix"/>
-  <Poi Name="End Break 1" Pos="113.346757" Type="remix"/>
-  <Poi Name="Break 2" Pos="188.469841" Type="remix"/>
-  <Poi Name="End Break 2" Pos="204.010522" Type="remix"/>
-  <Link NetSearch="sc2300812547" Cover="https://i1.sndcdn.com/artworks-d4HO3SFNuVdaajOH-WPvpMA-original.jpg"/>
+ <Song FilePath="netsearch://sc2300812547" Flag="256">
+  <Tags Author="sameh rashwan" Title="🔥 Habibi - Extended  By HouseNatic _ Deep House Track 2026 _ DJ _ Club Music" Remix="Club Mix" Flag="1"/>
+  <Infos SongLength="267.540" LastModified="1787951072" FirstSeen="1787951072"/>
+  <Link NetSearch="sc2300812547"/>
  </Song>
  <Song FilePath="netsearch://sc2301219239" FileSize="4523631" Flag="256">
   <Tags Author="GR Services" Title="Sophie | VYZEE | LARP SONG" Genre="Electronic" Bpm="0.6250" Key="D" Flag="9"/>
@@ -8231,19 +8735,10 @@
   <Poi Pos="21.914558" Type="automix" Point="cutEnd"/>
   <Link NetSearch="sc2315933687" Cover="https://i1.sndcdn.com/artworks-zSg60zN0XIQpz0KE-J7g3bA-original.jpg"/>
  </Song>
- <Song FilePath="netsearch://sc2317754387" FileSize="44362" Flag="256">
-  <Tags Author="bEnji*" Title="manno x housemusic I prod. bEnji" Genre="Trap" Internal="https://soundcloud.com/benji-521705051/manno-x-housemusic-i-prod?utm_medium=api&amp;utm_campaign=social_sharing&amp;utm_source=id_313874, bEnji*, https://soundcloud.com/benji-521705051?utm_medium=api&amp;utm_campaign=social_sharing&amp;utm_source=id_313874" Bpm="0.441176" Key="Em" Flag="1"/>
-  <Infos SongLength="121.370703" LastModified="1785083502" FirstSeen="1785083261" FirstPlay="1785083502" LastPlay="1785083502" PlayCount="1" Bitrate="256" Cover="16384"/>
-  <Scan Version="801" Bpm="0.441179" Phase="0.037823" AltBpm="0.661769" Volume="1.377148" Key="G" AudioSig="6vBXx4eEmPmH8PVXR_AA_70D" Flag="32768"/>
-  <Poi Pos="0.042086" Type="automix" Point="realStart"/>
-  <Poi Pos="121.125442" Type="automix" Point="realEnd"/>
-  <Poi Pos="0.050" Type="automix" Point="fadeStart"/>
-  <Poi Pos="119.150" Type="automix" Point="fadeEnd"/>
-  <Poi Pos="0.041361" Type="automix" Point="cutStart"/>
-  <Poi Pos="118.714921" Type="automix" Point="cutEnd"/>
-  <Poi Pos="0.038798" Type="automix" Point="tempoStart"/>
-  <Poi Pos="105.479456" Type="automix" Point="tempoEnd"/>
-  <Link NetSearch="sc2317754387" Cover="https://i1.sndcdn.com/artworks-X0Dr9VdHK8UOmk2A-3WBOhg-original.jpg"/>
+ <Song FilePath="netsearch://sc2317754387" Flag="256">
+  <Tags Author="bEnji*" Title="manno x housemusic I prod. bEnji" Flag="1"/>
+  <Infos SongLength="121.3710" LastModified="1787951072" FirstSeen="1787951072"/>
+  <Link NetSearch="sc2317754387"/>
  </Song>
  <Song FilePath="netsearch://sc2320075463" FileSize="10437707" Flag="256">
   <Tags Author="FLY" Title="Swag Surfin" Genre="Hip-hop &amp; Rap" Remix="slowed+reverb" Internal="https://soundcloud.com/user-241164821/fly-swag-surfin-slowed-reverb?utm_medium=api&amp;utm_campaign=social_sharing&amp;utm_source=id_313874, AKN Visualz, https://soundcloud.com/user-241164821?utm_medium=api&amp;utm_campaign=social_sharing&amp;utm_source=id_313874" Bpm="0.521739" Key="Dm" Flag="1"/>
@@ -8318,20 +8813,10 @@
   <Poi Name="End Break 1" Pos="43.731156" Type="remix"/>
   <Link NetSearch="sc234457307" Cover="https://i1.sndcdn.com/artworks-000137176062-z9cnfg-original.jpg"/>
  </Song>
- <Song FilePath="netsearch://sc2347230797" FileSize="2891485" Flag="256">
-  <Tags Author="Ricci" Title="It&apos;s All About House Music" Genre="Dance" Year="2026" Internal="https://soundcloud.com/ricci33297/its-all-about-house-music?utm_medium=api&amp;utm_campaign=social_sharing&amp;utm_source=id_313874, Ricci, https://soundcloud.com/ricci33297?utm_medium=api&amp;utm_campaign=social_sharing&amp;utm_source=id_313874" Bpm="0.458015" Key="A#" Flag="9"/>
-  <Infos SongLength="180.653855" LastModified="1785083341" FirstSeen="1785083261" FirstPlay="1785083341" LastPlay="1785083341" PlayCount="1" Bitrate="128" Cover="16386"/>
-  <Scan Version="801" Bpm="0.461542" Phase="27.690294" AltBpm="0.692313" Volume="0.944060" Key="Em" AudioSig="uq6op8SliInHxnq1xsWIfIcF" Flag="32768"/>
-  <Poi Type="automix" Point="realStart"/>
-  <Poi Pos="178.873469" Type="automix" Point="realEnd"/>
-  <Poi Pos="0.350" Type="automix" Point="fadeStart"/>
-  <Poi Pos="177.0" Type="automix" Point="fadeEnd"/>
-  <Poi Pos="30.460952" Type="automix" Point="cutStart"/>
-  <Poi Pos="159.691610" Type="automix" Point="cutEnd"/>
-  <Poi Pos="30.460023" Type="automix" Point="tempoStart"/>
-  <Poi Name="Break 1" Pos="71.536327" Type="remix"/>
-  <Poi Name="End Break 1" Pos="118.154014" Type="remix"/>
-  <Link NetSearch="sc2347230797" Cover="https://i1.sndcdn.com/artworks-mDeb9jgC6ZEa-0-original.jpg"/>
+ <Song FilePath="netsearch://sc2347230797" Flag="256">
+  <Tags Author="Ricci" Title="It&apos;s All About House Music" Flag="1"/>
+  <Infos SongLength="180.6540" LastModified="1787951072" FirstSeen="1787951072"/>
+  <Link NetSearch="sc2347230797"/>
  </Song>
  <Song FilePath="netsearch://sc2352382952" FileSize="274100" Flag="256">
   <Tags Author="home4circus" Title="BASIN BORET TEKK X DARK TRIAD" Genre="tg: home4circus" Remix="IS OUT NOW" Bpm="0.431655" Key="C#m" Flag="1"/>
@@ -8407,6 +8892,18 @@
   <Poi Name="Break 2" Pos="90.091973" Type="remix"/>
   <Poi Name="End Break 2" Pos="106.720363" Type="remix"/>
   <Link NetSearch="sc237913125" Cover="https://i1.sndcdn.com/artworks-000139855278-r9abnr-original.jpg"/>
+ </Song>
+ <Song FilePath="netsearch://sc2385589443" FileSize="272060" Flag="256">
+  <Tags Author="Belly Gang Kushington x 21 Savage" Title="WTF Goin FAST*" Internal="https://soundcloud.com/djrawhh78-gmail-com/belly-gang-kushington-x-21?utm_medium=api&amp;utm_campaign=social_sharing&amp;utm_source=id_313874, DJ Rawhh 6, https://soundcloud.com/djrawhh78-gmail-com?utm_medium=api&amp;utm_campaign=social_sharing&amp;utm_source=id_313874" Bpm="0.594059" Key="Cm" Flag="1"/>
+  <Infos SongLength="148.421950" LastModified="1788063817" FirstSeen="1788063804" Bitrate="256" Cover="16384"/>
+  <Scan Version="801" Bpm="0.597256" Phase="9.677574" AltBpm="0.447948" Volume="1.109984" Key="A#" AudioSig="eP2ohtVtmIiGJhe11iiTcZQE" Flag="32768"/>
+  <Poi Pos="0.062404" Type="automix" Point="realStart"/>
+  <Poi Pos="148.075102" Type="automix" Point="realEnd"/>
+  <Poi Pos="0.062404" Type="automix" Point="fadeStart"/>
+  <Poi Pos="145.90" Type="automix" Point="fadeEnd"/>
+  <Poi Pos="2.553469" Type="automix" Point="cutStart"/>
+  <Poi Pos="145.853968" Type="automix" Point="cutEnd"/>
+  <Link NetSearch="sc2385589443" Cover="https://i1.sndcdn.com/avatars-rEMoVin53h91XpRf-wOWd1w-large.jpg"/>
  </Song>
  <Song FilePath="netsearch://sc240921299" FileSize="65989" Flag="257">
   <Tags Author="Borlini" Title="I Don&apos;t Fuck With Roses(&quot;IDFWU&quot; &amp; &quot;Roses&quot;)(Borlini Mashup)" Genre="Roses" Remix="FREE DOWNLOAD" Internal="https://soundcloud.com/eric-borlin/i-dont-fuck-with-roses-big-sean-idfwu-the-chainsmokers-roses-borlini-mashup?utm_medium=api&amp;utm_campaign=social_sharing&amp;utm_source=id_313874, Borlini, https://soundcloud.com/eric-borlin?utm_medium=api&amp;utm_campaign=social_sharing&amp;utm_source=id_313874" Bpm="0.606061" Key="C#m" Flag="1"/>
@@ -8697,17 +9194,10 @@
   <Poi Pos="244.235465" Type="automix" Point="cutEnd"/>
   <Link NetSearch="sc255769632" Cover="https://i1.sndcdn.com/artworks-untmscgei0Tv-0-original.jpg"/>
  </Song>
- <Song FilePath="netsearch://sc255769656" FileSize="141543" Flag="256">
-  <Tags Author="Rihanna feat. JAY-Z" Title="Umbrella" Genre="R &amp; B" Remix="Radio Edit" Year="2007" Internal="https://soundcloud.com/rihanna/umbrella-radio-edit?utm_medium=api&amp;utm_campaign=social_sharing&amp;utm_source=id_313874, Rihanna, https://soundcloud.com/rihanna?utm_medium=api&amp;utm_campaign=social_sharing&amp;utm_source=id_313874" Bpm="0.681818" Key="C#" Flag="1"/>
-  <Infos SongLength="255.2320" LastModified="1780344851" FirstSeen="1780344797" FirstPlay="1780344851" LastPlay="1780344851" PlayCount="1" Bitrate="230"/>
-  <Scan Version="801" Bpm="0.689705" Phase="0.269932" AltBpm="0.517234" Volume="1.307995" Key="A#m" AudioSig="aJV4h5Z1eJl3bpyXZ6WCtM4H" Flag="32768"/>
-  <Poi Pos="0.258667" Type="automix" Point="realStart"/>
-  <Poi Pos="251.320" Type="automix" Point="realEnd"/>
-  <Poi Pos="0.258667" Type="automix" Point="fadeStart"/>
-  <Poi Pos="240.250" Type="automix" Point="fadeEnd"/>
-  <Poi Pos="0.256145" Type="automix" Point="cutStart"/>
-  <Poi Pos="236.480" Type="automix" Point="cutEnd"/>
-  <Link NetSearch="sc255769656" Cover="https://i1.sndcdn.com/artworks-ipeZQIzZA8OR-0-original.jpg"/>
+ <Song FilePath="netsearch://sc255769656" Flag="256">
+  <Tags Author="Rihanna feat. JAY-Z" Title="Umbrella" Remix="Radio Edit" Flag="1"/>
+  <Infos SongLength="255.2320" LastModified="1787951072" FirstSeen="1787951072"/>
+  <Link NetSearch="sc255769656"/>
  </Song>
  <Song FilePath="netsearch://sc255769996" FileSize="281851" Flag="256">
   <Tags Author="Rihanna" Title="SOS" Genre="Pop" Remix="Album Version" Year="2005" Internal="https://soundcloud.com/rihanna/sos-album-version?utm_medium=api&amp;utm_campaign=social_sharing&amp;utm_source=id_313874, Rihanna, https://soundcloud.com/rihanna?utm_medium=api&amp;utm_campaign=social_sharing&amp;utm_source=id_313874" Bpm="0.434783" Key="F#m" Flag="1"/>
@@ -9329,16 +9819,16 @@
   <Poi Name="End Break 1" Pos="162.676825" Type="remix"/>
   <Link NetSearch="sc316331220" Cover="https://i1.sndcdn.com/artworks-VgDwootuiVzX-0-original.jpg"/>
  </Song>
- <Song FilePath="netsearch://sc317417947" FileSize="3777672" Flag="256">
+ <Song FilePath="netsearch://sc317417947" FileSize="3777524" Flag="272">
   <Tags Author="Gucci Mane" Title="On Deck" Genre="Hip-hop &amp; Rap" Year="2015" Internal="https://soundcloud.com/rbc-records/on-deck?utm_medium=api&amp;utm_campaign=social_sharing&amp;utm_source=id_313874, RBC Records, https://soundcloud.com/rbc-records?utm_medium=api&amp;utm_campaign=social_sharing&amp;utm_source=id_313874" Bpm="0.387097" Key="Gm" Flag="1"/>
-  <Infos SongLength="186.990295" LastModified="1785082972" FirstSeen="1768706221" FirstPlay="1768706319" LastPlay="1778868214" PlayCount="16" Bitrate="160" Cover="16386"/>
+  <Infos SongLength="186.990295" LastModified="1788065572" FirstSeen="1768706221" FirstPlay="1768706319" LastPlay="1778868214" PlayCount="16" Bitrate="160" Cover="16384"/>
   <Scan Version="801" Bpm="0.389104" Phase="1.656281" AltBpm="0.583628" Volume="0.625690" Key="Gm" AudioSig="mbG5l6WXiJln7H7WhlIoGNAF" Flag="32768"/>
   <Poi Pos="1.656281" Type="beatgrid"/>
   <Poi Pos="0.089977" Type="automix" Point="realStart"/>
   <Poi Pos="186.935147" Type="automix" Point="realEnd"/>
   <Poi Pos="0.10" Type="automix" Point="fadeStart"/>
   <Poi Pos="186.90" Type="automix" Point="fadeEnd"/>
-  <Link NetSearch="sc317417947" Cover="https://i1.sndcdn.com/artworks-000217530101-ml5vke-original.jpg"/>
+  <Link NetSearch="sc317417947" DRM="20635" Cover="https://i1.sndcdn.com/artworks-000217530101-ml5vke-original.jpg"/>
  </Song>
  <Song FilePath="netsearch://sc317594712" FileSize="60893" Flag="256">
   <Tags Author="Playboi Carti" Title="Magnolia" Genre="Hip-hop &amp; Rap" Internal="https://soundcloud.com/playboicarti/magnolia-1?utm_medium=api&amp;utm_campaign=social_sharing&amp;utm_source=id_313874, playboicarti, https://soundcloud.com/playboicarti?utm_medium=api&amp;utm_campaign=social_sharing&amp;utm_source=id_313874" Bpm="0.365854" Key="Bm" Flag="1"/>
@@ -10999,6 +11489,22 @@
   <Poi Pos="206.898503" Type="automix" Point="cutEnd"/>
   <Link NetSearch="sc99242911" DRM="20750" Cover="https://i1.sndcdn.com/artworks-PnhOZ86d01Gc-0-original.jpg"/>
  </Song>
+ <Song FilePath="netsearch://sc998831686" FileSize="223792" Flag="256">
+  <Tags Author="Only The Family &amp; Lil Durk" Title="Hellcats &amp; Trackhawks" Internal="https://soundcloud.com/isskxke-isskxke/hellcats-trackhawks?utm_medium=api&amp;utm_campaign=social_sharing&amp;utm_source=id_313874, Isskxke Isskxke, https://soundcloud.com/isskxke-isskxke?utm_medium=api&amp;utm_campaign=social_sharing&amp;utm_source=id_313874" Bpm="0.379747" Key="Em" Flag="1"/>
+  <Infos SongLength="146.935873" LastModified="1788063269" FirstSeen="1788063122" FirstPlay="1788063269" LastPlay="1788063269" PlayCount="1" Bitrate="256" Cover="16384"/>
+  <Scan Version="801" Bpm="0.382188" Phase="0.202222" AltBpm="0.573288" Volume="1.282458" Key="E" AudioSig="mcN4h6ZriMtXxk61V9o-7IsE" Flag="32768"/>
+  <Poi Pos="0.198821" Type="automix" Point="realStart"/>
+  <Poi Pos="146.825578" Type="automix" Point="realEnd"/>
+  <Poi Pos="0.20" Type="automix" Point="fadeStart"/>
+  <Poi Pos="138.550" Type="automix" Point="fadeEnd"/>
+  <Poi Pos="0.197370" Type="automix" Point="cutStart"/>
+  <Poi Pos="138.358277" Type="automix" Point="cutEnd"/>
+  <Poi Name="Break 1" Pos="61.159184" Type="remix"/>
+  <Poi Name="End Break 1" Pos="73.586213" Type="remix"/>
+  <Poi Name="Break 2" Pos="85.625760" Type="remix"/>
+  <Poi Name="End Break 2" Pos="98.03610" Type="remix"/>
+  <Link NetSearch="sc998831686" Cover="https://i1.sndcdn.com/artworks-lIY5Z6MdaQpFGXkc-CUGw2g-original.jpg"/>
+ </Song>
  <Song FilePath="netsearch://sc998923204" FileSize="4731400" Flag="256">
   <Tags Author="Only The Family" Title="Only The Family &amp; Lil Durk - Hellcats &amp; Trackhawks" Genre="Hip-hop &amp; Rap" Year="2021" Stars="4" Internal="https://soundcloud.com/lildurk/only-the-family-lil-durk-hellcats-trackhawks?utm_medium=api&amp;utm_campaign=social_sharing&amp;utm_source=id_313874, Lil Durk, https://soundcloud.com/lildurk?utm_medium=api&amp;utm_campaign=social_sharing&amp;utm_source=id_313874" Bpm="0.379747" Key="Em" Flag="1"/>
   <Infos SongLength="146.912653" LastModified="1792801545" FirstSeen="1769141245" FirstPlay="1769141522" LastPlay="1783895076" PlayCount="10" Bitrate="256" Cover="16386"/>
@@ -11016,6 +11522,484 @@
   <Poi Name="Break 2" Pos="85.600363" Type="remix"/>
   <Poi Name="End Break 2" Pos="98.010703" Type="remix"/>
   <Link NetSearch="sc998923204" Cover="https://i1.sndcdn.com/artworks-eGZ69hze8cQffhvJ-Dyfv6A-original.jpg"/>
+ </Song>
+ <Song FilePath="netsearch://sp0LWIiBYFmOnkqysugp0VKo" Flag="256">
+  <Tags Author="Yung Miami" Title="Spend Dat" Album="Spend Dat" Year="2026" Bpm="0.666667" Key="Fm" Flag="1"/>
+  <Infos SongLength="181.3910" LastModified="1793246077" FirstSeen="1793243835" Bitrate="320"/>
+  <Comment>Explicit</Comment>
+  <Scan Version="801" Bpm="0.666667" Phase="0.057075" AltBpm="0.50" Volume="1.349508" Key="Fm" AudioSig="R9hpaGd4WEg3MJY3V25iro8F" Flag="8421376"/>
+  <Poi Pos="0.052245" Type="automix" Point="realStart"/>
+  <Poi Pos="179.401723" Type="automix" Point="realEnd"/>
+  <Poi Pos="0.052245" Type="automix" Point="fadeStart"/>
+  <Poi Pos="172.70" Type="automix" Point="fadeEnd"/>
+  <Poi Pos="0.057324" Type="automix" Point="cutStart"/>
+  <Poi Pos="171.72390" Type="automix" Point="cutEnd"/>
+  <Link NetSearch="sp0LWIiBYFmOnkqysugp0VKo" Cover="https://i.scdn.co/image/ab67616d00001e02c26b2162d8efc2dc7d64e9e4"/>
+ </Song>
+ <Song FilePath="netsearch://sp0UXC93QrbB1by2v4Fa6ILS" Flag="256">
+  <Tags Author="DaBaby" Title="PHAT" Album="HOW TF IS THIS A MIXTAPE?" Year="2024" Bpm="0.413793" Key="C" Flag="1"/>
+  <Infos SongLength="129.1060" LastModified="1793246077" FirstSeen="1793243835" Bitrate="320"/>
+  <Comment>Explicit</Comment>
+  <Scan Version="801" Bpm="0.413793" Phase="0.468594" AltBpm="0.620680" Volume="1.150338" Key="C" AudioSig="2t_a1_WGidm3ELLk1u8O7v0D" Flag="32768"/>
+  <Poi Pos="0.053696" Type="automix" Point="realStart"/>
+  <Poi Pos="129.100045" Type="automix" Point="realEnd"/>
+  <Poi Pos="0.90" Type="automix" Point="fadeStart"/>
+  <Poi Pos="128.950" Type="automix" Point="fadeEnd"/>
+  <Poi Pos="13.298503" Type="automix" Point="cutStart"/>
+  <Poi Pos="128.330159" Type="automix" Point="cutEnd"/>
+  <Poi Pos="14.534603" Type="automix" Point="tempoStart"/>
+  <Poi Pos="115.085964" Type="automix" Point="tempoEnd"/>
+  <Link NetSearch="sp0UXC93QrbB1by2v4Fa6ILS" Cover="https://i.scdn.co/image/ab67616d00001e020714b03355941bf8d2544f64"/>
+ </Song>
+ <Song FilePath="netsearch://sp0b4M7hd7mzLTm99MrMeZsp" Flag="256">
+  <Tags Author="Lil Wayne, Drake" Title="She Will" Album="Tha Carter IV (Complete Edition)" Year="2011" Bpm="0.789474" Key="Gm" Flag="1"/>
+  <Infos SongLength="305.840" LastModified="1793246077" FirstSeen="1793243835" Bitrate="320" Cover="16384"/>
+  <Comment>Explicit</Comment>
+  <Scan Version="801" Bpm="0.789474" Phase="28.520340" AltBpm="0.592109" Volume="1.399621" Key="Gm" AudioSig="aKd4h5aYaHlntovGl5VXPGUJ" Flag="32768"/>
+  <Poi Pos="0.114649" Type="automix" Point="realStart"/>
+  <Poi Pos="303.820045" Type="automix" Point="realEnd"/>
+  <Poi Pos="15.350" Type="automix" Point="fadeStart"/>
+  <Poi Pos="294.150" Type="automix" Point="fadeEnd"/>
+  <Poi Pos="29.109116" Type="automix" Point="cutStart"/>
+  <Poi Pos="293.585125" Type="automix" Point="cutEnd"/>
+  <Poi Pos="29.018163" Type="automix" Point="tempoStart"/>
+  <Poi Pos="268.993492" Type="automix" Point="tempoEnd"/>
+  <Link NetSearch="sp0b4M7hd7mzLTm99MrMeZsp" Cover="https://i.scdn.co/image/ab67616d00001e02e80b258c7e0b318202870953"/>
+ </Song>
+ <Song FilePath="netsearch://sp0jKDRDWNb3zixRFqQICUg0" Flag="256">
+  <Tags Author="FendiDa Rappa" Title="Throw Dat Mfa" Album="Throw Dat Mfa" Year="2025" Bpm="0.750" Key="Bm" Flag="1"/>
+  <Infos SongLength="90.0" LastModified="1793246077" FirstSeen="1793243835" FirstPlay="1793244686" LastPlay="1793244686" PlayCount="1" Bitrate="320" Cover="16384"/>
+  <Comment>Explicit</Comment>
+  <Scan Version="801" Bpm="0.750" Phase="0.017166" AltBpm="0.562494" Volume="0.752686" Key="Bm" AudioSig="zJHKpMN9zMnGQ0vTtWTCRZUC" Flag="32768"/>
+  <Poi Type="automix" Point="realStart"/>
+  <Poi Pos="84.471293" Type="automix" Point="realEnd"/>
+  <Poi Type="automix" Point="fadeStart"/>
+  <Poi Pos="84.471293" Type="automix" Point="fadeEnd"/>
+  <Poi Pos="0.002902" Type="automix" Point="cutStart"/>
+  <Poi Pos="75.016417" Type="automix" Point="cutEnd"/>
+  <Poi Pos="12.016621" Type="automix" Point="tempoStart"/>
+  <Link NetSearch="sp0jKDRDWNb3zixRFqQICUg0" Cover="https://i.scdn.co/image/ab67616d00001e026465a16961649097d6712f5d"/>
+ </Song>
+ <Song FilePath="netsearch://sp0kav2DxndmxlsiT3pqXZjG" Flag="256">
+  <Tags Author="DaBaby" Title="POP DAT THANG" Album="POP DAT THANG" Year="2026" Bpm="0.431655" Key="Cm" Flag="1"/>
+  <Infos SongLength="138.2510" LastModified="1793246077" FirstSeen="1793243835" Bitrate="320"/>
+  <Comment>Explicit</Comment>
+  <Scan Version="801" Bpm="0.431655" Phase="13.816440" AltBpm="0.647506" Volume="1.101046" Key="Cm" AudioSig="eqloh4eamYiHVymWiHs7Z0YE" Flag="32768"/>
+  <Poi Pos="0.001451" Type="automix" Point="realStart"/>
+  <Poi Pos="138.129705" Type="automix" Point="realEnd"/>
+  <Poi Pos="2.80" Type="automix" Point="fadeStart"/>
+  <Poi Pos="137.80" Type="automix" Point="fadeEnd"/>
+  <Poi Pos="13.818050" Type="automix" Point="cutStart"/>
+  <Poi Pos="133.600363" Type="automix" Point="cutEnd"/>
+  <Poi Name="Break 1" Pos="54.606077" Type="remix"/>
+  <Poi Name="End Break 1" Pos="69.067755" Type="remix"/>
+  <Poi Name="Break 2" Pos="109.859410" Type="remix"/>
+  <Poi Name="End Break 2" Pos="124.316735" Type="remix"/>
+  <Link NetSearch="sp0kav2DxndmxlsiT3pqXZjG" Cover="https://i.scdn.co/image/ab67616d00001e02e154030833dbe4ff814fdb9d"/>
+ </Song>
+ <Song FilePath="netsearch://sp0m1KYWlT6LhFRBDVq9UNx4" Flag="256">
+  <Tags Author="Drake, Lil Wayne" Title="HYFR" Album="Take Care (Deluxe)" Remix="Hell Ya Fucking Right" Year="2011" Bpm="0.428571" Key="Gm" Flag="1"/>
+  <Infos SongLength="206.6260" LastModified="1793246077" FirstSeen="1793243835" FirstPlay="1793244004" LastPlay="1793244004" PlayCount="1" Bitrate="320"/>
+  <Comment>Explicit</Comment>
+  <Scan Version="801" Bpm="0.428571" Phase="42.940136" AltBpm="0.642857" Volume="0.908105" Key="Gm" AudioSig="acZHd3Z1eHhYuHeXR0KDmlEG" Flag="32768"/>
+  <Poi Pos="0.110295" Type="automix" Point="realStart"/>
+  <Poi Pos="202.958367" Type="automix" Point="realEnd"/>
+  <Poi Pos="13.50" Type="automix" Point="fadeStart"/>
+  <Poi Pos="194.650" Type="automix" Point="fadeEnd"/>
+  <Poi Pos="41.222676" Type="automix" Point="cutStart"/>
+  <Poi Pos="194.011429" Type="automix" Point="cutEnd"/>
+  <Poi Name="Break 1" Pos="68.435737" Type="remix"/>
+  <Poi Name="End Break 1" Pos="82.360454" Type="remix"/>
+  <Poi Name="Break 2" Pos="95.870113" Type="remix"/>
+  <Poi Name="End Break 2" Pos="123.503311" Type="remix"/>
+  <Poi Name="Break 3" Pos="150.721451" Type="remix"/>
+  <Poi Name="End Break 3" Pos="164.641088" Type="remix"/>
+  <Link NetSearch="sp0m1KYWlT6LhFRBDVq9UNx4" Cover="https://i.scdn.co/image/ab67616d00001e02c7ea04a9b455e3f68ef82550"/>
+ </Song>
+ <Song FilePath="netsearch://sp19gEmPjfqSZT0ulDRfjl0m" Flag="256">
+  <Tags Author="Bobby Shmurda" Title="Hot N*gga" Album="Hot N*gga" Year="2014" Bpm="0.357143" Key="D" Flag="1"/>
+  <Infos SongLength="194.5610" LastModified="1793246077" FirstSeen="1793243835" Bitrate="320" Cover="16384"/>
+  <Comment>Explicit</Comment>
+  <Scan Version="801" Bpm="0.357143" Phase="24.569025" AltBpm="0.535737" Volume="1.194074" Key="D" AudioSig="SLt3V1Z6WFhndZuHl8ohPdoF" Flag="8421376"/>
+  <Poi Pos="0.287347" Type="automix" Point="realStart"/>
+  <Poi Pos="191.717007" Type="automix" Point="realEnd"/>
+  <Poi Pos="19.90" Type="automix" Point="fadeStart"/>
+  <Poi Pos="181.0" Type="automix" Point="fadeEnd"/>
+  <Poi Pos="24.744490" Type="automix" Point="cutStart"/>
+  <Poi Pos="180.274649" Type="automix" Point="cutEnd"/>
+  <Poi Name="Break 1" Pos="45.463946" Type="remix"/>
+  <Poi Name="End Break 1" Pos="57.418594" Type="remix"/>
+  <Poi Name="Break 2" Pos="68.321088" Type="remix"/>
+  <Poi Name="End Break 2" Pos="80.282268" Type="remix"/>
+  <Poi Name="Break 3" Pos="102.607528" Type="remix"/>
+  <Poi Name="End Break 3" Pos="114.568707" Type="remix"/>
+  <Poi Name="Break 4" Pos="125.463220" Type="remix"/>
+  <Poi Name="End Break 4" Pos="137.417143" Type="remix"/>
+  <Poi Name="Break 5" Pos="159.748934" Type="remix"/>
+  <Poi Name="End Break 5" Pos="171.701406" Type="remix"/>
+  <Link NetSearch="sp19gEmPjfqSZT0ulDRfjl0m" Cover="https://i.scdn.co/image/ab67616d00001e02d52e14e0595216ca453572ab"/>
+ </Song>
+ <Song FilePath="netsearch://sp1Ly3sQABkGYruk0s8XF6US" Flag="256">
+  <Tags Author="Tamia" Title="Can&apos;t Get Enough" Album="Between Friends" Year="2006" Bpm="0.416667" Key="Eb" Flag="1"/>
+  <Infos SongLength="229.0260" LastModified="1793246078" FirstSeen="1793244222" FirstPlay="1793244328" LastPlay="1793244328" PlayCount="1" Bitrate="320"/>
+  <Scan Version="801" Bpm="0.416667" Phase="3.392971" AltBpm="0.624989" Volume="1.267080" Key="Eb" AudioSig="qctod5aFSIhHwdOXd-owLxIH" Flag="32768"/>
+  <Poi Pos="0.056599" Type="automix" Point="realStart"/>
+  <Poi Pos="226.872018" Type="automix" Point="realEnd"/>
+  <Poi Pos="0.056599" Type="automix" Point="fadeStart"/>
+  <Poi Pos="226.10" Type="automix" Point="fadeEnd"/>
+  <Poi Pos="0.060227" Type="automix" Point="cutStart"/>
+  <Poi Pos="226.113016" Type="automix" Point="cutEnd"/>
+  <Link NetSearch="sp1Ly3sQABkGYruk0s8XF6US" Cover="https://i.scdn.co/image/ab67616d00001e02bb32c6646012a37443dbb4b4"/>
+ </Song>
+ <Song FilePath="netsearch://sp1Tq8G25k1dlNe3peDyqdXs" Flag="256">
+  <Tags Author="Line Dances" Title="Cha Cha Slide" Album="Line Dances" Year="2011" Bpm="0.491803" Key="Fm" Flag="1"/>
+  <Infos SongLength="222.786893" LastModified="1793244263" FirstSeen="1793244249" Bitrate="320" Cover="16384"/>
+  <Scan Version="801" Bpm="0.491803" Phase="-0.005646" AltBpm="0.368855" Volume="1.237043" Key="A#" AudioSig="mbmId3aHaHhX6LeHV6muW_IG" Flag="32768"/>
+  <Poi Type="automix" Point="realStart"/>
+  <Poi Pos="222.780952" Type="automix" Point="realEnd"/>
+  <Poi Type="automix" Point="fadeStart"/>
+  <Poi Pos="222.50" Type="automix" Point="fadeEnd"/>
+  <Poi Pos="0.251066" Type="automix" Point="cutStart"/>
+  <Poi Pos="221.789025" Type="automix" Point="cutEnd"/>
+  <Poi Pos="5.898753" Type="automix" Point="tempoStart"/>
+  <Poi Pos="205.573197" Type="automix" Point="tempoEnd"/>
+  <Poi Name="Break 1" Pos="54.629297" Type="remix"/>
+  <Poi Name="End Break 1" Pos="80.652336" Type="remix"/>
+  <Link NetSearch="sp1Tq8G25k1dlNe3peDyqdXs" Cover="https://i.scdn.co/image/ab67616d00001e021e2e2e0fed995d86507362d2"/>
+ </Song>
+ <Song FilePath="netsearch://sp1iK1hVN9o1zkpxw396QGbd" Flag="256">
+  <Tags Author="Sexyy Red" Title="Hellcats SRTs" Album="Hood Hottest Princess" Year="2023" Bpm="0.387097" Key="Fm" Flag="1"/>
+  <Infos SongLength="153.6660" LastModified="1793246077" FirstSeen="1793243835" Bitrate="320"/>
+  <Comment>Explicit</Comment>
+  <Scan Version="801" Bpm="0.387097" Phase="3.438821" AltBpm="0.580658" Volume="1.190555" Key="Fm" AudioSig="ufGo1bdPyP1G_Q_ztPYPP68E" Flag="32768"/>
+  <Poi Pos="0.330884" Type="automix" Point="realStart"/>
+  <Poi Pos="151.970249" Type="automix" Point="realEnd"/>
+  <Poi Pos="1.10" Type="automix" Point="fadeStart"/>
+  <Poi Pos="148.60" Type="automix" Point="fadeEnd"/>
+  <Poi Pos="0.337415" Type="automix" Point="cutStart"/>
+  <Poi Pos="139.702857" Type="automix" Point="cutEnd"/>
+  <Link NetSearch="sp1iK1hVN9o1zkpxw396QGbd" Cover="https://i.scdn.co/image/ab67616d00001e0238f8e4adcb8668df34ce1660"/>
+ </Song>
+ <Song FilePath="netsearch://sp1kyUkGGAG31fSzDnmzJfvv" Flag="256">
+  <Tags Author="Sheck Wes" Title="Mo Bamba" Album="Best Rap Workout 2023" Year="2023" Bpm="0.821918" Key="E" Flag="1"/>
+  <Infos SongLength="183.9060" LastModified="1793246077" FirstSeen="1793243835" Bitrate="320" Cover="16384"/>
+  <Comment>Explicit</Comment>
+  <Scan Version="801" Bpm="0.821918" Phase="32.991360" AltBpm="0.616440" Volume="1.351804" Key="E" AudioSig="eYh4ZmeKeXiHMZuHh7sumKwF" Flag="32768"/>
+  <Poi Pos="0.113197" Type="automix" Point="realStart"/>
+  <Poi Pos="182.582857" Type="automix" Point="realEnd"/>
+  <Poi Pos="1.650" Type="automix" Point="fadeStart"/>
+  <Poi Pos="177.050" Type="automix" Point="fadeEnd"/>
+  <Poi Pos="32.986848" Type="automix" Point="cutStart"/>
+  <Poi Pos="177.031837" Type="automix" Point="cutEnd"/>
+  <Link NetSearch="sp1kyUkGGAG31fSzDnmzJfvv" Cover="https://i.scdn.co/image/ab67616d00001e02ce95faf5576504fb7ebcfb0a"/>
+ </Song>
+ <Song FilePath="netsearch://sp22L7bfCiAkJo5xGSQgmiIO" Flag="256">
+  <Tags Author="Kanye West" Title="All Of The Lights" Album="My Beautiful Dark Twisted Fantasy" Year="2010" Bpm="0.422535" Key="A#m" Flag="1"/>
+  <Infos SongLength="299.6130" LastModified="1793246077" FirstSeen="1793243835" Bitrate="320"/>
+  <Comment>Explicit</Comment>
+  <Scan Version="801" Bpm="0.422535" Phase="27.471384" AltBpm="0.633787" Volume="2.014787" Key="A#m" AudioSig="aViId1eImFiHj3qWZ2R4RFYJ" Flag="32768"/>
+  <Poi Type="automix" Point="realStart"/>
+  <Poi Pos="298.583946" Type="automix" Point="realEnd"/>
+  <Poi Pos="0.050" Type="automix" Point="fadeStart"/>
+  <Poi Pos="284.750" Type="automix" Point="fadeEnd"/>
+  <Poi Pos="27.411156" Type="automix" Point="cutStart"/>
+  <Poi Pos="284.319637" Type="automix" Point="cutEnd"/>
+  <Poi Name="Break 1" Pos="163.980771" Type="remix"/>
+  <Poi Name="Break 2" Pos="216.761179" Type="remix"/>
+  <Poi Name="End Break 2" Pos="257.754558" Type="remix"/>
+  <Link NetSearch="sp22L7bfCiAkJo5xGSQgmiIO" Cover="https://i.scdn.co/image/ab67616d00001e02d9194aa18fa4c9362b47464f"/>
+ </Song>
+ <Song FilePath="netsearch://sp25CA8QVJQrh5R05UUCaODM" Flag="256">
+  <Tags Author="Trey Songz" Title="Heart Attack" Album="Chapter V (Deluxe)" Year="2012" Bpm="0.40" Key="B" Flag="1"/>
+  <Infos SongLength="233.1460" LastModified="1793246077" FirstSeen="1793243835" FirstPlay="1793244418" LastPlay="1793244418" PlayCount="1" Bitrate="320"/>
+  <Comment>Explicit</Comment>
+  <Scan Version="801" Bpm="0.40" Phase="12.864081" AltBpm="0.60" Volume="1.396976" Key="B" AudioSig="aZdYZ5aVWIhHhX6XptOpqj0H" Flag="32768"/>
+  <Poi Pos="0.060952" Type="automix" Point="realStart"/>
+  <Poi Pos="232.202449" Type="automix" Point="realEnd"/>
+  <Poi Pos="11.750" Type="automix" Point="fadeStart"/>
+  <Poi Pos="230.450" Type="automix" Point="fadeEnd"/>
+  <Poi Pos="14.065488" Type="automix" Point="cutStart"/>
+  <Poi Pos="212.465488" Type="automix" Point="cutEnd"/>
+  <Poi Name="Break 1" Pos="165.264399" Type="remix"/>
+  <Poi Name="End Break 1" Pos="179.874830" Type="remix"/>
+  <Link NetSearch="sp25CA8QVJQrh5R05UUCaODM" Cover="https://i.scdn.co/image/ab67616d00001e024f85a7199d1ac1a876d46f58"/>
+ </Song>
+ <Song FilePath="netsearch://sp2MjXWroB9wlTG2kqv3avfS" Flag="256">
+  <Tags Author="Sexyy Red" Title="Get It Sexyy" Album="Get It Sexyy" Year="2024" Bpm="0.413793" Key="Fm" Flag="1"/>
+  <Infos SongLength="148.5510" LastModified="1793246077" FirstSeen="1793243835" Bitrate="320"/>
+  <Comment>Explicit</Comment>
+  <Scan Version="801" Bpm="0.413793" Phase="0.011383" AltBpm="0.620680" Volume="1.346277" Key="Fm" AudioSig="SHsml0cmeEdH3EtGN10vUYME" Flag="32768"/>
+  <Poi Pos="0.008707" Type="automix" Point="realStart"/>
+  <Poi Pos="146.091247" Type="automix" Point="realEnd"/>
+  <Poi Pos="0.008707" Type="automix" Point="fadeStart"/>
+  <Poi Pos="145.50" Type="automix" Point="fadeEnd"/>
+  <Poi Pos="0.010884" Type="automix" Point="cutStart"/>
+  <Poi Pos="142.354286" Type="automix" Point="cutEnd"/>
+  <Link NetSearch="sp2MjXWroB9wlTG2kqv3avfS" Cover="https://i.scdn.co/image/ab67616d00001e02422237a4122460c2fa99c135"/>
+ </Song>
+ <Song FilePath="netsearch://sp2d8JP84HNLKhmd6IYOoupQ" Flag="256">
+  <Tags Author="Fetty Wap" Title="Trap Queen" Album="Fetty Wap (Deluxe)" Year="2015" Bpm="0.405405" Key="C" Flag="1"/>
+  <Infos SongLength="222.0930" LastModified="1793246077" FirstSeen="1793243835" Bitrate="320"/>
+  <Comment>Explicit</Comment>
+  <Scan Version="801" Bpm="0.405405" Phase="55.139412" AltBpm="0.607959" Volume="1.483562" Key="C" AudioSig="iLRHZ4Z2WEdXx4RnV3h7us4G" Flag="32768"/>
+  <Poi Pos="0.004354" Type="automix" Point="realStart"/>
+  <Poi Pos="219.239909" Type="automix" Point="realEnd"/>
+  <Poi Pos="3.250" Type="automix" Point="fadeStart"/>
+  <Poi Pos="218.10" Type="automix" Point="fadeEnd"/>
+  <Poi Pos="55.137234" Type="automix" Point="cutStart"/>
+  <Poi Pos="214.027755" Type="automix" Point="cutEnd"/>
+  <Poi Name="Break 1" Pos="81.073197" Type="remix"/>
+  <Poi Name="End Break 1" Pos="94.058231" Type="remix"/>
+  <Poi Name="Break 2" Pos="132.937868" Type="remix"/>
+  <Poi Name="End Break 2" Pos="145.911293" Type="remix"/>
+  <Link NetSearch="sp2d8JP84HNLKhmd6IYOoupQ" Cover="https://i.scdn.co/image/ab67616d00001e02df7c1e1c441dd172ea8f29f9"/>
+ </Song>
+ <Song FilePath="netsearch://sp3A2yGHWIzmGEIolwonU69h" Flag="256">
+  <Tags Author="City Girls" Title="Act Up" Album="Girl Code" Year="2018" Bpm="0.618557" Key="Cm" Flag="1"/>
+  <Infos SongLength="158.3320" LastModified="1793246078" FirstSeen="1793243836" Bitrate="320"/>
+  <Comment>Explicit</Comment>
+  <Scan Version="801" Bpm="0.618557" Phase="14.846485" AltBpm="0.463923" Volume="1.414096" Key="Cm" AudioSig="OYxJp2dkWFhHcphmSLmTx-YE" Flag="8421376"/>
+  <Poi Type="automix" Point="realStart"/>
+  <Poi Pos="157.914558" Type="automix" Point="realEnd"/>
+  <Poi Pos="9.90" Type="automix" Point="fadeStart"/>
+  <Poi Pos="155.250" Type="automix" Point="fadeEnd"/>
+  <Poi Pos="14.847710" Type="automix" Point="cutStart"/>
+  <Poi Pos="151.857778" Type="automix" Point="cutEnd"/>
+  <Poi Pos="19.859002" Type="automix" Point="tempoStart"/>
+  <Poi Name="Break 1" Pos="39.277279" Type="remix"/>
+  <Poi Name="End Break 1" Pos="60.311655" Type="remix"/>
+  <Poi Name="Break 2" Pos="88.148753" Type="remix"/>
+  <Poi Name="End Break 2" Pos="118.920272" Type="remix"/>
+  <Link NetSearch="sp3A2yGHWIzmGEIolwonU69h" Cover="https://i.scdn.co/image/ab67616d00001e0255eacf604f263cc9347e03e7"/>
+ </Song>
+ <Song FilePath="netsearch://sp3FhZPYvMGSjFc6boVYKlCv" Flag="256">
+  <Tags Author="DaBaby" Title="SHAKE SUMN" Album="CALL DA FIREMAN" Year="2023" Bpm="0.419580" Key="Fm" Flag="1"/>
+  <Infos SongLength="124.8050" LastModified="1793246077" FirstSeen="1793243835" Bitrate="320" Cover="16384"/>
+  <Comment>Explicit</Comment>
+  <Scan Version="801" Bpm="0.419580" Phase="-0.840952" AltBpm="0.314739" Volume="0.957854" Key="Fm" AudioSig="qqG4hrbZmdmY0a_mt-CvGr4D" Flag="32768"/>
+  <Poi Type="automix" Point="realStart"/>
+  <Poi Pos="121.675465" Type="automix" Point="realEnd"/>
+  <Poi Type="automix" Point="fadeStart"/>
+  <Poi Pos="120.650" Type="automix" Point="fadeEnd"/>
+  <Poi Pos="0.417234" Type="automix" Point="cutStart"/>
+  <Poi Pos="120.659592" Type="automix" Point="cutEnd"/>
+  <Poi Pos="1.047551" Type="automix" Point="tempoStart"/>
+  <Link NetSearch="sp3FhZPYvMGSjFc6boVYKlCv" Cover="https://i.scdn.co/image/ab67616d00001e02e9a8758303b7d6d44fdb6486"/>
+ </Song>
+ <Song FilePath="netsearch://sp3RjXEoNevqHjn9kAt5isZB" Flag="256">
+  <Tags Author="Speaker Knockerz" Title="Freak Hoe" Album="Freak Hoe" Year="2013" Bpm="0.666667" Key="A" Flag="1"/>
+  <Infos SongLength="165.3730" LastModified="1793246077" FirstSeen="1793243835" FirstPlay="1793244730" LastPlay="1793244730" PlayCount="1" Bitrate="320"/>
+  <Comment>Explicit</Comment>
+  <Scan Version="801" Bpm="0.666667" Phase="21.420816" AltBpm="0.50" Volume="1.197373" Key="A" AudioSig="aWFod3apWGiIl8d4WLJpufcE" Flag="32768"/>
+  <Poi Pos="0.082721" Type="automix" Point="realStart"/>
+  <Poi Pos="160.956372" Type="automix" Point="realEnd"/>
+  <Poi Pos="0.150" Type="automix" Point="fadeStart"/>
+  <Poi Pos="158.850" Type="automix" Point="fadeEnd"/>
+  <Poi Pos="21.421859" Type="automix" Point="cutStart"/>
+  <Poi Pos="148.919728" Type="automix" Point="cutEnd"/>
+  <Poi Name="Break 1" Pos="42.253061" Type="remix"/>
+  <Poi Name="End Break 1" Pos="64.089977" Type="remix"/>
+  <Poi Name="Break 2" Pos="106.253061" Type="remix"/>
+  <Poi Name="End Break 2" Pos="128.084172" Type="remix"/>
+  <Link NetSearch="sp3RjXEoNevqHjn9kAt5isZB" Cover="https://i.scdn.co/image/ab67616d00001e02ac4f90631d426398a264f7c8"/>
+ </Song>
+ <Song FilePath="netsearch://sp48PnQVhkwaDBLfp5ftpSep" Flag="256">
+  <Tags Author="Babyfxce E" Title="PTP" Album="PTP" Year="2024" Bpm="0.340909" Key="C#m" Flag="1"/>
+  <Infos SongLength="129.630" LastModified="1793246077" FirstSeen="1793243835" Bitrate="320"/>
+  <Comment>Explicit</Comment>
+  <Scan Version="801" Bpm="0.340909" Phase="2.808277" AltBpm="0.511247" Volume="1.189650" Key="C#m" AudioSig="u8yH1dWbyWdnAPrkxh8AD-YD" Flag="8421376"/>
+  <Poi Pos="0.111746" Type="automix" Point="realStart"/>
+  <Poi Pos="127.715556" Type="automix" Point="realEnd"/>
+  <Poi Pos="1.80" Type="automix" Point="fadeStart"/>
+  <Poi Pos="125.250" Type="automix" Point="fadeEnd"/>
+  <Poi Pos="5.574966" Type="automix" Point="cutStart"/>
+  <Poi Pos="125.236825" Type="automix" Point="cutEnd"/>
+  <Link NetSearch="sp48PnQVhkwaDBLfp5ftpSep" Cover="https://i.scdn.co/image/ab67616d00001e02a65ac396844cab3608d527f2"/>
+ </Song>
+ <Song FilePath="netsearch://sp4It00tEYLwpjQtAhqnjCPC" Flag="256">
+  <Tags Author="Nicki Minaj, 2 Chainz" Title="Beez In The Trap" Album="Pink Friday ... Roman Reloaded (Deluxe)" Year="2012" Bpm="0.40" Key="G#" Flag="1"/>
+  <Infos SongLength="268.4930" LastModified="1793246077" FirstSeen="1793243835" Bitrate="320" Cover="16384"/>
+  <Comment>Explicit</Comment>
+  <Scan Version="801" Bpm="0.40" Phase="12.795125" AltBpm="0.60" Volume="1.357572" Key="G#" AudioSig="eYyIl6aGaIhX2auWttiBSlsI" Flag="32768"/>
+  <Poi Type="automix" Point="realStart"/>
+  <Poi Pos="267.424218" Type="automix" Point="realEnd"/>
+  <Poi Type="automix" Point="fadeStart"/>
+  <Poi Pos="259.20" Type="automix" Point="fadeEnd"/>
+  <Poi Pos="12.793469" Type="automix" Point="cutStart"/>
+  <Poi Pos="257.795918" Type="automix" Point="cutEnd"/>
+  <Link NetSearch="sp4It00tEYLwpjQtAhqnjCPC" Cover="https://i.scdn.co/image/ab67616d00001e024f0aae4e435a794e0e24d115"/>
+ </Song>
+ <Song FilePath="netsearch://sp4l5lF04xjhTfYSopCXc4FU" Flag="256">
+  <Tags Author="Jeezy, Bankroll Fresh" Title="All There" Album="Trap Or Die 3" Year="2016" Bpm="0.413793" Key="G#m" Flag="1"/>
+  <Infos SongLength="198.4130" LastModified="1793246077" FirstSeen="1793243835" Bitrate="320" Cover="16384"/>
+  <Comment>Explicit</Comment>
+  <Scan Version="801" Bpm="0.413793" Phase="13.247687" AltBpm="0.620703" Volume="1.580851" Key="G#m" AudioSig="J052d1VGiTZI2j95R-Ueeh4G" Flag="32768"/>
+  <Poi Pos="0.001451" Type="automix" Point="realStart"/>
+  <Poi Pos="196.638186" Type="automix" Point="realEnd"/>
+  <Poi Pos="9.550" Type="automix" Point="fadeStart"/>
+  <Poi Pos="192.850" Type="automix" Point="fadeEnd"/>
+  <Poi Pos="13.243356" Type="automix" Point="cutStart"/>
+  <Poi Pos="185.384490" Type="automix" Point="cutEnd"/>
+  <Link NetSearch="sp4l5lF04xjhTfYSopCXc4FU" Cover="https://i.scdn.co/image/ab67616d00001e02f4ecb3cc1fe5996c982fe8c6"/>
+ </Song>
+ <Song FilePath="netsearch://sp5HT024WOZhZRgHclgDDFEY" Flag="256">
+  <Tags Author="Tamia" Title="Believe In Love" Album="Beautiful Surprise" Year="2012" Bpm="0.606061" Key="B" Flag="1"/>
+  <Infos SongLength="210.240" LastModified="1793244233" FirstSeen="1793244222" Bitrate="320"/>
+  <Scan Version="801" Bpm="0.606054" Phase="9.812880" AltBpm="0.454546" Volume="1.422023" Key="C#" AudioSig="eXSIhoaKaGh3uG6mprVoVl8G" Flag="32768"/>
+  <Poi Pos="0.114649" Type="automix" Point="realStart"/>
+  <Poi Pos="205.448707" Type="automix" Point="realEnd"/>
+  <Poi Pos="4.250" Type="automix" Point="fadeStart"/>
+  <Poi Pos="204.10" Type="automix" Point="fadeEnd"/>
+  <Poi Pos="9.808254" Type="automix" Point="cutStart"/>
+  <Poi Pos="202.845170" Type="automix" Point="cutEnd"/>
+  <Link NetSearch="sp5HT024WOZhZRgHclgDDFEY" Cover="https://i.scdn.co/image/ab67616d00001e02a64581783ee0bc5a99d2ad4d"/>
+ </Song>
+ <Song FilePath="netsearch://sp5ItzU5pBrFmRUudfr5RkJP" Flag="256">
+  <Tags Author="F.L.Y. (Fast Life Yungstaz), Easton" Title="Swag Surfin&apos;" Album="Jamboree" Year="2009" Bpm="0.416667" Key="F#m" Flag="1"/>
+  <Infos SongLength="249.920" LastModified="1793246077" FirstSeen="1793243835" Bitrate="320" Cover="16384"/>
+  <Scan Version="801" Bpm="0.416667" Phase="33.397278" AltBpm="0.624989" Volume="1.228202" Key="F#m" AudioSig="qYWIxcS2Z6hX2NvVtughWaUH" Flag="32768"/>
+  <Poi Pos="0.066757" Type="automix" Point="realStart"/>
+  <Poi Pos="246.751202" Type="automix" Point="realEnd"/>
+  <Poi Pos="5.050" Type="automix" Point="fadeStart"/>
+  <Poi Pos="237.350" Type="automix" Point="fadeEnd"/>
+  <Poi Pos="33.398277" Type="automix" Point="cutStart"/>
+  <Poi Pos="236.106304" Type="automix" Point="cutEnd"/>
+  <Link NetSearch="sp5ItzU5pBrFmRUudfr5RkJP" Cover="https://i.scdn.co/image/ab67616d00001e0257245fdfe84f0ac5f8c10bdc"/>
+ </Song>
+ <Song FilePath="netsearch://sp5NQbUaeTEOGdD6hHcre0dZ" Flag="256">
+  <Tags Author="Fetty Wap, Remy Boyz" Title="679" Album="679 (feat. Remy Boyz)" Remix="feat. Remy Boyz" Year="2015" Bpm="0.631579" Key="Bm" Flag="1"/>
+  <Infos SongLength="196.6930" LastModified="1793246078" FirstSeen="1793243836" Bitrate="320" Cover="16384"/>
+  <Comment>Explicit</Comment>
+  <Scan Version="801" Bpm="0.631579" Phase="10.108844" AltBpm="0.473685" Volume="1.410111" Key="Bm" AudioSig="qMSIh8WUiKh3sbWXV-ejzAYG" Flag="8421376"/>
+  <Poi Pos="0.001451" Type="automix" Point="realStart"/>
+  <Poi Pos="194.204444" Type="automix" Point="realEnd"/>
+  <Poi Pos="2.10" Type="automix" Point="fadeStart"/>
+  <Poi Pos="191.750" Type="automix" Point="fadeEnd"/>
+  <Poi Pos="10.110839" Type="automix" Point="cutStart"/>
+  <Poi Pos="191.529796" Type="automix" Point="cutEnd"/>
+  <Link NetSearch="sp5NQbUaeTEOGdD6hHcre0dZ" Cover="https://i.scdn.co/image/ab67616d00001e021769fa68b9643ca67c4d44ce"/>
+ </Song>
+ <Song FilePath="netsearch://sp6C2nVSSeXNqfoY8t6tliZ4" Flag="256">
+  <Tags Author="2hollis" Title="jeans" Album="jeans" Year="2023" Bpm="0.419580" Key="E" Flag="1"/>
+  <Infos SongLength="181.2580" LastModified="1793246077" FirstSeen="1793243835" Bitrate="320"/>
+  <Comment>Explicit</Comment>
+  <Scan Version="801" Bpm="0.419580" Phase="0.004535" AltBpm="0.629342" Volume="1.583709" Key="E" AudioSig="eTiIl6a5eKl3ZHSmxlZSPZIF" Flag="8421376"/>
+  <Poi Type="automix" Point="realStart"/>
+  <Poi Pos="180.152018" Type="automix" Point="realEnd"/>
+  <Poi Type="automix" Point="fadeStart"/>
+  <Poi Pos="177.90" Type="automix" Point="fadeEnd"/>
+  <Poi Pos="0.004354" Type="automix" Point="cutStart"/>
+  <Poi Pos="172.868209" Type="automix" Point="cutEnd"/>
+  <Link NetSearch="sp6C2nVSSeXNqfoY8t6tliZ4" Cover="https://i.scdn.co/image/ab67616d00001e02b8362432f72c45d2b6bf08d8"/>
+ </Song>
+ <Song FilePath="netsearch://sp6fujklziTHa8uoM5OQSfIo" Flag="256">
+  <Tags Author="Rae Sremmurd, Gucci Mane" Title="Black Beatles" Album="SremmLife 2 (Deluxe)" Year="2016" Bpm="0.410959" Key="Em" Flag="1"/>
+  <Infos SongLength="291.8930" LastModified="1793246077" FirstSeen="1793243835" Bitrate="320" Cover="16384"/>
+  <Comment>Explicit</Comment>
+  <Scan Version="801" Bpm="0.410959" Phase="26.485056" AltBpm="0.616417" Volume="1.206842" Key="Em" AudioSig="WqaId6Z8iIqXZHmYh3s8tQ0J" Flag="32768"/>
+  <Poi Pos="0.168345" Type="automix" Point="realStart"/>
+  <Poi Pos="289.681995" Type="automix" Point="realEnd"/>
+  <Poi Pos="13.30" Type="automix" Point="fadeStart"/>
+  <Poi Pos="271.20" Type="automix" Point="fadeEnd"/>
+  <Poi Pos="26.477279" Type="automix" Point="cutStart"/>
+  <Poi Pos="269.142494" Type="automix" Point="cutEnd"/>
+  <Poi Name="Break 1" Pos="52.165805" Type="remix"/>
+  <Poi Name="End Break 1" Pos="65.930884" Type="remix"/>
+  <Poi Name="Break 2" Pos="118.159093" Type="remix"/>
+  <Poi Name="End Break 2" Pos="131.686893" Type="remix"/>
+  <Poi Name="Break 3" Pos="183.681451" Type="remix"/>
+  <Poi Name="End Break 3" Pos="197.437823" Type="remix"/>
+  <Poi Name="Break 4" Pos="249.434558" Type="remix"/>
+  <Poi Name="End Break 4" Pos="263.189478" Type="remix"/>
+  <Link NetSearch="sp6fujklziTHa8uoM5OQSfIo" Cover="https://i.scdn.co/image/ab67616d00001e02881fb62d913fe712fc2e1c95"/>
+ </Song>
+ <Song FilePath="netsearch://sp6mtjo5kIHKlboGE84lf1FJ" Flag="256">
+  <Tags Author="Migos, YoungBoy Never Broke Again" Title="Need It" Album="Need It" Year="2020" Bpm="0.405405" Key="Em" Flag="1"/>
+  <Infos SongLength="195.680" LastModified="1793246077" FirstSeen="1793243835" Bitrate="320" Cover="16384"/>
+  <Comment>Explicit</Comment>
+  <Scan Version="801" Bpm="0.405405" Phase="0.221043" AltBpm="0.608118" Volume="1.633088" Key="Em" AudioSig="WKRoN4WHeCd2kptXZulN3AwG" Flag="32768"/>
+  <Poi Pos="0.217687" Type="automix" Point="realStart"/>
+  <Poi Pos="194.615147" Type="automix" Point="realEnd"/>
+  <Poi Pos="0.217687" Type="automix" Point="fadeStart"/>
+  <Poi Pos="191.550" Type="automix" Point="fadeEnd"/>
+  <Poi Pos="0.222766" Type="automix" Point="cutStart"/>
+  <Poi Pos="191.574059" Type="automix" Point="cutEnd"/>
+  <Link NetSearch="sp6mtjo5kIHKlboGE84lf1FJ" Cover="https://i.scdn.co/image/ab67616d00001e02fe125b32fcf094fa625dbdae"/>
+ </Song>
+ <Song FilePath="netsearch://sp70TGNwQDvF5b6GQWlYPr8p" Flag="256">
+  <Tags Author="Central Cee, Lil Baby" Title="BAND4BAND" Album="CAN&apos;T RUSH GREATNESS" Remix="feat. Lil Baby" Year="2025" Bpm="0.428571" Key="B" Flag="1"/>
+  <Infos SongLength="140.720" LastModified="1793246077" FirstSeen="1793243835" Bitrate="320" Cover="16384"/>
+  <Comment>Explicit</Comment>
+  <Scan Version="801" Bpm="0.428571" Phase="13.740681" AltBpm="0.642857" Volume="1.455657" Key="B" AudioSig="WUF3hoeXeYhohLmXd8zW20AE" Flag="32768"/>
+  <Poi Pos="0.023220" Type="automix" Point="realStart"/>
+  <Poi Pos="138.155828" Type="automix" Point="realEnd"/>
+  <Poi Pos="13.70" Type="automix" Point="fadeStart"/>
+  <Poi Pos="137.250" Type="automix" Point="fadeEnd"/>
+  <Poi Pos="13.749116" Type="automix" Point="cutStart"/>
+  <Poi Pos="136.741587" Type="automix" Point="cutEnd"/>
+  <Poi Name="Break 1" Pos="54.455873" Type="remix"/>
+  <Poi Name="End Break 1" Pos="96.035556" Type="remix"/>
+  <Link NetSearch="sp70TGNwQDvF5b6GQWlYPr8p" Cover="https://i.scdn.co/image/ab67616d00001e0258513cbc1bba4cd4c5f472ce"/>
+ </Song>
+ <Song FilePath="netsearch://sp77mIZsgQxWaU5SCWh9S7ev" Flag="256">
+  <Tags Author="Chief Keef" Title="Faneto" Album="Faneto" Year="2015" Bpm="0.416667" Key="Em" Flag="1"/>
+  <Infos SongLength="206.6540" LastModified="1793246077" FirstSeen="1793243835" Bitrate="320"/>
+  <Comment>Explicit</Comment>
+  <Scan Version="801" Bpm="0.416667" Phase="0.057868" AltBpm="0.624989" Volume="1.149842" Key="Em" AudioSig="eed4d7aHeKh3hpiXp71uT0UG" Flag="32768"/>
+  <Poi Pos="0.058050" Type="automix" Point="realStart"/>
+  <Poi Pos="201.395374" Type="automix" Point="realEnd"/>
+  <Poi Pos="0.90" Type="automix" Point="fadeStart"/>
+  <Poi Pos="199.650" Type="automix" Point="fadeEnd"/>
+  <Poi Pos="26.725442" Type="automix" Point="cutStart"/>
+  <Poi Pos="199.035646" Type="automix" Point="cutEnd"/>
+  <Poi Name="Break 1" Pos="52.979229" Type="remix"/>
+  <Poi Name="End Break 1" Pos="83.393016" Type="remix"/>
+  <Poi Name="Break 2" Pos="126.305669" Type="remix"/>
+  <Poi Name="End Break 2" Pos="156.725261" Type="remix"/>
+  <Link NetSearch="sp77mIZsgQxWaU5SCWh9S7ev" Cover="https://i.scdn.co/image/ab67616d00001e028322eb511c38e4ba1e1aef27"/>
+ </Song>
+ <Song FilePath="netsearch://sp7hOSN3o2LSbsFJaZKIFUpu" Flag="256">
+  <Tags Author="Fatt Macc, Baby Mel" Title="Control the Traffic" Album="Control the Traffic" Year="2024" Bpm="0.833333" Key="E" Flag="1"/>
+  <Infos SongLength="159.3470" LastModified="1793246077" FirstSeen="1793243835" Bitrate="320"/>
+  <Comment>Explicit</Comment>
+  <Scan Version="801" Bpm="0.833333" Phase="13.542517" AltBpm="0.629365" Volume="1.434649" Key="E" AudioSig="WE1md1VFiTdIyy95V5MOid4E" Flag="32768"/>
+  <Poi Pos="0.11610" Type="automix" Point="realStart"/>
+  <Poi Pos="157.020590" Type="automix" Point="realEnd"/>
+  <Poi Pos="2.60" Type="automix" Point="fadeStart"/>
+  <Poi Pos="152.0" Type="automix" Point="fadeEnd"/>
+  <Poi Pos="14.801270" Type="automix" Point="cutStart"/>
+  <Poi Pos="151.164807" Type="automix" Point="cutEnd"/>
+  <Link NetSearch="sp7hOSN3o2LSbsFJaZKIFUpu" Cover="https://i.scdn.co/image/ab67616d00001e021e77b2c74fada4b338193f25"/>
+ </Song>
+ <Song FilePath="netsearch://sp7icwQvajsokotDfM3tefW6" Flag="256">
+  <Tags Author="Sexyy Red" Title="SkeeYee" Album="Hood Hottest Princess" Year="2023" Bpm="0.363636" Key="Fm" Flag="1"/>
+  <Infos SongLength="157.1250" LastModified="1793246077" FirstSeen="1793243835" Bitrate="320" Cover="16384"/>
+  <Comment>Explicit</Comment>
+  <Scan Version="801" Bpm="0.363636" Phase="1.800272" AltBpm="0.545465" Volume="1.253456" Key="Fm" AudioSig="J4xXxjdXiFhnTZlHOA9fgbIE" Flag="32768"/>
+  <Poi Pos="0.329433" Type="automix" Point="realStart"/>
+  <Poi Pos="153.105125" Type="automix" Point="realEnd"/>
+  <Poi Pos="0.329433" Type="automix" Point="fadeStart"/>
+  <Poi Pos="151.70" Type="automix" Point="fadeEnd"/>
+  <Poi Pos="0.335238" Type="automix" Point="cutStart"/>
+  <Poi Pos="151.447075" Type="automix" Point="cutEnd"/>
+  <Link NetSearch="sp7icwQvajsokotDfM3tefW6" Cover="https://i.scdn.co/image/ab67616d00001e0238f8e4adcb8668df34ce1660"/>
+ </Song>
+ <Song FilePath="netsearch://sp7ngdkrVQPgP3AoIxUrTpHT" Flag="256">
+  <Tags Author="YG, Drake" Title="Who Do You Love?" Album="My Krazy Life" Year="2014" Bpm="0.618557" Key="Am" Flag="1"/>
+  <Infos SongLength="233.5150" LastModified="1793246078" FirstSeen="1793243836" Bitrate="320"/>
+  <Comment>Explicit</Comment>
+  <Scan Version="801" Bpm="0.618557" Phase="2.542970" AltBpm="0.466315" Volume="0.929739" Key="Am" AudioSig="mch5pkZ6iXlW2IqGN3MuZ0YH" Flag="32768"/>
+  <Poi Pos="0.059501" Type="automix" Point="realStart"/>
+  <Poi Pos="233.322812" Type="automix" Point="realEnd"/>
+  <Poi Pos="10.30" Type="automix" Point="fadeStart"/>
+  <Poi Pos="232.80" Type="automix" Point="fadeEnd"/>
+  <Poi Pos="19.955374" Type="automix" Point="cutStart"/>
+  <Poi Pos="178.810340" Type="automix" Point="cutEnd"/>
+  <Poi Name="Break 1" Pos="99.224671" Type="remix"/>
+  <Poi Name="End Break 1" Pos="119.436916" Type="remix"/>
+  <Poi Name="Break 2" Pos="139.020045" Type="remix"/>
+  <Poi Name="End Break 2" Pos="159.229388" Type="remix"/>
+  <Link NetSearch="sp7ngdkrVQPgP3AoIxUrTpHT" Cover="https://i.scdn.co/image/ab67616d00001e02d5e1093f3b6f0a59114a4905"/>
  </Song>
  <Song FilePath="netsearch://va380002" Flag="256">
   <Tags Author="F.L.Y." Title="Swag Surfin&apos;" Genre="Old School / Classics" Composer="Single" Grouping="Dirty" Year="2009" Key="C#m" Flag="9"/>
@@ -11180,5 +12164,10 @@
   <Poi Pos="29.950" Type="automix" Point="fadeEnd"/>
   <Poi Pos="0.311293" Type="automix" Point="cutStart"/>
   <Link NetSearch="va584732"/>
+ </Song>
+ <Song FilePath="sc255790792" Flag="256">
+  <Tags Author="John Newman" Title="Love Me Again" Genre="Pop" Year="2013" Bpm="0.472441" Key="Gm" Flag="1"/>
+  <Infos SongLength="240.3270" LastModified="1787954020" FirstSeen="1787953607"/>
+  <Link NetSearch="sc255790792" Cover="https://i1.sndcdn.com/artworks-KPe54KeWO3iy-0-original.jpg"/>
  </Song>
 </VirtualDJ_Database>

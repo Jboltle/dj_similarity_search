@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-10-24T01:05:46.381Z",
-  "generatedOn": "DESKTOP-02SQPLG",
-  "generatedFromPlatform": "linux",
-  "generatedByMachine": "windows",
+  "generatedAt": "2026-10-29T04:00:25.540Z",
+  "generatedOn": "Jonathans-MacBook-Pro-8.local",
+  "generatedFromPlatform": "darwin",
+  "generatedByMachine": "mac",
   "preferLocal": false,
   "machines": [
     {
@@ -11,42 +11,52 @@
       "platform": "linux",
       "hostname": "DESKTOP-02SQPLG",
       "lastPushAt": 1792803946239
+    },
+    {
+      "id": "mac",
+      "displayName": "mac",
+      "platform": "darwin",
+      "hostname": "Jonathans-MacBook-Pro-8.local",
+      "lastPushAt": 1793246425088
     }
   ],
   "outputs": {
-    "databaseXml": "/home/on/Sandbox/dj_similarity_search/sync/merged/database.xml",
-    "extraDb": "/home/on/Sandbox/dj_similarity_search/sync/merged/extra.db",
-    "historyDir": "/home/on/Sandbox/dj_similarity_search/sync/merged/History",
+    "databaseXml": "/Users/jboltle/Sandbox/dj_similarity_search/sync/merged/database.xml",
+    "extraDb": "/Users/jboltle/Sandbox/dj_similarity_search/sync/merged/extra.db",
+    "historyDir": "/Users/jboltle/Sandbox/dj_similarity_search/sync/merged/History",
     "audioLibraryIndex": null
   },
   "summary": {
     "databaseXml": {
-      "merged": 893,
-      "addedFromRemote": 0,
-      "keptLocal": 893,
-      "conflicts": 0,
+      "merged": 1036,
+      "addedFromRemote": 143,
+      "keptLocal": 0,
+      "conflicts": 893,
       "contributing": [
-        "windows"
+        "windows",
+        "mac"
       ],
-      "singleSource": "windows"
+      "singleSource": null
     },
     "extraDb": {
       "mergedTrackCount": 128,
-      "mergedPairCount": 84,
-      "pairsAddedFromRemote": 0,
-      "trackConflicts": 0,
+      "mergedPairCount": 88,
+      "pairsAddedFromRemote": 4,
+      "trackConflicts": 128,
       "contributing": [
-        "windows"
+        "windows",
+        "mac"
       ]
     },
     "history": {
       "localFileCount": 63,
-      "remoteFileCount": 0,
-      "mergedFileCount": 63,
-      "identicalDedup": 0,
+      "remoteFileCount": 216,
+      "mergedFileCount": 233,
+      "identicalDedup": 46,
       "collisionsSuffixed": 0,
       "contributing": [
-        "windows"
+        "windows",
+        "mac"
       ]
     },
     "audioLibrary": null
